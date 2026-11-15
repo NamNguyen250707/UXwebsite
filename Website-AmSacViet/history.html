@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="hist.meta.title">Lịch sử âm nhạc truyền thống | Âm Sắc Việt</title>
+  <meta name="description" data-i18n-content="hist.meta.desc"
+        content="Tám mốc lịch sử của âm nhạc truyền thống Việt Nam, từ đàn đá, trống đồng đến hôm nay, có năm tháng, nguồn tra cứu và những điểm còn tranh luận.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+
+  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/history.js"></script>
+</head>
+<body data-page="history" id="top">
+
+  <div id="site-header"></div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Đầu trang -->
+    <section class="page-head has-deco" aria-labelledby="hist-title">
+      <!-- Hoa văn: ba con hạc ở khoảng trống bên phải tiêu đề -->
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-hac deco-l1" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l2" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l3" src="images/motifs/hac.svg" alt="">
+      </div>
+      <div class="container">
+        <h1 id="hist-title" class="page-title" data-i18n="hist.title">Lịch sử âm nhạc truyền thống</h1>
+        <p class="section-lead" data-i18n="hist.lead">Tám mốc lịch sử, mốc đầu là đàn đá và trống đồng, mốc cuối là hôm nay. Mỗi mốc ghi năm, nguồn tra cứu, và tách riêng những điều các nhà nghiên cứu chưa thống nhất.</p>
+      </div>
+    </section>
+
+    <!-- Thanh thời kỳ: dính dưới menu khi cuộn, gạch chân mốc đang xem (history.js vẽ) -->
+    <nav class="hist-nav" id="histNav" aria-label="Chọn thời kỳ" data-i18n-aria-label="hist.nav.label">
+      <div class="container"><ol class="hist-nav-list" id="histNavList"></ol></div>
+    </nav>
+    <p class="visually-hidden" id="histLive" aria-live="polite"></p>
+
+    <!-- Dòng thời gian: 8 mốc (history.js vẽ từ ASV_DATA.history) -->
+    <section class="section pt-4" aria-labelledby="hist-title">
+      <div class="container">
+        <ol class="hist-list" id="histList"></ol>
+      </div>
+    </section>
+
+    <!-- Cách viết trang này -->
+    <section class="section pt-0" aria-labelledby="method-title">
+      <div class="container">
+        <div class="asv-card hist-method">
+          <h2 id="method-title" class="h4" data-i18n="hist.method.title">Chúng tôi viết trang này như thế nào</h2>
+          <p class="mb-0" data-i18n="hist.method.text">Năm tháng được đối chiếu với sử liệu (Đại Việt sử ký toàn thư), Bảo tàng Lịch sử Quốc gia, hồ sơ UNESCO và các bài nghiên cứu đã đăng tạp chí.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Xem tiếp -->
+    <section id="explore-next" data-next="genres,instruments"></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <noscript>
+    <p class="container py-3" style="color:#9E2A1C">Trang cần bật JavaScript để hiện dòng thời gian, phát âm thanh và đổi ngôn ngữ. / Please enable JavaScript to see the timeline, play sounds and switch languages.</p>
+  </noscript>
+</body>
+</html>

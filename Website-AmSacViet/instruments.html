@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="inst.meta.title">Nhạc cụ | Âm Sắc Việt</title>
+  <meta name="description" data-i18n-content="inst.meta.desc"
+        content="12 nhạc cụ truyền thống Việt Nam chia theo dây, hơi, gõ, có hình, mô tả, âm thanh và một cây đàn bầu ảo để tự chơi.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+
+  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/play-models.js"></script>
+  <script defer src="js/instruments.js"></script>
+  <script defer src="js/scales.js"></script>
+</head>
+<body data-page="instruments" id="top">
+
+  <div id="site-header"></div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Đầu trang: tiêu đề, lọc theo họ, tìm kiếm -->
+    <section class="page-head has-deco" aria-labelledby="inst-title">
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-drum deco-drum-head" src="images/motifs/vong-trong-dong.svg" alt="">
+      </div>
+      <div class="container">
+        <h1 id="inst-title" class="page-title" data-i18n="inst.title">Nhạc cụ truyền thống</h1>
+        <p class="section-lead" data-i18n="inst.lead">12 nhạc cụ quen thuộc, chia theo cách phát ra tiếng. Bấm vào một thẻ để xem chi tiết và nghe thử.</p>
+
+        <div class="inst-tools">
+          <div class="filter-bar" role="group" aria-label="Lọc theo họ nhạc cụ" data-i18n-aria-label="inst.filter.label">
+            <button type="button" class="filter-btn" data-family="all" aria-pressed="true" data-i18n="inst.filter.all">Tất cả</button>
+            <button type="button" class="filter-btn" data-family="string" aria-pressed="false" data-i18n="family.string">Dây</button>
+            <button type="button" class="filter-btn" data-family="wind" aria-pressed="false" data-i18n="family.wind">Hơi</button>
+            <button type="button" class="filter-btn" data-family="percussion" aria-pressed="false" data-i18n="family.percussion">Gõ</button>
+          </div>
+          <div class="inst-search">
+            <label class="form-label" for="instSearch" data-i18n="inst.search.label">Tìm theo tên</label>
+            <input type="search" class="form-control" id="instSearch" autocomplete="off"
+                   placeholder="Ví dụ: đàn bầu, sáo, khèn" data-i18n-placeholder="inst.search.placeholder"
+                   aria-describedby="instSearchHint">
+            <small class="inst-search-hint" id="instSearchHint" data-i18n="inst.search.hint">Gõ có dấu hay không dấu đều được.</small>
+          </div>
+        </div>
+        <!-- Giải thích ngắn cho nhóm đang chọn (nhãn danh mục phải tự hiểu được) -->
+        <p class="family-hint" id="familyHint"></p>
+        <p class="filter-count" id="instCount" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Lưới 12 thẻ -->
+    <section class="section pt-0" aria-labelledby="inst-title">
+      <div class="container">
+        <div class="row g-4" id="instGrid"></div>
+        <!-- Trạng thái "không tìm thấy" -->
+        <div class="inst-empty asv-card" id="instEmpty" hidden>
+          <h2 class="inst-empty-title" data-i18n="inst.empty.title">Không tìm thấy nhạc cụ nào</h2>
+          <p id="instEmptyText"></p>
+          <button type="button" class="btn btn-outline-son" id="instReset" data-i18n="inst.empty.reset">Xóa tìm kiếm và bộ lọc</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chơi thử nhạc cụ ảo (cả 12 nhạc cụ) -->
+    <section class="section pt-0 has-deco" id="choi-thu" aria-labelledby="play-title">
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-hac deco-l1" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l2" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l3" src="images/motifs/hac.svg" alt="">
+      </div>
+      <div class="container">
+        <span id="dan-bau-ao" class="anchor-alias" aria-hidden="true"></span><!-- link cũ #dan-bau-ao vẫn tới đây -->
+        <h2 id="play-title" class="section-title" data-i18n="inst.play.title">Chơi thử nhạc cụ</h2>
+        <p class="section-lead mb-2" data-i18n="inst.play.lead">Chọn một nhạc cụ rồi bấm, giữ hoặc vuốt như khi chơi thật. Trên máy tính có thể dùng phím số 1 đến 9.</p>
+        <p class="play-disclaimer" data-i18n="inst.play.disclaimer">Đây là âm mô phỏng bằng máy tính để bạn hình dung cách chơi, không thay được tiếng nhạc cụ thật. Muốn nghe nghệ nhân biểu diễn, hãy mở các bản ghi của UNESCO ở trang Loại hình.</p>
+
+        <!-- Chọn nhạc cụ (instruments.js vẽ 12 nút) -->
+        <div class="filter-bar play-picker" id="playPicker" role="group" aria-label="Chọn nhạc cụ để chơi" data-i18n-aria-label="inst.play.picker"></div>
+
+        <div class="asv-card play-stage">
+          <!-- Nhạc cụ thường: hình bên trái, các phím/dây/ống để chơi bên phải -->
+          <div class="row g-4 align-items-start" id="playGeneric">
+            <div class="col-12">
+              <h3 class="play-name" id="playName"></h3>
+              <p class="play-how" id="playHow"></p>
+              <div class="play-pads" id="playPads"></div>
+              <p class="play-note" id="playNote" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <!-- Đàn bầu: giao diện riêng (cần đàn uốn cao độ) -->
+          <div class="vbau" id="vbauPanel" hidden>
+            <h3 class="play-name" data-i18n="inst.bau.title">Đàn bầu ảo</h3>
+            <p class="play-how" data-i18n="inst.bau.lead">Người chơi đàn bầu đẩy, kéo cần đàn trong lúc dây còn ngân để tiếng đàn lượn lên xuống. Bấm “Gảy dây”, rồi kéo thanh trượt cần đàn để nghe.</p>
+          <!-- Hình cây đàn (instruments.js làm cần đàn nghiêng và dây rung theo thanh trượt) -->
+          <div class="vbau-art" id="vbauArt" data-motif="danBau" aria-hidden="true"></div>
+
+          <div class="vbau-controls">
+            <button type="button" class="btn btn-son btn-lg" id="vbauPluck">
+              <span data-icon="play"></span><span data-i18n="inst.bau.pluck">Gảy dây</span>
+            </button>
+
+            <div class="vbau-harmonics" role="group" aria-labelledby="vbauHarmLabel">
+              <span class="vbau-label" id="vbauHarmLabel" data-i18n="inst.bau.harmonics">Chọn âm</span>
+              <div class="vbau-harm-btns" id="vbauHarm"></div>
+              <small class="vbau-explain" data-i18n="inst.bau.explain">Âm thực là tiếng dây buông, gảy mà không chạm điểm nút. Âm bồi trong và cao hơn, có được khi cạnh bàn tay chạm nhẹ vào điểm nút trên dây. Đàn bầu dùng âm bồi là chủ yếu.</small>
+            </div>
+
+            <div class="vbau-rod">
+              <label class="vbau-label" for="vbauRod" data-i18n="inst.bau.rod">Cần đàn</label>
+              <input type="range" class="form-range" id="vbauRod" min="-100" max="100" step="1" value="0" aria-describedby="vbauRodHint">
+              <small id="vbauRodHint" data-i18n="inst.bau.rodHint">Kéo sang phải: dây căng, tiếng cao lên. Kéo sang trái: dây chùng, tiếng thấp xuống. Dùng phím mũi tên cũng được.</small>
+            </div>
+
+            <p class="vbau-note" id="vbauNote" aria-live="polite"></p>
+          </div>
+          </div>
+
+          <!-- Ghi lại phần chơi (instruments.js): chỉ ghi các lần bấm, không thu âm từ micro -->
+          <div class="rec-bar" id="recBar" role="group" aria-labelledby="rec-title">
+            <h3 class="rec-title" id="rec-title" data-i18n="rec.title">Ghi lại phần bạn chơi</h3>
+            <p class="rec-lead" data-i18n="rec.lead">Bấm “Ghi”, chơi tối đa 60 giây rồi bấm “Dừng ghi”. Trang chỉ ghi lại các lần bạn bấm, không thu âm từ micro.</p>
+            <div class="rec-actions">
+              <button type="button" class="btn btn-outline-son" id="recToggle" aria-pressed="false">
+                <span class="rec-dot" aria-hidden="true"></span><span class="rec-label">Ghi</span>
+              </button>
+              <button type="button" class="btn btn-son" id="recPlay" disabled>
+                <span class="btn-play-icon" data-icon="play"></span><span class="rec-label">Nghe lại</span>
+              </button>
+              <button type="button" class="btn btn-outline-cham" id="recSave" disabled data-i18n="rec.save">Lưu vào máy</button>
+              <button type="button" class="btn btn-outline-cham" id="recShare" disabled data-i18n="rec.share">Tạo link chia sẻ</button>
+            </div>
+            <p class="rec-status" id="recStatus" aria-live="polite"></p>
+            <div class="rec-share" id="recShareBox" hidden>
+              <label for="recLink" data-i18n="rec.linkLabel">Link chia sẻ</label>
+              <input type="text" class="form-control" id="recLink" readonly aria-describedby="recLinkNote">
+              <small id="recLinkNote" data-i18n="rec.linkNote">Người nhận mở được link khi trang đã đưa lên web. Nếu bạn đang mở trang trực tiếp từ máy, link chỉ dùng được trên chính máy này.</small>
+            </div>
+            <h4 class="rec-saved-title" data-i18n="rec.savedTitle">Đã lưu trên máy này</h4>
+            <ol class="rec-list" id="recSaved"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Năm âm và bảy âm (scales.js vẽ hai hàng phím vào #scaleTool) -->
+    <section class="section pt-0" id="thang-am" aria-labelledby="scale-title">
+      <div class="container">
+        <h2 id="scale-title" class="section-title" data-i18n="scale.title">Năm âm và bảy âm</h2>
+        <p class="section-lead" data-i18n="scale.lead">Bấm “Nghe cả thang” ở từng hàng rồi so sánh. Hai hàng xếp thẳng cột theo cao độ, nên thấy ngay thang năm âm bỏ những nốt nào.</p>
+        <div class="asv-card scale-card">
+          <div id="scaleTool"></div>
+          <div class="scale-explain">
+            <p data-i18n="scale.explain1">Thang bảy âm Đô Rê Mi Fa Sol La Si có hai chỗ hai nốt chỉ cách nhau nửa cung: Mi–Fa và Si–Đô (tô đậm ở hàng dưới). Thang năm âm ở hàng trên bỏ Mi và Si, nên không còn bước nửa cung nào; các bước chỉ là một cung hoặc một cung rưỡi. Nhiều làn điệu dân ca Việt Nam được xây trên thang năm âm.</p>
+            <p data-i18n="scale.explain2">Dây đàn tranh ở phần chơi thử dùng đúng năm nốt này (bắt đầu từ Rê: Rê, Fa, Sol, La, Đô), vì vậy vuốt kiểu gì cũng nghe thuận tai.</p>
+            <p class="scale-note" data-i18n="scale.explain3">Đây chỉ là phần đơn giản nhất. Nhạc cổ truyền còn có các “hơi”, như hơi Bắc, hơi Nam, với cách nhấn nhá và cao độ riêng mà đàn phím không chơi đúng được.</p>
+            <button type="button" class="btn btn-outline-son" data-try="dan-tranh" data-i18n="scale.try">Thử vuốt đàn tranh</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thuật ngữ: danh sách đầy đủ (common.js vẽ từ ASV_DATA.glossary) -->
+    <section class="section pt-0" id="thuat-ngu" aria-labelledby="gloss-title">
+      <div class="container">
+        <h2 id="gloss-title" class="section-title" data-i18n="gloss.title">Thuật ngữ</h2>
+        <p class="section-lead" data-i18n="gloss.lead">Trong bài, các từ chuyên môn có gạch chấm bên dưới. Bấm vào để xem giải thích ngắn; danh sách đầy đủ ở đây.</p>
+        <dl class="asv-card gloss-list" data-glossary-list></dl>
+      </div>
+    </section>
+
+    <!-- Xem tiếp -->
+    <section id="explore-next" data-next="genres,history"></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Hộp chi tiết nhạc cụ (modal Bootstrap, instruments.js điền nội dung) -->
+  <div class="modal fade" id="instModal" tabindex="-1" aria-labelledby="instModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content asv-modal">
+        <div class="modal-header">
+          <h2 class="modal-title" id="instModalTitle"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng" data-i18n-aria-label="inst.modal.close"></button>
+        </div>
+        <div class="modal-body" id="instModalBody"></div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-sm btn-outline-cham" data-step="-1">
+            <span data-icon="arrow" class="icon-flip-wrap"></span><span data-i18n="inst.modal.prev">Nhạc cụ trước</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-cham" data-step="1">
+            <span data-i18n="inst.modal.next">Nhạc cụ sau</span><span data-icon="arrow"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <p class="container py-3" style="color:#9E2A1C">Trang cần bật JavaScript để hiện danh sách nhạc cụ, phát âm thanh và đổi ngôn ngữ. / Please enable JavaScript to see the instruments, play sounds and switch languages.</p>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Lớp học nhạc dân tộc. Minh họa vẽ mới cho dự án, phỏng theo phong cách tranh khắc gỗ dân gian.
+       Sinh bởi scripts/draw-history.cjs — sửa ở script rồi chạy lại. -->
+  <style>
+    .k { stroke: #2E2118; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+    .l { stroke: #2E2118; stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; }
+    .t { stroke: #2E2118; stroke-width: 1.3; fill: none; stroke-linecap: round; }
+  </style>
+  <defs>
+    <pattern id="diep" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="7" r="1.3" fill="#FBF4E2"/><circle cx="22" cy="18" r="1" fill="#FBF4E2"/><circle cx="13" cy="29" r="0.8" fill="#E2CFA8"/>
+    </pattern>
+    <pattern id="song" width="36" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q9 3 18 12 Q27 3 36 12" fill="none" stroke="#8FA6BD" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="gan" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 3.5 H7" stroke="#2E2118" stroke-width="0.7" opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="#F1E4C6"/>
+  <rect width="400" height="300" fill="url(#diep)"/>
+  <rect x="0" y="0" width="400" height="214" fill="#E9D8B4"/><path d="M0 0 H400 V214 H0Z" fill="url(#gan)"/>
+  <rect class="k" x="150" y="34" width="210" height="104" fill="#2F4A3A"/><rect class="k" x="144" y="28" width="222" height="116" fill="none" style="stroke:#6B4A2B;stroke-width:5"/>
+  <path d="M166 62 H344 M166 72 H344 M166 82 H344 M166 92 H344 M166 102 H344" stroke="#FBF4E2" stroke-width="1.2" opacity="0.8"/>
+  <ellipse cx="190" cy="92" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 190 92)"/><path d="M194.6 91 V70" stroke="#FBF4E2" stroke-width="1.4"/>
+  <ellipse cx="214" cy="87" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 214 87)"/><path d="M218.6 86 V65" stroke="#FBF4E2" stroke-width="1.4"/>
+  <ellipse cx="238" cy="82" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 238 82)"/><path d="M242.6 81 V60" stroke="#FBF4E2" stroke-width="1.4"/>
+  <ellipse cx="262" cy="77" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 262 77)"/><path d="M266.6 76 V55" stroke="#FBF4E2" stroke-width="1.4"/>
+  <ellipse cx="290" cy="82" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 290 82)"/><path d="M294.6 81 V60" stroke="#FBF4E2" stroke-width="1.4"/>
+  <ellipse cx="318" cy="92" rx="5" ry="3.6" fill="#FBF4E2" transform="rotate(-20 318 92)"/><path d="M322.6 91 V70" stroke="#FBF4E2" stroke-width="1.4"/>
+  <rect class="k" x="24" y="40" width="88" height="98" fill="#FBF4E2"/><path class="k" fill="none" d="M68 40 V138 M24 89 H112"/>
+  <path class="k" fill="#5B7247" d="M26 136 Q46 104 66 118 Q86 96 110 120 V136Z"/>
+  <path class="k" fill="#8A6A44" d="M0 214 H400 V300 H0Z"/><path class="t" d="M0 248 H400 M0 278 H400" style="opacity:0.5"/>
+  <g><path class="k" fill="none" style="stroke-width:8" d="M130.3 190.5 L159.1 179"/><path fill="none" stroke="#26405E" stroke-width="4.6" stroke-linecap="round" d="M130.3 190.5 L159.1 179"/><path class="k" fill="#26405E" d="M108.5 181.3 L131.5 181.3 L138.4 248 L101.6 248Z"/><path class="k" fill="#2E2118" d="M105 227.3 L134.9 227.3 L136.1 248 L103.9 248Z"/><circle class="k" cx="120" cy="172.1" r="8.6" fill="#E6C9A0"/></g>
+  <g><ellipse class="k" cx="236" cy="283" rx="22" ry="6" fill="#2E2118"/><path class="k" fill="#9E2A1C" d="M226 250 L246 250 L250 282 L222 282Z"/><circle class="k" cx="236" cy="242" r="7.5" fill="#E6C9A0"/><circle class="l" cx="241" cy="237.5" r="3.6" fill="#2E2118"/></g>
+  <path class="k" fill="#8A6A44" d="M190 255 H300 V269 H190Z"/>
+  <path class="t" d="M194 255 H296" style="stroke:#FBF4E2"/>
+  <path class="k" fill="none" style="stroke-width:3.5" d="M206 255 Q200 222 214 204"/>
+  <ellipse class="k" cx="207" cy="230" rx="9" ry="7" fill="#D9BE84"/>
+  <path class="l" fill="none" d="M214 204 L294 256"/>
+  <g><ellipse class="k" cx="344" cy="287" rx="22" ry="6" fill="#2E2118"/><path class="k" fill="#7A5A3A" d="M334 254 L354 254 L358 286 L330 286Z"/><circle class="k" cx="344" cy="246" r="7.5" fill="#E6C9A0"/></g>
+  <path class="k" fill="#8A6A44" d="M300 264 L396 260 L396 278 L300 276Z"/><path class="l" fill="#FBF4E2" d="M317 272 L320 265 L323 272Z"/><path class="l" fill="#FBF4E2" d="M331 272 L334 265 L337 272Z"/><path class="l" fill="#FBF4E2" d="M345 272 L348 265 L351 272Z"/><path class="l" fill="#FBF4E2" d="M359 272 L362 265 L365 272Z"/><path class="l" fill="#FBF4E2" d="M373 272 L376 265 L379 272Z"/>
+</svg>

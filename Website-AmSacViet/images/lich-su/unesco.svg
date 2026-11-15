@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Các mốc UNESCO. Minh họa vẽ mới cho dự án, phỏng theo phong cách tranh khắc gỗ dân gian.
+       Sinh bởi scripts/draw-history.cjs — sửa ở script rồi chạy lại. -->
+  <style>
+    .k { stroke: #2E2118; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+    .l { stroke: #2E2118; stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; }
+    .t { stroke: #2E2118; stroke-width: 1.3; fill: none; stroke-linecap: round; }
+  </style>
+  <defs>
+    <pattern id="diep" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="7" r="1.3" fill="#FBF4E2"/><circle cx="22" cy="18" r="1" fill="#FBF4E2"/><circle cx="13" cy="29" r="0.8" fill="#E2CFA8"/>
+    </pattern>
+    <pattern id="song" width="36" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q9 3 18 12 Q27 3 36 12" fill="none" stroke="#8FA6BD" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="gan" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 3.5 H7" stroke="#2E2118" stroke-width="0.7" opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="#F1E4C6"/>
+  <rect width="400" height="300" fill="url(#diep)"/>
+  <rect class="k" x="130" y="80" width="140" height="150" fill="#FBF4E2"/>
+  <path class="k" fill="#D9BE84" d="M122 74 H278 V88 H122Z M122 222 H278 V236 H122Z"/>
+  <path class="t" d="M150 108 H250 M150 124 H250 M150 140 H232 M150 156 H250 M150 172 H220"/>
+  <rect class="k" x="216" y="182" width="32" height="32" fill="#9E2A1C"/><path d="M224 190 H240 V206 H224Z M232 190 V206" fill="none" stroke="#FBF4E2" stroke-width="1.6"/>
+  <circle class="k" cx="60" cy="58" r="30" fill="#B98B3E"/><circle class="l" cx="60" cy="58" r="20" fill="#D2A94B"/><circle class="l" cx="60" cy="58" r="7" fill="#B98B3E"/>
+  <ellipse class="k" cx="200" cy="40" rx="40" ry="10" fill="#D2A94B"/><ellipse class="l" cx="200" cy="38" rx="18" ry="4" fill="#D9BE84"/><path class="t" d="M176 44 Q180 64 190 70 M224 44 Q220 64 210 70"/>
+  <rect class="k" x="306" y="54" width="70" height="12" rx="3" fill="#D6BB78"/>
+  <path class="k" fill="none" style="stroke-width:5" d="M316 38 L336 54"/><path fill="none" stroke="#6B4A2B" stroke-width="2.4" stroke-linecap="round" d="M316 38 L336 54"/>
+  <path class="k" fill="none" style="stroke-width:5" d="M368 34 L352 54"/><path fill="none" stroke="#6B4A2B" stroke-width="2.4" stroke-linecap="round" d="M368 34 L352 54"/>
+  <g transform="translate(60 168) rotate(0)"><path class="k" fill="#9E2A1C" d="M0 0 L-30 0 A30 30 0 0 1 30 0 Z"/><path class="t" d="M0 0 L-21 -21 M0 0 L0 -30 M0 0 L21 -21" style="stroke:#D2A94B"/></g>
+  <path class="k" fill="#4A3518" d="M330 130 L338 130 L346 178 L322 178Z"/><path class="k" fill="#D2A94B" d="M322 178 L346 178 L358 200 L310 200Z"/><path class="k" fill="#2E2118" d="M332 122 h4 v8 h-4z"/>
+  <path class="k" fill="none" style="stroke-width:4" d="M70 262 L100.6 209"/><circle class="k" cx="70" cy="262" r="18" fill="#D2A94B"/><circle class="l" cx="70" cy="262" r="5.4" fill="#4A3518"/>
+  <path class="k" fill="#D9BE84" d="M160 278 L200 244 L240 278Z"/><path class="t" d="M174 266 H226 M186 256 H214"/>
+  <g transform="rotate(10 330 260)"><rect class="k" x="310" y="226" width="40" height="62" fill="#FBF4E2"/><path class="t" d="M318 240 H342 M318 252 H342 M318 264 H336" style="stroke:#9E2A1C"/></g>
+</svg>

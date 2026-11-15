@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Múa rối nước thời Lý – Trần. Minh họa vẽ mới cho dự án, phỏng theo phong cách tranh khắc gỗ dân gian.
+       Sinh bởi scripts/draw-history.cjs — sửa ở script rồi chạy lại. -->
+  <style>
+    .k { stroke: #2E2118; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+    .l { stroke: #2E2118; stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; }
+    .t { stroke: #2E2118; stroke-width: 1.3; fill: none; stroke-linecap: round; }
+  </style>
+  <defs>
+    <pattern id="diep" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="7" r="1.3" fill="#FBF4E2"/><circle cx="22" cy="18" r="1" fill="#FBF4E2"/><circle cx="13" cy="29" r="0.8" fill="#E2CFA8"/>
+    </pattern>
+    <pattern id="song" width="36" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q9 3 18 12 Q27 3 36 12" fill="none" stroke="#8FA6BD" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="gan" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 3.5 H7" stroke="#2E2118" stroke-width="0.7" opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="#F1E4C6"/>
+  <rect width="400" height="300" fill="url(#diep)"/>
+  <circle class="k" cx="330" cy="52" r="20" fill="#9E2A1C"/>
+  <path class="k" fill="#FBF4E2" d="M60 52 q4 -14 20 -9 q8 -12 22 -3 q14 -3 14 9 q-4 9 -16 5 q-9 8 -22 2 q-14 5 -18 -4z"/>
+  <path class="t" d="M150 40 q4 -4 8 0 q4 -4 8 0 M172 32 q3 -3 6 0 q3 -3 6 0 M160 50 q3 -3 6 0 q3 -3 6 0"/>
+  <path class="k" fill="#8C9663" d="M0 116 Q70 66 140 106 Q210 56 290 102 Q350 78 400 100 V180 H0Z"/><path d="M0 116 Q70 66 140 106 Q210 56 290 102 Q350 78 400 100 V180 H0Z" fill="url(#gan)"/>
+  <path class="k" fill="#5B7247" d="M0 136 Q90 110 180 130 Q280 108 400 126 V180 H0Z"/><path d="M0 136 Q90 110 180 130 Q280 108 400 126 V180 H0Z" fill="url(#gan)"/>
+  <rect x="0" y="170" width="400" height="130" fill="#33506F"/>
+  <rect x="0" y="170" width="400" height="130" fill="url(#song)"/>
+  <path class="k" fill="none" d="M0 170 H400"/>
+  <path class="k" fill="#8A6A44" d="M226 150 H352 V170 H226Z"/>
+  <path class="k" fill="none" style="stroke-width:3" d="M236 170 V196 M342 170 V196 M289 170 V196"/>
+  <rect class="k" x="242.2" y="128" width="93.6" height="45.8" fill="#7A2E22"/>
+  <path class="t" d="M270.8 128 v45.8 M307.2 128 v45.8"/>
+  <path class="k" fill="#4A3518" d="M211 115.5 Q224 128 234.4 128 L250 86.4 L328 86.4 L343.6 128 Q354 128 367 115.5 Q356.6 134.2 341 134.2 L237 134.2 Q221.4 134.2 211 115.5Z"/>
+  <path class="t" d="M240 150 V132 M338 150 V132"/>
+  <path class="k" fill="#D6BB78" d="M244 132 H334 V152 H244Z"/><path class="t" d="M256 132 V152 M268 132 V152 M280 132 V152 M292 132 V152 M304 132 V152 M316 132 V152"/>
+  <g><path class="k" fill="none" style="stroke-width:5.6" d="M156.4 192 L166 193.6"/><path fill="none" stroke="#9E2A1C" stroke-width="3.2" stroke-linecap="round" d="M156.4 192 L166 193.6"/><path class="k" fill="#9E2A1C" d="M142 185.6 L158 185.6 L162.8 232 L137.2 232Z"/><path d="M140.4 206.4 H159.6" stroke="#D2A94B" stroke-width="2.4"/><circle class="k" cx="150" cy="179.2" r="6" fill="#E6C9A0"/><path class="k" fill="#2E2118" d="M143.6 177.2 Q150 170 156.4 177.2 L156 179.2 Q150 174.8 144 179.2Z"/></g>
+  <g><path class="k" fill="none" style="stroke-width:5.3" d="M190 200.5 L182.5 202"/><path fill="none" stroke="#26405E" stroke-width="3" stroke-linecap="round" d="M190 200.5 L182.5 202"/><path class="k" fill="#26405E" d="M188.5 194.5 L203.5 194.5 L208 238 L184 238Z"/><path d="M187 214 H205" stroke="#D2A94B" stroke-width="2.3"/><circle class="k" cx="196" cy="188.5" r="5.6" fill="#E6C9A0"/><circle class="l" cx="199.8" cy="185.1" r="2.7" fill="#2E2118"/></g>
+  <path class="t" d="M126 236 q24 8 48 0 M172 242 q24 8 48 0" style="stroke:#FBF4E2;stroke-width:2"/>
+  <g transform="translate(220 196) rotate(-30)"><path class="k" fill="#9E2A1C" d="M0 0 L-11 0 A11 11 0 0 1 11 0 Z"/><path class="t" d="M0 0 L-7.7 -7.7 M0 0 L0 -11 M0 0 L7.7 -7.7" style="stroke:#D2A94B"/></g>
+  <path class="k" fill="#5B7247" d="M0 210 Q50 200 96 214 L80 300 H0Z"/><path d="M0 210 Q50 200 96 214 L80 300 H0Z" fill="url(#gan)"/>
+  <path class="k" fill="none" d="M44 271.6 L53.6 246 M76 271.6 L66.4 246" style="stroke-width:3"/>
+  <ellipse class="k" cx="60" cy="246" rx="16" ry="12" fill="#9E2A1C"/>
+  <ellipse class="l" cx="56.8" cy="246" rx="8" ry="9.6" fill="#E6C9A0"/>
+  <path class="k" fill="none" style="stroke-width:5" d="M34 214 L56 240"/><path fill="none" stroke="#D9BE84" stroke-width="2.4" stroke-linecap="round" d="M34 214 L56 240"/>
+  <g><path class="k" fill="none" style="stroke-width:6.3" d="M33.4 239 L37 231.8"/><path fill="none" stroke="#7A5A3A" stroke-width="3.6" stroke-linecap="round" d="M33.4 239 L37 231.8"/><path class="k" fill="#7A5A3A" d="M19 231.8 L37 231.8 L42.4 284 L13.6 284Z"/><circle class="k" cx="28" cy="224.6" r="6.8" fill="#E6C9A0"/><path class="k" fill="#2E2118" d="M20.8 222.4 Q28 214.3 35.2 222.4 L34.8 224.6 Q28 219.7 21.3 224.6Z"/></g>
+</svg>

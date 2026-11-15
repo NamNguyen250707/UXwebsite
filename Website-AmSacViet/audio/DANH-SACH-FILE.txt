@@ -1,0 +1,19 @@
+Thả file đúng tên dưới đây vào thư mục này là trang tự dùng, không cần sửa code.
+Chưa có file → trang phát âm tổng hợp bằng Web Audio.
+
+audio/ — bản thu MP3 (khuyên dùng 5–20 giây, dưới 1 MB)
+
+# Nhạc cụ
+dan-bau.mp3  (Đàn bầu)
+dan-tranh.mp3  (Đàn tranh)
+dan-nguyet.mp3  (Đàn nguyệt)
+dan-nhi.mp3  (Đàn nhị)
+ty-ba.mp3  (Tỳ bà)
+sao-truc.mp3  (Sáo trúc)
+khen.mp3  (Khèn)
+ken-bau.mp3  (Kèn bầu)
+trong.mp3  (Trống)
+phach.mp3  (Phách)
+dan-trung.mp3  (Đàn t'rưng)
+cong-chieng.mp3  (Cồng chiêng)
+

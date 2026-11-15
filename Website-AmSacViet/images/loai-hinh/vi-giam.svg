@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Dân ca ví, giặm Nghệ Tĩnh. Minh họa vẽ mới cho dự án, phỏng theo phong cách tranh khắc gỗ dân gian.
+       Sinh bởi scripts/draw-genres.cjs — sửa ở script rồi chạy lại. -->
+  <style>
+    .k { stroke: #2E2118; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+    .l { stroke: #2E2118; stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; }
+    .t { stroke: #2E2118; stroke-width: 1.3; fill: none; stroke-linecap: round; }
+  </style>
+  <defs>
+    <pattern id="diep" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="7" r="1.3" fill="#FBF4E2"/><circle cx="22" cy="18" r="1" fill="#FBF4E2"/><circle cx="13" cy="29" r="0.8" fill="#E2CFA8"/>
+    </pattern>
+    <pattern id="song" width="36" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q9 3 18 12 Q27 3 36 12" fill="none" stroke="#8FA6BD" stroke-width="1.5"/>
+    </pattern>
+    <pattern id="gan" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 3.5 H7" stroke="#2E2118" stroke-width="0.7" opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="#F1E4C6"/>
+  <rect width="400" height="300" fill="url(#diep)"/>
+  <circle class="k" cx="320" cy="70" r="26" fill="#D2A94B"/>
+  <path class="t" d="M200 52 q4 -4 8 0 q4 -4 8 0 M222 44 q3 -3 6 0 q3 -3 6 0 M210 62 q3 -3 6 0 q3 -3 6 0"/>
+  <path class="k" fill="#A9AE84" d="M0 170 L40 120 L70 150 L110 96 L150 146 L190 110 L230 160 L260 130 L300 168 V200 H0Z"/><path d="M0 170 L40 120 L70 150 L110 96 L150 146 L190 110 L230 160 L260 130 L300 168 V200 H0Z" fill="url(#gan)"/>
+  <path class="k" fill="#5B7247" d="M0 186 Q120 170 240 184 Q320 176 400 186 V206 H0Z"/>
+  <rect x="0" y="204" width="400" height="96" fill="#33506F"/>
+  <rect x="0" y="204" width="400" height="96" fill="url(#song)"/>
+  <path class="k" fill="none" d="M0 204 H400"/>
+  <path class="k" fill="#6B4A2B" d="M110 250 Q190 270 280 248 L270 264 Q190 284 120 264Z"/>
+  <g><path class="k" fill="none" style="stroke-width:7.4" d="M246.4 199.5 L265.3 218.4"/><path fill="none" stroke="#9E2A1C" stroke-width="4.2" stroke-linecap="round" d="M246.4 199.5 L265.3 218.4"/><path class="k" fill="#9E2A1C" d="M227.5 191.1 L248.5 191.1 L254.8 252 L221.2 252Z"/><path class="k" fill="#2E2118" d="M224.3 233.1 L251.7 233.1 L252.7 252 L223.3 252Z"/><circle class="k" cx="238" cy="182.7" r="7.9" fill="#E6C9A0"/><path class="k" fill="#D9BE84" d="M222.3 178 L238 161.2 L253.8 178Z"/></g>
+  <path class="k" fill="none" d="M270 214 L250 290"/>
+  <g><ellipse class="k" cx="160" cy="251.2" rx="20.9" ry="5.7" fill="#2E2118"/><path class="k" fill="#26405E" d="M150.5 219.8 L169.5 219.8 L173.3 250.2 L146.7 250.2Z"/><circle class="k" cx="160" cy="212.2" r="7.1" fill="#E6C9A0"/><path class="k" fill="#D9BE84" d="M145.8 207.9 L160 192.7 L174.3 207.9Z"/></g>
+  <path class="k" fill="#5B7247" d="M300 214 Q350 208 400 212 V300 H320Z"/>
+  <path class="t" d="M336 234 l3 -8 l3 8 M356 244 l3 -8 l3 8 M372 230 l3 -8 l3 8 M384 258 l3 -8 l3 8" style="stroke:#3F5434"/>
+  <g><path class="k" fill="none" style="stroke-width:7" d="M344 228 L330 220"/><path fill="none" stroke="#7A5A3A" stroke-width="4" stroke-linecap="round" d="M344 228 L330 220"/><path class="k" fill="#7A5A3A" d="M342 220 L362 220 L368 278 L336 278Z"/><circle class="k" cx="352" cy="212" r="7.5" fill="#E6C9A0"/><path class="k" fill="#D9BE84" d="M337 207.5 L352 191.5 L367 207.5Z"/></g>
+</svg>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="genres.meta.title">Loại hình âm nhạc | Âm Sắc Việt</title>
+  <meta name="description" data-i18n-content="genres.meta.desc"
+        content="Bản đồ 8 loại hình âm nhạc truyền thống Việt Nam được UNESCO ghi danh, kèm mô tả, âm thanh và video biểu diễn.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+
+  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/map-data.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/genres.js"></script>
+</head>
+<body data-page="genres" id="top">
+
+  <div id="site-header"></div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Đầu trang -->
+    <section class="page-head has-deco" aria-labelledby="genres-title">
+      <!-- Hoa văn: vòng trống đồng lấp ló góc phải, ba con hạc bên trái -->
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-drum deco-drum-head" src="images/motifs/vong-trong-dong.svg" alt="">
+      </div>
+      <div class="container">
+        <h1 id="genres-title" class="page-title" data-i18n="genres.title">Các loại hình âm nhạc</h1>
+        <p class="section-lead" data-i18n="genres.lead">Tám loại hình tiêu biểu đã được UNESCO ghi danh, từ Bắc Bộ vào Nam Bộ. Bấm vào một điểm trên bản đồ để đọc, nghe và xem biểu diễn; chọn một vùng để bản đồ phóng tới vùng đó.</p>
+
+        <!-- Nút lọc theo vùng (genres.js gắn sự kiện) -->
+        <div class="filter-bar" role="group" aria-label="Lọc theo vùng" data-i18n-aria-label="genres.filter.label">
+          <button type="button" class="filter-btn" data-region="all" aria-pressed="true" data-i18n="genres.filter.all">Tất cả</button>
+          <button type="button" class="filter-btn" data-region="north" aria-pressed="false" data-i18n="region.north">Bắc Bộ</button>
+          <button type="button" class="filter-btn" data-region="central" aria-pressed="false" data-i18n="region.central">Trung Bộ</button>
+          <button type="button" class="filter-btn" data-region="highlands" aria-pressed="false" data-i18n="region.highlands">Tây Nguyên</button>
+          <button type="button" class="filter-btn" data-region="south" aria-pressed="false" data-i18n="region.south">Nam Bộ</button>
+        </div>
+        <p class="filter-count" id="filterCount" aria-live="polite"></p>
+        <p class="visually-hidden" id="genreLive" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Bản đồ + khung chi tiết -->
+    <section class="section pt-0">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-5">
+            <div class="asv-card map-card">
+              <!-- genres.js vẽ bản đồ (SVG) và các nút đánh dấu vào đây -->
+              <div class="map-wrap" id="mapWrap"></div>
+              <p class="map-hint" data-i18n="genres.map.hint">Bấm vào một điểm trên bản đồ, hoặc chọn trong danh sách bên dưới.</p>
+              <p class="map-source" data-i18n="genres.map.source">Đường biên: Natural Earth. Bản đồ minh họa, không đúng tỉ lệ ở các điểm đánh dấu phía Bắc.</p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <!-- Khung chi tiết: đổi theo điểm đang chọn -->
+            <article class="asv-card genre-panel" id="genrePanel" tabindex="-1"></article>
+            <div class="genre-media" id="genreMedia"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Danh sách thẻ (cho người không dùng bản đồ) -->
+    <section class="section pt-0 has-deco" aria-labelledby="list-title">
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-hac deco-l1" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l2" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l3" src="images/motifs/hac.svg" alt="">
+      </div>
+      <div class="container">
+        <h2 id="list-title" class="section-title" data-i18n="genres.list.title">Tất cả loại hình</h2>
+        <p class="section-lead mb-4" data-i18n="genres.list.lead">Danh sách dành cho bạn không muốn dùng bản đồ. Bấm vào một thẻ để xem chi tiết.</p>
+        <div class="row g-4" id="genreList"></div>
+        <p class="genres-more" data-i18n="genres.more">Ngoài 8 loại hình này, UNESCO còn ghi danh hát văn trong Thực hành tín ngưỡng thờ Mẫu Tam phủ (2016) và Thực hành Then của người Tày, Nùng, Thái (2019).</p>
+      </div>
+    </section>
+
+    <!-- Xem tiếp -->
+    <section id="explore-next" data-next="instruments,history"></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <noscript>
+    <p class="container py-3" style="color:#9E2A1C">Trang cần bật JavaScript để hiện bản đồ, phát âm thanh và đổi ngôn ngữ. / Please enable JavaScript to see the map, play sounds and switch languages.</p>
+  </noscript>
+</body>
+</html>
