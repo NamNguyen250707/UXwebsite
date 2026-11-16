@@ -105,10 +105,14 @@ ASV.ready(function () {
 
   function renderList() {
     list.innerHTML = DATA.map(itemHtml).join("");
-    // Hình minh họa: thiếu file thì createMedia hiện ô giữ chỗ
+    // Ảnh thật kèm chú thích và nguồn. Thiếu file ảnh thì dùng tranh vẽ (h.image) và bỏ chú thích.
     DATA.forEach(function (h, i) {
       var fig = list.querySelector('[data-media="' + i + '"]');
-      fig.appendChild(ASV.createMedia({ src: h.image, name: pick(h.title), kind: "history", alt: pick(h.alt) }));
+      if (h.photo) fig.innerHTML = ASV.photoCaption(h.photo);
+      fig.insertBefore(ASV.createMedia({
+        src: h.photo ? h.photo.src : h.image, fallback: h.image, name: pick(h.title), kind: "history", alt: pick(h.alt),
+        onFallback: function () { var cap = fig.querySelector("figcaption"); if (cap) cap.remove(); }
+      }), fig.firstChild);
     });
     ASV.syncPlayButtons();
   }

@@ -593,7 +593,7 @@ var ASV_DATA = {
       instruments: ["trong", "dan-nhi", "sao-truc", "dan-nguyet"],
       desc: {
         vi: "Chèo là sân khấu dân gian của đồng bằng Bắc Bộ, lớn lên từ những chiếu chèo diễn ở sân đình. Một vở chèo kết hợp hát, múa, nói lối và những vai hề dí dỏm, kể các tích quen thuộc như Quan Âm Thị Kính, Lưu Bình Dương Lễ. Dàn nhạc thường có trống, đàn nhị, sáo và đàn nguyệt.",
-        en: "Chèo is the folk theatre of the Red River Delta, which grew out of performances on mats in village communal-house yards. A chèo play combines singing, dance, rhythmic speech and witty clown roles, telling familiar stories such as Quan Âm Thị Kính and Lưu Bình Dương Lễ. The ensemble usually has drums, đàn nhị, flute and đàn nguyệt."
+        en: "Chèo is the folk theatre of the Red River Delta, which grew out of performances on mats in village communal-house yards. A chèo play combines singing, dance, rhythmic speech and witty clown roles, telling familiar stories such as Quan Âm Thị Kính and Lưu Bình Dương Lễ. The ensemble usually has drums, đàn nhị, sáo and đàn nguyệt."
       }
     },
     {
@@ -639,7 +639,7 @@ var ASV_DATA = {
       instruments: ["dan-tranh", "ty-ba", "dan-nguyet", "dan-nhi", "sao-truc"],
       desc: {
         vi: "Ca Huế là lối hát thính phòng tao nhã của đất cố đô, từng vang trong phủ đệ rồi lan ra đời sống thường ngày. Bài bản chia hai điệu: điệu Bắc tươi vui, điệu Nam buồn thương. Người ca đi cùng đàn tranh, tỳ bà, nguyệt, nhị và sáo. Ngày nay nhiều người nghe ca Huế trên thuyền giữa sông Hương.",
-        en: "Ca Huế is the refined chamber singing of the old capital, once heard in aristocratic residences before spreading into everyday life. Its pieces fall into two modes: the bright Bắc mode and the sorrowful Nam mode. Singers are accompanied by đàn tranh, tỳ bà, đàn nguyệt, đàn nhị and flute. Today many people hear ca Huế on boats on the Hương River."
+        en: "Ca Huế is the refined chamber singing of the old capital, once heard in aristocratic residences before spreading into everyday life. Its pieces fall into two modes: the bright Bắc mode and the sorrowful Nam mode. Singers are accompanied by đàn tranh, tỳ bà, đàn nguyệt, đàn nhị and sáo. Today many people hear ca Huế on boats on the Hương River."
       }
     },
     {
@@ -727,17 +727,17 @@ var ASV_DATA = {
   history: [
     {
       id: "dong-son",
-      short: { vi: "Đàn đá, trống đồng", en: "Stone and bronze" }, // tên ngắn trên thanh thời kỳ
+      short: { vi: "Đàn đá, trống đồng", en: "Lithophones, bronze drums" }, // tên ngắn trên thanh thời kỳ
       start: -700,
       period: { vi: "Thời tiền sử – thế kỷ 1", en: "Prehistory – 1st century CE" },
-      title: { vi: "Đàn đá và trống đồng", en: "Stone lithophones and bronze drums" },
+      title: { vi: "Đàn đá và trống đồng", en: "Lithophones and bronze drums" },
       summary: {
         vi: "Những nhạc cụ cổ nhất tìm thấy trên đất Việt Nam làm bằng đá và đồng. Đàn đá là những phiến đá được ghè đẽo để mỗi thanh gõ ra một cao độ riêng. Trống đồng của văn hóa Đông Sơn (khoảng thế kỷ 7 TCN đến thế kỷ 1) vừa là nhạc cụ vừa là vật dùng trong nghi lễ; mặt trống khắc người đánh trống, nhảy múa, chim bay và thuyền.",
         en: "The oldest instruments found in Vietnam are made of stone and bronze. Lithophones are stone slabs chipped so that each one rings at its own pitch. The bronze drums of the Đông Sơn culture (around the 7th century BCE to the 1st century CE) were both instruments and ritual objects; their surfaces show people drumming and dancing, birds in flight and boats."
       },
       facts: [
-        { year: "1893", vi: "Trống đồng Ngọc Lũ được tìm thấy khi đắp đê ở làng Ngọc Lũ (Hà Nam). Trống hiện trưng bày tại Bảo tàng Lịch sử Quốc gia ở Hà Nội.",
-          en: "The Ngọc Lũ drum was found while villagers were building a dyke in Ngọc Lũ (Hà Nam). It is now on display at the National Museum of Vietnamese History in Hà Nội." },
+        { year: "1893", vi: "Trống đồng Ngọc Lũ được tìm thấy khi đắp đê ở làng Ngọc Lũ (Hà Nam cũ, nay thuộc Ninh Bình). Trống hiện trưng bày tại Bảo tàng Lịch sử Quốc gia ở Hà Nội.",
+          en: "The Ngọc Lũ drum was found while villagers were building a dyke in Ngọc Lũ (former Hà Nam, now part of Ninh Bình). It is now on display at the National Museum of Vietnamese History in Hà Nội." },
         { year: "1949", vi: "Công nhân làm đường ở Ndut Liêng Krak (Đắk Lắk) đào được một bộ đàn đá 11 thanh. Nhà dân tộc học Georges Condominas đưa bộ đàn về Paris để nghiên cứu.",
           en: "Road workers at Ndut Liêng Krak (Đắk Lắk) dug up a set of 11 stone bars. The ethnologist Georges Condominas took the set to Paris for study." },
         { year: "2012", vi: "Trống đồng Ngọc Lũ đứng đầu danh sách 30 hiện vật được công nhận Bảo vật quốc gia đợt đầu tiên.",
@@ -753,9 +753,16 @@ var ASV_DATA = {
         { vi: "G. Condominas, bài về đàn đá Ndut Liêng Krak, Bulletin de l'École française d'Extrême-Orient", en: "G. Condominas, article on the Ndut Liêng Krak lithophone, Bulletin de l'École française d'Extrême-Orient" }
       ],
       genres: [], instruments: [],
-      image: "images/lich-su/dong-son.svg",
-      alt: { vi: "Tranh khắc gỗ: mặt trống đồng có ngôi sao giữa và vòng chim bay, bên cạnh là bộ đàn đá trên giá.",
-             en: "Woodcut-style picture: a bronze drumhead with a central star and a ring of flying birds, next to a stone lithophone on a stand." }
+      image: "images/lich-su/dong-son.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/dong-son.jpg",
+        author: "VuThiAnh", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:Ngoc_Lu.jpg",
+        caption: { vi: "Trống đồng Ngọc Lũ trưng bày tại Bảo tàng Lịch sử Quốc gia, Hà Nội",
+                   en: "The Ngọc Lũ drum on display at the National Museum of Vietnamese History, Hà Nội" }
+      },
+      alt: { vi: "Ảnh chụp trống đồng Ngọc Lũ nhìn ngang trong tủ kính: tang trống phình, thân thắt lại, có hai cặp quai bện thừng và các vành hoa văn khắc chìm.",
+             en: "Side view of the Ngọc Lũ bronze drum in a glass case: a bulging top, a narrow waist, two pairs of rope-patterned handles and bands of engraved decoration." }
     },
     {
       id: "ly-tran",
@@ -768,8 +775,8 @@ var ASV_DATA = {
         en: "Under the Lý (1009–1225) and Trần (1225–1400) dynasties, music belonged to temples, the royal court and village festivals. Stone inscriptions and chronicles describe large court performances: puppets dancing on water to drums and music, and later staged shows with roles and costumes. These are the earliest surviving records of theatre in Vietnam."
       },
       facts: [
-        { year: "1121", vi: "Bia Sùng Thiện Diên Linh được dựng ở chùa Long Đọi Sơn (Hà Nam). Văn bia tả cảnh múa rối trên mặt nước trong buổi lễ mừng thọ vua Lý Nhân Tông. Tấm bia nay là Bảo vật quốc gia.",
-          en: "The Sùng Thiện Diên Linh stele was erected at Long Đọi Sơn pagoda (Hà Nam). Its text describes puppets performing on water at a celebration of King Lý Nhân Tông's longevity. The stele is now a National Treasure." },
+        { year: "1121", vi: "Bia Sùng Thiện Diên Linh được dựng ở chùa Long Đọi Sơn (Hà Nam cũ, nay thuộc Ninh Bình). Văn bia tả cảnh múa rối trên mặt nước trong buổi lễ mừng thọ vua Lý Nhân Tông. Tấm bia nay là Bảo vật quốc gia.",
+          en: "The Sùng Thiện Diên Linh stele was erected at Long Đọi Sơn pagoda (former Hà Nam, now part of Ninh Bình). Its text describes puppets performing on water at a celebration of King Lý Nhân Tông's longevity. The stele is now a National Treasure." },
         { year: "1285", vi: "Trong cuộc kháng chiến chống quân Nguyên, quân Trần bắt được Lý Nguyên Cát, một người trong phường hát, nổi tiếng hát giỏi.",
           en: "During the war against the Yuan armies, Trần forces captured Lý Nguyên Cát, a member of a troupe of singers known for his fine voice." },
         { year: "1362", vi: "Đại Việt sử ký toàn thư, chép ở năm này, kể lại rằng con em nhà quyền quý theo Lý Nguyên Cát học hát và diễn những tích truyện có vai.",
@@ -785,16 +792,23 @@ var ASV_DATA = {
           url: "https://nhahatmuaroivietnam.vn/node/998" }
       ],
       genres: [], instruments: [],
-      image: "images/lich-su/ly-tran.svg",
-      alt: { vi: "Tranh khắc gỗ: thủy đình mái cong giữa ao, những con rối múa trên mặt nước, có người đánh trống bên bờ.",
-             en: "Woodcut-style picture: a water pavilion with a curved roof in a pond, puppets dancing on the water and a drummer on the bank." }
+      image: "images/lich-su/ly-tran.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/ly-tran.jpg",
+        author: "TravellerMya", license: "CC0", licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+        page: "https://commons.wikimedia.org/wiki/File:Water_Puppet_Show_in_Vietnam_with_Two_Birds.jpg",
+        caption: { vi: "Một buổi diễn múa rối nước ngày nay",
+                   en: "A water puppet show today" }
+      },
+      alt: { vi: "Ảnh chụp sân khấu múa rối nước: những con rối chim và người sơn màu rực rỡ trên mặt nước, phía sau là tấm mành tre và rèm đỏ thêu rồng.",
+             en: "Photo of a water puppet stage: brightly painted bird and figure puppets on the water, with a bamboo screen and a red embroidered curtain behind them." }
     },
     {
       id: "le",
       short: { vi: "Thời Lê", en: "The Lê era" }, // tên ngắn trên thanh thời kỳ
       start: 1428,
       period: { vi: "1428 – 1789", en: "1428 – 1789" },
-      title: { vi: "Thời Lê: định lễ nhạc, hát cửa đình", en: "The Lê era: court ritual music and village singing" },
+      title: { vi: "Thời Lê: định lễ nhạc, hát cửa đình", en: "The Lê era: court ritual music and communal-house singing" },
       summary: {
         vi: "Sau khi giành lại độc lập, nhà Lê sắp xếp lại lễ nhạc của triều đình theo tinh thần Nho giáo, có nhạc khí và bài bản riêng cho từng nghi lễ. Ở làng xã, đình làng là nơi hát xướng trong ngày hội. Lối hát ở cửa đình, cửa đền này về sau được gọi chung là ca trù, với ba thành phần: đào nương gõ phách, kép đàn đáy và người cầm chầu.",
         en: "After regaining independence, the Lê dynasty reorganised court ritual music along Confucian lines, with its own instruments and pieces for each ceremony. In the villages, the communal house was where people sang at festivals. This singing at communal houses and temples later became known as ca trù, performed by a female singer with clappers, a lute player and a drummer who judges the song."
@@ -818,16 +832,23 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/VSS/en/article/view/88612" }
       ],
       genres: ["ca-tru"], instruments: ["phach"],
-      image: "images/lich-su/le.svg",
-      alt: { vi: "Tranh khắc gỗ: chiếc khánh đá treo trên giá gỗ trước sân đình, một đào nương ngồi gõ phách.",
-             en: "Woodcut-style picture: a stone chime hanging on a wooden frame in front of a communal house, with a singer playing clappers." }
+      image: "images/lich-su/le.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/le.jpg",
+        author: "Phương Huy", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+        page: "https://commons.wikimedia.org/wiki/File:Tu_vi%E1%BB%87n_V%C4%A9nh_Nghi%C3%AAm,_c%E1%BB%95ng_tam_quan_(chi%E1%BA%BFc_kh%C3%A1nh_b%E1%BA%B1ng_%C4%91%C3%A1)_(4).jpg",
+        caption: { vi: "Một chiếc khánh đá ngày nay treo ở cổng tam quan tu viện Vĩnh Nghiêm. Khánh là nhạc cụ quen thuộc trong lễ nhạc cung đình và chùa chiền.",
+                   en: "A modern stone chime (khánh) hanging in the gate of Vĩnh Nghiêm monastery. The khánh was a familiar instrument in court ritual music and in temples." }
+      },
+      alt: { vi: "Ảnh chụp chiếc khánh đá màu xanh sẫm treo dưới mái gỗ, mặt khánh chạm nổi hai con rồng chầu mặt trời.",
+             en: "Photo of a dark green stone chime hanging under a wooden roof, carved in relief with two dragons facing a sun." }
     },
     {
       id: "nguyen",
-      short: { vi: "Triều Nguyễn", en: "The Nguyễn court" }, // tên ngắn trên thanh thời kỳ
+      short: { vi: "Triều Nguyễn", en: "The Nguyễn dynasty" }, // tên ngắn trên thanh thời kỳ
       start: 1802,
       period: { vi: "1802 – 1945", en: "1802 – 1945" },
-      title: { vi: "Triều Nguyễn: nhã nhạc ở Huế", en: "The Nguyễn court: nhã nhạc in Huế" },
+      title: { vi: "Triều Nguyễn: nhã nhạc ở Huế", en: "The Nguyễn dynasty: nhã nhạc in Huế" },
       summary: {
         vi: "Nhà Nguyễn đóng đô ở Huế và quy định nhạc cho từng nghi lễ: lễ tế Nam Giao, lễ Đại triều, Thường triều, sinh nhật vua và hoàng hậu, yến tiệc trong cung. Có dàn lớn với kèn, trống, chiêng và dàn nhỏ với đàn, sáo. Cùng thời, ca Huế phát triển trong sinh hoạt của quan lại và người dân bên sông Hương.",
         en: "The Nguyễn dynasty ruled from Huế and set out music for each ceremony: the Nam Giao sacrifice, grand and regular court audiences, the birthdays of the king and queen, and palace banquets. There were large ensembles with oboes, drums and gongs, and small ones with strings and flutes. Meanwhile ca Huế chamber singing grew among officials and townspeople along the Hương River."
@@ -853,9 +874,16 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/ncpt-hue/article/view/4570" }
       ],
       genres: ["nha-nhac"], instruments: ["ken-bau", "trong"],
-      image: "images/lich-su/nguyen.svg",
-      alt: { vi: "Tranh khắc gỗ: cổng cung điện mái vàng nhiều tầng, phía trước là các nhạc công mặc áo đỏ thổi kèn, đánh trống.",
-             en: "Woodcut-style picture: a multi-roofed palace gate with yellow tiles, with musicians in red robes playing oboes and drums in front." }
+      image: "images/lich-su/nguyen.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/nguyen.jpg",
+        author: "Liftold", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:S%C3%A2n_kh%E1%BA%A5u_ch%C3%ADnh_c%E1%BB%A7a_Duy%E1%BB%87t_Th%E1%BB%8B_%C4%90%C6%B0%E1%BB%9Dng.JPG",
+        caption: { vi: "Sân khấu chính của nhà hát Duyệt Thị Đường trong Đại Nội Huế",
+                   en: "The main stage of the Duyệt Thị Đường royal theatre in the Huế Imperial City" }
+      },
+      alt: { vi: "Ảnh chụp sân khấu nhà hát cung đình: ngai vàng ở giữa trên bậc cao, hai bên là trống và lọng vàng, phía trên treo bức hoành chữ Hán.",
+             en: "Photo of the royal theatre stage: a golden throne on a raised platform, drums and yellow parasols on each side, and a board with Chinese characters above." }
     },
     {
       id: "tai-tu-cai-luong",
@@ -868,16 +896,16 @@ var ASV_DATA = {
         en: "In southern Vietnam in the late 19th century, amateur musicians called tài tử gathered to play and sing around well-known pieces, including 20 core pieces known as the bài tổ. In the early 20th century, singing with acted gestures (ca ra bộ) moved onto the stage, with stories, costumes and scenery. This became cải lương theatre."
       },
       facts: [
-        { year: "1918", vi: "Vở Kim Vân Kiều diễn ở Mỹ Tho thường được lấy làm mốc ra đời của cải lương. Năm 2018, giới sân khấu cả nước kỷ niệm 100 năm sân khấu cải lương.",
-          en: "A staging of Kim Vân Kiều in Mỹ Tho is usually taken as the birth of cải lương. In 2018, theatres across Vietnam celebrated 100 years of cải lương." },
-        { year: "1919", vi: "Nhạc sĩ Cao Văn Lầu (Sáu Lầu) ở Bạc Liêu viết bài Dạ cổ hoài lang. Bài này về sau phát triển thành bản vọng cổ, bài quan trọng bậc nhất của cải lương.",
-          en: "Composer Cao Văn Lầu (Sáu Lầu) of Bạc Liêu wrote Dạ cổ hoài lang. It later grew into vọng cổ, the most important melody in cải lương." },
+        { year: "1918", vi: "Vở Kim Vân Kiều diễn ở Mỹ Tho (Tiền Giang cũ, nay thuộc Đồng Tháp) thường được lấy làm mốc ra đời của cải lương. Năm 2018, giới sân khấu cả nước kỷ niệm 100 năm sân khấu cải lương.",
+          en: "A staging of Kim Vân Kiều in Mỹ Tho (former Tiền Giang, now part of Đồng Tháp) is usually taken as the birth of cải lương. In 2018, theatres across Vietnam celebrated 100 years of cải lương." },
+        { year: "1919", vi: "Nhạc sĩ Cao Văn Lầu (Sáu Lầu) ở Bạc Liêu (nay thuộc Cà Mau) viết bài Dạ cổ hoài lang. Bài này về sau phát triển thành bản vọng cổ, bài quan trọng bậc nhất của cải lương.",
+          en: "Composer Cao Văn Lầu (Sáu Lầu) of Bạc Liêu (now part of Cà Mau) wrote Dạ cổ hoài lang. It later grew into vọng cổ, the most important melody in cải lương." },
         { year: "2013", vi: "UNESCO ghi danh Nghệ thuật đờn ca tài tử Nam Bộ vào Danh sách di sản văn hóa phi vật thể đại diện của nhân loại.",
           en: "UNESCO inscribed the art of Đờn ca tài tử music and song in southern Vietnam on the Representative List." }
       ],
       debate: {
-        vi: "Mốc 1918 chưa được mọi người đồng ý: có nhà nghiên cứu đề nghị năm 1917, với vở Vì nghĩa quên nhà ở Sa Đéc. Năm sáng tác Dạ cổ hoài lang cũng có tài liệu ghi 1917, 1918 hoặc 1920, nhưng nhiều nguồn thống nhất là 1919.",
-        en: "Not everyone accepts 1918: one researcher proposes 1917, with the play Vì nghĩa quên nhà in Sa Đéc. Some sources also date Dạ cổ hoài lang to 1917, 1918 or 1920, though most agree on 1919."
+        vi: "Mốc 1918 chưa được mọi người đồng ý: có nhà nghiên cứu đề nghị năm 1917, với vở Vì nghĩa quên nhà ở Sa Đéc (Đồng Tháp). Năm sáng tác Dạ cổ hoài lang cũng có tài liệu ghi 1917, 1918 hoặc 1920, nhưng nhiều nguồn thống nhất là 1919.",
+        en: "Not everyone accepts 1918: one researcher proposes 1917, with the play Vì nghĩa quên nhà in Sa Đéc (Đồng Tháp). Some sources also date Dạ cổ hoài lang to 1917, 1918 or 1920, though most agree on 1919."
       },
       sources: [
         { vi: "UNESCO: Đờn ca tài tử", en: "UNESCO: Art of Đờn ca tài tử music and song",
@@ -886,9 +914,16 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/ncpt-hue/article/view/38427" }
       ],
       genres: ["tai-tu"], instruments: ["dan-nguyet", "dan-tranh"],
-      image: "images/lich-su/tai-tu-cai-luong.svg",
-      alt: { vi: "Tranh khắc gỗ: sân khấu cải lương có màn đỏ, hai nghệ sĩ đang diễn, phía dưới là dàn đờn ngồi bên cạnh.",
-             en: "Woodcut-style picture: a cải lương stage with a red curtain and two actors performing, with musicians seated at the side." }
+      image: "images/lich-su/tai-tu-cai-luong.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/loai-hinh/anh/tai-tu.jpg",
+        author: "", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:Ban_nh%E1%BA%A1c_%C4%91%E1%BB%9Dn_ca_t%C3%A0i_t%E1%BB%AD_S%C3%A0i_G%C3%B2n_(1911).jpeg",
+        caption: { vi: "Một ban đờn ca tài tử ở Sài Gòn năm 1911, in trên một tờ quảng cáo",
+                   en: "A đờn ca tài tử group in Sài Gòn in 1911, printed on a poster" }
+      },
+      alt: { vi: "Bưu thiếp đen trắng năm 1911: nhóm nhạc công mặc áo dài, đội khăn xếp, người ngồi người đứng, cầm đàn tranh, đàn tỳ bà, đàn kìm và đàn cò.",
+             en: "Black-and-white postcard from 1911: musicians in long tunics and turbans, some seated and some standing, holding đàn tranh, đàn tỳ bà, đàn kìm and đàn cò." }
     },
     {
       id: "hien-dai",
@@ -918,9 +953,16 @@ var ASV_DATA = {
         { vi: "Trần Văn Khê, La musique vietnamienne traditionnelle, Paris, 1962", en: "Trần Văn Khê, La musique vietnamienne traditionnelle, Paris, 1962" }
       ],
       genres: [], instruments: ["dan-bau", "dan-tranh"],
-      image: "images/lich-su/hien-dai.svg",
-      alt: { vi: "Tranh khắc gỗ: lớp học nhạc, thầy giáo và học trò ngồi chơi đàn bầu, đàn tranh, trên bảng có khuông nhạc.",
-             en: "Woodcut-style picture: a music class with a teacher and students playing the đàn bầu and đàn tranh, a stave drawn on the board." }
+      image: "images/lich-su/hien-dai.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/hien-dai.jpg",
+        author: "Adir Benyamini", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+        page: "https://commons.wikimedia.org/wiki/File:The_Vietnam_National_Academy_of_Music_SAM_0397.jpg",
+        caption: { vi: "Tòa phòng hòa nhạc của Học viện Âm nhạc Quốc gia Việt Nam, Hà Nội",
+                   en: "The concert hall of the Vietnam National Academy of Music, Hà Nội" }
+      },
+      alt: { vi: "Ảnh chụp tòa nhà màu kem có hàng cột tròn cao của Học viện Âm nhạc Quốc gia Việt Nam.",
+             en: "Photo of the cream-coloured building with tall round columns at the Vietnam National Academy of Music." }
     },
     {
       id: "unesco",
@@ -948,9 +990,16 @@ var ASV_DATA = {
           url: "https://ich.unesco.org/en/state/viet-nam-VN" }
       ],
       genres: ["nha-nhac", "cong-chieng", "quan-ho", "ca-tru", "hat-xoan", "tai-tu", "vi-giam", "bai-choi"], instruments: [],
-      image: "images/lich-su/unesco.svg",
-      alt: { vi: "Tranh khắc gỗ: tám vật gợi tám loại hình (chiêng, nón quai thao, phách, quạt, kèn, đàn kìm, nón lá, thẻ bài chòi) xếp quanh một tấm bằng đóng dấu đỏ.",
-             en: "Woodcut-style picture: eight objects standing for eight genres (gong, flat hat, clappers, fan, oboe, moon lute, conical hat, bài chòi card) around a certificate with a red seal." }
+      image: "images/lich-su/unesco.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/loai-hinh/anh/hat-xoan.jpg",
+        author: "Sở Văn hóa, Thể thao và Du lịch Phú Thọ", source: "hồ sơ UNESCO", license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
+        page: "https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260",
+        caption: { vi: "Hát xoan tại miếu Lãi Lèn, Phú Thọ. Năm 2017 hát xoan được chuyển từ danh sách cần bảo vệ khẩn cấp sang danh sách đại diện.",
+                   en: "Xoan singing at Lãi Lèn temple, Phú Thọ. In 2017 xoan singing moved from the urgent safeguarding list to the representative list." }
+      },
+      alt: { vi: "Ảnh chụp bốn đào xoan mặc áo dài đỏ, đội khăn, đứng hát trước ban thờ trong miếu, người xem ngồi quanh trên chiếu.",
+             en: "Photo of four xoan singers in red dresses and headscarves singing before the altar inside the temple, with the audience seated around them on mats." }
     },
     {
       id: "hom-nay",
@@ -972,9 +1021,16 @@ var ASV_DATA = {
         { vi: "Nghị định 62/2014/NĐ-CP về xét tặng danh hiệu Nghệ nhân nhân dân, Nghệ nhân ưu tú", en: "Decree 62/2014/NĐ-CP on the titles People's Artisan and Meritorious Artisan" }
       ],
       genres: [], instruments: ["dan-bau"],
-      image: "images/lich-su/hom-nay.svg",
-      alt: { vi: "Tranh khắc gỗ: một nghệ nhân lớn tuổi dạy một bạn trẻ chơi đàn bầu, bên cạnh là chiếc loa và điện thoại.",
-             en: "Woodcut-style picture: an elderly master teaching a young person to play the đàn bầu, with a speaker and a phone beside them." }
+      image: "images/lich-su/hom-nay.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      photo: {
+        src: "images/lich-su/anh/hom-nay.jpg",
+        author: "Cục Hợp tác quốc tế (Bộ VHTTDL)", source: "Báo Điện tử Chính phủ", license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
+        page: "https://baochinhphu.vn/tinh-hoa-am-nhac-truyen-thong-viet-nam-toa-sang-tai-expo-2025-102250420143328483.htm",
+        caption: { vi: "Khách tham quan chơi thử đàn t'rưng tại EXPO 2025 ở Osaka, Nhật Bản",
+                   en: "Visitors trying the đàn t'rưng at EXPO 2025 in Osaka, Japan" }
+      },
+      alt: { vi: "Ảnh chụp một nghệ sĩ mặc áo dài hồng hướng dẫn khách, cả người lớn và trẻ em, gõ thử cây đàn t'rưng bằng ống tre.",
+             en: "Photo of a performer in a pink áo dài showing visitors, adults and children, how to play a bamboo đàn t'rưng." }
     }
   ],
 

@@ -949,6 +949,16 @@ ASV.videoCard = function (g, opts) {
     "</div></article>";
 };
 
+/* Chú thích dưới ảnh thật: nội dung ảnh + dòng nguồn (tác giả · nơi lấy ảnh · giấy phép), link tới trang gốc.
+   Ảnh Wikimedia Commons: giấy phép CC hoặc phạm vi công cộng. Dùng ở trang Loại hình và Lịch sử. */
+ASV.photoCaption = function (p) {
+  var license = p.license === "Public domain" ? I18n.t("photo.pd") : I18n.pick(p.license);
+  var credit = I18n.t("photo.credit", { author: I18n.pick(p.author) || I18n.t("photo.unknown"), license: license, source: I18n.pick(p.source || "Wikimedia Commons") });
+  return '<figcaption><span class="photo-caption">' + ASV.escape(I18n.pick(p.caption)) + "</span><br>" +
+    '<a class="photo-credit" href="' + p.page + '" target="_blank" rel="noopener">' + ASV.escape(credit) +
+    '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span></a></figcaption>";
+};
+
 /* Dòng nguồn của video: video UNESCO ghi "Video: UNESCO · <đơn vị giữ bản quyền>" (link tới trang UNESCO);
    video của nhà hát hoặc báo chí nhà nước ghi rõ tên kênh (link tới kênh YouTube chính thức). */
 ASV.videoCredit = function (v) {

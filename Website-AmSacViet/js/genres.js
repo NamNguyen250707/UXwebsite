@@ -58,13 +58,7 @@
   // Ảnh Wikimedia Commons: giấy phép CC hoặc phạm vi công cộng. Ảnh Báo Điện tử Chính phủ: báo cho phép đăng lại khi ghi nguồn.
   function figureHtml(g) {
     if (!g.photo) return '<div class="genre-panel-media"></div>';
-    var p = g.photo;
-    var license = p.license === "Public domain" ? I18n.t("photo.pd") : I18n.pick(p.license);
-    var credit = I18n.t("photo.credit", { author: p.author || I18n.t("photo.unknown"), license: license, source: p.source || "Wikimedia Commons" });
-    return '<figure class="genre-panel-media genre-photo">' +
-      '<figcaption><span class="photo-caption">' + ASV.escape(I18n.pick(p.caption)) + "</span> " +
-        '<a class="photo-credit" href="' + p.page + '" target="_blank" rel="noopener">' + ASV.escape(credit) +
-        '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span></a></figcaption></figure>";
+    return '<figure class="genre-panel-media genre-photo">' + ASV.photoCaption(g.photo) + "</figure>";
   }
 
   /* Bản đồ */
