@@ -334,6 +334,7 @@ html { scroll-padding-top: 84px; }
 
 /* "Xem tiếp" */
 .explore-next { padding: 3.5rem 0 4.5rem; }
+.explore-next--plain { padding: 0; min-height: 7rem; }
 .next-card {
   display: flex;
   align-items: center;
@@ -1062,7 +1063,6 @@ body.welcome-open { overflow: hidden; }
 .genre-card-body { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.9rem 1rem 1rem; flex: 1; }
 .genre-card-region { font-size: 0.82rem; color: var(--asv-muted); }
 .genre-card-name { font-family: var(--asv-font-heading); font-weight: 700; font-size: 1.15rem; color: var(--asv-heading); line-height: 1.25; }
-.genre-card-open { margin-top: auto; padding-top: 0.4rem; font-weight: 600; color: var(--asv-son); text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 991.98px) {
   .map-card { max-width: 520px; margin: 0 auto; }
@@ -1111,7 +1111,6 @@ body.welcome-open { overflow: hidden; }
 .inst-card-tags { margin-bottom: 0.2rem; }
 .inst-card-name { font-family: var(--asv-font-heading); font-weight: 700; font-size: 1.2rem; color: var(--asv-heading); line-height: 1.2; }
 .inst-card-gloss { font-size: 0.88rem; color: var(--asv-muted); }
-.inst-card-open { margin-top: auto; padding-top: 0.45rem; font-weight: 600; color: var(--asv-son); text-decoration: underline; text-underline-offset: 3px; }
 [data-col][hidden] { display: none; }
 
 /* Không tìm thấy */

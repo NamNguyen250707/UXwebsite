@@ -264,7 +264,6 @@
         '<span class="genre-card-body">' +
           '<span class="genre-card-region">' + ASV.escape(I18n.t("region." + g.region)) + " · " + ASV.escape(badgeOf(g)) + "</span>" +
           '<span class="genre-card-name">' + ASV.escape(I18n.pick(g.name)) + "</span>" +
-          '<span class="genre-card-open">' + ASV.escape(I18n.t("genres.card.open")) + "</span>" +
         "</span></button></div>";
     }).join("");
     document.querySelectorAll(".genre-card-media").forEach(function (box) {

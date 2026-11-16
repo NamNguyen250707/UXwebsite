@@ -42,7 +42,6 @@
             '<span class="inst-card-tags"><span class="badge-family">' + ASV.escape(I18n.t("family." + it.family)) + "</span></span>" +
             '<span class="inst-card-name">' + ASV.escape(name) + "</span>" +
             '<span class="inst-card-gloss">' + ASV.escape(I18n.pick(it.gloss)) + "</span>" +
-            '<span class="inst-card-open">' + ASV.escape(I18n.t("inst.card.open")) + "</span>" +
           "</span></button></div>";
     }).join("");
     document.querySelectorAll(".inst-card").forEach(function (card) {
