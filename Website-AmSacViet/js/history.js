@@ -109,10 +109,6 @@ ASV.ready(function () {
     DATA.forEach(function (h, i) {
       var fig = list.querySelector('[data-media="' + i + '"]');
       fig.appendChild(ASV.createMedia({ src: h.image, name: pick(h.title), kind: "history", alt: pick(h.alt) }));
-      var cap = document.createElement("figcaption");
-      cap.className = "hist-scene-note";
-      cap.textContent = I18n.t("hist.scene");
-      fig.appendChild(cap);
     });
     ASV.syncPlayButtons();
   }
