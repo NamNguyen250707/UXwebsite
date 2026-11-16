@@ -36,7 +36,7 @@
     <div class="welcome-inner">
       <span class="welcome-logo" data-motif="logo"></span>
       <h2 class="welcome-title" id="welcome-title" data-i18n="site.name">Âm Sắc Việt</h2>
-      <p class="welcome-tagline" data-i18n="welcome.tagline">Đồ án môn HCI về âm nhạc truyền thống Việt Nam</p>
+      <p class="welcome-tagline" data-i18n="welcome.tagline">Khám phá âm nhạc truyền thống Việt Nam</p>
       <div class="lang-switch welcome-lang" role="group" data-i18n-aria-label="lang.group" aria-label="Chọn ngôn ngữ">
         <button type="button" class="lang-btn" data-lang="vi" lang="vi">VI</button>
         <button type="button" class="lang-btn" data-lang="en" lang="en">EN</button>
@@ -85,7 +85,7 @@
         <!-- Tiêu đề, giới thiệu và hai nút đặt lên đầu để thấy ngay khi vào trang -->
         <div class="hero-text">
           <h1 id="hero-title" class="display-title" data-i18n="home.hero.title">Nghe nhạc truyền thống của ba miền</h1>
-          <p class="lead" data-i18n="home.hero.lead">Ba bức tranh là ba miền Bắc, Trung, Nam. Bấm vào tranh để nghe bản ghi của UNESCO, hoặc gảy thử cây đàn bầu bên dưới.</p>
+          <p class="lead" data-i18n="home.hero.lead">Lắng nghe Quan họ, Nhã nhạc và Đờn ca tài tử qua ba miền Bắc, Trung, Nam.</p>
           <div class="d-flex flex-wrap justify-content-center gap-2">
             <a class="btn btn-son btn-lg" href="genres.html">
               <span data-i18n="home.hero.cta">Bắt đầu khám phá</span>
@@ -97,7 +97,7 @@
 
         <!-- Ba tấm tranh vẽ mới theo phong cách tranh khắc gỗ dân gian.
              Bấm vào tranh: nghe bản ghi thật (video UNESCO) của loại hình miền đó. Bấm bảng tên: sang trang Loại hình. -->
-        <p class="screen-hint" data-i18n="home.screen.hint">Bấm vào tranh để nghe bản ghi thật của UNESCO, bấm tên phía trên để xem loại hình đó.</p>
+        <p class="screen-hint" data-i18n="home.screen.hint">Chọn ảnh để xem biểu diễn.</p>
         <div class="hero-screen">
           <figure class="screen-panel" data-genre="quan-ho">
             <!-- Bảng tên: sang thẳng trang Loại hình của loại nhạc này -->
@@ -110,9 +110,9 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="quan-ho"
                     aria-label="Nghe quan họ Bắc Ninh" >
-              <img src="images/tranh/bac-bo.svg" alt="Tranh minh họa: liền anh, liền chị hát quan họ trên thuyền, phía xa là mái đình và đồi Kinh Bắc." data-i18n-alt="home.screen.northAlt">
+              <img src="images/loai-hinh/anh/quan-ho.jpg" alt="Ảnh hát quan họ tại hội Lim, Bắc Ninh — Nguyễn Đông Sơn, CC BY-SA 3.0." title="Ảnh hát quan họ tại hội Lim, Bắc Ninh — Nguyễn Đông Sơn, CC BY-SA 3.0." data-i18n-alt="home.screen.northAlt">
               <span class="screen-play-badge" aria-hidden="true">
-                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Nghe bản ghi</span>
+                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
             </button>
           </figure>
@@ -127,9 +127,9 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="nha-nhac"
                     aria-label="Nghe nhã nhạc cung đình Huế" >
-              <img src="images/tranh/trung-bo.svg" alt="Tranh minh họa: đò treo đèn lồng trên sông Hương dưới trăng, bên bờ có ngọn tháp và đôi hạc bay." data-i18n-alt="home.screen.centralAlt">
+              <img src="images/loai-hinh/anh/nha-nhac.jpg" alt="Ảnh nhã nhạc tại Festival Huế 2008 — Lưu Ly, phạm vi công cộng." title="Ảnh nhã nhạc tại Festival Huế 2008 — Lưu Ly, phạm vi công cộng." data-i18n-alt="home.screen.centralAlt">
               <span class="screen-play-badge" aria-hidden="true">
-                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Nghe bản ghi</span>
+                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
             </button>
           </figure>
@@ -144,9 +144,9 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="tai-tu"
                     aria-label="Nghe đờn ca tài tử" >
-              <img src="images/tranh/nam-bo.svg" alt="Tranh minh họa: người đờn đàn kìm và người ca ngồi trên chiếu bên bờ sông, sau lưng là hàng dừa và nhà lá." data-i18n-alt="home.screen.southAlt">
+              <img src="images/loai-hinh/anh/tai-tu.jpg" alt="Ảnh ban đờn ca tài tử Sài Gòn năm 1911, phạm vi công cộng." title="Ảnh ban đờn ca tài tử Sài Gòn năm 1911, phạm vi công cộng." data-i18n-alt="home.screen.southAlt">
               <span class="screen-play-badge" aria-hidden="true">
-                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Nghe bản ghi</span>
+                <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
             </button>
           </figure>
@@ -196,7 +196,7 @@
           <div class="col-md-4">
             <article class="asv-card path-card">
               <h3><a class="card-link" href="history.html" data-i18n="page.history.title">Lịch sử</a></h3>
-              <p data-i18n="page.history.desc">8 mốc lịch sử, mỗi mốc có năm tháng, nguồn tra cứu và những chỗ còn tranh luận.</p>
+              <p data-i18n="page.history.desc">Tám dấu mốc của âm nhạc Việt Nam, kèm tư liệu tham khảo.</p>
               <p class="path-more" data-i18n="page.history.meta">Xem dòng thời gian</p>
             </article>
           </div>
@@ -210,9 +210,9 @@
       <div class="sec-deco" aria-hidden="true"><img class="deco-drum" src="images/motifs/vong-trong-dong.svg" alt=""></div>
       <div class="container">
         <h2 id="video-title" class="section-title" data-i18n="home.video.title">Xem nghệ nhân biểu diễn</h2>
-        <p class="section-lead" data-i18n="home.video.lead">Ba đoạn video của UNESCO, mỗi miền một loại hình. Cần có Internet để xem.</p>
+        <p class="section-lead" data-i18n="home.video.lead">Ba màn biểu diễn từ tư liệu UNESCO, đại diện cho ba miền.</p>
         <!-- Chỉ hiện khi mở trang bằng file:// (home.js bật lên) -->
-        <p class="video-file-note" id="videoFileNote" hidden data-i18n="home.video.fileNote"></p>
+        <p class="video-file-note" id="videoFileNote" hidden data-i18n="home.video.fileNote">Video sẽ mở trong tab mới.</p>
         <!-- home.js vẽ thẻ video cho các loại hình trong data-genres -->
         <div class="row g-4 mt-1" id="videoGrid" data-genres="quan-ho,nha-nhac,tai-tu"></div>
         <p class="mt-4 mb-0">
@@ -230,7 +230,6 @@
       <div class="sec-deco" aria-hidden="true"><img class="deco-hac deco-t1" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-t2" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-t3" src="images/motifs/hac.svg" alt=""></div>
       <div class="container">
         <h2 id="today-title" class="section-title" data-i18n="home.today.title">Nghe thử một nhạc cụ</h2>
-        <p class="section-lead mb-4" data-i18n="home.today.lead">Trang chọn ngẫu nhiên một trong 12 nhạc cụ. Muốn nghe cây khác thì bấm “Chọn nhạc cụ khác”.</p>
 
         <article class="asv-card today-card" id="todayCard">
           <div class="row g-0">

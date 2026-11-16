@@ -250,10 +250,10 @@ ASV.renderFooter = function () {
             '<ul class="footer-links">' + links + "</ul>" +
           "</div>" +
           '<div class="col-12 col-md-4">' +
-            '<h2 class="footer-title" data-i18n="footer.about">' + I18n.t("footer.about") + "</h2>" +
+            '<details class="footer-sources"><summary class="footer-title" data-i18n="footer.about">' + I18n.t("footer.about") + "</summary>" +
             '<p class="footer-small" data-i18n="footer.synthNote">' + I18n.t("footer.synthNote") + "</p>" +
             '<p class="footer-small" data-i18n="footer.motif">' + I18n.t("footer.motif") + "</p>" +
-            '<p class="footer-small" data-i18n="footer.videoNote">' + I18n.t("footer.videoNote") + "</p>" +
+            '<p class="footer-small" data-i18n="footer.videoNote">' + I18n.t("footer.videoNote") + "</p>" + "</details>" +
           "</div>" +
         "</div>" +
         '<div class="footer-bottom">' +
