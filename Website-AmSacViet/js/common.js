@@ -863,7 +863,7 @@ ASV.updatePlayerBar = function () {
 };
 
 /* Ảnh có ô giữ chỗ
-   ASV.createMedia({ src, name, kind: "instrument"|"genre", className })
+   ASV.createMedia({ src, name, kind: "instrument"|"genre", className, alt, fallback, onFallback })
    Ảnh lỗi/chưa có → thay bằng ô giữ chỗ có con dấu đàn bầu và tên. */
 ASV.createMedia = function (opts) {
   var wrap = document.createElement("div");
@@ -886,7 +886,17 @@ ASV.createMedia = function (opts) {
   var img = new Image();
   img.alt = opts.alt || I18n.t(altKey, { name: opts.name }); // opts.alt: mô tả riêng cho hình (nếu có)
   img.decoding = "async";
-  img.addEventListener("error", showPlaceholder); // gắn trước khi đặt src để không lỡ sự kiện
+  // Ảnh lỗi: có ảnh dự phòng (opts.fallback, ví dụ tranh vẽ) thì đổi sang ảnh đó, không thì hiện ô giữ chỗ.
+  // Gắn trước khi đặt src để không lỡ sự kiện.
+  img.addEventListener("error", function () {
+    if (opts.fallback && img.getAttribute("src") !== opts.fallback) {
+      if (/\.svg$/i.test(opts.fallback)) wrap.classList.add("is-art");
+      img.src = opts.fallback;
+      if (opts.onFallback) opts.onFallback();
+      return;
+    }
+    showPlaceholder();
+  });
   img.src = opts.src;
   wrap.appendChild(img);
   return wrap;
@@ -925,7 +935,7 @@ ASV.videoCard = function (g, opts) {
     '<div class="video-body">' +
       (opts.compact ? "" :
         '<h3 class="video-title">' + ASV.escape(name) + "</h3>" +
-        '<p class="video-meta">' + ASV.escape(I18n.pick(g.place)) + " · UNESCO " + g.unesco.year + "</p>") +
+        '<p class="video-meta">' + ASV.escape(I18n.pick(g.place)) + (g.unesco ? " · UNESCO " + g.unesco.year : "") + "</p>") +
       '<div class="video-actions">' +
         (ASV.canEmbedVideo
           ? '<button type="button" class="btn btn-sm btn-outline-cham" data-video-play="' + v.youtube + '">' +
@@ -935,9 +945,19 @@ ASV.videoCard = function (g, opts) {
           "<span>" + I18n.t("video.youtube") + "</span>" + ASV.icon("external") +
           '<span class="visually-hidden">' + I18n.t("video.newTab") + "</span></a>" +
       "</div>" +
-      '<p class="video-credit">' + I18n.t("video.source") + ' · <a href="' + v.unesco + '" target="_blank" rel="noopener">' +
-        ASV.escape(v.credit) + '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span></a></p>" +
+      '<p class="video-credit">' + ASV.videoCredit(v) + "</p>" +
     "</div></article>";
+};
+
+/* Dòng nguồn của video: video UNESCO ghi "Video: UNESCO · <đơn vị giữ bản quyền>" (link tới trang UNESCO);
+   video của nhà hát hoặc báo chí nhà nước ghi rõ tên kênh (link tới kênh YouTube chính thức). */
+ASV.videoCredit = function (v) {
+  var tab = '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span>";
+  if (v.unesco) {
+    return I18n.t("video.source") + ' · <a href="' + v.unesco + '" target="_blank" rel="noopener">' + ASV.escape(v.credit) + tab + "</a>";
+  }
+  var text = I18n.t(v.kind === "press" ? "video.sourcePress" : "video.sourceTheatre", { channel: v.channel });
+  return '<a href="' + v.channelUrl + '" target="_blank" rel="noopener">' + ASV.escape(text) + tab + "</a>";
 };
 
 /* Nghe bản ghi thật của một loại hình (video UNESCO):
@@ -974,8 +994,7 @@ ASV.openRecording = function (gid) {
   el.querySelector(".rec-frame").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + g.video.youtube +
     '?autoplay=1&rel=0" title="' + ASV.escape(I18n.pick(g.name)) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" ' +
     'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
-  el.querySelector("#recCredit").innerHTML = I18n.t("video.source") + ' · <a href="' + g.video.unesco + '" target="_blank" rel="noopener">' +
-    ASV.escape(g.video.credit) + "</a>";
+  el.querySelector("#recCredit").innerHTML = ASV.videoCredit(g.video);
   bootstrap.Modal.getOrCreateInstance(el).show();
 };
 

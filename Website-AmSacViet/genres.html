@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="genres.meta.title">Loại hình âm nhạc | Âm Sắc Việt</title>
   <meta name="description" data-i18n-content="genres.meta.desc"
-        content="Bản đồ 8 loại hình âm nhạc truyền thống Việt Nam được UNESCO ghi danh, kèm mô tả, âm thanh và video biểu diễn.">
+        content="Bản đồ 16 loại hình âm nhạc truyền thống Việt Nam, 10 được UNESCO ghi danh, kèm ảnh, mô tả và video biểu diễn.">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -33,15 +33,23 @@
       </div>
       <div class="container">
         <h1 id="genres-title" class="page-title" data-i18n="genres.title">Các loại hình âm nhạc</h1>
-        <p class="section-lead" data-i18n="genres.lead">Tám loại hình tiêu biểu đã được UNESCO ghi danh, từ Bắc Bộ vào Nam Bộ. Bấm vào một điểm trên bản đồ để đọc, nghe và xem biểu diễn; chọn một vùng để bản đồ phóng tới vùng đó.</p>
+        <p class="section-lead" data-i18n="genres.lead">16 loại hình: 10 được UNESCO ghi danh, 6 loại hình tiêu biểu khác. Bấm vào một điểm trên bản đồ để đọc, xem ảnh và video biểu diễn; chọn vùng hoặc nhóm để lọc.</p>
 
         <!-- Nút lọc theo vùng (genres.js gắn sự kiện) -->
         <div class="filter-bar" role="group" aria-label="Lọc theo vùng" data-i18n-aria-label="genres.filter.label">
+          <span class="filter-label" aria-hidden="true" data-i18n="genres.filter.short">Vùng</span>
           <button type="button" class="filter-btn" data-region="all" aria-pressed="true" data-i18n="genres.filter.all">Tất cả</button>
           <button type="button" class="filter-btn" data-region="north" aria-pressed="false" data-i18n="region.north">Bắc Bộ</button>
           <button type="button" class="filter-btn" data-region="central" aria-pressed="false" data-i18n="region.central">Trung Bộ</button>
           <button type="button" class="filter-btn" data-region="highlands" aria-pressed="false" data-i18n="region.highlands">Tây Nguyên</button>
           <button type="button" class="filter-btn" data-region="south" aria-pressed="false" data-i18n="region.south">Nam Bộ</button>
+        </div>
+        <!-- Lọc theo nhóm: UNESCO ghi danh / loại hình khác (genres.js gắn sự kiện) -->
+        <div class="filter-bar filter-bar-group" role="group" aria-label="Lọc theo nhóm" data-i18n-aria-label="genres.group.label">
+          <span class="filter-label" aria-hidden="true" data-i18n="genres.group.short">Nhóm</span>
+          <button type="button" class="filter-btn" data-group="all" aria-pressed="true" data-i18n="genres.filter.all">Tất cả</button>
+          <button type="button" class="filter-btn" data-group="unesco" aria-pressed="false" data-i18n="genres.group.unesco">UNESCO ghi danh</button>
+          <button type="button" class="filter-btn" data-group="other" aria-pressed="false" data-i18n="genres.group.other">Loại hình khác</button>
         </div>
         <p class="filter-count" id="filterCount" aria-live="polite"></p>
         <p class="visually-hidden" id="genreLive" aria-live="polite"></p>
@@ -56,8 +64,13 @@
             <div class="asv-card map-card">
               <!-- genres.js vẽ bản đồ (SVG) và các nút đánh dấu vào đây -->
               <div class="map-wrap" id="mapWrap"></div>
+              <!-- Chú thích hai kiểu điểm trên bản đồ -->
+              <ul class="map-legend">
+                <li><span class="map-dot" aria-hidden="true"></span><span data-i18n="genres.legend.unesco">Được UNESCO ghi danh</span></li>
+                <li><span class="map-dot is-other" aria-hidden="true"></span><span data-i18n="genres.legend.other">Loại hình tiêu biểu khác</span></li>
+              </ul>
               <p class="map-hint" data-i18n="genres.map.hint">Bấm vào một điểm trên bản đồ, hoặc chọn trong danh sách bên dưới.</p>
-              <p class="map-source" data-i18n="genres.map.source">Đường biên: Natural Earth. Bản đồ minh họa, không đúng tỉ lệ ở các điểm đánh dấu phía Bắc.</p>
+              <p class="map-source" data-i18n="genres.map.source">Đường biên: Natural Earth. Một số điểm gần nhau được dời ra cho khỏi chồng nhau; chấm nhỏ là vị trí thật. Tên tỉnh theo địa giới từ ngày 1/7/2025.</p>
             </div>
           </div>
           <div class="col-lg-7">
@@ -80,7 +93,6 @@
         <h2 id="list-title" class="section-title" data-i18n="genres.list.title">Tất cả loại hình</h2>
         <p class="section-lead mb-4" data-i18n="genres.list.lead">Danh sách dành cho bạn không muốn dùng bản đồ. Bấm vào một thẻ để xem chi tiết.</p>
         <div class="row g-4" id="genreList"></div>
-        <p class="genres-more" data-i18n="genres.more">Ngoài 8 loại hình này, UNESCO còn ghi danh hát văn trong Thực hành tín ngưỡng thờ Mẫu Tam phủ (2016) và Thực hành Then của người Tày, Nùng, Thái (2019).</p>
       </div>
     </section>
 

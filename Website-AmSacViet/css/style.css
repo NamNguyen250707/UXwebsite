@@ -925,6 +925,9 @@ body.welcome-open { overflow: hidden; }
 }
 .filter-btn:hover { border-color: var(--asv-son); color: var(--asv-son); }
 .filter-btn[aria-pressed="true"] { background: var(--asv-drum); border-color: var(--asv-drum); color: var(--asv-paper); }
+.filter-bar-group { margin-top: 0.5rem; }
+/* Chữ "Vùng" / "Nhóm" ở đầu mỗi hàng nút lọc */
+.filter-label { align-self: center; min-width: 3.2rem; font-weight: 600; color: var(--asv-muted); }
 .filter-count { margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--asv-muted); }
 
 /* Bản đồ */
@@ -940,7 +943,11 @@ body.welcome-open { overflow: hidden; }
 .map-wave { fill: none; stroke: #9FB3C6; stroke-width: 1.4px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .map-leader { stroke: var(--asv-son); stroke-width: 1.4px; stroke-dasharray: 3 3; fill: none; vector-effect: non-scaling-stroke; }
 .map-true { fill: var(--asv-son); }
-.map-hint { margin: 0.75rem 0 0.25rem; font-size: 0.92rem; color: var(--asv-muted); }
+/* Chú thích hai kiểu chấm */
+.map-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; list-style: none; padding: 0; margin: 0.75rem 0 0; font-size: 0.9rem; }
+.map-legend li { display: inline-flex; align-items: center; gap: 0.45rem; }
+.map-legend .map-dot { width: 16px; height: 16px; border-width: 2px; }
+.map-hint { margin: 0.5rem 0 0.25rem; font-size: 0.92rem; color: var(--asv-muted); }
 .map-source { margin: 0; font-size: 0.78rem; color: var(--asv-muted); }
 
 /* Nút đánh dấu: chấm đỏ son, đang chọn thì vàng đồng và to hơn */
@@ -978,8 +985,11 @@ body.welcome-open { overflow: hidden; }
   white-space: nowrap;
 }
 .map-marker:hover .map-dot { background: var(--asv-son-dark); }
+/* Loại hình ngoài danh sách UNESCO: chấm rỗng (vòng đỏ son, giữa màu giấy) */
+.map-marker.is-other .map-dot, .map-dot.is-other { background: var(--asv-card); box-shadow: 0 0 0 1.5px var(--asv-heading), inset 0 0 0 5px var(--asv-son); }
+.map-marker.is-other:hover .map-dot { background: #F1E1C4; }
 .map-marker.is-active { z-index: 2; }
-.map-marker.is-active .map-dot { background: var(--asv-gold); box-shadow: 0 0 0 2px var(--asv-heading), 0 0 0 6px rgba(158, 42, 28, 0.25); }
+.map-marker.is-active .map-dot, .map-marker.is-other.is-active .map-dot { background: var(--asv-gold); box-shadow: 0 0 0 2px var(--asv-heading), 0 0 0 6px rgba(158, 42, 28, 0.25); }
 .map-marker.is-active .map-name { background: var(--asv-drum); color: var(--asv-paper); }
 
 .map-marker:focus-visible { outline: none; }
@@ -991,6 +1001,14 @@ body.welcome-open { overflow: hidden; }
 /* Hình nằm ngang ở đầu khung; cắt bớt trên dưới, giữ phần giữa có người biểu diễn */
 .genre-panel-media .media-frame { aspect-ratio: 16 / 7; }
 .genre-panel-media .media-frame.is-art img { object-fit: cover; object-position: center 62%; }
+/* Ảnh thật: khung 16:9, dòng chú thích và nguồn ảnh ngay dưới */
+.genre-photo { margin: 0; }
+.genre-photo .media-frame { aspect-ratio: 16 / 9; }
+.genre-photo .media-frame img { object-position: center 40%; }
+.genre-photo figcaption { padding: 0.5rem 1.5rem 0; font-size: 0.85rem; color: var(--asv-muted); }
+.photo-caption { color: var(--asv-text); }
+.photo-credit { color: var(--asv-muted); }
+.genre-novideo { color: var(--asv-muted); }
 .genre-panel-body { padding: 1.5rem 1.5rem 1.25rem; }
 .genre-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
 .badge-unesco {
@@ -1002,6 +1020,7 @@ body.welcome-open { overflow: hidden; }
   font-size: 0.78rem;
   font-weight: 600;
 }
+.badge-unesco.is-other { background: var(--asv-cham); }
 .genre-name { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 0.6rem; }
 .genre-facts dt { font-weight: 600; color: var(--asv-son); }
 .genre-facts dd { margin-bottom: 0.6rem; }
@@ -1043,7 +1062,6 @@ body.welcome-open { overflow: hidden; }
 .genre-card-body { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.9rem 1rem 1rem; flex: 1; }
 .genre-card-region { font-size: 0.82rem; color: var(--asv-muted); }
 .genre-card-name { font-family: var(--asv-font-heading); font-weight: 700; font-size: 1.15rem; color: var(--asv-heading); line-height: 1.25; }
-.genres-more { margin: 1.5rem 0 0; font-size: 0.92rem; color: var(--asv-muted); max-width: 48rem; }
 .genre-card-open { margin-top: auto; padding-top: 0.4rem; font-weight: 600; color: var(--asv-son); text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 991.98px) {
@@ -1055,6 +1073,7 @@ body.welcome-open { overflow: hidden; }
   .map-dot { width: 22px; height: 22px; }
   .video-card.is-compact { flex-direction: column; }
   .genre-panel-body { padding: 1.25rem 1.1rem; }
+  .genre-photo figcaption { padding: 0.5rem 1.1rem 0; }
 }
 
 /* Trang nhạc cụ (instruments.html) */

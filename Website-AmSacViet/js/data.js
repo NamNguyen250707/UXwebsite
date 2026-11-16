@@ -310,7 +310,7 @@ var ASV_DATA = {
     }
   ],
 
-  /* 8 loại hình
+  /* 16 loại hình (10 được UNESCO ghi danh, 6 loại hình khác)
      region: "north" | "central" | "highlands" | "south"
      lat/lon: tọa độ gần đúng để đặt điểm trên bản đồ SVG
      video: video chính thức trên kênh YouTube của UNESCO (mã video, trang di sản, ghi công).
@@ -321,13 +321,18 @@ var ASV_DATA = {
       name: { vi: "Dân ca quan họ Bắc Ninh", en: "Quan họ Bắc Ninh folk songs" },
       short: "Quan họ",
       region: "north",
-      place: { vi: "Vùng Kinh Bắc (Bắc Ninh, Bắc Giang)", en: "Kinh Bắc region (Bắc Ninh, Bắc Giang)" },
+      place: { vi: "Vùng Kinh Bắc (Bắc Ninh và Bắc Giang cũ, nay đều thuộc tỉnh Bắc Ninh)", en: "Kinh Bắc region (Bắc Ninh and former Bắc Giang, now both part of Bắc Ninh province)" },
       lat: 21.18, lon: 106.07,
       unesco: {
         year: 2009,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/quan-ho.svg",
+      image: "images/loai-hinh/anh/quan-ho.jpg",
+      photo: {
+        author: "Nguyễn Đông Sơn", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:Quan_h%E1%BB%8D_giao_duy%C3%AAn_-_h%E1%BB%99i_Lim,_B%E1%BA%AFc_Ninh.JPG",
+        caption: { vi: "Hát quan họ giao duyên ở hội Lim, Bắc Ninh", en: "Quan họ courtship singing at the Lim festival, Bắc Ninh" }
+      },
       video: { youtube: "MlKtqU5685w", unesco: "https://ich.unesco.org/en/RL/00183", credit: "© 2008 Vietnam Institute of Culture and Arts Studies" },
       instruments: [],
       desc: {
@@ -346,7 +351,12 @@ var ASV_DATA = {
         year: 2009,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể cần bảo vệ khẩn cấp", en: "List of Intangible Cultural Heritage in Need of Urgent Safeguarding" }
       },
-      image: "images/loai-hinh/ca-tru.svg",
+      image: "images/loai-hinh/anh/ca-tru.jpg",
+      photo: {
+        author: "Michael Coghlan", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0",
+        page: "https://commons.wikimedia.org/wiki/File:Ca_tr%C3%B9_performance.jpg",
+        caption: { vi: "Một buổi ca trù ở Hà Nội", en: "A ca trù performance in Hà Nội" }
+      },
       video: { youtube: "XrzGeo8GQX8", unesco: "https://ich.unesco.org/en/USL/00309", credit: "© 2008 Vietnamese Institute for Musicology" },
       instruments: ["phach", "trong"],
       desc: {
@@ -365,7 +375,13 @@ var ASV_DATA = {
         year: 2011,
         note: { vi: "Danh sách cần bảo vệ khẩn cấp; năm 2017 được chuyển sang Danh sách đại diện", en: "Urgent Safeguarding List; moved to the Representative List in 2017" }
       },
-      image: "images/loai-hinh/hat-xoan.svg",
+      image: "images/loai-hinh/anh/hat-xoan.jpg",
+      photo: {
+        author: "Sở Văn hóa, Thể thao và Du lịch Phú Thọ", source: "hồ sơ UNESCO",
+        license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
+        page: "https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260",
+        caption: { vi: "Hát xoan tại miếu Lãi Lèn, Phú Thọ", en: "Xoan singing at Lãi Lèn temple, Phú Thọ" }
+      },
       video: { youtube: "Vair7eo_NHE", unesco: "https://ich.unesco.org/en/RL/01260", credit: "© 2016 Phú Thọ Department of Culture, Sports and Tourism" },
       instruments: ["trong", "phach"],
       desc: {
@@ -384,7 +400,12 @@ var ASV_DATA = {
         year: 2003,
         note: { vi: "Công nhận là Kiệt tác năm 2003; ghi danh vào Danh sách đại diện năm 2008", en: "Proclaimed a Masterpiece in 2003; inscribed on the Representative List in 2008" }
       },
-      image: "images/loai-hinh/nha-nhac.svg",
+      image: "images/loai-hinh/anh/nha-nhac.jpg",
+      photo: {
+        author: "Lưu Ly", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:Nh%C3%A3_nh%E1%BA%A1c_cung_%C4%91%C3%ACnh_Hu%E1%BA%BF.JPG",
+        caption: { vi: "Nhã nhạc cung đình Huế tại Festival Huế 2008", en: "Nhã nhạc at the 2008 Huế Festival" }
+      },
       video: { youtube: "G5X7KUtbEkk", unesco: "https://ich.unesco.org/en/RL/00074", credit: "© UNESCO" },
       instruments: ["ken-bau", "ty-ba", "dan-nhi", "trong"],
       desc: {
@@ -403,7 +424,13 @@ var ASV_DATA = {
         year: 2014,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/vi-giam.svg",
+      image: "images/loai-hinh/anh/vi-giam.jpg",
+      photo: {
+        author: "Lan Anh", source: "Báo Điện tử Chính phủ",
+        license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
+        page: "https://baochinhphu.vn/lien-hoan-vi-dam-dang-nguoi-cau-hat-dan-ca-102126833.htm",
+        caption: { vi: "Một tiết mục ví, giặm tại Liên hoan các câu lạc bộ dân ca tỉnh Nghệ An ở Vinh, năm 2012", en: "A ví and giặm performance at the Nghệ An folk song clubs festival in Vinh, 2012" }
+      },
       video: { youtube: "LAjFaHHYxXc", unesco: "https://ich.unesco.org/en/RL/01008", credit: "© 2013 Vietnam Institute of Culture and Arts Studies" },
       instruments: [],
       desc: {
@@ -422,7 +449,12 @@ var ASV_DATA = {
         year: 2017,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/bai-choi.svg",
+      image: "images/loai-hinh/anh/bai-choi.jpg",
+      photo: {
+        author: "Lê Tấn Lộc", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:B%C3%A0i_ch%C3%B2i_H%E1%BB%99i_An.JPG",
+        caption: { vi: "Hội bài chòi ở Hội An", en: "A bài chòi game in Hội An" }
+      },
       video: { youtube: "mcILpWU81GU", unesco: "https://ich.unesco.org/en/RL/01222", credit: "© 2015 Vietnamese Institute for Musicology" },
       instruments: ["trong"],
       desc: {
@@ -436,15 +468,21 @@ var ASV_DATA = {
       short: "Cồng chiêng",
       region: "highlands",
       place: {
-        vi: "Năm tỉnh Tây Nguyên: Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng (theo địa giới khi được ghi danh)",
-        en: "Five Central Highlands provinces: Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng (boundaries at the time of inscription)"
+        vi: "Năm tỉnh Tây Nguyên khi được ghi danh: Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng (từ năm 2025 thuộc các tỉnh Quảng Ngãi, Gia Lai, Đắk Lắk, Lâm Đồng)",
+        en: "The five Central Highlands provinces at the time of inscription: Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng (since 2025 part of Quảng Ngãi, Gia Lai, Đắk Lắk and Lâm Đồng)"
       },
       lat: 12.90, lon: 108.05,
       unesco: {
         year: 2005,
         note: { vi: "Công nhận là Kiệt tác năm 2005; ghi danh vào Danh sách đại diện năm 2008", en: "Proclaimed a Masterpiece in 2005; inscribed on the Representative List in 2008" }
       },
-      image: "images/loai-hinh/cong-chieng.svg",
+      image: "images/loai-hinh/anh/cong-chieng.jpg",
+      photo: {
+        author: "DA", source: "Báo Điện tử Chính phủ",
+        license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
+        page: "https://baochinhphu.vn/gin-giu-va-phat-huy-di-san-van-hoa-phi-vat-the-tao-dong-luc-cho-phat-trien-du-lich-102230906121936739.htm",
+        caption: { vi: "Đồng bào Tây Nguyên mang trống và cồng chiêng trong một buổi giới thiệu văn hóa cồng chiêng ở Gia Lai", en: "Central Highlands people carrying a drum and gongs at a gong culture event in Gia Lai" }
+      },
       video: { youtube: "l90_bPVujKc", unesco: "https://ich.unesco.org/en/RL/00120", credit: "© UNESCO" },
       instruments: ["cong-chieng", "dan-trung"],
       desc: {
@@ -463,15 +501,223 @@ var ASV_DATA = {
         year: 2013,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/tai-tu.svg",
+      image: "images/loai-hinh/anh/tai-tu.jpg",
+      photo: {
+        author: "", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:Ban_nh%E1%BA%A1c_%C4%91%E1%BB%9Dn_ca_t%C3%A0i_t%E1%BB%AD_S%C3%A0i_G%C3%B2n_(1911).jpeg",
+        caption: { vi: "Một ban đờn ca tài tử ở Sài Gòn năm 1911, in trên một tờ quảng cáo", en: "A đờn ca tài tử group in Sài Gòn in 1911, printed on a poster" }
+      },
       video: { youtube: "5M4h4AGteGU", unesco: "https://ich.unesco.org/en/RL/00733", credit: "© 2011 Vietnamese Institute for Musicology" },
       instruments: ["dan-nguyet", "dan-tranh", "dan-nhi", "dan-bau", "sao-truc", "phach"],
       desc: {
         vi: "Đờn ca tài tử hình thành ở Nam Bộ vào cuối thế kỷ 19, là lối chơi nhạc thân mật của những người “tài tử” yêu nghệ thuật. Họ quây quần trong sân nhà, trên ghe thuyền hay trong ngày đám tiệc, cùng đờn, cùng ca và ngẫu hứng quanh những bài bản quen thuộc. Từ đờn ca tài tử, nghệ thuật cải lương đã ra đời.",
         en: "Đờn ca tài tử emerged in southern Vietnam in the late 19th century as intimate music made by amateur “tài tử” enthusiasts. They gather in courtyards, on boats or at family celebrations, playing and singing together and improvising around well-known pieces. This tradition gave birth to cải lương, the southern reformed theatre."
       }
+    },
+
+    /* ---- Loại hình được UNESCO ghi danh như một phần của di sản lớn hơn ---- */
+    {
+      id: "hat-van",
+      name: { vi: "Hát văn (trong Thực hành tín ngưỡng thờ Mẫu Tam phủ)", en: "Hát văn (part of the Mother Goddess worship practices)" },
+      short: "Hát văn",
+      region: "north",
+      place: { vi: "Nhiều nơi ở Bắc Bộ; nổi tiếng ở Phủ Giầy (Nam Định cũ, nay thuộc tỉnh Ninh Bình)",
+               en: "Many places in Northern Vietnam; best known at Phủ Giầy (formerly Nam Định, now Ninh Bình province)" },
+      lat: 20.37, lon: 106.11,
+      unesco: {
+        year: 2016,
+        note: { vi: "Danh sách đại diện, là một phần của di sản Thực hành tín ngưỡng thờ Mẫu Tam phủ của người Việt",
+                en: "Representative List, as part of the Practices related to the Việt beliefs in the Mother Goddesses of Three Realms" }
+      },
+      image: "images/loai-hinh/anh/hat-van.jpg",
+      photo: {
+        author: "Casablanca1911", license: "CC BY 3.0", licenseUrl: "https://creativecommons.org/licenses/by/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:L%C3%AAn_%C4%91%E1%BB%93ng.jpg",
+        caption: { vi: "Một buổi hầu đồng ở Phủ Giầy", en: "A hầu đồng ritual at Phủ Giầy" }
+      },
+      video: { youtube: "RdFbNpdV3Fo", unesco: "https://ich.unesco.org/en/RL/01064", credit: "© Vietnam National Institute of Culture and Arts Studies" },
+      instruments: ["dan-nguyet", "trong", "phach"],
+      desc: {
+        vi: "Hát văn là lối hát của cung văn trong nghi lễ hầu đồng thờ Mẫu. Người cung văn chính vừa đàn nguyệt vừa hát, kèm trống, phách và cảnh, giữ nhịp cho người lên đồng múa. Mỗi giá đồng có làn điệu riêng, từ trang nghiêm đến rộn ràng. Năm 2016, UNESCO ghi danh Thực hành tín ngưỡng thờ Mẫu Tam phủ, trong đó có hát văn.",
+        en: "Hát văn is the singing of the cung văn musicians in the hầu đồng mediumship ritual of Mother Goddess worship. The lead musician sings while playing the đàn nguyệt, with drum, clappers and a small cymbal keeping time for the medium's dances. Each spirit has its own melodies, from solemn to lively. In 2016 UNESCO inscribed the Mother Goddess worship practices, which include hát văn."
+      }
+    },
+    {
+      id: "then",
+      name: { vi: "Thực hành Then của người Tày, Nùng, Thái", en: "Practices of Then by the Tày, Nùng and Thái peoples" },
+      short: "Then",
+      region: "north",
+      place: { vi: "Miền núi phía Bắc, như Cao Bằng, Lạng Sơn, Tuyên Quang, Thái Nguyên",
+               en: "The northern mountains, such as Cao Bằng, Lạng Sơn, Tuyên Quang and Thái Nguyên" },
+      lat: 22.67, lon: 106.26,
+      unesco: {
+        year: 2019,
+        note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
+      },
+      image: "images/loai-hinh/anh/then.jpg",
+      photo: {
+        author: "DTH-BD-NVT", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+        page: "https://commons.wikimedia.org/wiki/File:Dan_Tinh_lute_from_Vietnam.jpg",
+        caption: { vi: "Đàn tính, cây đàn dùng trong nghi lễ Then", en: "The đàn tính lute used in Then rituals" }
+      },
+      video: { youtube: "1cVpYm89scM", unesco: "https://ich.unesco.org/en/RL/01379", credit: "© UNESCO" },
+      instruments: [],
+      desc: {
+        vi: "Then là nghi lễ tín ngưỡng của người Tày, Nùng và Thái. Thầy Then vừa hát vừa đàn, có khi múa, để cầu bình an, chữa bệnh hay mừng năm mới. Tiếng đàn tính bầu tròn cần dài hòa cùng chùm xóc nhạc rung trong tay. Lời Then kể chuyến đi lên trời gặp thần linh. Năm 2019, UNESCO ghi danh thực hành Then.",
+        en: "Then is a ritual practice of the Tày, Nùng and Thái peoples. The Then master sings, plays and sometimes dances to pray for peace, cure illness or welcome the new year. The long-necked, gourd-bodied đàn tính lute blends with a bunch of small bells shaken in the hand. The lyrics tell of a journey to the heavens to meet the spirits. UNESCO inscribed the practice in 2019."
+      }
+    },
+
+    /* ---- Các loại hình khác: di sản quốc gia hoặc loại hình tiêu biểu (không thuộc danh sách UNESCO) ---- */
+    {
+      id: "cheo",
+      name: { vi: "Chèo", en: "Chèo" },
+      short: "Chèo",
+      region: "north",
+      place: { vi: "Đồng bằng Bắc Bộ; nổi tiếng ở Thái Bình cũ (nay thuộc Hưng Yên), Bắc Ninh, Hà Nội",
+               en: "The Red River Delta; well known in former Thái Bình (now Hưng Yên), Bắc Ninh and Hà Nội" },
+      lat: 20.45, lon: 106.34,
+      heritage: {
+        year: 2025,
+        badge: { vi: "Chèo Bắc Ninh: di sản quốc gia 2025", en: "Chèo of Bắc Ninh: national heritage 2025" },
+        note: { vi: "Chèo Bắc Ninh được công nhận là di sản văn hóa phi vật thể quốc gia năm 2025",
+                en: "Chèo of Bắc Ninh was recognised as national intangible cultural heritage in 2025" }
+      },
+      image: "images/loai-hinh/anh/cheo.jpg",
+      photo: {
+        author: "USIS", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:VoCheoQuanamThiKinh.jpg",
+        caption: { vi: "Cảnh vở chèo Quan Âm Thị Kính (ảnh tư liệu)", en: "A scene from the chèo play Quan Âm Thị Kính (archive photo)" }
+      },
+      video: { youtube: "MQSYywLZmWY", channel: "Nhà hát Chèo Việt Nam", channelUrl: "https://www.youtube.com/@nhahatcheovietnam1534", kind: "theatre" },
+      instruments: ["trong", "dan-nhi", "sao-truc", "dan-nguyet"],
+      desc: {
+        vi: "Chèo là sân khấu dân gian của đồng bằng Bắc Bộ, lớn lên từ những chiếu chèo diễn ở sân đình. Một vở chèo kết hợp hát, múa, nói lối và những vai hề dí dỏm, kể các tích quen thuộc như Quan Âm Thị Kính, Lưu Bình Dương Lễ. Dàn nhạc thường có trống, đàn nhị, sáo và đàn nguyệt.",
+        en: "Chèo is the folk theatre of the Red River Delta, which grew out of performances on mats in village communal-house yards. A chèo play combines singing, dance, rhythmic speech and witty clown roles, telling familiar stories such as Quan Âm Thị Kính and Lưu Bình Dương Lễ. The ensemble usually has drums, đàn nhị, flute and đàn nguyệt."
+      }
+    },
+    {
+      id: "tuong",
+      name: { vi: "Tuồng (hát bội)", en: "Tuồng (hát bội)" },
+      short: "Tuồng",
+      region: "central",
+      place: { vi: "Trung Bộ, mạnh nhất ở Bình Định cũ (nay thuộc Gia Lai), Quảng Nam cũ (nay thuộc Đà Nẵng) và Huế; cũng có ở Bắc Bộ, Nam Bộ",
+               en: "Central Vietnam, strongest in former Bình Định (now Gia Lai), former Quảng Nam (now Đà Nẵng) and Huế; also found in the north and south" },
+      lat: 15.57, lon: 108.47,
+      image: "images/loai-hinh/anh/tuong.jpg",
+      photo: {
+        author: "Bùi Thụy Đào Nguyên", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:H%C3%A1t_tu%E1%BB%93ng_2014.jpg",
+        caption: { vi: "Hát bội trong lễ Kỳ Yên ở đình Mỹ Phước, Long Xuyên, năm 2014", en: "Hát bội at the Kỳ Yên festival, Mỹ Phước communal house, Long Xuyên, 2014" }
+      },
+      video: { youtube: "Y42hnhQQsAM", channel: "Nhà hát Tuồng Việt Nam", channelUrl: "https://www.youtube.com/@nhahattuongvietnam", kind: "theatre" },
+      instruments: ["trong", "ken-bau"],
+      desc: {
+        vi: "Tuồng, ở miền Nam gọi là hát bội, là sân khấu cổ diễn các tích trung hiếu, nghĩa liệt. Diễn viên vẽ mặt theo tính cách nhân vật: mặt đỏ là người trung dũng, mặt trắng mốc là kẻ gian thần. Động tác cách điệu, giọng hát mạnh mẽ, đi cùng tiếng trống và kèn. Tuồng phát triển rực rỡ dưới triều Nguyễn.",
+        en: "Tuồng, called hát bội in the south, is a classical theatre of loyalty and righteousness. Actors paint their faces to show character: red for brave and loyal heroes, chalk-white for treacherous officials. Movements are stylised and the singing is powerful, driven by drums and oboes. Tuồng flourished under the Nguyễn dynasty."
+      }
+    },
+    {
+      id: "ca-hue",
+      name: { vi: "Ca Huế", en: "Ca Huế" },
+      short: "Ca Huế",
+      region: "central",
+      place: { vi: "Huế", en: "Huế" },
+      lat: 16.46, lon: 107.59,
+      heritage: {
+        year: 2015,
+        note: { vi: "Di sản văn hóa phi vật thể quốc gia (Quyết định 1877/QĐ-BVHTTDL, ngày 8/6/2015)",
+                en: "National intangible cultural heritage (Decision 1877/QĐ-BVHTTDL, 8 June 2015)" }
+      },
+      image: "images/loai-hinh/anh/ca-hue.jpg",
+      photo: {
+        author: "Liftold", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+        page: "https://commons.wikimedia.org/wiki/File:D%C3%A0n_nh%E1%BA%A1c_ca_Hu%E1%BA%BF_tr%C3%AAn_s%C3%B4ng_Hu%E1%BA%BF.JPG",
+        caption: { vi: "Dàn nhạc ca Huế trên thuyền", en: "A ca Huế ensemble on a boat" }
+      },
+      video: { youtube: "40HN4CwbqdY", channel: "VTV3", channelUrl: "https://www.youtube.com/@VTV3GIAITRI", kind: "press" },
+      instruments: ["dan-tranh", "ty-ba", "dan-nguyet", "dan-nhi", "sao-truc"],
+      desc: {
+        vi: "Ca Huế là lối hát thính phòng tao nhã của đất cố đô, từng vang trong phủ đệ rồi lan ra đời sống thường ngày. Bài bản chia hai điệu: điệu Bắc tươi vui, điệu Nam buồn thương. Người ca đi cùng đàn tranh, tỳ bà, nguyệt, nhị và sáo. Ngày nay nhiều người nghe ca Huế trên thuyền giữa sông Hương.",
+        en: "Ca Huế is the refined chamber singing of the old capital, once heard in aristocratic residences before spreading into everyday life. Its pieces fall into two modes: the bright Bắc mode and the sorrowful Nam mode. Singers are accompanied by đàn tranh, tỳ bà, đàn nguyệt, đàn nhị and flute. Today many people hear ca Huế on boats on the Hương River."
+      }
+    },
+    {
+      id: "ho",
+      name: { vi: "Hò", en: "Hò work songs" },
+      short: "Hò",
+      region: "central",
+      place: { vi: "Nhiều nơi ở Trung Bộ và Nam Bộ; tiêu biểu là hò khoan Lệ Thủy (Quảng Bình cũ, nay thuộc Quảng Trị)",
+               en: "Across Central and Southern Vietnam; a well-known form is hò khoan Lệ Thủy (formerly Quảng Bình, now Quảng Trị)" },
+      lat: 17.21, lon: 106.79,
+      heritage: {
+        badge: { vi: "Hò khoan Lệ Thủy: di sản quốc gia", en: "Hò khoan Lệ Thủy: national heritage" },
+        note: { vi: "Hò khoan Lệ Thủy là di sản văn hóa phi vật thể quốc gia", en: "Hò khoan Lệ Thủy is national intangible cultural heritage" }
+      },
+      image: "images/loai-hinh/anh/ho.jpg",
+      photo: {
+        author: "Báo Nhân Dân", source: "nhandan.vn",
+        license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
+        page: "https://nhandan.vn/doc-dao-ho-khoan-le-thuy-post303235.html",
+        caption: { vi: "Trình diễn hò khoan Lệ Thủy bên sông Kiến Giang", en: "Hò khoan Lệ Thủy performed by the Kiến Giang River" }
+      },
+      video: { youtube: "rBVs1Rg9o84", channel: "Báo Nhân Dân", channelUrl: "https://www.youtube.com/@baonhandanmedia", kind: "press" },
+      instruments: [],
+      desc: {
+        vi: "Hò là những câu hát cất lên khi làm việc: chèo thuyền, kéo lưới, giã gạo, cấy lúa. Một người xướng câu hò, cả nhóm đáp lại theo nhịp lao động. Mỗi vùng có điệu riêng như hò mái nhì Huế hay hò Đồng Tháp. Hò khoan Lệ Thủy nổi tiếng với lối hò đối đáp giao duyên trong những đêm hội.",
+        en: "Hò are songs sung while working: rowing, hauling nets, pounding rice or planting. One person leads a line and the group answers in the rhythm of the work. Each region has its own style, such as hò mái nhì of Huế or hò of Đồng Tháp. Hò khoan Lệ Thủy is known for its playful call-and-response courting songs on festival nights."
+      }
+    },
+    {
+      id: "cai-luong",
+      name: { vi: "Cải lương", en: "Cải lương" },
+      short: "Cải lương",
+      region: "south",
+      place: { vi: "Nam Bộ; buổi diễn thường được coi là đầu tiên ở Mỹ Tho (nay thuộc Đồng Tháp)",
+               en: "Southern Vietnam; the performance usually counted as the first was in Mỹ Tho (now in Đồng Tháp)" },
+      lat: 10.36, lon: 106.36,
+      image: "images/loai-hinh/anh/cai-luong.jpg",
+      photo: {
+        author: "", license: "Public domain",
+        page: "https://commons.wikimedia.org/wiki/File:T%C3%A2y-Thi_-_Saigon,_August_1927_-_B%C3%B9i_Quang_Tu%E1%BA%A5n_(3_June_2020).jpg",
+        caption: { vi: "Tờ chương trình vở cải lương Tây Thi ở Sài Gòn, tháng 8 năm 1927", en: "Programme for the cải lương play Tây Thi, Sài Gòn, August 1927" }
+      },
+      video: { youtube: "xiNl0rkOhBg", channel: "Nhà hát Cải lương Trần Hữu Trang", channelUrl: "https://www.youtube.com/@nhcl.tranhuutrangofficial", kind: "theatre" },
+      instruments: ["dan-nguyet", "dan-tranh", "dan-nhi"],
+      desc: {
+        vi: "Cải lương ra đời ở Nam Bộ đầu thế kỷ 20, khi lối đờn ca tài tử bước lên sân khấu với tích truyện, phục trang và cảnh trí. Bài quan trọng nhất của cải lương là vọng cổ, phát triển từ bài Dạ cổ hoài lang của Cao Văn Lầu. Dàn nhạc có đàn kìm, đàn tranh, đàn cò và cây ghi-ta phím lõm.",
+        en: "Cải lương was born in southern Vietnam in the early 20th century, when đờn ca tài tử moved onto the stage with stories, costumes and scenery. Its most important melody is vọng cổ, which grew out of Cao Văn Lầu's Dạ cổ hoài lang. The ensemble includes the đàn kìm, đàn tranh, đàn cò and a guitar with scalloped frets."
+      }
+    },
+    {
+      id: "ngu-am",
+      name: { vi: "Nhạc ngũ âm của người Khmer", en: "Ngũ âm music of the Khmer people" },
+      short: "Ngũ âm Khmer",
+      region: "south",
+      place: { vi: "Cộng đồng người Khmer Nam Bộ, như ở Sóc Trăng cũ (nay thuộc Cần Thơ) và Trà Vinh cũ (nay thuộc Vĩnh Long)",
+               en: "Khmer communities of the south, such as former Sóc Trăng (now Cần Thơ) and former Trà Vinh (now Vĩnh Long)" },
+      lat: 9.60, lon: 105.97,
+      heritage: {
+        year: 2021,
+        note: { vi: "Nghệ thuật trình diễn dân gian nhạc ngũ âm của người Khmer là di sản văn hóa phi vật thể quốc gia (2021)",
+                en: "The Khmer folk performing art of ngũ âm music is national intangible cultural heritage (2021)" }
+      },
+      image: "images/loai-hinh/anh/ngu-am.jpg",
+      photo: {
+        author: "Lê Sơn", source: "Báo Điện tử Chính phủ",
+        license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
+        page: "https://baochinhphu.vn/vinh-long-sap-dien-ra-le-hoi-ok-om-bok-dua-ghe-ngo-cung-nhieu-trai-nghiem-hap-dan-102261112105839068.htm",
+        caption: { vi: "Trình diễn âm nhạc Khmer Nam Bộ tại Đại học Trà Vinh; hàng trước là đàn gỗ roneat, một nhạc cụ có trong dàn ngũ âm", en: "Southern Khmer music performed at Trà Vinh University; in front is the roneat xylophone, one of the instruments of the ngũ âm ensemble" }
+      },
+      video: { youtube: "phwtWLJsBDA", channel: "VTV5", channelUrl: "https://www.youtube.com/@vtv5tiengdantocthieuso", kind: "press" },
+      instruments: [],
+      desc: {
+        vi: "Nhạc ngũ âm là dàn nhạc truyền thống của người Khmer Nam Bộ, vang lên trong lễ hội ở chùa, Tết Chôl Chnăm Thmây và nhiều nghi lễ của phum sóc. Tên gọi gắn với năm nhóm âm thanh của dàn nhạc: đồng, sắt, gỗ, da và hơi, như dàn cồng, đàn gỗ, trống và kèn. Năm 2021, nghệ thuật này được công nhận là di sản văn hóa phi vật thể quốc gia.",
+        en: "Ngũ âm is the traditional ensemble of the Khmer people of southern Vietnam, played at pagoda festivals, the Chôl Chnăm Thmây new year and many village rituals. Its name refers to five groups of sound: bronze, iron, wood, skin and breath, as in gong circles, wooden xylophones, drums and oboes. In 2021 it was recognised as national intangible cultural heritage."
+      }
     }
   ],
+
 
   /* 8 mốc lịch sử
      Mỗi mốc: period (khoảng thời gian), title, summary (40–70 từ),

@@ -266,6 +266,70 @@ S['tai-tu'] = ['Đờn ca tài tử Nam Bộ', [
   stand({ x: 222, y: 276, s: 1.05, top: C.son, bottom: C.ink, hat: 'bui-toc' })
 ].join('\n')];
 
+/* 9. Hò: người chèo đò vừa chèo vừa hò, bờ bên kia có người đáp lời */
+S['ho'] = ['Hò', [
+  sun(330, 62, 22, C.gold), cloud(50, 56), birds(170, 44),
+  `  <path class="k" fill="${C.green}" d="M0 150 Q100 136 200 146 Q300 136 400 148 V176 H0Z"/><path d="M0 150 Q100 136 200 146 Q300 136 400 148 V176 H0Z" fill="url(#gan)"/>`,
+  // Nhà tranh bên bờ xa
+  `  <path class="k" fill="${C.thatch}" d="M48 146 L74 118 L100 146Z"/><rect class="k" x="56" y="146" width="36" height="14" fill="${C.wood}"/>`,
+  `  <path class="k" fill="${C.thatch}" d="M300 144 L322 120 L344 144Z"/><rect class="k" x="306" y="144" width="32" height="14" fill="${C.wood}"/>`,
+  water(172),
+  // Đò dài, ba người chèo, một người đứng mũi xướng câu hò
+  `  <path class="k" fill="${C.wood}" d="M60 248 Q200 272 340 246 L330 262 Q200 290 70 264Z"/>`,
+  `  <path class="t" d="M80 254 Q200 276 322 252" style="stroke:${C.woodL}"/>`,
+  stand({ x: 110, y: 250, s: 0.95, top: C.brown, hat: 'non-la', arm: [8, 28, 26] }),
+  stand({ x: 170, y: 254, s: 0.95, top: C.cham, hat: 'non-la', arm: [8, 28, 26] }),
+  stand({ x: 230, y: 254, s: 0.95, top: C.brown, hat: 'non-la', arm: [8, 28, 26] }),
+  `  <path class="k" fill="none" d="M136 230 L160 292 M196 234 L220 292 M256 234 L280 292"/>`,
+  stand({ x: 300, y: 248, s: 1.05, top: C.son, bottom: C.ink, hat: 'khan-xep', arm: [-9, -26, 4] }),
+  // Bờ gần bên phải: người đáp lời
+  `  <path class="k" fill="${C.green}" d="M340 222 Q372 214 400 216 V300 H352Z"/><path d="M340 222 Q372 214 400 216 V300 H352Z" fill="url(#gan)"/>`,
+  stand({ x: 378, y: 280, s: 0.9, top: C.son, hat: 'non-la', arm: [-8, -22, 2] })
+].join('\n')];
+
+/* 10. Nhạc ngũ âm Khmer: dàn đàn gỗ, vòng cồng, trống và kèn trước mái chùa nhiều tầng */
+(() => {
+  // Vòng cồng: khung cong hình móng ngựa, nhiều cồng nhỏ có núm
+  const gongCircle = (cx, cy, r) => {
+    let g = `  <path class="k" fill="none" style="stroke-width:6" d="M${cx - r} ${cy} A${r} ${r * 0.7} 0 0 1 ${cx + r} ${cy}"/><path fill="none" stroke="${C.wood}" stroke-width="3" d="M${cx - r} ${cy} A${r} ${r * 0.7} 0 0 1 ${cx + r} ${cy}"/>`;
+    for (let i = 0; i <= 8; i++) {
+      const a = Math.PI + (i / 8) * Math.PI;
+      const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r * 0.7;
+      g += `<circle class="l" cx="${f(x)}" cy="${f(y)}" r="6.5" fill="#B98B3E"/><circle cx="${f(x)}" cy="${f(y)}" r="2.2" fill="${C.ink}"/>`;
+    }
+    return g;
+  };
+  // Đàn gỗ (đàn thuyền): thân cong như con thuyền, các phím gỗ nằm ngang
+  const xylophone = (x, y, w) => {
+    let g = `  <path class="k" fill="${C.son}" d="M${x} ${y - 10} Q${x + w / 2} ${y + 6} ${x + w} ${y - 10} L${x + w - 10} ${y + 16} Q${x + w / 2} ${y + 26} ${x + 10} ${y + 16}Z"/>`;
+    for (let i = 0; i < 9; i++) {
+      const bx = x + 14 + i * ((w - 28) / 8);
+      g += `<rect class="l" x="${f(bx - 4)}" y="${f(y - 6 + Math.abs(i - 4))}" width="8" height="11" fill="${C.bamboo}"/>`;
+    }
+    return g;
+  };
+  S['ngu-am'] = ['Nhạc ngũ âm của người Khmer', [
+    `  <rect x="0" y="0" width="400" height="200" fill="#E9D8B4"/>`,
+    sun(334, 50, 20, C.gold),
+    // Mái chùa Khmer nhiều tầng, đầu mái vút nhọn
+    `  <rect class="k" x="110" y="128" width="180" height="72" fill="${C.cream}"/><path class="t" d="M150 128 V200 M200 128 V200 M250 128 V200"/>`,
+    `  <path class="k" fill="${C.son}" d="M84 132 L130 92 H270 L316 132Z"/>`,
+    `  <path class="k" fill="${C.gold}" d="M118 96 L156 62 H244 L282 96Z"/>`,
+    `  <path class="k" fill="${C.son}" d="M150 66 L184 36 H216 L250 66Z"/>`,
+    `  <path class="k" fill="${C.gold}" d="M196 36 L200 14 L204 36Z M84 132 L70 116 L92 124Z M316 132 L330 116 L308 124Z"/>`,
+    ground(196, '#C9A15A'),
+    // Người chơi đàn gỗ (trái), vòng cồng (giữa), trống (phải), kèn (đứng sau)
+    sit({ x: 70, y: 286, s: 1.0, top: C.cream, hat: '' }),
+    xylophone(36, 262, 96),
+    sit({ x: 200, y: 288, s: 1.0, top: C.cham, hat: '' }),
+    gongCircle(200, 278, 46),
+    sit({ x: 320, y: 286, s: 1.0, top: C.cream, hat: '' }),
+    `  <ellipse class="k" cx="352" cy="262" rx="20" ry="14" fill="${C.wood}"/><ellipse class="l" cx="336" cy="262" rx="6" ry="13" fill="${C.skin}"/><ellipse class="l" cx="368" cy="262" rx="6" ry="13" fill="${C.skin}"/>`,
+    stand({ x: 268, y: 238, s: 0.85, top: C.son, hat: '', arm: [-6, -12, 2] }),
+    `  <path class="k" fill="${C.drum}" d="M254 194 L258 194 L262 214 L250 214Z"/>`
+  ].join('\n')];
+})();
+
 // Cho script khác (draw-history.cjs) dùng lại bộ nét vẽ
 module.exports = { C, f, wrap, hills, water, ground, sun, cloud, birds, roof, hat, stand, sit, fan, drumOnStand, stick };
 if (require.main === module) for (const id of Object.keys(S)) {
