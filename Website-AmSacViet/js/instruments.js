@@ -8,6 +8,9 @@
             ?choi=khen#choi-thu mở sẵn khèn ở phần chơi thử; #dan-bau-ao mở sẵn đàn bầu.
    Âm thanh chơi thử là âm MÔ PHỎNG bằng Web Audio (trang có ghi rõ), không phải bản thu. */
 
+// Danh sách thuật ngữ đã chuyển sang trang riêng: link cũ instruments.html#thuat-ngu vẫn tới đúng chỗ
+if (location.hash === "#thuat-ngu") location.replace("glossary.html");
+
 (function () {
   var family = "all";   // họ đang lọc
   var query = "";       // từ đang tìm
@@ -77,7 +80,7 @@
     if (query) p.push("q=" + encodeURIComponent(query));
     if (playId && playId !== "dan-bau") p.push("choi=" + playId);
     try {
-      var section = ["#choi-thu", "#thang-am", "#thuat-ngu"].indexOf(location.hash) !== -1 ? location.hash : "";
+      var section = ["#choi-thu", "#thang-am"].indexOf(location.hash) !== -1 ? location.hash : "";
       history.replaceState(null, "", (p.length ? "?" + p.join("&") : location.pathname) + (openId ? "#" + openId : section));
     } catch (e) { /* file:// có thể chặn, bỏ qua */ }
   }
@@ -853,6 +856,7 @@
     var box = document.getElementById("recShareBox"), input = document.getElementById("recLink");
     input.value = url;
     box.hidden = false;
+    document.getElementById("recLinkNote").hidden = ASV.canEmbedVideo; // chỉ giải thích khi mở bằng file://
     input.focus();
     input.select();
     var done = function () { setMsg("rec.copied"); };
@@ -935,7 +939,7 @@
       else setMsg("rec.badLink");
     }
     // Nội dung phía trên do JS vẽ nên làm lệch chỗ nhảy tới: cuộn lại đúng phần được nhắc trong địa chỉ
-    if (["choi-thu", "thang-am", "thuat-ngu"].indexOf(hash) !== -1) {
+    if (["choi-thu", "thang-am"].indexOf(hash) !== -1) {
       setTimeout(function () { document.getElementById(hash).scrollIntoView({ behavior: "instant" }); }, 0);
     }
 

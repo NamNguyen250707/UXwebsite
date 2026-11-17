@@ -67,7 +67,8 @@ ASV.ready(function () {
         ASV.escape(I18n.t("hist.try", { name: name })) + "</a>");
     });
     if (!items.length) return "";
-    var hasSynth = (h.instruments || []).length > 0;
+    var firstSynth = DATA.filter(function (x) { return (x.instruments || []).length > 0; })[0];
+    var hasSynth = h === firstSynth;
     return '<div class="hist-listen"><h3 class="hist-sub">' + I18n.t("hist.listen") + "</h3>" +
       '<div class="hist-actions">' + items.join("") + "</div>" +
       (hasSynth ? '<p class="hist-note">' + I18n.t("hist.synthNote") + "</p>" : "") + "</div>";

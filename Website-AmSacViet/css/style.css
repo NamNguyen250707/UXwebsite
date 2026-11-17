@@ -447,7 +447,6 @@ html { scroll-padding-top: 84px; }
 .hero-text { text-align: center; margin: 0 auto 1.75rem; }
 .hero .display-title { font-size: clamp(2.2rem, 5.2vw, 3.6rem); margin-bottom: 0.75rem; }
 .hero .lead { font-size: 1.12rem; color: var(--asv-muted); max-width: 36rem; margin: 0 auto 1.5rem; }
-.screen-hint { text-align: center; margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--asv-muted); }
 
 /* Cây đàn bầu nằm ngang ngay dưới bình phong tranh */
 .bau-stage {
@@ -510,14 +509,6 @@ html { scroll-padding-top: 84px; }
 .path-card:hover, .path-card:focus-within { border-color: var(--asv-son); }
 .path-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
 .path-card p { color: var(--asv-muted); flex: 1; }
-.path-card .path-more {
-  flex: none;
-  margin: 0;
-  font-weight: 600;
-  color: var(--asv-son);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 /* Cả thẻ bấm được nhờ ::after của link tiêu đề */
 .card-link { color: inherit; text-decoration: none; }
 .card-link::after { content: ""; position: absolute; inset: 0; }
@@ -709,15 +700,6 @@ body.welcome-open { overflow: hidden; }
 .welcome-title { font-size: clamp(2.6rem, 8vw, 4.6rem); margin: 0.25rem 0 0; }
 .welcome-tagline { color: var(--asv-muted); font-size: 1.1rem; margin: 0; }
 .welcome-enter { margin-top: 0.5rem; min-width: 220px; }
-.welcome-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0;
-  color: var(--asv-muted);
-  font-size: 0.9rem;
-}
-.welcome-hint .icon { color: var(--asv-son); animation: asv-bob 1.6s ease-in-out infinite; }
 /* Sợi dây đàn rung nhẹ chạy ngang màn hình */
 .welcome-string { position: absolute; left: 0; bottom: 16%; width: 100%; height: 40px; }
 .welcome-string path {
@@ -780,15 +762,6 @@ body.welcome-open { overflow: hidden; }
 .video-meta { color: var(--asv-muted); font-size: 0.88rem; margin-bottom: 0.9rem; }
 .video-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
 .video-credit { margin: 0.8rem 0 0; font-size: 0.78rem; color: var(--asv-muted); }
-.video-file-note {
-  max-width: 48rem;
-  padding: 0.7rem 1rem;
-  background: var(--asv-card);
-  border: 1px solid var(--asv-border);
-  border-left: 3px solid var(--asv-cham);
-  border-radius: var(--asv-radius);
-  font-size: 0.92rem;
-}
 
 /* Hoa văn nền trang chủ
    Bố cục có chủ đích: vòng trống đồng lấp ló góc trên phải, đàn hạc bay theo một đường cong,
@@ -948,8 +921,7 @@ body.welcome-open { overflow: hidden; }
 .map-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; list-style: none; padding: 0; margin: 0.75rem 0 0; font-size: 0.9rem; }
 .map-legend li { display: inline-flex; align-items: center; gap: 0.45rem; }
 .map-legend .map-dot { width: 16px; height: 16px; border-width: 2px; }
-.map-hint { margin: 0.5rem 0 0.25rem; font-size: 0.92rem; color: var(--asv-muted); }
-.map-source { margin: 0; font-size: 0.78rem; color: var(--asv-muted); }
+.map-source { margin: 0.5rem 0 0; font-size: 0.78rem; color: var(--asv-muted); }
 
 /* Nút đánh dấu: chấm đỏ son, đang chọn thì vàng đồng và to hơn */
 .map-marker {
@@ -1090,7 +1062,6 @@ body.welcome-open { overflow: hidden; }
 }
 .inst-search .form-control:focus { border-color: var(--asv-cham); box-shadow: 0 0 0 3px rgba(38, 64, 94, 0.25); }
 .inst-search .form-control::placeholder { color: #7A6650; } /* 4.6:1 trên nền thẻ */
-.inst-search-hint { display: block; margin-top: 0.3rem; color: var(--asv-muted); font-size: 0.82rem; }
 .family-hint { margin: 1rem 0 0; color: var(--asv-text); max-width: 46rem; }
 
 /* Thẻ nhạc cụ */
@@ -1270,7 +1241,7 @@ body.welcome-open { overflow: hidden; }
 
 /* Tôn trọng người dùng muốn giảm chuyển động */
 @media (prefers-reduced-motion: reduce) {
-  .mt-wave, .eq i, .welcome-hint .icon, .bg-drum-spin { animation: none; }
+  .mt-wave, .eq i, .bg-drum-spin { animation: none; }
   .bg-ripple { display: none; }
   .eq i { height: 12px; }
   .bau-touch.is-on { animation-duration: 0.01s; }
@@ -1430,11 +1401,35 @@ body.welcome-open { overflow: hidden; }
 .gloss-pop-def { margin: 0 0 0.75rem; }
 .gloss-pop-actions { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
 .gloss-pop-actions a { color: var(--asv-cham); }
-.gloss-list { margin: 0; padding: 1.25rem 1.5rem; columns: 2 22rem; column-gap: 2.5rem; }
-.gloss-item { break-inside: avoid; padding: 0.6rem 0; border-bottom: 1px solid var(--asv-border); }
-.gloss-item dt { font-family: var(--asv-font-heading); font-size: 1.08rem; color: var(--asv-heading); }
-.gloss-item dd { margin: 0.15rem 0 0; }
-.gloss-item:target { background: rgba(38, 64, 94, 0.08); }
+/* Trang Thuật ngữ (glossary.html): mỗi nhóm một tiêu đề, các mục từ xếp hai cột */
+.gloss-group + .gloss-group { margin-top: 2.75rem; }
+.gloss-group[hidden] { display: none; }
+.gloss-group-title {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--asv-border);
+}
+.gloss-entry {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.25rem 1.4rem;
+  scroll-margin-top: 6rem; /* chừa chỗ cho thanh menu dính đầu trang */
+}
+.gloss-entry-term { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.gloss-entry-def { margin-bottom: 1rem; }
+/* Link liên quan và các nút nằm sát đáy thẻ, thẳng hàng giữa hai cột */
+.gloss-entry-foot { margin-top: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.gloss-entry-related { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.5rem; }
+.gloss-entry-related .chip-list { margin: 0; }
+.gloss-entry-label { font-size: 0.88rem; font-weight: 600; color: var(--asv-muted); }
+.gloss-entry-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.gloss-entry-actions .btn { display: inline-flex; align-items: center; gap: 0.35rem; }
+/* Mục vừa mở bằng địa chỉ glossary.html#id hoặc "Đến mục từ này" */
+.gloss-entry.is-target { border-color: var(--asv-cham); box-shadow: 0 0 0 2px var(--asv-cham); }
+.gloss-entry:focus { outline: none; }
+.gloss-entry:focus-visible { outline: 3px solid var(--asv-cham); outline-offset: 2px; }
 
 /* Năm âm và bảy âm: hai hàng 8 cột thẳng hàng theo cao độ */
 .scale-card { padding: 1.5rem; }
@@ -1489,7 +1484,7 @@ body.welcome-open { overflow: hidden; }
   .scale-key { font-size: 0.85rem; padding: 0.15rem 0; min-height: 52px; }
   .rec-actions .btn { flex: 1 1 calc(50% - 0.5rem); justify-content: center; }
   .rec-item-actions { display: flex; margin-top: 0.3rem; }
-  .gloss-list { padding: 1rem; }
+  .gloss-entry { padding: 1.1rem 1rem; }
 }
 
 /* Màn hình nhỏ (từ 360px) */

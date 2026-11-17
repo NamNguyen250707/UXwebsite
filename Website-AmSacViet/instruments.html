@@ -33,7 +33,6 @@
       </div>
       <div class="container">
         <h1 id="inst-title" class="page-title" data-i18n="inst.title">Nhạc cụ truyền thống</h1>
-        <p class="section-lead" data-i18n="inst.lead">12 nhạc cụ quen thuộc, chia theo cách phát ra tiếng. Bấm vào một thẻ để xem chi tiết và nghe thử.</p>
 
         <div class="inst-tools">
           <div class="filter-bar" role="group" aria-label="Lọc theo họ nhạc cụ" data-i18n-aria-label="inst.filter.label">
@@ -45,9 +44,7 @@
           <div class="inst-search">
             <label class="form-label" for="instSearch" data-i18n="inst.search.label">Tìm theo tên</label>
             <input type="search" class="form-control" id="instSearch" autocomplete="off"
-                   placeholder="Ví dụ: đàn bầu, sáo, khèn" data-i18n-placeholder="inst.search.placeholder"
-                   aria-describedby="instSearchHint">
-            <small class="inst-search-hint" id="instSearchHint" data-i18n="inst.search.hint">Gõ có dấu hay không dấu đều được.</small>
+                   placeholder="Ví dụ: đàn bầu, dan bau, khèn" data-i18n-placeholder="inst.search.placeholder">
           </div>
         </div>
         <!-- Giải thích ngắn cho nhóm đang chọn (nhãn danh mục phải tự hiểu được) -->
@@ -79,7 +76,6 @@
       <div class="container">
         <span id="dan-bau-ao" class="anchor-alias" aria-hidden="true"></span><!-- link cũ #dan-bau-ao vẫn tới đây -->
         <h2 id="play-title" class="section-title" data-i18n="inst.play.title">Chơi thử nhạc cụ</h2>
-        <p class="section-lead mb-2" data-i18n="inst.play.lead">Chọn một nhạc cụ rồi bấm, giữ hoặc vuốt như khi chơi thật. Trên máy tính có thể dùng phím số 1 đến 9.</p>
         <p class="play-disclaimer" data-i18n="inst.play.disclaimer">Đây là âm mô phỏng bằng máy tính, nghe gần giống chứ không thay được nhạc cụ thật. Muốn nghe nghệ nhân chơi, hãy xem video ở trang Loại hình.</p>
 
         <!-- Chọn nhạc cụ (instruments.js vẽ 12 nút) -->
@@ -142,7 +138,7 @@
             <div class="rec-share" id="recShareBox" hidden>
               <label for="recLink" data-i18n="rec.linkLabel">Link chia sẻ</label>
               <input type="text" class="form-control" id="recLink" readonly aria-describedby="recLinkNote">
-              <small id="recLinkNote" data-i18n="rec.linkNote">Người nhận mở được link khi trang đã đưa lên web. Nếu bạn đang mở trang trực tiếp từ máy, link chỉ dùng được trên chính máy này.</small>
+              <small id="recLinkNote" hidden data-i18n="rec.linkNote">Người nhận mở được link khi trang đã đưa lên web. Nếu bạn đang mở trang trực tiếp từ máy, link chỉ dùng được trên chính máy này.</small>
             </div>
             <h4 class="rec-saved-title" data-i18n="rec.savedTitle">Đã lưu trên máy này</h4>
             <ol class="rec-list" id="recSaved"></ol>
@@ -155,7 +151,6 @@
     <section class="section pt-0" id="thang-am" aria-labelledby="scale-title">
       <div class="container">
         <h2 id="scale-title" class="section-title" data-i18n="scale.title">Năm âm và bảy âm</h2>
-        <p class="section-lead" data-i18n="scale.lead">Bấm “Nghe cả thang” ở từng hàng rồi so sánh. Hai hàng xếp thẳng cột theo cao độ, nên thấy ngay thang năm âm bỏ những nốt nào.</p>
         <div class="asv-card scale-card">
           <div id="scaleTool"></div>
           <div class="scale-explain">
@@ -168,17 +163,8 @@
       </div>
     </section>
 
-    <!-- Thuật ngữ: danh sách đầy đủ (common.js vẽ từ ASV_DATA.glossary) -->
-    <section class="section pt-0" id="thuat-ngu" aria-labelledby="gloss-title">
-      <div class="container">
-        <h2 id="gloss-title" class="section-title" data-i18n="gloss.title">Thuật ngữ</h2>
-        <p class="section-lead" data-i18n="gloss.lead">Trong bài, các từ chuyên môn có gạch chấm bên dưới. Bấm vào để xem giải thích ngắn; danh sách đầy đủ ở đây.</p>
-        <dl class="asv-card gloss-list" data-glossary-list></dl>
-      </div>
-    </section>
-
     <!-- Xem tiếp -->
-    <section id="explore-next" data-next="genres,history"></section>
+    <section id="explore-next" data-next="glossary,genres"></section>
   </main>
 
   <div id="site-footer"></div>

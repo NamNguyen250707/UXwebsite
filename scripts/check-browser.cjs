@@ -71,7 +71,7 @@ const shots = path.resolve('docs/screenshots');
     ok('Cùng phiên, quay lại trang chủ → không hiện lại màn hình chào', await js('!document.getElementById("welcome")'));
 
     /* --- Trang chủ --- */
-    ok('Navbar có 4 mục (đã bỏ Quiz), Trang chủ đang được đánh dấu', await js('document.querySelectorAll(".site-nav .nav-link").length===4 && !document.querySelector("a[href*=\\"quiz\\"]") && document.querySelector(".nav-link.active").getAttribute("aria-current")==="page"'));
+    ok('Navbar có 5 mục (thêm Thuật ngữ, không có Quiz), Trang chủ đang được đánh dấu', await js('document.querySelectorAll(".site-nav .nav-link").length===5 && !!document.querySelector(".site-nav a[href=\\"glossary.html\\"]") && !document.querySelector("a[href*=\\"quiz\\"]") && document.querySelector(".nav-link.active").getAttribute("aria-current")==="page"'));
     ok('Trang chủ: nút phụ dẫn tới đàn bầu ảo; không còn dải mời lặp lại và thẻ Xem tiếp', await js('document.querySelectorAll("a[href=\\"instruments.html#dan-bau-ao\\"]").length===1 && !document.querySelector(".cta-band, .next-card")'));
     ok('Logo là con dấu đàn bầu, không còn họa tiết trống đồng', await js('!!document.querySelector(".brand .mt-logo") && !document.querySelector("[class*=ds-]")'));
     ok('Footer được vẽ', await js('!!document.querySelector(".site-footer")'));
@@ -146,7 +146,8 @@ const shots = path.resolve('docs/screenshots');
 
     /* --- Video UNESCO --- */
     ok('Có 3 thẻ video với link YouTube của UNESCO (mở tab mới)', await js('[...document.querySelectorAll(".video-card a[href*=\\"youtube.com/watch\\"]")].filter(a=>a.target==="_blank"&&a.rel.includes("noopener")).length>=3'));
-    ok('Mở bằng file:// → không có nút "Xem tại đây", có ghi chú giải thích', await js('!document.querySelector("button[data-video-play]") && !document.getElementById("videoFileNote").hidden'));
+    ok('Mở bằng file:// → không có nút "Xem tại đây", chỉ còn link YouTube; đã bỏ dòng ghi chú dài', await js('!document.querySelector("button[data-video-play]") && !document.getElementById("videoFileNote")'));
+    ok('Trang chủ: đã bỏ các dòng chú thích nhỏ lặp ý (gợi ý bấm tên ảnh, "Xem…" dưới thẻ, gợi ý lăn chuột)', await js('!document.querySelector(".screen-hint, .path-more, .welcome-hint")'));
     ok('Có ghi nguồn UNESCO trên mỗi thẻ', await js('[...document.querySelectorAll(".video-credit")].every(p=>p.textContent.includes("UNESCO")&&p.querySelector("a[href*=\\"ich.unesco.org\\"]"))'));
     ok('Thẻ video không còn nút Nghe âm giả', await js('!document.querySelector(".video-card [data-play]")'));
 
@@ -446,7 +447,7 @@ const shots = path.resolve('docs/screenshots');
     await js('document.querySelector("#nguyen [data-play=\\"instrument:ken-bau\\"]").scrollIntoView({behavior:"instant",block:"center"})');
     await b.click('#nguyen [data-play="instrument:ken-bau"]');
     await b.wait('ASV.Player.current && ASV.Player.current.status==="playing"');
-    ok('Lịch sử: nút nghe kèn bầu phát âm (ghi rõ âm mô phỏng), nhãn đổi thành Dừng', await js('document.querySelector("#nguyen [data-play=\\"instrument:ken-bau\\"] .btn-play-label").textContent==="Dừng" && document.querySelector("#nguyen .hist-note").textContent.includes("mô phỏng")'));
+    ok('Lịch sử: nút nghe kèn bầu phát âm (ghi rõ âm mô phỏng), nhãn đổi thành Dừng', await js('document.querySelector("#nguyen [data-play=\\"instrument:ken-bau\\"] .btn-play-label").textContent==="Dừng" && document.querySelectorAll(".hist-note").length===1 && document.querySelector(".hist-note").textContent.includes("mô phỏng")'));
     await key('Escape', 'Escape', 27);
     ok('Lịch sử: Esc dừng âm', await js('ASV.Player.current===null'));
     ok('Lịch sử: link "Chơi thử" trỏ đúng tới phần chơi thử nhạc cụ', await js('!!document.querySelector("#nguyen a[href=\\"instruments.html?choi=ken-bau#choi-thu\\"]")'));
@@ -480,7 +481,7 @@ const shots = path.resolve('docs/screenshots');
     await js('window._gt=document.querySelector("#le .gloss-term")||document.querySelector(".gloss-term");window._gt.scrollIntoView({block:"center",behavior:"instant"})');
     await js('window._gt.click()');
     await b.delay(150);
-    ok('Thuật ngữ: bấm → khung giải thích mở, có tên từ, định nghĩa, link "Xem tất cả", focus vào nút Đóng', await js('!document.getElementById("glossPop").hidden && window._gt.getAttribute("aria-expanded")==="true" && document.querySelector(".gloss-pop-def").textContent.length>30 && document.querySelector(".gloss-pop a").getAttribute("href")==="instruments.html#thuat-ngu" && document.activeElement.classList.contains("gloss-pop-close")'));
+    ok('Thuật ngữ: bấm → khung giải thích mở, có tên từ, định nghĩa, link "Xem tất cả", focus vào nút Đóng', await js('!document.getElementById("glossPop").hidden && window._gt.getAttribute("aria-expanded")==="true" && document.querySelector(".gloss-pop-def").textContent.length>30 && document.querySelector(".gloss-pop a").getAttribute("href")==="glossary.html#"+window._gt.dataset.gloss && document.activeElement.classList.contains("gloss-pop-close")'));
     ok('Thuật ngữ: khung giải thích nằm trong màn hình', await js('(()=>{const r=document.getElementById("glossPop").getBoundingClientRect();return r.left>=0&&r.right<=document.documentElement.clientWidth})()'));
     await key('Escape', 'Escape', 27);
     ok('Thuật ngữ: Esc đóng khung, focus quay về chữ vừa bấm', await js('document.getElementById("glossPop").hidden && document.activeElement===window._gt && window._gt.getAttribute("aria-expanded")==="false"'));
@@ -507,8 +508,58 @@ const shots = path.resolve('docs/screenshots');
     await b.click('[data-timbre="sao"]');
     ok('Năm âm/bảy âm: đổi âm sắc sang tiếng sáo', await js('document.querySelector("[data-timbre=sao]").getAttribute("aria-pressed")==="true"'));
 
-    // Danh sách thuật ngữ
-    ok('Thuật ngữ: trang Nhạc cụ có danh sách đầy đủ 23 từ', await js('document.querySelectorAll("[data-glossary-list] .gloss-item").length===ASV_DATA.glossary.length && ASV_DATA.glossary.length===23'));
+    /* ================= TRANG THUẬT NGỮ (glossary.html) ================= */
+    const turl = pathToFileURL(path.resolve('Website-AmSacViet/glossary.html')).href;
+    const glossReady = 'document.querySelectorAll(".gloss-entry").length===23';
+    ok('Nhạc cụ: không còn khối thuật ngữ cũ và dòng gợi ý tìm kiếm; ô tìm có ví dụ không dấu', await js('!document.getElementById("thuat-ngu") && !document.getElementById("instSearchHint") && document.getElementById("instSearch").placeholder.includes("dan bau")'));
+    await b.goto(url);
+    await b.goto(iurl + '#thuat-ngu');
+    await b.wait('location.href.includes("glossary.html") && ' + glossReady);
+    ok('Link cũ instruments.html#thuat-ngu chuyển sang trang Thuật ngữ', true);
+    await b.goto(url);
+    await b.goto(turl);
+    await b.wait(glossReady);
+    ok('Thuật ngữ: 23 mục trong 4 nhóm, menu gạch chân "Thuật ngữ", đếm "23 từ"', await js('document.querySelectorAll(".gloss-group").length===4 && document.querySelector(".nav-link.active").getAttribute("href")==="glossary.html" && document.getElementById("glossCount").textContent==="23 từ"'));
+    ok('Thuật ngữ: mỗi mục có tên (h3) và định nghĩa; trong mục không đánh dấu chính từ của nó', await js('[...document.querySelectorAll(".gloss-entry")].every(e=>e.querySelector("h3").textContent.length>1 && e.querySelector(".gloss-entry-def").textContent.length>30 && !e.querySelector(".gloss-term[data-gloss=\\""+e.id+"\\"]"))'));
+    ok('Thuật ngữ: loại hình chỉ có nút "Xem biểu diễn" (video thật), không có âm tổng hợp', await js('!!document.querySelector("#ca-nuong [data-recording=ca-tru]") && !document.querySelector("[data-play^=\\"genre:\\"]")'));
+    await js('document.querySelector(".filter-btn[data-group=unesco]").click()');
+    ok('Thuật ngữ: lọc "Danh hiệu UNESCO" → còn 3 mục, nhóm khác ẩn hẳn, địa chỉ ghi ?nhom=unesco', await js('document.querySelectorAll("[data-col]:not([hidden])").length===3 && document.querySelectorAll(".gloss-group:not([hidden])").length===1 && document.getElementById("glossCount").textContent==="3 từ" && location.search==="?nhom=unesco"'));
+    await js('document.querySelector(".filter-btn[data-group=all]").click(); {const i=document.getElementById("glossSearch"); i.value="am boi"; i.dispatchEvent(new Event("input"))}');
+    ok('Thuật ngữ: gõ không dấu "am boi" → tìm ra "Âm bồi"', await js('!document.querySelector("[data-col=am-boi]").hidden && document.querySelectorAll("[data-col]:not([hidden])").length===1'));
+    await js('{const i=document.getElementById("glossSearch"); i.value="xyz"; i.dispatchEvent(new Event("input"))}');
+    ok('Thuật ngữ: không khớp → hiện "Không có từ nào khớp" và nút xóa', await js('!document.getElementById("glossEmpty").hidden && document.getElementById("glossEmptyText").textContent.includes("xyz")'));
+    await b.click('#glossReset');
+    ok('Thuật ngữ: bấm "Xóa tìm kiếm và bộ lọc" → hiện lại 23 mục, focus vào ô tìm', await js('document.querySelectorAll("[data-col]:not([hidden])").length===23 && document.activeElement.id==="glossSearch" && document.getElementById("glossEmpty").hidden'));
+    await js('document.querySelector("[data-play=\\"term:am-thuc\\"]").scrollIntoView({block:"center",behavior:"instant"})');
+    await b.click('#am-thuc [data-play="term:am-thuc"]');
+    await b.wait('ASV.Player.current && ASV.Player.current.status==="playing"');
+    ok('Thuật ngữ: "Nghe âm thực" phát âm mô phỏng, nhãn đổi thành Dừng, thanh phát ghi tên', await js('document.querySelector("#am-thuc .btn-play-label").textContent==="Dừng" && !document.getElementById("asvPlayer").hidden'));
+    await key('Escape', 'Escape', 27);
+    ok('Thuật ngữ: Esc dừng âm', await js('ASV.Player.current===null'));
+    ok('Thuật ngữ: "Chơi thử" trỏ đúng phần chơi thử của trang Nhạc cụ', await js('!!document.querySelector("#am-boi a[href=\\"instruments.html#dan-bau-ao\\"]") && !!document.querySelector("#ve a[href=\\"instruments.html?choi=ty-ba#choi-thu\\"]")'));
+    await js('window._gt=document.querySelector("#am-boi .gloss-term"); window._gt.scrollIntoView({block:"center",behavior:"instant"}); window._gt.click()');
+    await b.delay(150);
+    ok('Thuật ngữ: khung giải thích trên chính trang này có link "Đến mục từ này"', await js('document.querySelector(".gloss-pop a").getAttribute("href")==="#"+window._gt.dataset.gloss && document.querySelector(".gloss-pop a").textContent==="Đến mục từ này"'));
+    await key('Escape', 'Escape', 27);
+    await b.goto(url);
+    await b.goto(turl + '?nhom=sound#ds-khan-cap');
+    await b.wait(glossReady + ' && document.querySelector(".gloss-entry.is-target")');
+    await b.delay(100);
+    ok('Thuật ngữ: glossary.html#ds-khan-cap mở thẳng mục đó (bỏ bộ lọc đang ẩn nó), tô viền, focus vào mục', await js('document.activeElement.id==="ds-khan-cap" && !document.querySelector("[data-col=ds-khan-cap]").hidden && Math.abs(document.getElementById("ds-khan-cap").getBoundingClientRect().top) < 200'));
+    await b.screenshot(path.join(shots, 'glossary-1280-vi.png'));
+    await js('I18n.set("en")');
+    await b.delay(200);
+    ok('Thuật ngữ EN: không còn dấu tiếng Việt, tiêu đề "Glossary", đếm "23 terms", vẫn giữ mục đang xem', await js('!/[à-ỹÀ-ỸđĐăĂâÂêÊôÔơƠưƯ]/.test(document.body.innerText) && document.title.startsWith("Glossary") && document.getElementById("glossCount").textContent==="23 terms" && document.querySelectorAll(".gloss-entry").length===23'));
+    await b.screenshot(path.join(shots, 'glossary-1280-en.png'));
+    await js('I18n.set("vi")');
+    await b.size(360, 740);
+    await b.goto(url);
+    await b.goto(turl);
+    await b.wait(glossReady);
+    await b.delay(200);
+    ok('Thuật ngữ 360px: không cuộn ngang', await js('document.documentElement.scrollWidth<=innerWidth'));
+    await b.screenshot(path.join(shots, 'glossary-360-vi.png'));
+    await b.size(1280, 900);
 
     // Ghi lại phần chơi: đàn tranh, bấm phím số 1, 3, 5
     await js('localStorage.removeItem("asv-recordings")');

@@ -45,7 +45,6 @@
         <span data-i18n="welcome.enter">Vào thăm ngay</span>
         <span data-icon="arrow"></span>
       </button>
-      <p class="welcome-hint"><span data-icon="down"></span><span data-i18n="welcome.hint">hoặc lăn chuột, vuốt màn hình để vào</span></p>
     </div>
     <!-- Sợi dây đàn rung nhẹ chạy ngang màn hình (trang trí) -->
     <svg class="welcome-string" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -85,7 +84,7 @@
         <!-- Tiêu đề, giới thiệu và hai nút đặt lên đầu để thấy ngay khi vào trang -->
         <div class="hero-text">
           <h1 id="hero-title" class="display-title" data-i18n="home.hero.title">Nghe nhạc truyền thống của ba miền</h1>
-          <p class="lead" data-i18n="home.hero.lead">Bấm vào một ảnh để xem quan họ, nhã nhạc hoặc đờn ca tài tử, hoặc gảy thử cây đàn bầu bên dưới.</p>
+          <p class="lead" data-i18n="home.hero.lead">Từ tiếng trống đồng Đông Sơn đến những làn điệu được UNESCO ghi danh: 16 loại hình, 12 nhạc cụ và tám mốc lịch sử của âm nhạc truyền thống Việt Nam.</p>
           <div class="d-flex flex-wrap justify-content-center gap-2">
             <a class="btn btn-son btn-lg" href="genres.html">
               <span data-i18n="home.hero.cta">Bắt đầu khám phá</span>
@@ -97,7 +96,6 @@
 
         <!-- Ba tấm tranh vẽ mới theo phong cách tranh khắc gỗ dân gian.
              Bấm vào tranh: nghe bản ghi thật (video UNESCO) của loại hình miền đó. Bấm bảng tên: sang trang Loại hình. -->
-        <p class="screen-hint" data-i18n="home.screen.hint">Bấm tên phía trên ảnh để đọc về loại hình đó.</p>
         <div class="hero-screen">
           <figure class="screen-panel" data-genre="quan-ho">
             <!-- Bảng tên: sang thẳng trang Loại hình của loại nhạc này -->
@@ -183,21 +181,18 @@
             <article class="asv-card path-card">
               <h3><a class="card-link" href="genres.html" data-i18n="page.genres.title">Loại hình</a></h3>
               <p data-i18n="page.genres.desc">16 loại hình trên bản đồ: 10 được UNESCO ghi danh, 6 loại hình tiêu biểu khác như chèo, tuồng, cải lương.</p>
-              <p class="path-more" data-i18n="page.genres.meta">Xem bản đồ 16 loại hình</p>
             </article>
           </div>
           <div class="col-md-4">
             <article class="asv-card path-card">
               <h3><a class="card-link" href="instruments.html" data-i18n="page.instruments.title">Nhạc cụ</a></h3>
               <p data-i18n="page.instruments.desc">12 nhạc cụ chia theo dây, hơi, gõ, kèm một cây đàn bầu ảo để bạn tự chơi.</p>
-              <p class="path-more" data-i18n="page.instruments.meta">Xem 12 nhạc cụ</p>
             </article>
           </div>
           <div class="col-md-4">
             <article class="asv-card path-card">
               <h3><a class="card-link" href="history.html" data-i18n="page.history.title">Lịch sử</a></h3>
               <p data-i18n="page.history.desc">8 mốc lịch sử, mỗi mốc có năm tháng, nguồn tra cứu và những chỗ còn tranh luận.</p>
-              <p class="path-more" data-i18n="page.history.meta">Xem dòng thời gian</p>
             </article>
           </div>
         </div>
@@ -210,9 +205,6 @@
       <div class="sec-deco" aria-hidden="true"><img class="deco-drum" src="images/motifs/vong-trong-dong.svg" alt=""></div>
       <div class="container">
         <h2 id="video-title" class="section-title" data-i18n="home.video.title">Xem nghệ nhân biểu diễn</h2>
-        <p class="section-lead" data-i18n="home.video.lead">Ba đoạn video của UNESCO, mỗi miền một loại hình. Cần có Internet để xem.</p>
-        <!-- Chỉ hiện khi mở trang bằng file:// (home.js bật lên) -->
-        <p class="video-file-note" id="videoFileNote" hidden data-i18n="home.video.fileNote">Bạn đang mở trang trực tiếp từ máy, nên YouTube không cho phát video ngay trong trang; video sẽ mở ở tab mới. Khi đưa trang lên web (ví dụ GitHub Pages), video phát được tại chỗ.</p>
         <!-- home.js vẽ thẻ video cho các loại hình trong data-genres -->
         <div class="row g-4 mt-1" id="videoGrid" data-genres="quan-ho,nha-nhac,tai-tu"></div>
         <p class="mt-4 mb-0">

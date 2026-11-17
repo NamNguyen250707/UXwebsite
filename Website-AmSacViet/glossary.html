@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="glossary.meta.title">Thuật ngữ | Âm Sắc Việt</title>
+  <meta name="description" data-i18n-content="glossary.meta.desc"
+        content="23 từ chuyên môn về âm nhạc truyền thống Việt Nam, giải thích bằng lời thường, kèm âm thanh, link chơi thử và video biểu diễn.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className += " js";</script>
+
+  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/glossary.js"></script>
+</head>
+<body data-page="glossary" id="top">
+
+  <div id="site-header"></div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Đầu trang: tiêu đề, lọc theo nhóm, tìm kiếm -->
+    <section class="page-head has-deco" aria-labelledby="glossary-title">
+      <!-- Hoa văn: ba con hạc ở khoảng trống bên phải tiêu đề -->
+      <div class="sec-deco" aria-hidden="true">
+        <img class="deco-hac deco-l1" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l2" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l3" src="images/motifs/hac.svg" alt="">
+      </div>
+      <div class="container">
+        <h1 id="glossary-title" class="page-title" data-i18n="glossary.title">Thuật ngữ</h1>
+        <p class="section-lead" data-i18n="glossary.lead">23 từ chuyên môn dùng trong các trang khác, nơi chúng có gạch chấm bên dưới.</p>
+
+        <div class="inst-tools">
+          <!-- Lọc theo nhóm (glossary.js gắn sự kiện) -->
+          <div class="filter-bar" role="group" aria-label="Lọc theo nhóm" data-i18n-aria-label="glossary.filter.label">
+            <button type="button" class="filter-btn" data-group="all" aria-pressed="true" data-i18n="glossary.filter.all">Tất cả</button>
+            <button type="button" class="filter-btn" data-group="sound" aria-pressed="false" data-i18n="glossary.group.sound">Cách chơi và âm thanh</button>
+            <button type="button" class="filter-btn" data-group="parts" aria-pressed="false" data-i18n="glossary.group.parts">Nhạc cụ và bộ phận</button>
+            <button type="button" class="filter-btn" data-group="performance" aria-pressed="false" data-i18n="glossary.group.performance">Biểu diễn và bài bản</button>
+            <button type="button" class="filter-btn" data-group="unesco" aria-pressed="false" data-i18n="glossary.group.unesco">Danh hiệu UNESCO</button>
+          </div>
+          <div class="inst-search">
+            <label class="form-label" for="glossSearch" data-i18n="glossary.search.label">Tìm từ</label>
+            <input type="search" class="form-control" id="glossSearch" autocomplete="off"
+                   placeholder="Ví dụ: âm bồi, am boi, vê" data-i18n-placeholder="glossary.search.placeholder">
+          </div>
+        </div>
+        <p class="filter-count" id="glossCount" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Các mục từ, chia theo nhóm (glossary.js vẽ từ ASV_DATA.glossary) -->
+    <section class="section pt-0" aria-labelledby="glossary-title">
+      <div class="container">
+        <div id="glossGroups"></div>
+        <!-- Trạng thái "không tìm thấy" -->
+        <div class="inst-empty asv-card" id="glossEmpty" hidden>
+          <h2 class="inst-empty-title" data-i18n="glossary.empty.title">Không có từ nào khớp</h2>
+          <p id="glossEmptyText"></p>
+          <button type="button" class="btn btn-outline-son" id="glossReset" data-i18n="glossary.empty.reset">Xóa tìm kiếm và bộ lọc</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Xem tiếp -->
+    <section id="explore-next" data-next="instruments,genres"></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <noscript>
+    <p class="container py-3" style="color:#9E2A1C">Trang cần bật JavaScript để hiện danh sách thuật ngữ, phát âm thanh và đổi ngôn ngữ. / Please enable JavaScript to see the glossary, play sounds and switch languages.</p>
+  </noscript>
+</body>
+</html>

@@ -18,7 +18,8 @@ ASV.PAGES = [
   { id: "home",        href: "HomePage.html",    icon: "home",     ready: true },
   { id: "genres",      href: "genres.html",      icon: "map",      ready: true },
   { id: "instruments", href: "instruments.html", icon: "lute",     ready: true },
-  { id: "history",     href: "history.html",     icon: "timeline", ready: true }
+  { id: "history",     href: "history.html",     icon: "timeline", ready: true },
+  { id: "glossary",    href: "glossary.html",    icon: "book",     ready: true }
 ];
 
 /* Tiện ích */
@@ -68,6 +69,7 @@ ASV.ICONS = {
   timeline: '<path d="M7 3v18"/><circle cx="7" cy="6" r="2" fill="currentColor"/><circle cx="7" cy="12" r="2" fill="currentColor"/><circle cx="7" cy="18" r="2" fill="currentColor"/><path d="M11 6h9M11 12h6M11 18h8"/>',
   ear: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
   home: '<path d="M4 11l8-6.5 8 6.5M6 9.5V20h12V9.5M10 20v-5h4v5"/>',
+  book: '<path d="M4 5.5c2.7-1 5.3-1 8 .8 2.7-1.8 5.3-1.8 8-.8v13c-2.7-1-5.3-1-8 .8-2.7-1.8-5.3-1.8-8-.8z"/><path d="M12 6.3v13"/>',
   arrow: '<path d="M4 12h15M13 6l6 6-6 6"/>',
   shuffle: '<path d="M3 7h3.5c4 0 6 10 10 10H21M3 17h3.5c1.6 0 2.8-1.6 3.9-3.6M14 9.6C15 8 16 7 17.5 7H21M18 4l3 3-3 3M18 14l3 3-3 3"/>',
   close: '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -635,6 +637,12 @@ ASV.Synth = (function () {
       [osc, osc2, lfo].forEach(function (o) { o.start(t); o.stop(t + 2.5); });
       return 2.5;
     },
+    // Chuỗi bồi âm đàn bầu 2, 3, 4 nối nhau (trang Thuật ngữ): p.freq = tần số âm thực
+    "bau-series": function (out, t, p) {
+      var f = (p && p.freq) || 130.81;
+      [2, 3, 4].forEach(function (n, i) { PRESETS["bau-harmonic"](out, t + i * 0.9, { freq: f * n }); });
+      return 1.8 + 2.5;
+    },
   };
 
   // Phát một hay nhiều preset cùng lúc (params: tham số thêm, ví dụ tần số); trả về { duration, stop }
@@ -1050,7 +1058,7 @@ document.addEventListener("click", function (e) {
 ASV.Glossary = (function () {
   var SKIP = "a, button, h1, h2, h3, h4, h5, h6, label, input, textarea, select, svg, script, style, " +
     "[aria-live], .visually-hidden, .site-header, .site-footer, .player-bar, .welcome, .hist-nav, " +
-    ".play-pads, .filter-bar, .gloss-list, .gloss-pop, .video-poster, .asv-toast, [data-no-gloss]";
+    ".play-pads, .filter-bar, .gloss-pop, .video-poster, .asv-toast, [data-no-gloss]";
   var BLOCK = "p, li, dd, td, small, figcaption, .hist-debate";
   var rules = [];   // [{ id, re }] cho ngôn ngữ đang dùng
   var pop = null, opener = null, observer = null, busy = false;
@@ -1094,6 +1102,8 @@ ASV.Glossary = (function () {
       for (var r = 0; r < rules.length; r++) {
         var rule = rules[r];
         if (block.querySelector('.gloss-term[data-gloss="' + rule.id + '"]')) continue; // khối này đã có từ đó
+        var own = block.closest("[data-gloss-own]");
+        if (own && own.getAttribute("data-gloss-own") === rule.id) continue;
         var m = rule.re.exec(node.nodeValue);
         if (!m) continue;
         // Tách nút chữ: [trước][TỪ][sau], rồi quét tiếp phần "sau"
@@ -1134,13 +1144,13 @@ ASV.Glossary = (function () {
     close(false);
     opener = btn;
     var el = ensurePop();
-    var onGlossPage = location.pathname.indexOf("instruments.html") !== -1;
+    var onGlossPage = document.body.getAttribute("data-page") === "glossary";
     el.setAttribute("aria-labelledby", "glossPopTitle");
     el.innerHTML =
       '<p class="gloss-pop-title" id="glossPopTitle">' + ASV.escape(I18n.pick(g.term)) + "</p>" +
       '<p class="gloss-pop-def">' + ASV.escape(I18n.pick(g.def)) + "</p>" +
       '<div class="gloss-pop-actions">' +
-        '<a href="' + (onGlossPage ? "" : "instruments.html") + "#thuat-ngu" + '">' + ASV.escape(I18n.t("gloss.all")) + "</a>" +
+        '<a href="' + (onGlossPage ? "" : "glossary.html") + "#" + g.id + '">' + ASV.escape(I18n.t(onGlossPage ? "gloss.here" : "gloss.all")) + "</a>" +
         '<button type="button" class="btn btn-sm btn-outline-cham gloss-pop-close">' + ASV.escape(I18n.t("gloss.close")) + "</button>" +
       "</div>";
     el.hidden = false;
@@ -1176,6 +1186,7 @@ ASV.Glossary = (function () {
     var t = e.target.closest(".gloss-term");
     if (t) { e.preventDefault(); open(t); return; }
     if (e.target.closest(".gloss-pop-close")) { close(true); return; }
+    if (e.target.closest(".gloss-pop a")) { close(false); return; } // sang mục từ: đóng khung
     if (opener && !e.target.closest(".gloss-pop")) close(false);
   });
   document.addEventListener("keydown", function (e) {
@@ -1183,22 +1194,8 @@ ASV.Glossary = (function () {
   });
   window.addEventListener("resize", place);
 
-  // Danh sách đầy đủ (trang Nhạc cụ, #thuat-ngu): xếp theo thứ tự chữ cái của ngôn ngữ đang dùng
-  function renderList() {
-    var host = document.querySelector("[data-glossary-list]");
-    if (!host) return;
-    var items = ASV_DATA.glossary.slice().sort(function (a, b) {
-      return I18n.pick(a.term).localeCompare(I18n.pick(b.term), I18n.lang);
-    });
-    host.innerHTML = items.map(function (g) {
-      return '<div class="gloss-item" id="tn-' + g.id + '"><dt>' + ASV.escape(I18n.pick(g.term)) + "</dt>" +
-        "<dd>" + ASV.escape(I18n.pick(g.def)) + "</dd></div>";
-    }).join("");
-  }
-
   function start() {
     build();
-    renderList();
     scan(document.body);
     // Chữ mới do JS vẽ ra → đánh dấu lại (gộp nhiều thay đổi thành một lần quét)
     var timer = null;
@@ -1213,7 +1210,6 @@ ASV.Glossary = (function () {
   document.addEventListener("asv:langchange", function () {
     close(false);
     build();
-    renderList();
     scan(document.body);
   });
 

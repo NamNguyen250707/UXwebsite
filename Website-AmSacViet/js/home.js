@@ -267,7 +267,6 @@
       var g = ASV_DATA.genres.filter(function (x) { return x.id === id; })[0];
       return g ? '<div class="col-md-4">' + ASV.videoCard(g) + "</div>" : "";
     }).join("");
-    document.getElementById("videoFileNote").hidden = ASV.canEmbedVideo;
     ASV.syncPlayButtons();
   }
 
