@@ -36,7 +36,8 @@ const shots = path.resolve('docs/screenshots');
   };
   try {
     {
-      const src = require('node:fs').readFileSync(path.resolve('Website-AmSacViet/js/i18n.js'), 'utf8');
+      const core = require('node:fs').readFileSync(path.resolve('Website-AmSacViet/js/core.js'), 'utf8');
+      const src = core.slice(core.indexOf('PHẦN 1:'), core.indexOf('PHẦN 2:')); // chỉ phần bản dịch
       const part = (a, b2) => src.slice(src.indexOf(a), b2 ? src.indexOf(b2) : undefined);
       const dup = [part('vi: {', '  en: {'), part('  en: {', '\n};')].map((t) => { const k = [...t.matchAll(/^\s+"([^"]+)":/gm)].map((m) => m[1]); return k.filter((x, i) => k.indexOf(x) !== i); });
       ok('i18n: không có khóa dịch nào bị trùng (VI và EN)', dup[0].length === 0 && dup[1].length === 0);

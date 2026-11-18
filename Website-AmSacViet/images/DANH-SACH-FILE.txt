@@ -1,5 +1,0 @@
-Mọi hình trên site đều là SVG tự vẽ, không cần thả ảnh vào nữa:
-  images/tranh/      3 tranh trang chủ
-  images/nhac-cu/    12 nhạc cụ
-  images/loai-hinh/  8 loại hình
-  images/motifs/     hoa văn nền

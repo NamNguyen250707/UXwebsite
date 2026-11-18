@@ -1,7 +1,7 @@
 /* Dựng bản đồ Việt Nam cho trang Loại hình (Website-AmSacViet).
    Nguồn đường biên: Natural Earth (public domain), file ne_50m_admin_0_countries.geojson.
    Chạy: node scripts/build-map.cjs <đường-dẫn-tới-geojson>
-   → ghi Website-AmSacViet/js/map-data.js (biến toàn cục ASV_MAP, không cần fetch khi mở bằng file://).
+   → ghi vào phần bản đồ của Website-AmSacViet/js/core.js (biến toàn cục ASV_MAP, không cần fetch khi mở bằng file://).
    Hoàng Sa và Trường Sa không có trong dữ liệu Natural Earth nên được vẽ thêm theo tọa độ gần đúng. */
 const fs = require('fs');
 const path = require('path');
@@ -37,7 +37,7 @@ const truongSa = [[111.92, 10.4], [112.8, 11.1], [114.3, 11.45], [114.1, 10.9], 
   [112.9, 9.0], [113.6, 8.8], [114.5, 8.6], [112.3, 9.7], [115.5, 9.8], [111.92, 8.65]];
 const dots = (list) => list.map(([lon, lat]) => [r1(px(lon)), r1(py(lat))]);
 
-const out = `/* map-data.js — Đường biên Việt Nam cho bản đồ trang Loại hình.
+const out = `/* Đường biên Việt Nam cho bản đồ trang Loại hình.
    Sinh tự động bởi scripts/build-map.cjs từ dữ liệu Natural Earth (public domain).
    Không sửa tay; muốn đổi thì sửa script rồi chạy lại. */
 var ASV_MAP = {
@@ -50,6 +50,12 @@ var ASV_MAP = {
   truongSa: ${JSON.stringify(dots(truongSa))}
 };
 `;
-const dest = path.resolve(__dirname, '../Website-AmSacViet/js/map-data.js');
-fs.writeFileSync(dest, out);
+// Đoạn bản đồ nằm trong core.js, giữa hai mốc <ban-do> … </ban-do>
+const dest = path.resolve(__dirname, '../Website-AmSacViet/js/core.js');
+const core = fs.readFileSync(dest, 'utf8');
+const A = '/* <ban-do>', B = '/* </ban-do> */';
+const i = core.indexOf(A), j = core.indexOf(B);
+if (i < 0 || j < 0) throw Error('Không thấy mốc <ban-do> trong core.js');
+const head = core.slice(i, core.indexOf('\n', i) + 1);
+fs.writeFileSync(dest, core.slice(0, i) + head + out + core.slice(j));
 console.log('Đã ghi ' + dest + ' (' + (out.length / 1024).toFixed(1) + ' KB)');
