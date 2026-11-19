@@ -10,7 +10,7 @@
    Kiểu "rỗng trong": mọi hình chỉ có đường viền (fill none), không tô khối đặc. */
 const fs = require('fs');
 const path = require('path');
-const OUT = path.resolve(__dirname, '../Website-AmSacViet/images/motifs');
+const OUT = path.resolve(__dirname, '../Website-AmSacViet/assets');
 fs.mkdirSync(OUT, { recursive: true });
 
 const LIGHT = '#FFF8EA', DARK = '#E2D1AE', BASE = '#F5ECD9';
@@ -68,7 +68,7 @@ ${emboss(d)}
   // Chấm tròn vòng ngoài
   around(455, 64, '<circle r="7" fill="none" stroke="currentColor" stroke-width="2.6"/>');
   const defs = `    <g id="m">\n${o.join('\n')}\n    </g>`;
-  fs.writeFileSync(path.join(OUT, 'vong-trong-dong.svg'),
+  fs.writeFileSync(path.join(OUT, 'motif-vong-trong-dong.svg'),
     svg('-500 -500 1000 1000', 'Vòng hoa văn trống đồng, chạm nổi.', defs, 1.6));
 })();
 
@@ -84,7 +84,7 @@ ${emboss(d)}
       <path d="M-55 -11 L-70 -5 L-55 -6Z"/>
       <path fill="none" stroke-width="2" stroke-linecap="round" d="M18 2 L52 9 M18 4 L50 12"/>
     </g>`;
-  fs.writeFileSync(path.join(OUT, 'hac.svg'), svg('-74 -66 130 82', 'Hạc bay, chạm nổi.', defs, 0.8));
+  fs.writeFileSync(path.join(OUT, 'motif-hac.svg'), svg('-74 -66 130 82', 'Hạc bay, chạm nổi.', defs, 0.8));
 })();
 
 /* ---------- 3. Dải sen ở chân hero ---------- */
@@ -114,12 +114,12 @@ ${emboss(d)}
   // Mặt nước: vài nét sóng ngang
   o.push(`      <path d="M0 196 Q60 188 120 196 T240 196 T360 196 T480 196 T600 196 T720 196 T840 196 T960 196 T1080 196 T1200 196 T1320 196 T1440 196 T1560 196 T1680 196" fill="none" stroke-width="2.4"/>`);
   const defs = `    <g id="m" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">\n${o.join('\n')}\n    </g>`;
-  fs.writeFileSync(path.join(OUT, 'dai-sen.svg'),
+  fs.writeFileSync(path.join(OUT, 'motif-dai-sen.svg'),
     svg('0 0 1640 204', 'Dải sen ở chân hero, chạm nổi.', defs, 1.4, ' preserveAspectRatio="xMidYMax slice"'));
 })();
 
 /* ---------- 4. Vân giấy dó ---------- */
-fs.writeFileSync(path.join(OUT, 'giay-do.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+fs.writeFileSync(path.join(OUT, 'motif-giay-do.svg'), `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
   <!-- Vân giấy dó: nhiễu feTurbulence chuyển thành lốm đốm màu nâu rất nhạt (độ mờ rất thấp).
        Lát kín nền trang (background-repeat), nên chỉ tính một lần. Sinh bởi scripts/draw-background.cjs -->
   <filter id="soi" x="0" y="0" width="100%" height="100%">

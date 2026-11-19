@@ -1,52 +1,40 @@
-# Âm Sắc Việt (website)
+# Am Sac Viet
 
-**Cách mở:** bấm đúp `HomePage.html` (hoặc `index.html`). Không cần server, không cần mạng.
+A website about traditional Vietnamese music: its genres, instruments, history and key terms. Available in Vietnamese and English.
 
-Lần đầu vào sẽ gặp màn hình chào (bấm "Vào thăm ngay" hoặc lăn chuột). Muốn xem lại: đóng tab rồi mở lại.
+## How to open
 
-**Video:** video biểu diễn là video chính thức của UNESCO, của nhà hát hoặc báo chí nhà nước trên YouTube, cần Internet. Khi mở bằng file://, YouTube
-không cho phát trong trang nên video mở ở tab mới; khi đưa lên web (GitHub Pages) thì xem được ngay trong trang.
+Double-click `HomePage.html` (or `index.html`). The site opens in your browser. You don't need to install anything, and it works offline.
+A recent version of Chrome, Edge, Firefox or Safari is recommended.
 
-## Ràng buộc kỹ thuật
-- Chỉ dùng HTML5, CSS, JavaScript thuần và Bootstrap 5.3.3 (nằm sẵn trong `vendor/bootstrap/`).
-- Không dùng fetch(), ES modules hay CDN. Dữ liệu là biến toàn cục trong `js/core.js` (phần 2: dữ liệu).
-- Mọi đường dẫn đều tương đối.
+The first time, you will see a welcome screen. Press **"Visit now"** or scroll down to enter the site.
 
-## Cấu trúc
-```
-HomePage.html            Trang chủ: màn hình chào, 3 ảnh ba miền, đàn bầu, video, nghe thử một nhạc cụ
-genres.html              Loại hình: bản đồ 16 loại hình, lọc vùng và nhóm, ảnh thật, video
-instruments.html         Nhạc cụ: 12 thẻ, lọc, tìm không dấu, hộp chi tiết, chơi thử 12 nhạc cụ,
-                         ghi lại phần chơi, năm âm và bảy âm
-history.html             Lịch sử: 8 mốc, sự kiện có năm, nguồn tra cứu, điểm còn tranh luận
-glossary.html            Thuật ngữ: 23 từ chia 4 nhóm, tìm không dấu, nghe thử, link chơi thử và video
-index.html               Chuyển tới HomePage.html
-css/style.css            Một file CSS chung
-js/core.js               Code dùng chung, 4 phần: (1) bản dịch VI/EN, (2) dữ liệu 12 nhạc cụ, 16 loại hình,
-                         8 mốc lịch sử, 23 thuật ngữ, (3) đường biên bản đồ, (4) menu, chân trang, âm thanh, thẻ video
-js/home.js               Logic trang chủ
-js/genres.js             Logic trang Loại hình
-js/instruments.js        Trang Nhạc cụ, 3 phần: (1) mô hình SVG 11 nhạc cụ để bấm, (2) thẻ, lọc, chơi thử,
-                         đàn bầu ảo, ghi lại phần chơi, (3) năm âm và bảy âm
-js/history.js            Logic trang Lịch sử
-js/glossary.js           Logic trang Thuật ngữ
-images/                  Hình SVG vẽ mới (nhạc cụ, loại hình, lịch sử, hoa văn); images/loai-hinh/anh/ và
-                         images/lich-su/anh/ là ảnh thật (nguồn ghi dưới mỗi ảnh)
-fonts/                   Be Vietnam Pro, Alegreya (giấy phép OFL)
-vendor/bootstrap/        bootstrap.min.css, bootstrap.bundle.min.js
-```
+## Pages
 
-## Thêm bản thu âm thật cho nhạc cụ (không bắt buộc)
-Hiện chưa có bản thu nào: mọi âm nhạc cụ là âm tổng hợp bằng Web Audio và trang ghi rõ là âm mô phỏng.
-Muốn dùng bản thu thật (có giấy phép), tạo thư mục `audio/` cạnh HomePage.html rồi thả file MP3 đúng tên
-(5–20 giây, dưới 1 MB), trang tự dùng mà không cần sửa code:
-dan-bau.mp3, dan-tranh.mp3, dan-nguyet.mp3, dan-nhi.mp3, ty-ba.mp3, sao-truc.mp3, khen.mp3, ken-bau.mp3,
-trong.mp3, phach.mp3, dan-trung.mp3, cong-chieng.mp3.
+| Page | What's inside |
+|---|---|
+| **Home** | The three regions of Vietnam, a dan bau you can touch to hear, videos, and one featured instrument to listen to |
+| **Genres** | A map of 16 music genres you can filter by region and by group (UNESCO heritage or other), with real photos and videos |
+| **Instruments** | 12 instruments with search, details and a play-it-yourself mode, plus a virtual dan bau, recording, and the five-note and seven-note scales |
+| **History** | 8 historical periods with dated events and sources |
+| **Glossary** | 23 terms in 4 groups, with search and sound examples |
 
-## Vẽ lại hình
-Các hình SVG được sinh bởi script trong `../scripts/` (`draw-instruments.cjs`, `draw-genres.cjs`, `draw-history.cjs`,
-`draw-background.cjs`). Sửa script rồi chạy `node scripts/<tên>.cjs` từ thư mục gốc repo.
+## How to use it
 
-## Nội dung cần kiểm chứng
-Tìm chuỗi `[CẦN KIỂM CHỨNG]` trong `js/core.js`. Trên trang, các chỗ này được tô vàng.
-Khi đã tra xong, xóa đánh dấu hoặc đặt `showVerifyMarks: false`.
+- **Change language:** press **VI** or **EN** in the top right corner.
+- **Search:** type with or without Vietnamese accents. Both find the same results.
+- **Listen:** press a ▶ button. A player bar appears at the bottom of the screen. Press **Stop** or the **Esc** key to stop the sound.
+- **Virtual dan bau** (Instruments page, choose Dan bau):
+  - Choose a sound by clicking a point on the string or one of the buttons below it. Near the rod you get the open string; the marked nodes give harmonics.
+  - Drag the **Rod** slider to make the note glide up and down. The arrow keys work too. Double-click the slider to move it back to the middle.
+- **Record what you play** (Instruments page): press **Record**, play for up to 60 seconds, then press **Stop recording**.
+  You can then press **Play back**, **Save on this device** (keeps up to 5 of your latest recordings) or **Make a share link** to send it to someone else.
+  The page only records your key presses. It does not use the microphone.
+
+## Good to know
+
+- **The instrument sounds are simulated** by the computer. They come close, but they are not recordings of the real instruments.
+  To hear musicians perform, watch the videos on the Genres page.
+- **The videos** are official YouTube videos from UNESCO, theatres and state media, so they **need an Internet connection**.
+  When you open the site by double-clicking the file, videos open in a new tab. Once the site is online, they play right on the page.
+- **No sound?** Check your speakers and volume, then press ▶ again. Browsers only allow sound after you click something on the page.

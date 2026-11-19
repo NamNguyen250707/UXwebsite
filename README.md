@@ -32,7 +32,7 @@ HTML5, CSS, JavaScript thuần và Bootstrap 5.3.3. Không framework, không bui
 - Ảnh chụp trang Loại hình: Wikimedia Commons (CC0, CC BY, CC BY-SA hoặc phạm vi công cộng), ghi tác giả và giấy phép dưới mỗi ảnh.
 - Âm thanh nhạc cụ: âm mô phỏng tạo bằng Web Audio, trang có ghi rõ.
 - Bản đồ: Natural Earth (public domain).
-- Font Be Vietnam Pro và Alegreya: SIL Open Font License (kèm trong `Website-AmSacViet/fonts/`).
+- Font Be Vietnam Pro và Alegreya: SIL Open Font License (kèm trong `Website-AmSacViet/assets/`).
 - Bootstrap: giấy phép MIT.
 
 ## Kiểm tra tự động (tùy chọn)

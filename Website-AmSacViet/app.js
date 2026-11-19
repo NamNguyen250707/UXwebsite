@@ -1,22 +1,20 @@
-/* core.js: phần code dùng chung cho mọi trang của Âm Sắc Việt.
-   Gồm 4 phần, theo đúng thứ tự phải chạy (phần sau dùng biến của phần trước):
-     PHẦN 1  Bản dịch VI/EN và hàm đổi ngôn ngữ ....... I18n, ASV_TRANSLATIONS
-     PHẦN 2  Dữ liệu nhạc cụ, loại hình, lịch sử ...... ASV_DATA
-     PHẦN 3  Đường biên Việt Nam cho bản đồ ............ ASV_MAP
-     PHẦN 4  Menu, chân trang, âm thanh, tiện ích ...... ASV
-   Mỗi trang nạp file này, rồi nạp file riêng của trang (home.js, genres.js…).
-   Muốn tìm nhanh một phần: tìm chữ "PHẦN 1", "PHẦN 2"… */
+/* app.js: toàn bộ JavaScript của Âm Sắc Việt.
+   Thứ tự: Bootstrap 5.3.3, phần chung (core), rồi phần riêng từng trang.
+   Phần riêng chỉ chạy khi <body data-page="..."> đúng tên trang. */
+
+/* ===== BOOTSTRAP 5.3.3 ===== */
+/*!
+  * Bootstrap v5.3.3 (https://getbootstrap.com/)
+  * Copyright 2011-2024 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,i,n){t.has(e)||t.set(e,new Map);const s=t.get(e);s.has(i)||0===s.size?s.set(i,n):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(s.keys())[0]}.`)},get:(e,i)=>t.has(e)&&t.get(e).get(i)||null,remove(e,i){if(!t.has(e))return;const n=t.get(e);n.delete(i),0===n.size&&t.delete(e)}},i="transitionend",n=t=>(t&&window.CSS&&window.CSS.escape&&(t=t.replace(/#([^\s"#']+)/g,((t,e)=>`#${CSS.escape(e)}`))),t),s=t=>{t.dispatchEvent(new Event(i))},o=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),r=t=>o(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(n(t)):null,a=t=>{if(!o(t)||0===t.getClientRects().length)return!1;const e="visible"===getComputedStyle(t).getPropertyValue("visibility"),i=t.closest("details:not([open])");if(!i)return e;if(i!==t){const e=t.closest("summary");if(e&&e.parentNode!==i)return!1;if(null===e)return!1}return e},l=t=>!t||t.nodeType!==Node.ELEMENT_NODE||!!t.classList.contains("disabled")||(void 0!==t.disabled?t.disabled:t.hasAttribute("disabled")&&"false"!==t.getAttribute("disabled")),c=t=>{if(!document.documentElement.attachShadow)return null;if("function"==typeof t.getRootNode){const e=t.getRootNode();return e instanceof ShadowRoot?e:null}return t instanceof ShadowRoot?t:t.parentNode?c(t.parentNode):null},h=()=>{},d=t=>{t.offsetHeight},u=()=>window.jQuery&&!document.body.hasAttribute("data-bs-no-jquery")?window.jQuery:null,f=[],p=()=>"rtl"===document.documentElement.dir,m=t=>{var e;e=()=>{const e=u();if(e){const i=t.NAME,n=e.fn[i];e.fn[i]=t.jQueryInterface,e.fn[i].Constructor=t,e.fn[i].noConflict=()=>(e.fn[i]=n,t.jQueryInterface)}},"loading"===document.readyState?(f.length||document.addEventListener("DOMContentLoaded",(()=>{for(const t of f)t()})),f.push(e)):e()},g=(t,e=[],i=t)=>"function"==typeof t?t(...e):i,_=(t,e,n=!0)=>{if(!n)return void g(t);const o=(t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:i}=window.getComputedStyle(t);const n=Number.parseFloat(e),s=Number.parseFloat(i);return n||s?(e=e.split(",")[0],i=i.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(i))):0})(e)+5;let r=!1;const a=({target:n})=>{n===e&&(r=!0,e.removeEventListener(i,a),g(t))};e.addEventListener(i,a),setTimeout((()=>{r||s(e)}),o)},b=(t,e,i,n)=>{const s=t.length;let o=t.indexOf(e);return-1===o?!i&&n?t[s-1]:t[0]:(o+=i?1:-1,n&&(o=(o+s)%s),t[Math.max(0,Math.min(o,s-1))])},v=/[^.]*(?=\..*)\.|.*/,y=/\..*/,w=/::\d+$/,A={};let E=1;const T={mouseenter:"mouseover",mouseleave:"mouseout"},C=new Set(["click","dblclick","mouseup","mousedown","contextmenu","mousewheel","DOMMouseScroll","mouseover","mouseout","mousemove","selectstart","selectend","keydown","keypress","keyup","orientationchange","touchstart","touchmove","touchend","touchcancel","pointerdown","pointermove","pointerup","pointerleave","pointercancel","gesturestart","gesturechange","gestureend","focus","blur","change","reset","select","submit","focusin","focusout","load","unload","beforeunload","resize","move","DOMContentLoaded","readystatechange","error","abort","scroll"]);function O(t,e){return e&&`${e}::${E++}`||t.uidEvent||E++}function x(t){const e=O(t);return t.uidEvent=e,A[e]=A[e]||{},A[e]}function k(t,e,i=null){return Object.values(t).find((t=>t.callable===e&&t.delegationSelector===i))}function L(t,e,i){const n="string"==typeof e,s=n?i:e||i;let o=I(t);return C.has(o)||(o=t),[n,s,o]}function S(t,e,i,n,s){if("string"!=typeof e||!t)return;let[o,r,a]=L(e,i,n);if(e in T){const t=t=>function(e){if(!e.relatedTarget||e.relatedTarget!==e.delegateTarget&&!e.delegateTarget.contains(e.relatedTarget))return t.call(this,e)};r=t(r)}const l=x(t),c=l[a]||(l[a]={}),h=k(c,r,o?i:null);if(h)return void(h.oneOff=h.oneOff&&s);const d=O(r,e.replace(v,"")),u=o?function(t,e,i){return function n(s){const o=t.querySelectorAll(e);for(let{target:r}=s;r&&r!==this;r=r.parentNode)for(const a of o)if(a===r)return P(s,{delegateTarget:r}),n.oneOff&&N.off(t,s.type,e,i),i.apply(r,[s])}}(t,i,r):function(t,e){return function i(n){return P(n,{delegateTarget:t}),i.oneOff&&N.off(t,n.type,e),e.apply(t,[n])}}(t,r);u.delegationSelector=o?i:null,u.callable=r,u.oneOff=s,u.uidEvent=d,c[d]=u,t.addEventListener(a,u,o)}function D(t,e,i,n,s){const o=k(e[i],n,s);o&&(t.removeEventListener(i,o,Boolean(s)),delete e[i][o.uidEvent])}function $(t,e,i,n){const s=e[i]||{};for(const[o,r]of Object.entries(s))o.includes(n)&&D(t,e,i,r.callable,r.delegationSelector)}function I(t){return t=t.replace(y,""),T[t]||t}const N={on(t,e,i,n){S(t,e,i,n,!1)},one(t,e,i,n){S(t,e,i,n,!0)},off(t,e,i,n){if("string"!=typeof e||!t)return;const[s,o,r]=L(e,i,n),a=r!==e,l=x(t),c=l[r]||{},h=e.startsWith(".");if(void 0===o){if(h)for(const i of Object.keys(l))$(t,l,i,e.slice(1));for(const[i,n]of Object.entries(c)){const s=i.replace(w,"");a&&!e.includes(s)||D(t,l,r,n.callable,n.delegationSelector)}}else{if(!Object.keys(c).length)return;D(t,l,r,o,s?i:null)}},trigger(t,e,i){if("string"!=typeof e||!t)return null;const n=u();let s=null,o=!0,r=!0,a=!1;e!==I(e)&&n&&(s=n.Event(e,i),n(t).trigger(s),o=!s.isPropagationStopped(),r=!s.isImmediatePropagationStopped(),a=s.isDefaultPrevented());const l=P(new Event(e,{bubbles:o,cancelable:!0}),i);return a&&l.preventDefault(),r&&t.dispatchEvent(l),l.defaultPrevented&&s&&s.preventDefault(),l}};function P(t,e={}){for(const[i,n]of Object.entries(e))try{t[i]=n}catch(e){Object.defineProperty(t,i,{configurable:!0,get:()=>n})}return t}function j(t){if("true"===t)return!0;if("false"===t)return!1;if(t===Number(t).toString())return Number(t);if(""===t||"null"===t)return null;if("string"!=typeof t)return t;try{return JSON.parse(decodeURIComponent(t))}catch(e){return t}}function M(t){return t.replace(/[A-Z]/g,(t=>`-${t.toLowerCase()}`))}const F={setDataAttribute(t,e,i){t.setAttribute(`data-bs-${M(e)}`,i)},removeDataAttribute(t,e){t.removeAttribute(`data-bs-${M(e)}`)},getDataAttributes(t){if(!t)return{};const e={},i=Object.keys(t.dataset).filter((t=>t.startsWith("bs")&&!t.startsWith("bsConfig")));for(const n of i){let i=n.replace(/^bs/,"");i=i.charAt(0).toLowerCase()+i.slice(1,i.length),e[i]=j(t.dataset[n])}return e},getDataAttribute:(t,e)=>j(t.getAttribute(`data-bs-${M(e)}`))};class H{static get Default(){return{}}static get DefaultType(){return{}}static get NAME(){throw new Error('You have to implement the static method "NAME", for each component!')}_getConfig(t){return t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t}_mergeConfigObj(t,e){const i=o(e)?F.getDataAttribute(e,"config"):{};return{...this.constructor.Default,..."object"==typeof i?i:{},...o(e)?F.getDataAttributes(e):{},..."object"==typeof t?t:{}}}_typeCheckConfig(t,e=this.constructor.DefaultType){for(const[n,s]of Object.entries(e)){const e=t[n],r=o(e)?"element":null==(i=e)?`${i}`:Object.prototype.toString.call(i).match(/\s([a-z]+)/i)[1].toLowerCase();if(!new RegExp(s).test(r))throw new TypeError(`${this.constructor.NAME.toUpperCase()}: Option "${n}" provided type "${r}" but expected type "${s}".`)}var i}}class W extends H{constructor(t,i){super(),(t=r(t))&&(this._element=t,this._config=this._getConfig(i),e.set(this._element,this.constructor.DATA_KEY,this))}dispose(){e.remove(this._element,this.constructor.DATA_KEY),N.off(this._element,this.constructor.EVENT_KEY);for(const t of Object.getOwnPropertyNames(this))this[t]=null}_queueCallback(t,e,i=!0){_(t,e,i)}_getConfig(t){return t=this._mergeConfigObj(t,this._element),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}static getInstance(t){return e.get(r(t),this.DATA_KEY)}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,"object"==typeof e?e:null)}static get VERSION(){return"5.3.3"}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}static eventName(t){return`${t}${this.EVENT_KEY}`}}const B=t=>{let e=t.getAttribute("data-bs-target");if(!e||"#"===e){let i=t.getAttribute("href");if(!i||!i.includes("#")&&!i.startsWith("."))return null;i.includes("#")&&!i.startsWith("#")&&(i=`#${i.split("#")[1]}`),e=i&&"#"!==i?i.trim():null}return e?e.split(",").map((t=>n(t))).join(","):null},z={find:(t,e=document.documentElement)=>[].concat(...Element.prototype.querySelectorAll.call(e,t)),findOne:(t,e=document.documentElement)=>Element.prototype.querySelector.call(e,t),children:(t,e)=>[].concat(...t.children).filter((t=>t.matches(e))),parents(t,e){const i=[];let n=t.parentNode.closest(e);for(;n;)i.push(n),n=n.parentNode.closest(e);return i},prev(t,e){let i=t.previousElementSibling;for(;i;){if(i.matches(e))return[i];i=i.previousElementSibling}return[]},next(t,e){let i=t.nextElementSibling;for(;i;){if(i.matches(e))return[i];i=i.nextElementSibling}return[]},focusableChildren(t){const e=["a","button","input","textarea","select","details","[tabindex]",'[contenteditable="true"]'].map((t=>`${t}:not([tabindex^="-"])`)).join(",");return this.find(e,t).filter((t=>!l(t)&&a(t)))},getSelectorFromElement(t){const e=B(t);return e&&z.findOne(e)?e:null},getElementFromSelector(t){const e=B(t);return e?z.findOne(e):null},getMultipleElementsFromSelector(t){const e=B(t);return e?z.find(e):[]}},R=(t,e="hide")=>{const i=`click.dismiss${t.EVENT_KEY}`,n=t.NAME;N.on(document,i,`[data-bs-dismiss="${n}"]`,(function(i){if(["A","AREA"].includes(this.tagName)&&i.preventDefault(),l(this))return;const s=z.getElementFromSelector(this)||this.closest(`.${n}`);t.getOrCreateInstance(s)[e]()}))},q=".bs.alert",V=`close${q}`,K=`closed${q}`;class Q extends W{static get NAME(){return"alert"}close(){if(N.trigger(this._element,V).defaultPrevented)return;this._element.classList.remove("show");const t=this._element.classList.contains("fade");this._queueCallback((()=>this._destroyElement()),this._element,t)}_destroyElement(){this._element.remove(),N.trigger(this._element,K),this.dispose()}static jQueryInterface(t){return this.each((function(){const e=Q.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}R(Q,"close"),m(Q);const X='[data-bs-toggle="button"]';class Y extends W{static get NAME(){return"button"}toggle(){this._element.setAttribute("aria-pressed",this._element.classList.toggle("active"))}static jQueryInterface(t){return this.each((function(){const e=Y.getOrCreateInstance(this);"toggle"===t&&e[t]()}))}}N.on(document,"click.bs.button.data-api",X,(t=>{t.preventDefault();const e=t.target.closest(X);Y.getOrCreateInstance(e).toggle()})),m(Y);const U=".bs.swipe",G=`touchstart${U}`,J=`touchmove${U}`,Z=`touchend${U}`,tt=`pointerdown${U}`,et=`pointerup${U}`,it={endCallback:null,leftCallback:null,rightCallback:null},nt={endCallback:"(function|null)",leftCallback:"(function|null)",rightCallback:"(function|null)"};class st extends H{constructor(t,e){super(),this._element=t,t&&st.isSupported()&&(this._config=this._getConfig(e),this._deltaX=0,this._supportPointerEvents=Boolean(window.PointerEvent),this._initEvents())}static get Default(){return it}static get DefaultType(){return nt}static get NAME(){return"swipe"}dispose(){N.off(this._element,U)}_start(t){this._supportPointerEvents?this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX):this._deltaX=t.touches[0].clientX}_end(t){this._eventIsPointerPenTouch(t)&&(this._deltaX=t.clientX-this._deltaX),this._handleSwipe(),g(this._config.endCallback)}_move(t){this._deltaX=t.touches&&t.touches.length>1?0:t.touches[0].clientX-this._deltaX}_handleSwipe(){const t=Math.abs(this._deltaX);if(t<=40)return;const e=t/this._deltaX;this._deltaX=0,e&&g(e>0?this._config.rightCallback:this._config.leftCallback)}_initEvents(){this._supportPointerEvents?(N.on(this._element,tt,(t=>this._start(t))),N.on(this._element,et,(t=>this._end(t))),this._element.classList.add("pointer-event")):(N.on(this._element,G,(t=>this._start(t))),N.on(this._element,J,(t=>this._move(t))),N.on(this._element,Z,(t=>this._end(t))))}_eventIsPointerPenTouch(t){return this._supportPointerEvents&&("pen"===t.pointerType||"touch"===t.pointerType)}static isSupported(){return"ontouchstart"in document.documentElement||navigator.maxTouchPoints>0}}const ot=".bs.carousel",rt=".data-api",at="next",lt="prev",ct="left",ht="right",dt=`slide${ot}`,ut=`slid${ot}`,ft=`keydown${ot}`,pt=`mouseenter${ot}`,mt=`mouseleave${ot}`,gt=`dragstart${ot}`,_t=`load${ot}${rt}`,bt=`click${ot}${rt}`,vt="carousel",yt="active",wt=".active",At=".carousel-item",Et=wt+At,Tt={ArrowLeft:ht,ArrowRight:ct},Ct={interval:5e3,keyboard:!0,pause:"hover",ride:!1,touch:!0,wrap:!0},Ot={interval:"(number|boolean)",keyboard:"boolean",pause:"(string|boolean)",ride:"(boolean|string)",touch:"boolean",wrap:"boolean"};class xt extends W{constructor(t,e){super(t,e),this._interval=null,this._activeElement=null,this._isSliding=!1,this.touchTimeout=null,this._swipeHelper=null,this._indicatorsElement=z.findOne(".carousel-indicators",this._element),this._addEventListeners(),this._config.ride===vt&&this.cycle()}static get Default(){return Ct}static get DefaultType(){return Ot}static get NAME(){return"carousel"}next(){this._slide(at)}nextWhenVisible(){!document.hidden&&a(this._element)&&this.next()}prev(){this._slide(lt)}pause(){this._isSliding&&s(this._element),this._clearInterval()}cycle(){this._clearInterval(),this._updateInterval(),this._interval=setInterval((()=>this.nextWhenVisible()),this._config.interval)}_maybeEnableCycle(){this._config.ride&&(this._isSliding?N.one(this._element,ut,(()=>this.cycle())):this.cycle())}to(t){const e=this._getItems();if(t>e.length-1||t<0)return;if(this._isSliding)return void N.one(this._element,ut,(()=>this.to(t)));const i=this._getItemIndex(this._getActive());if(i===t)return;const n=t>i?at:lt;this._slide(n,e[t])}dispose(){this._swipeHelper&&this._swipeHelper.dispose(),super.dispose()}_configAfterMerge(t){return t.defaultInterval=t.interval,t}_addEventListeners(){this._config.keyboard&&N.on(this._element,ft,(t=>this._keydown(t))),"hover"===this._config.pause&&(N.on(this._element,pt,(()=>this.pause())),N.on(this._element,mt,(()=>this._maybeEnableCycle()))),this._config.touch&&st.isSupported()&&this._addTouchEventListeners()}_addTouchEventListeners(){for(const t of z.find(".carousel-item img",this._element))N.on(t,gt,(t=>t.preventDefault()));const t={leftCallback:()=>this._slide(this._directionToOrder(ct)),rightCallback:()=>this._slide(this._directionToOrder(ht)),endCallback:()=>{"hover"===this._config.pause&&(this.pause(),this.touchTimeout&&clearTimeout(this.touchTimeout),this.touchTimeout=setTimeout((()=>this._maybeEnableCycle()),500+this._config.interval))}};this._swipeHelper=new st(this._element,t)}_keydown(t){if(/input|textarea/i.test(t.target.tagName))return;const e=Tt[t.key];e&&(t.preventDefault(),this._slide(this._directionToOrder(e)))}_getItemIndex(t){return this._getItems().indexOf(t)}_setActiveIndicatorElement(t){if(!this._indicatorsElement)return;const e=z.findOne(wt,this._indicatorsElement);e.classList.remove(yt),e.removeAttribute("aria-current");const i=z.findOne(`[data-bs-slide-to="${t}"]`,this._indicatorsElement);i&&(i.classList.add(yt),i.setAttribute("aria-current","true"))}_updateInterval(){const t=this._activeElement||this._getActive();if(!t)return;const e=Number.parseInt(t.getAttribute("data-bs-interval"),10);this._config.interval=e||this._config.defaultInterval}_slide(t,e=null){if(this._isSliding)return;const i=this._getActive(),n=t===at,s=e||b(this._getItems(),i,n,this._config.wrap);if(s===i)return;const o=this._getItemIndex(s),r=e=>N.trigger(this._element,e,{relatedTarget:s,direction:this._orderToDirection(t),from:this._getItemIndex(i),to:o});if(r(dt).defaultPrevented)return;if(!i||!s)return;const a=Boolean(this._interval);this.pause(),this._isSliding=!0,this._setActiveIndicatorElement(o),this._activeElement=s;const l=n?"carousel-item-start":"carousel-item-end",c=n?"carousel-item-next":"carousel-item-prev";s.classList.add(c),d(s),i.classList.add(l),s.classList.add(l),this._queueCallback((()=>{s.classList.remove(l,c),s.classList.add(yt),i.classList.remove(yt,c,l),this._isSliding=!1,r(ut)}),i,this._isAnimated()),a&&this.cycle()}_isAnimated(){return this._element.classList.contains("slide")}_getActive(){return z.findOne(Et,this._element)}_getItems(){return z.find(At,this._element)}_clearInterval(){this._interval&&(clearInterval(this._interval),this._interval=null)}_directionToOrder(t){return p()?t===ct?lt:at:t===ct?at:lt}_orderToDirection(t){return p()?t===lt?ct:ht:t===lt?ht:ct}static jQueryInterface(t){return this.each((function(){const e=xt.getOrCreateInstance(this,t);if("number"!=typeof t){if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}else e.to(t)}))}}N.on(document,bt,"[data-bs-slide], [data-bs-slide-to]",(function(t){const e=z.getElementFromSelector(this);if(!e||!e.classList.contains(vt))return;t.preventDefault();const i=xt.getOrCreateInstance(e),n=this.getAttribute("data-bs-slide-to");return n?(i.to(n),void i._maybeEnableCycle()):"next"===F.getDataAttribute(this,"slide")?(i.next(),void i._maybeEnableCycle()):(i.prev(),void i._maybeEnableCycle())})),N.on(window,_t,(()=>{const t=z.find('[data-bs-ride="carousel"]');for(const e of t)xt.getOrCreateInstance(e)})),m(xt);const kt=".bs.collapse",Lt=`show${kt}`,St=`shown${kt}`,Dt=`hide${kt}`,$t=`hidden${kt}`,It=`click${kt}.data-api`,Nt="show",Pt="collapse",jt="collapsing",Mt=`:scope .${Pt} .${Pt}`,Ft='[data-bs-toggle="collapse"]',Ht={parent:null,toggle:!0},Wt={parent:"(null|element)",toggle:"boolean"};class Bt extends W{constructor(t,e){super(t,e),this._isTransitioning=!1,this._triggerArray=[];const i=z.find(Ft);for(const t of i){const e=z.getSelectorFromElement(t),i=z.find(e).filter((t=>t===this._element));null!==e&&i.length&&this._triggerArray.push(t)}this._initializeChildren(),this._config.parent||this._addAriaAndCollapsedClass(this._triggerArray,this._isShown()),this._config.toggle&&this.toggle()}static get Default(){return Ht}static get DefaultType(){return Wt}static get NAME(){return"collapse"}toggle(){this._isShown()?this.hide():this.show()}show(){if(this._isTransitioning||this._isShown())return;let t=[];if(this._config.parent&&(t=this._getFirstLevelChildren(".collapse.show, .collapse.collapsing").filter((t=>t!==this._element)).map((t=>Bt.getOrCreateInstance(t,{toggle:!1})))),t.length&&t[0]._isTransitioning)return;if(N.trigger(this._element,Lt).defaultPrevented)return;for(const e of t)e.hide();const e=this._getDimension();this._element.classList.remove(Pt),this._element.classList.add(jt),this._element.style[e]=0,this._addAriaAndCollapsedClass(this._triggerArray,!0),this._isTransitioning=!0;const i=`scroll${e[0].toUpperCase()+e.slice(1)}`;this._queueCallback((()=>{this._isTransitioning=!1,this._element.classList.remove(jt),this._element.classList.add(Pt,Nt),this._element.style[e]="",N.trigger(this._element,St)}),this._element,!0),this._element.style[e]=`${this._element[i]}px`}hide(){if(this._isTransitioning||!this._isShown())return;if(N.trigger(this._element,Dt).defaultPrevented)return;const t=this._getDimension();this._element.style[t]=`${this._element.getBoundingClientRect()[t]}px`,d(this._element),this._element.classList.add(jt),this._element.classList.remove(Pt,Nt);for(const t of this._triggerArray){const e=z.getElementFromSelector(t);e&&!this._isShown(e)&&this._addAriaAndCollapsedClass([t],!1)}this._isTransitioning=!0,this._element.style[t]="",this._queueCallback((()=>{this._isTransitioning=!1,this._element.classList.remove(jt),this._element.classList.add(Pt),N.trigger(this._element,$t)}),this._element,!0)}_isShown(t=this._element){return t.classList.contains(Nt)}_configAfterMerge(t){return t.toggle=Boolean(t.toggle),t.parent=r(t.parent),t}_getDimension(){return this._element.classList.contains("collapse-horizontal")?"width":"height"}_initializeChildren(){if(!this._config.parent)return;const t=this._getFirstLevelChildren(Ft);for(const e of t){const t=z.getElementFromSelector(e);t&&this._addAriaAndCollapsedClass([e],this._isShown(t))}}_getFirstLevelChildren(t){const e=z.find(Mt,this._config.parent);return z.find(t,this._config.parent).filter((t=>!e.includes(t)))}_addAriaAndCollapsedClass(t,e){if(t.length)for(const i of t)i.classList.toggle("collapsed",!e),i.setAttribute("aria-expanded",e)}static jQueryInterface(t){const e={};return"string"==typeof t&&/show|hide/.test(t)&&(e.toggle=!1),this.each((function(){const i=Bt.getOrCreateInstance(this,e);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t]()}}))}}N.on(document,It,Ft,(function(t){("A"===t.target.tagName||t.delegateTarget&&"A"===t.delegateTarget.tagName)&&t.preventDefault();for(const t of z.getMultipleElementsFromSelector(this))Bt.getOrCreateInstance(t,{toggle:!1}).toggle()})),m(Bt);var zt="top",Rt="bottom",qt="right",Vt="left",Kt="auto",Qt=[zt,Rt,qt,Vt],Xt="start",Yt="end",Ut="clippingParents",Gt="viewport",Jt="popper",Zt="reference",te=Qt.reduce((function(t,e){return t.concat([e+"-"+Xt,e+"-"+Yt])}),[]),ee=[].concat(Qt,[Kt]).reduce((function(t,e){return t.concat([e,e+"-"+Xt,e+"-"+Yt])}),[]),ie="beforeRead",ne="read",se="afterRead",oe="beforeMain",re="main",ae="afterMain",le="beforeWrite",ce="write",he="afterWrite",de=[ie,ne,se,oe,re,ae,le,ce,he];function ue(t){return t?(t.nodeName||"").toLowerCase():null}function fe(t){if(null==t)return window;if("[object Window]"!==t.toString()){var e=t.ownerDocument;return e&&e.defaultView||window}return t}function pe(t){return t instanceof fe(t).Element||t instanceof Element}function me(t){return t instanceof fe(t).HTMLElement||t instanceof HTMLElement}function ge(t){return"undefined"!=typeof ShadowRoot&&(t instanceof fe(t).ShadowRoot||t instanceof ShadowRoot)}const _e={name:"applyStyles",enabled:!0,phase:"write",fn:function(t){var e=t.state;Object.keys(e.elements).forEach((function(t){var i=e.styles[t]||{},n=e.attributes[t]||{},s=e.elements[t];me(s)&&ue(s)&&(Object.assign(s.style,i),Object.keys(n).forEach((function(t){var e=n[t];!1===e?s.removeAttribute(t):s.setAttribute(t,!0===e?"":e)})))}))},effect:function(t){var e=t.state,i={popper:{position:e.options.strategy,left:"0",top:"0",margin:"0"},arrow:{position:"absolute"},reference:{}};return Object.assign(e.elements.popper.style,i.popper),e.styles=i,e.elements.arrow&&Object.assign(e.elements.arrow.style,i.arrow),function(){Object.keys(e.elements).forEach((function(t){var n=e.elements[t],s=e.attributes[t]||{},o=Object.keys(e.styles.hasOwnProperty(t)?e.styles[t]:i[t]).reduce((function(t,e){return t[e]="",t}),{});me(n)&&ue(n)&&(Object.assign(n.style,o),Object.keys(s).forEach((function(t){n.removeAttribute(t)})))}))}},requires:["computeStyles"]};function be(t){return t.split("-")[0]}var ve=Math.max,ye=Math.min,we=Math.round;function Ae(){var t=navigator.userAgentData;return null!=t&&t.brands&&Array.isArray(t.brands)?t.brands.map((function(t){return t.brand+"/"+t.version})).join(" "):navigator.userAgent}function Ee(){return!/^((?!chrome|android).)*safari/i.test(Ae())}function Te(t,e,i){void 0===e&&(e=!1),void 0===i&&(i=!1);var n=t.getBoundingClientRect(),s=1,o=1;e&&me(t)&&(s=t.offsetWidth>0&&we(n.width)/t.offsetWidth||1,o=t.offsetHeight>0&&we(n.height)/t.offsetHeight||1);var r=(pe(t)?fe(t):window).visualViewport,a=!Ee()&&i,l=(n.left+(a&&r?r.offsetLeft:0))/s,c=(n.top+(a&&r?r.offsetTop:0))/o,h=n.width/s,d=n.height/o;return{width:h,height:d,top:c,right:l+h,bottom:c+d,left:l,x:l,y:c}}function Ce(t){var e=Te(t),i=t.offsetWidth,n=t.offsetHeight;return Math.abs(e.width-i)<=1&&(i=e.width),Math.abs(e.height-n)<=1&&(n=e.height),{x:t.offsetLeft,y:t.offsetTop,width:i,height:n}}function Oe(t,e){var i=e.getRootNode&&e.getRootNode();if(t.contains(e))return!0;if(i&&ge(i)){var n=e;do{if(n&&t.isSameNode(n))return!0;n=n.parentNode||n.host}while(n)}return!1}function xe(t){return fe(t).getComputedStyle(t)}function ke(t){return["table","td","th"].indexOf(ue(t))>=0}function Le(t){return((pe(t)?t.ownerDocument:t.document)||window.document).documentElement}function Se(t){return"html"===ue(t)?t:t.assignedSlot||t.parentNode||(ge(t)?t.host:null)||Le(t)}function De(t){return me(t)&&"fixed"!==xe(t).position?t.offsetParent:null}function $e(t){for(var e=fe(t),i=De(t);i&&ke(i)&&"static"===xe(i).position;)i=De(i);return i&&("html"===ue(i)||"body"===ue(i)&&"static"===xe(i).position)?e:i||function(t){var e=/firefox/i.test(Ae());if(/Trident/i.test(Ae())&&me(t)&&"fixed"===xe(t).position)return null;var i=Se(t);for(ge(i)&&(i=i.host);me(i)&&["html","body"].indexOf(ue(i))<0;){var n=xe(i);if("none"!==n.transform||"none"!==n.perspective||"paint"===n.contain||-1!==["transform","perspective"].indexOf(n.willChange)||e&&"filter"===n.willChange||e&&n.filter&&"none"!==n.filter)return i;i=i.parentNode}return null}(t)||e}function Ie(t){return["top","bottom"].indexOf(t)>=0?"x":"y"}function Ne(t,e,i){return ve(t,ye(e,i))}function Pe(t){return Object.assign({},{top:0,right:0,bottom:0,left:0},t)}function je(t,e){return e.reduce((function(e,i){return e[i]=t,e}),{})}const Me={name:"arrow",enabled:!0,phase:"main",fn:function(t){var e,i=t.state,n=t.name,s=t.options,o=i.elements.arrow,r=i.modifiersData.popperOffsets,a=be(i.placement),l=Ie(a),c=[Vt,qt].indexOf(a)>=0?"height":"width";if(o&&r){var h=function(t,e){return Pe("number"!=typeof(t="function"==typeof t?t(Object.assign({},e.rects,{placement:e.placement})):t)?t:je(t,Qt))}(s.padding,i),d=Ce(o),u="y"===l?zt:Vt,f="y"===l?Rt:qt,p=i.rects.reference[c]+i.rects.reference[l]-r[l]-i.rects.popper[c],m=r[l]-i.rects.reference[l],g=$e(o),_=g?"y"===l?g.clientHeight||0:g.clientWidth||0:0,b=p/2-m/2,v=h[u],y=_-d[c]-h[f],w=_/2-d[c]/2+b,A=Ne(v,w,y),E=l;i.modifiersData[n]=((e={})[E]=A,e.centerOffset=A-w,e)}},effect:function(t){var e=t.state,i=t.options.element,n=void 0===i?"[data-popper-arrow]":i;null!=n&&("string"!=typeof n||(n=e.elements.popper.querySelector(n)))&&Oe(e.elements.popper,n)&&(e.elements.arrow=n)},requires:["popperOffsets"],requiresIfExists:["preventOverflow"]};function Fe(t){return t.split("-")[1]}var He={top:"auto",right:"auto",bottom:"auto",left:"auto"};function We(t){var e,i=t.popper,n=t.popperRect,s=t.placement,o=t.variation,r=t.offsets,a=t.position,l=t.gpuAcceleration,c=t.adaptive,h=t.roundOffsets,d=t.isFixed,u=r.x,f=void 0===u?0:u,p=r.y,m=void 0===p?0:p,g="function"==typeof h?h({x:f,y:m}):{x:f,y:m};f=g.x,m=g.y;var _=r.hasOwnProperty("x"),b=r.hasOwnProperty("y"),v=Vt,y=zt,w=window;if(c){var A=$e(i),E="clientHeight",T="clientWidth";A===fe(i)&&"static"!==xe(A=Le(i)).position&&"absolute"===a&&(E="scrollHeight",T="scrollWidth"),(s===zt||(s===Vt||s===qt)&&o===Yt)&&(y=Rt,m-=(d&&A===w&&w.visualViewport?w.visualViewport.height:A[E])-n.height,m*=l?1:-1),s!==Vt&&(s!==zt&&s!==Rt||o!==Yt)||(v=qt,f-=(d&&A===w&&w.visualViewport?w.visualViewport.width:A[T])-n.width,f*=l?1:-1)}var C,O=Object.assign({position:a},c&&He),x=!0===h?function(t,e){var i=t.x,n=t.y,s=e.devicePixelRatio||1;return{x:we(i*s)/s||0,y:we(n*s)/s||0}}({x:f,y:m},fe(i)):{x:f,y:m};return f=x.x,m=x.y,l?Object.assign({},O,((C={})[y]=b?"0":"",C[v]=_?"0":"",C.transform=(w.devicePixelRatio||1)<=1?"translate("+f+"px, "+m+"px)":"translate3d("+f+"px, "+m+"px, 0)",C)):Object.assign({},O,((e={})[y]=b?m+"px":"",e[v]=_?f+"px":"",e.transform="",e))}const Be={name:"computeStyles",enabled:!0,phase:"beforeWrite",fn:function(t){var e=t.state,i=t.options,n=i.gpuAcceleration,s=void 0===n||n,o=i.adaptive,r=void 0===o||o,a=i.roundOffsets,l=void 0===a||a,c={placement:be(e.placement),variation:Fe(e.placement),popper:e.elements.popper,popperRect:e.rects.popper,gpuAcceleration:s,isFixed:"fixed"===e.options.strategy};null!=e.modifiersData.popperOffsets&&(e.styles.popper=Object.assign({},e.styles.popper,We(Object.assign({},c,{offsets:e.modifiersData.popperOffsets,position:e.options.strategy,adaptive:r,roundOffsets:l})))),null!=e.modifiersData.arrow&&(e.styles.arrow=Object.assign({},e.styles.arrow,We(Object.assign({},c,{offsets:e.modifiersData.arrow,position:"absolute",adaptive:!1,roundOffsets:l})))),e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-placement":e.placement})},data:{}};var ze={passive:!0};const Re={name:"eventListeners",enabled:!0,phase:"write",fn:function(){},effect:function(t){var e=t.state,i=t.instance,n=t.options,s=n.scroll,o=void 0===s||s,r=n.resize,a=void 0===r||r,l=fe(e.elements.popper),c=[].concat(e.scrollParents.reference,e.scrollParents.popper);return o&&c.forEach((function(t){t.addEventListener("scroll",i.update,ze)})),a&&l.addEventListener("resize",i.update,ze),function(){o&&c.forEach((function(t){t.removeEventListener("scroll",i.update,ze)})),a&&l.removeEventListener("resize",i.update,ze)}},data:{}};var qe={left:"right",right:"left",bottom:"top",top:"bottom"};function Ve(t){return t.replace(/left|right|bottom|top/g,(function(t){return qe[t]}))}var Ke={start:"end",end:"start"};function Qe(t){return t.replace(/start|end/g,(function(t){return Ke[t]}))}function Xe(t){var e=fe(t);return{scrollLeft:e.pageXOffset,scrollTop:e.pageYOffset}}function Ye(t){return Te(Le(t)).left+Xe(t).scrollLeft}function Ue(t){var e=xe(t),i=e.overflow,n=e.overflowX,s=e.overflowY;return/auto|scroll|overlay|hidden/.test(i+s+n)}function Ge(t){return["html","body","#document"].indexOf(ue(t))>=0?t.ownerDocument.body:me(t)&&Ue(t)?t:Ge(Se(t))}function Je(t,e){var i;void 0===e&&(e=[]);var n=Ge(t),s=n===(null==(i=t.ownerDocument)?void 0:i.body),o=fe(n),r=s?[o].concat(o.visualViewport||[],Ue(n)?n:[]):n,a=e.concat(r);return s?a:a.concat(Je(Se(r)))}function Ze(t){return Object.assign({},t,{left:t.x,top:t.y,right:t.x+t.width,bottom:t.y+t.height})}function ti(t,e,i){return e===Gt?Ze(function(t,e){var i=fe(t),n=Le(t),s=i.visualViewport,o=n.clientWidth,r=n.clientHeight,a=0,l=0;if(s){o=s.width,r=s.height;var c=Ee();(c||!c&&"fixed"===e)&&(a=s.offsetLeft,l=s.offsetTop)}return{width:o,height:r,x:a+Ye(t),y:l}}(t,i)):pe(e)?function(t,e){var i=Te(t,!1,"fixed"===e);return i.top=i.top+t.clientTop,i.left=i.left+t.clientLeft,i.bottom=i.top+t.clientHeight,i.right=i.left+t.clientWidth,i.width=t.clientWidth,i.height=t.clientHeight,i.x=i.left,i.y=i.top,i}(e,i):Ze(function(t){var e,i=Le(t),n=Xe(t),s=null==(e=t.ownerDocument)?void 0:e.body,o=ve(i.scrollWidth,i.clientWidth,s?s.scrollWidth:0,s?s.clientWidth:0),r=ve(i.scrollHeight,i.clientHeight,s?s.scrollHeight:0,s?s.clientHeight:0),a=-n.scrollLeft+Ye(t),l=-n.scrollTop;return"rtl"===xe(s||i).direction&&(a+=ve(i.clientWidth,s?s.clientWidth:0)-o),{width:o,height:r,x:a,y:l}}(Le(t)))}function ei(t){var e,i=t.reference,n=t.element,s=t.placement,o=s?be(s):null,r=s?Fe(s):null,a=i.x+i.width/2-n.width/2,l=i.y+i.height/2-n.height/2;switch(o){case zt:e={x:a,y:i.y-n.height};break;case Rt:e={x:a,y:i.y+i.height};break;case qt:e={x:i.x+i.width,y:l};break;case Vt:e={x:i.x-n.width,y:l};break;default:e={x:i.x,y:i.y}}var c=o?Ie(o):null;if(null!=c){var h="y"===c?"height":"width";switch(r){case Xt:e[c]=e[c]-(i[h]/2-n[h]/2);break;case Yt:e[c]=e[c]+(i[h]/2-n[h]/2)}}return e}function ii(t,e){void 0===e&&(e={});var i=e,n=i.placement,s=void 0===n?t.placement:n,o=i.strategy,r=void 0===o?t.strategy:o,a=i.boundary,l=void 0===a?Ut:a,c=i.rootBoundary,h=void 0===c?Gt:c,d=i.elementContext,u=void 0===d?Jt:d,f=i.altBoundary,p=void 0!==f&&f,m=i.padding,g=void 0===m?0:m,_=Pe("number"!=typeof g?g:je(g,Qt)),b=u===Jt?Zt:Jt,v=t.rects.popper,y=t.elements[p?b:u],w=function(t,e,i,n){var s="clippingParents"===e?function(t){var e=Je(Se(t)),i=["absolute","fixed"].indexOf(xe(t).position)>=0&&me(t)?$e(t):t;return pe(i)?e.filter((function(t){return pe(t)&&Oe(t,i)&&"body"!==ue(t)})):[]}(t):[].concat(e),o=[].concat(s,[i]),r=o[0],a=o.reduce((function(e,i){var s=ti(t,i,n);return e.top=ve(s.top,e.top),e.right=ye(s.right,e.right),e.bottom=ye(s.bottom,e.bottom),e.left=ve(s.left,e.left),e}),ti(t,r,n));return a.width=a.right-a.left,a.height=a.bottom-a.top,a.x=a.left,a.y=a.top,a}(pe(y)?y:y.contextElement||Le(t.elements.popper),l,h,r),A=Te(t.elements.reference),E=ei({reference:A,element:v,strategy:"absolute",placement:s}),T=Ze(Object.assign({},v,E)),C=u===Jt?T:A,O={top:w.top-C.top+_.top,bottom:C.bottom-w.bottom+_.bottom,left:w.left-C.left+_.left,right:C.right-w.right+_.right},x=t.modifiersData.offset;if(u===Jt&&x){var k=x[s];Object.keys(O).forEach((function(t){var e=[qt,Rt].indexOf(t)>=0?1:-1,i=[zt,Rt].indexOf(t)>=0?"y":"x";O[t]+=k[i]*e}))}return O}function ni(t,e){void 0===e&&(e={});var i=e,n=i.placement,s=i.boundary,o=i.rootBoundary,r=i.padding,a=i.flipVariations,l=i.allowedAutoPlacements,c=void 0===l?ee:l,h=Fe(n),d=h?a?te:te.filter((function(t){return Fe(t)===h})):Qt,u=d.filter((function(t){return c.indexOf(t)>=0}));0===u.length&&(u=d);var f=u.reduce((function(e,i){return e[i]=ii(t,{placement:i,boundary:s,rootBoundary:o,padding:r})[be(i)],e}),{});return Object.keys(f).sort((function(t,e){return f[t]-f[e]}))}const si={name:"flip",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,n=t.name;if(!e.modifiersData[n]._skip){for(var s=i.mainAxis,o=void 0===s||s,r=i.altAxis,a=void 0===r||r,l=i.fallbackPlacements,c=i.padding,h=i.boundary,d=i.rootBoundary,u=i.altBoundary,f=i.flipVariations,p=void 0===f||f,m=i.allowedAutoPlacements,g=e.options.placement,_=be(g),b=l||(_!==g&&p?function(t){if(be(t)===Kt)return[];var e=Ve(t);return[Qe(t),e,Qe(e)]}(g):[Ve(g)]),v=[g].concat(b).reduce((function(t,i){return t.concat(be(i)===Kt?ni(e,{placement:i,boundary:h,rootBoundary:d,padding:c,flipVariations:p,allowedAutoPlacements:m}):i)}),[]),y=e.rects.reference,w=e.rects.popper,A=new Map,E=!0,T=v[0],C=0;C<v.length;C++){var O=v[C],x=be(O),k=Fe(O)===Xt,L=[zt,Rt].indexOf(x)>=0,S=L?"width":"height",D=ii(e,{placement:O,boundary:h,rootBoundary:d,altBoundary:u,padding:c}),$=L?k?qt:Vt:k?Rt:zt;y[S]>w[S]&&($=Ve($));var I=Ve($),N=[];if(o&&N.push(D[x]<=0),a&&N.push(D[$]<=0,D[I]<=0),N.every((function(t){return t}))){T=O,E=!1;break}A.set(O,N)}if(E)for(var P=function(t){var e=v.find((function(e){var i=A.get(e);if(i)return i.slice(0,t).every((function(t){return t}))}));if(e)return T=e,"break"},j=p?3:1;j>0&&"break"!==P(j);j--);e.placement!==T&&(e.modifiersData[n]._skip=!0,e.placement=T,e.reset=!0)}},requiresIfExists:["offset"],data:{_skip:!1}};function oi(t,e,i){return void 0===i&&(i={x:0,y:0}),{top:t.top-e.height-i.y,right:t.right-e.width+i.x,bottom:t.bottom-e.height+i.y,left:t.left-e.width-i.x}}function ri(t){return[zt,qt,Rt,Vt].some((function(e){return t[e]>=0}))}const ai={name:"hide",enabled:!0,phase:"main",requiresIfExists:["preventOverflow"],fn:function(t){var e=t.state,i=t.name,n=e.rects.reference,s=e.rects.popper,o=e.modifiersData.preventOverflow,r=ii(e,{elementContext:"reference"}),a=ii(e,{altBoundary:!0}),l=oi(r,n),c=oi(a,s,o),h=ri(l),d=ri(c);e.modifiersData[i]={referenceClippingOffsets:l,popperEscapeOffsets:c,isReferenceHidden:h,hasPopperEscaped:d},e.attributes.popper=Object.assign({},e.attributes.popper,{"data-popper-reference-hidden":h,"data-popper-escaped":d})}},li={name:"offset",enabled:!0,phase:"main",requires:["popperOffsets"],fn:function(t){var e=t.state,i=t.options,n=t.name,s=i.offset,o=void 0===s?[0,0]:s,r=ee.reduce((function(t,i){return t[i]=function(t,e,i){var n=be(t),s=[Vt,zt].indexOf(n)>=0?-1:1,o="function"==typeof i?i(Object.assign({},e,{placement:t})):i,r=o[0],a=o[1];return r=r||0,a=(a||0)*s,[Vt,qt].indexOf(n)>=0?{x:a,y:r}:{x:r,y:a}}(i,e.rects,o),t}),{}),a=r[e.placement],l=a.x,c=a.y;null!=e.modifiersData.popperOffsets&&(e.modifiersData.popperOffsets.x+=l,e.modifiersData.popperOffsets.y+=c),e.modifiersData[n]=r}},ci={name:"popperOffsets",enabled:!0,phase:"read",fn:function(t){var e=t.state,i=t.name;e.modifiersData[i]=ei({reference:e.rects.reference,element:e.rects.popper,strategy:"absolute",placement:e.placement})},data:{}},hi={name:"preventOverflow",enabled:!0,phase:"main",fn:function(t){var e=t.state,i=t.options,n=t.name,s=i.mainAxis,o=void 0===s||s,r=i.altAxis,a=void 0!==r&&r,l=i.boundary,c=i.rootBoundary,h=i.altBoundary,d=i.padding,u=i.tether,f=void 0===u||u,p=i.tetherOffset,m=void 0===p?0:p,g=ii(e,{boundary:l,rootBoundary:c,padding:d,altBoundary:h}),_=be(e.placement),b=Fe(e.placement),v=!b,y=Ie(_),w="x"===y?"y":"x",A=e.modifiersData.popperOffsets,E=e.rects.reference,T=e.rects.popper,C="function"==typeof m?m(Object.assign({},e.rects,{placement:e.placement})):m,O="number"==typeof C?{mainAxis:C,altAxis:C}:Object.assign({mainAxis:0,altAxis:0},C),x=e.modifiersData.offset?e.modifiersData.offset[e.placement]:null,k={x:0,y:0};if(A){if(o){var L,S="y"===y?zt:Vt,D="y"===y?Rt:qt,$="y"===y?"height":"width",I=A[y],N=I+g[S],P=I-g[D],j=f?-T[$]/2:0,M=b===Xt?E[$]:T[$],F=b===Xt?-T[$]:-E[$],H=e.elements.arrow,W=f&&H?Ce(H):{width:0,height:0},B=e.modifiersData["arrow#persistent"]?e.modifiersData["arrow#persistent"].padding:{top:0,right:0,bottom:0,left:0},z=B[S],R=B[D],q=Ne(0,E[$],W[$]),V=v?E[$]/2-j-q-z-O.mainAxis:M-q-z-O.mainAxis,K=v?-E[$]/2+j+q+R+O.mainAxis:F+q+R+O.mainAxis,Q=e.elements.arrow&&$e(e.elements.arrow),X=Q?"y"===y?Q.clientTop||0:Q.clientLeft||0:0,Y=null!=(L=null==x?void 0:x[y])?L:0,U=I+K-Y,G=Ne(f?ye(N,I+V-Y-X):N,I,f?ve(P,U):P);A[y]=G,k[y]=G-I}if(a){var J,Z="x"===y?zt:Vt,tt="x"===y?Rt:qt,et=A[w],it="y"===w?"height":"width",nt=et+g[Z],st=et-g[tt],ot=-1!==[zt,Vt].indexOf(_),rt=null!=(J=null==x?void 0:x[w])?J:0,at=ot?nt:et-E[it]-T[it]-rt+O.altAxis,lt=ot?et+E[it]+T[it]-rt-O.altAxis:st,ct=f&&ot?function(t,e,i){var n=Ne(t,e,i);return n>i?i:n}(at,et,lt):Ne(f?at:nt,et,f?lt:st);A[w]=ct,k[w]=ct-et}e.modifiersData[n]=k}},requiresIfExists:["offset"]};function di(t,e,i){void 0===i&&(i=!1);var n,s,o=me(e),r=me(e)&&function(t){var e=t.getBoundingClientRect(),i=we(e.width)/t.offsetWidth||1,n=we(e.height)/t.offsetHeight||1;return 1!==i||1!==n}(e),a=Le(e),l=Te(t,r,i),c={scrollLeft:0,scrollTop:0},h={x:0,y:0};return(o||!o&&!i)&&(("body"!==ue(e)||Ue(a))&&(c=(n=e)!==fe(n)&&me(n)?{scrollLeft:(s=n).scrollLeft,scrollTop:s.scrollTop}:Xe(n)),me(e)?((h=Te(e,!0)).x+=e.clientLeft,h.y+=e.clientTop):a&&(h.x=Ye(a))),{x:l.left+c.scrollLeft-h.x,y:l.top+c.scrollTop-h.y,width:l.width,height:l.height}}function ui(t){var e=new Map,i=new Set,n=[];function s(t){i.add(t.name),[].concat(t.requires||[],t.requiresIfExists||[]).forEach((function(t){if(!i.has(t)){var n=e.get(t);n&&s(n)}})),n.push(t)}return t.forEach((function(t){e.set(t.name,t)})),t.forEach((function(t){i.has(t.name)||s(t)})),n}var fi={placement:"bottom",modifiers:[],strategy:"absolute"};function pi(){for(var t=arguments.length,e=new Array(t),i=0;i<t;i++)e[i]=arguments[i];return!e.some((function(t){return!(t&&"function"==typeof t.getBoundingClientRect)}))}function mi(t){void 0===t&&(t={});var e=t,i=e.defaultModifiers,n=void 0===i?[]:i,s=e.defaultOptions,o=void 0===s?fi:s;return function(t,e,i){void 0===i&&(i=o);var s,r,a={placement:"bottom",orderedModifiers:[],options:Object.assign({},fi,o),modifiersData:{},elements:{reference:t,popper:e},attributes:{},styles:{}},l=[],c=!1,h={state:a,setOptions:function(i){var s="function"==typeof i?i(a.options):i;d(),a.options=Object.assign({},o,a.options,s),a.scrollParents={reference:pe(t)?Je(t):t.contextElement?Je(t.contextElement):[],popper:Je(e)};var r,c,u=function(t){var e=ui(t);return de.reduce((function(t,i){return t.concat(e.filter((function(t){return t.phase===i})))}),[])}((r=[].concat(n,a.options.modifiers),c=r.reduce((function(t,e){var i=t[e.name];return t[e.name]=i?Object.assign({},i,e,{options:Object.assign({},i.options,e.options),data:Object.assign({},i.data,e.data)}):e,t}),{}),Object.keys(c).map((function(t){return c[t]}))));return a.orderedModifiers=u.filter((function(t){return t.enabled})),a.orderedModifiers.forEach((function(t){var e=t.name,i=t.options,n=void 0===i?{}:i,s=t.effect;if("function"==typeof s){var o=s({state:a,name:e,instance:h,options:n});l.push(o||function(){})}})),h.update()},forceUpdate:function(){if(!c){var t=a.elements,e=t.reference,i=t.popper;if(pi(e,i)){a.rects={reference:di(e,$e(i),"fixed"===a.options.strategy),popper:Ce(i)},a.reset=!1,a.placement=a.options.placement,a.orderedModifiers.forEach((function(t){return a.modifiersData[t.name]=Object.assign({},t.data)}));for(var n=0;n<a.orderedModifiers.length;n++)if(!0!==a.reset){var s=a.orderedModifiers[n],o=s.fn,r=s.options,l=void 0===r?{}:r,d=s.name;"function"==typeof o&&(a=o({state:a,options:l,name:d,instance:h})||a)}else a.reset=!1,n=-1}}},update:(s=function(){return new Promise((function(t){h.forceUpdate(),t(a)}))},function(){return r||(r=new Promise((function(t){Promise.resolve().then((function(){r=void 0,t(s())}))}))),r}),destroy:function(){d(),c=!0}};if(!pi(t,e))return h;function d(){l.forEach((function(t){return t()})),l=[]}return h.setOptions(i).then((function(t){!c&&i.onFirstUpdate&&i.onFirstUpdate(t)})),h}}var gi=mi(),_i=mi({defaultModifiers:[Re,ci,Be,_e]}),bi=mi({defaultModifiers:[Re,ci,Be,_e,li,si,hi,Me,ai]});const vi=Object.freeze(Object.defineProperty({__proto__:null,afterMain:ae,afterRead:se,afterWrite:he,applyStyles:_e,arrow:Me,auto:Kt,basePlacements:Qt,beforeMain:oe,beforeRead:ie,beforeWrite:le,bottom:Rt,clippingParents:Ut,computeStyles:Be,createPopper:bi,createPopperBase:gi,createPopperLite:_i,detectOverflow:ii,end:Yt,eventListeners:Re,flip:si,hide:ai,left:Vt,main:re,modifierPhases:de,offset:li,placements:ee,popper:Jt,popperGenerator:mi,popperOffsets:ci,preventOverflow:hi,read:ne,reference:Zt,right:qt,start:Xt,top:zt,variationPlacements:te,viewport:Gt,write:ce},Symbol.toStringTag,{value:"Module"})),yi="dropdown",wi=".bs.dropdown",Ai=".data-api",Ei="ArrowUp",Ti="ArrowDown",Ci=`hide${wi}`,Oi=`hidden${wi}`,xi=`show${wi}`,ki=`shown${wi}`,Li=`click${wi}${Ai}`,Si=`keydown${wi}${Ai}`,Di=`keyup${wi}${Ai}`,$i="show",Ii='[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)',Ni=`${Ii}.${$i}`,Pi=".dropdown-menu",ji=p()?"top-end":"top-start",Mi=p()?"top-start":"top-end",Fi=p()?"bottom-end":"bottom-start",Hi=p()?"bottom-start":"bottom-end",Wi=p()?"left-start":"right-start",Bi=p()?"right-start":"left-start",zi={autoClose:!0,boundary:"clippingParents",display:"dynamic",offset:[0,2],popperConfig:null,reference:"toggle"},Ri={autoClose:"(boolean|string)",boundary:"(string|element)",display:"string",offset:"(array|string|function)",popperConfig:"(null|object|function)",reference:"(string|element|object)"};class qi extends W{constructor(t,e){super(t,e),this._popper=null,this._parent=this._element.parentNode,this._menu=z.next(this._element,Pi)[0]||z.prev(this._element,Pi)[0]||z.findOne(Pi,this._parent),this._inNavbar=this._detectNavbar()}static get Default(){return zi}static get DefaultType(){return Ri}static get NAME(){return yi}toggle(){return this._isShown()?this.hide():this.show()}show(){if(l(this._element)||this._isShown())return;const t={relatedTarget:this._element};if(!N.trigger(this._element,xi,t).defaultPrevented){if(this._createPopper(),"ontouchstart"in document.documentElement&&!this._parent.closest(".navbar-nav"))for(const t of[].concat(...document.body.children))N.on(t,"mouseover",h);this._element.focus(),this._element.setAttribute("aria-expanded",!0),this._menu.classList.add($i),this._element.classList.add($i),N.trigger(this._element,ki,t)}}hide(){if(l(this._element)||!this._isShown())return;const t={relatedTarget:this._element};this._completeHide(t)}dispose(){this._popper&&this._popper.destroy(),super.dispose()}update(){this._inNavbar=this._detectNavbar(),this._popper&&this._popper.update()}_completeHide(t){if(!N.trigger(this._element,Ci,t).defaultPrevented){if("ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))N.off(t,"mouseover",h);this._popper&&this._popper.destroy(),this._menu.classList.remove($i),this._element.classList.remove($i),this._element.setAttribute("aria-expanded","false"),F.removeDataAttribute(this._menu,"popper"),N.trigger(this._element,Oi,t)}}_getConfig(t){if("object"==typeof(t=super._getConfig(t)).reference&&!o(t.reference)&&"function"!=typeof t.reference.getBoundingClientRect)throw new TypeError(`${yi.toUpperCase()}: Option "reference" provided type "object" without a required "getBoundingClientRect" method.`);return t}_createPopper(){if(void 0===vi)throw new TypeError("Bootstrap's dropdowns require Popper (https://popper.js.org)");let t=this._element;"parent"===this._config.reference?t=this._parent:o(this._config.reference)?t=r(this._config.reference):"object"==typeof this._config.reference&&(t=this._config.reference);const e=this._getPopperConfig();this._popper=bi(t,this._menu,e)}_isShown(){return this._menu.classList.contains($i)}_getPlacement(){const t=this._parent;if(t.classList.contains("dropend"))return Wi;if(t.classList.contains("dropstart"))return Bi;if(t.classList.contains("dropup-center"))return"top";if(t.classList.contains("dropdown-center"))return"bottom";const e="end"===getComputedStyle(this._menu).getPropertyValue("--bs-position").trim();return t.classList.contains("dropup")?e?Mi:ji:e?Hi:Fi}_detectNavbar(){return null!==this._element.closest(".navbar")}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map((t=>Number.parseInt(t,10))):"function"==typeof t?e=>t(e,this._element):t}_getPopperConfig(){const t={placement:this._getPlacement(),modifiers:[{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"offset",options:{offset:this._getOffset()}}]};return(this._inNavbar||"static"===this._config.display)&&(F.setDataAttribute(this._menu,"popper","static"),t.modifiers=[{name:"applyStyles",enabled:!1}]),{...t,...g(this._config.popperConfig,[t])}}_selectMenuItem({key:t,target:e}){const i=z.find(".dropdown-menu .dropdown-item:not(.disabled):not(:disabled)",this._menu).filter((t=>a(t)));i.length&&b(i,e,t===Ti,!i.includes(e)).focus()}static jQueryInterface(t){return this.each((function(){const e=qi.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}static clearMenus(t){if(2===t.button||"keyup"===t.type&&"Tab"!==t.key)return;const e=z.find(Ni);for(const i of e){const e=qi.getInstance(i);if(!e||!1===e._config.autoClose)continue;const n=t.composedPath(),s=n.includes(e._menu);if(n.includes(e._element)||"inside"===e._config.autoClose&&!s||"outside"===e._config.autoClose&&s)continue;if(e._menu.contains(t.target)&&("keyup"===t.type&&"Tab"===t.key||/input|select|option|textarea|form/i.test(t.target.tagName)))continue;const o={relatedTarget:e._element};"click"===t.type&&(o.clickEvent=t),e._completeHide(o)}}static dataApiKeydownHandler(t){const e=/input|textarea/i.test(t.target.tagName),i="Escape"===t.key,n=[Ei,Ti].includes(t.key);if(!n&&!i)return;if(e&&!i)return;t.preventDefault();const s=this.matches(Ii)?this:z.prev(this,Ii)[0]||z.next(this,Ii)[0]||z.findOne(Ii,t.delegateTarget.parentNode),o=qi.getOrCreateInstance(s);if(n)return t.stopPropagation(),o.show(),void o._selectMenuItem(t);o._isShown()&&(t.stopPropagation(),o.hide(),s.focus())}}N.on(document,Si,Ii,qi.dataApiKeydownHandler),N.on(document,Si,Pi,qi.dataApiKeydownHandler),N.on(document,Li,qi.clearMenus),N.on(document,Di,qi.clearMenus),N.on(document,Li,Ii,(function(t){t.preventDefault(),qi.getOrCreateInstance(this).toggle()})),m(qi);const Vi="backdrop",Ki="show",Qi=`mousedown.bs.${Vi}`,Xi={className:"modal-backdrop",clickCallback:null,isAnimated:!1,isVisible:!0,rootElement:"body"},Yi={className:"string",clickCallback:"(function|null)",isAnimated:"boolean",isVisible:"boolean",rootElement:"(element|string)"};class Ui extends H{constructor(t){super(),this._config=this._getConfig(t),this._isAppended=!1,this._element=null}static get Default(){return Xi}static get DefaultType(){return Yi}static get NAME(){return Vi}show(t){if(!this._config.isVisible)return void g(t);this._append();const e=this._getElement();this._config.isAnimated&&d(e),e.classList.add(Ki),this._emulateAnimation((()=>{g(t)}))}hide(t){this._config.isVisible?(this._getElement().classList.remove(Ki),this._emulateAnimation((()=>{this.dispose(),g(t)}))):g(t)}dispose(){this._isAppended&&(N.off(this._element,Qi),this._element.remove(),this._isAppended=!1)}_getElement(){if(!this._element){const t=document.createElement("div");t.className=this._config.className,this._config.isAnimated&&t.classList.add("fade"),this._element=t}return this._element}_configAfterMerge(t){return t.rootElement=r(t.rootElement),t}_append(){if(this._isAppended)return;const t=this._getElement();this._config.rootElement.append(t),N.on(t,Qi,(()=>{g(this._config.clickCallback)})),this._isAppended=!0}_emulateAnimation(t){_(t,this._getElement(),this._config.isAnimated)}}const Gi=".bs.focustrap",Ji=`focusin${Gi}`,Zi=`keydown.tab${Gi}`,tn="backward",en={autofocus:!0,trapElement:null},nn={autofocus:"boolean",trapElement:"element"};class sn extends H{constructor(t){super(),this._config=this._getConfig(t),this._isActive=!1,this._lastTabNavDirection=null}static get Default(){return en}static get DefaultType(){return nn}static get NAME(){return"focustrap"}activate(){this._isActive||(this._config.autofocus&&this._config.trapElement.focus(),N.off(document,Gi),N.on(document,Ji,(t=>this._handleFocusin(t))),N.on(document,Zi,(t=>this._handleKeydown(t))),this._isActive=!0)}deactivate(){this._isActive&&(this._isActive=!1,N.off(document,Gi))}_handleFocusin(t){const{trapElement:e}=this._config;if(t.target===document||t.target===e||e.contains(t.target))return;const i=z.focusableChildren(e);0===i.length?e.focus():this._lastTabNavDirection===tn?i[i.length-1].focus():i[0].focus()}_handleKeydown(t){"Tab"===t.key&&(this._lastTabNavDirection=t.shiftKey?tn:"forward")}}const on=".fixed-top, .fixed-bottom, .is-fixed, .sticky-top",rn=".sticky-top",an="padding-right",ln="margin-right";class cn{constructor(){this._element=document.body}getWidth(){const t=document.documentElement.clientWidth;return Math.abs(window.innerWidth-t)}hide(){const t=this.getWidth();this._disableOverFlow(),this._setElementAttributes(this._element,an,(e=>e+t)),this._setElementAttributes(on,an,(e=>e+t)),this._setElementAttributes(rn,ln,(e=>e-t))}reset(){this._resetElementAttributes(this._element,"overflow"),this._resetElementAttributes(this._element,an),this._resetElementAttributes(on,an),this._resetElementAttributes(rn,ln)}isOverflowing(){return this.getWidth()>0}_disableOverFlow(){this._saveInitialAttribute(this._element,"overflow"),this._element.style.overflow="hidden"}_setElementAttributes(t,e,i){const n=this.getWidth();this._applyManipulationCallback(t,(t=>{if(t!==this._element&&window.innerWidth>t.clientWidth+n)return;this._saveInitialAttribute(t,e);const s=window.getComputedStyle(t).getPropertyValue(e);t.style.setProperty(e,`${i(Number.parseFloat(s))}px`)}))}_saveInitialAttribute(t,e){const i=t.style.getPropertyValue(e);i&&F.setDataAttribute(t,e,i)}_resetElementAttributes(t,e){this._applyManipulationCallback(t,(t=>{const i=F.getDataAttribute(t,e);null!==i?(F.removeDataAttribute(t,e),t.style.setProperty(e,i)):t.style.removeProperty(e)}))}_applyManipulationCallback(t,e){if(o(t))e(t);else for(const i of z.find(t,this._element))e(i)}}const hn=".bs.modal",dn=`hide${hn}`,un=`hidePrevented${hn}`,fn=`hidden${hn}`,pn=`show${hn}`,mn=`shown${hn}`,gn=`resize${hn}`,_n=`click.dismiss${hn}`,bn=`mousedown.dismiss${hn}`,vn=`keydown.dismiss${hn}`,yn=`click${hn}.data-api`,wn="modal-open",An="show",En="modal-static",Tn={backdrop:!0,focus:!0,keyboard:!0},Cn={backdrop:"(boolean|string)",focus:"boolean",keyboard:"boolean"};class On extends W{constructor(t,e){super(t,e),this._dialog=z.findOne(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._isShown=!1,this._isTransitioning=!1,this._scrollBar=new cn,this._addEventListeners()}static get Default(){return Tn}static get DefaultType(){return Cn}static get NAME(){return"modal"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||this._isTransitioning||N.trigger(this._element,pn,{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._isTransitioning=!0,this._scrollBar.hide(),document.body.classList.add(wn),this._adjustDialog(),this._backdrop.show((()=>this._showElement(t))))}hide(){this._isShown&&!this._isTransitioning&&(N.trigger(this._element,dn).defaultPrevented||(this._isShown=!1,this._isTransitioning=!0,this._focustrap.deactivate(),this._element.classList.remove(An),this._queueCallback((()=>this._hideModal()),this._element,this._isAnimated())))}dispose(){N.off(window,hn),N.off(this._dialog,hn),this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}handleUpdate(){this._adjustDialog()}_initializeBackDrop(){return new Ui({isVisible:Boolean(this._config.backdrop),isAnimated:this._isAnimated()})}_initializeFocusTrap(){return new sn({trapElement:this._element})}_showElement(t){document.body.contains(this._element)||document.body.append(this._element),this._element.style.display="block",this._element.removeAttribute("aria-hidden"),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.scrollTop=0;const e=z.findOne(".modal-body",this._dialog);e&&(e.scrollTop=0),d(this._element),this._element.classList.add(An),this._queueCallback((()=>{this._config.focus&&this._focustrap.activate(),this._isTransitioning=!1,N.trigger(this._element,mn,{relatedTarget:t})}),this._dialog,this._isAnimated())}_addEventListeners(){N.on(this._element,vn,(t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():this._triggerBackdropTransition())})),N.on(window,gn,(()=>{this._isShown&&!this._isTransitioning&&this._adjustDialog()})),N.on(this._element,bn,(t=>{N.one(this._element,_n,(e=>{this._element===t.target&&this._element===e.target&&("static"!==this._config.backdrop?this._config.backdrop&&this.hide():this._triggerBackdropTransition())}))}))}_hideModal(){this._element.style.display="none",this._element.setAttribute("aria-hidden",!0),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._isTransitioning=!1,this._backdrop.hide((()=>{document.body.classList.remove(wn),this._resetAdjustments(),this._scrollBar.reset(),N.trigger(this._element,fn)}))}_isAnimated(){return this._element.classList.contains("fade")}_triggerBackdropTransition(){if(N.trigger(this._element,un).defaultPrevented)return;const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._element.style.overflowY;"hidden"===e||this._element.classList.contains(En)||(t||(this._element.style.overflowY="hidden"),this._element.classList.add(En),this._queueCallback((()=>{this._element.classList.remove(En),this._queueCallback((()=>{this._element.style.overflowY=e}),this._dialog)}),this._dialog),this._element.focus())}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight,e=this._scrollBar.getWidth(),i=e>0;if(i&&!t){const t=p()?"paddingLeft":"paddingRight";this._element.style[t]=`${e}px`}if(!i&&t){const t=p()?"paddingRight":"paddingLeft";this._element.style[t]=`${e}px`}}_resetAdjustments(){this._element.style.paddingLeft="",this._element.style.paddingRight=""}static jQueryInterface(t,e){return this.each((function(){const i=On.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===i[t])throw new TypeError(`No method named "${t}"`);i[t](e)}}))}}N.on(document,yn,'[data-bs-toggle="modal"]',(function(t){const e=z.getElementFromSelector(this);["A","AREA"].includes(this.tagName)&&t.preventDefault(),N.one(e,pn,(t=>{t.defaultPrevented||N.one(e,fn,(()=>{a(this)&&this.focus()}))}));const i=z.findOne(".modal.show");i&&On.getInstance(i).hide(),On.getOrCreateInstance(e).toggle(this)})),R(On),m(On);const xn=".bs.offcanvas",kn=".data-api",Ln=`load${xn}${kn}`,Sn="show",Dn="showing",$n="hiding",In=".offcanvas.show",Nn=`show${xn}`,Pn=`shown${xn}`,jn=`hide${xn}`,Mn=`hidePrevented${xn}`,Fn=`hidden${xn}`,Hn=`resize${xn}`,Wn=`click${xn}${kn}`,Bn=`keydown.dismiss${xn}`,zn={backdrop:!0,keyboard:!0,scroll:!1},Rn={backdrop:"(boolean|string)",keyboard:"boolean",scroll:"boolean"};class qn extends W{constructor(t,e){super(t,e),this._isShown=!1,this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._addEventListeners()}static get Default(){return zn}static get DefaultType(){return Rn}static get NAME(){return"offcanvas"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||N.trigger(this._element,Nn,{relatedTarget:t}).defaultPrevented||(this._isShown=!0,this._backdrop.show(),this._config.scroll||(new cn).hide(),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.classList.add(Dn),this._queueCallback((()=>{this._config.scroll&&!this._config.backdrop||this._focustrap.activate(),this._element.classList.add(Sn),this._element.classList.remove(Dn),N.trigger(this._element,Pn,{relatedTarget:t})}),this._element,!0))}hide(){this._isShown&&(N.trigger(this._element,jn).defaultPrevented||(this._focustrap.deactivate(),this._element.blur(),this._isShown=!1,this._element.classList.add($n),this._backdrop.hide(),this._queueCallback((()=>{this._element.classList.remove(Sn,$n),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._config.scroll||(new cn).reset(),N.trigger(this._element,Fn)}),this._element,!0)))}dispose(){this._backdrop.dispose(),this._focustrap.deactivate(),super.dispose()}_initializeBackDrop(){const t=Boolean(this._config.backdrop);return new Ui({className:"offcanvas-backdrop",isVisible:t,isAnimated:!0,rootElement:this._element.parentNode,clickCallback:t?()=>{"static"!==this._config.backdrop?this.hide():N.trigger(this._element,Mn)}:null})}_initializeFocusTrap(){return new sn({trapElement:this._element})}_addEventListeners(){N.on(this._element,Bn,(t=>{"Escape"===t.key&&(this._config.keyboard?this.hide():N.trigger(this._element,Mn))}))}static jQueryInterface(t){return this.each((function(){const e=qn.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}N.on(document,Wn,'[data-bs-toggle="offcanvas"]',(function(t){const e=z.getElementFromSelector(this);if(["A","AREA"].includes(this.tagName)&&t.preventDefault(),l(this))return;N.one(e,Fn,(()=>{a(this)&&this.focus()}));const i=z.findOne(In);i&&i!==e&&qn.getInstance(i).hide(),qn.getOrCreateInstance(e).toggle(this)})),N.on(window,Ln,(()=>{for(const t of z.find(In))qn.getOrCreateInstance(t).show()})),N.on(window,Hn,(()=>{for(const t of z.find("[aria-modal][class*=show][class*=offcanvas-]"))"fixed"!==getComputedStyle(t).position&&qn.getOrCreateInstance(t).hide()})),R(qn),m(qn);const Vn={"*":["class","dir","id","lang","role",/^aria-[\w-]*$/i],a:["target","href","title","rel"],area:[],b:[],br:[],col:[],code:[],dd:[],div:[],dl:[],dt:[],em:[],hr:[],h1:[],h2:[],h3:[],h4:[],h5:[],h6:[],i:[],img:["src","srcset","alt","title","width","height"],li:[],ol:[],p:[],pre:[],s:[],small:[],span:[],sub:[],sup:[],strong:[],u:[],ul:[]},Kn=new Set(["background","cite","href","itemtype","longdesc","poster","src","xlink:href"]),Qn=/^(?!javascript:)(?:[a-z0-9+.-]+:|[^&:/?#]*(?:[/?#]|$))/i,Xn=(t,e)=>{const i=t.nodeName.toLowerCase();return e.includes(i)?!Kn.has(i)||Boolean(Qn.test(t.nodeValue)):e.filter((t=>t instanceof RegExp)).some((t=>t.test(i)))},Yn={allowList:Vn,content:{},extraClass:"",html:!1,sanitize:!0,sanitizeFn:null,template:"<div></div>"},Un={allowList:"object",content:"object",extraClass:"(string|function)",html:"boolean",sanitize:"boolean",sanitizeFn:"(null|function)",template:"string"},Gn={entry:"(string|element|function|null)",selector:"(string|element)"};class Jn extends H{constructor(t){super(),this._config=this._getConfig(t)}static get Default(){return Yn}static get DefaultType(){return Un}static get NAME(){return"TemplateFactory"}getContent(){return Object.values(this._config.content).map((t=>this._resolvePossibleFunction(t))).filter(Boolean)}hasContent(){return this.getContent().length>0}changeContent(t){return this._checkContent(t),this._config.content={...this._config.content,...t},this}toHtml(){const t=document.createElement("div");t.innerHTML=this._maybeSanitize(this._config.template);for(const[e,i]of Object.entries(this._config.content))this._setContent(t,i,e);const e=t.children[0],i=this._resolvePossibleFunction(this._config.extraClass);return i&&e.classList.add(...i.split(" ")),e}_typeCheckConfig(t){super._typeCheckConfig(t),this._checkContent(t.content)}_checkContent(t){for(const[e,i]of Object.entries(t))super._typeCheckConfig({selector:e,entry:i},Gn)}_setContent(t,e,i){const n=z.findOne(i,t);n&&((e=this._resolvePossibleFunction(e))?o(e)?this._putElementInTemplate(r(e),n):this._config.html?n.innerHTML=this._maybeSanitize(e):n.textContent=e:n.remove())}_maybeSanitize(t){return this._config.sanitize?function(t,e,i){if(!t.length)return t;if(i&&"function"==typeof i)return i(t);const n=(new window.DOMParser).parseFromString(t,"text/html"),s=[].concat(...n.body.querySelectorAll("*"));for(const t of s){const i=t.nodeName.toLowerCase();if(!Object.keys(e).includes(i)){t.remove();continue}const n=[].concat(...t.attributes),s=[].concat(e["*"]||[],e[i]||[]);for(const e of n)Xn(e,s)||t.removeAttribute(e.nodeName)}return n.body.innerHTML}(t,this._config.allowList,this._config.sanitizeFn):t}_resolvePossibleFunction(t){return g(t,[this])}_putElementInTemplate(t,e){if(this._config.html)return e.innerHTML="",void e.append(t);e.textContent=t.textContent}}const Zn=new Set(["sanitize","allowList","sanitizeFn"]),ts="fade",es="show",is=".modal",ns="hide.bs.modal",ss="hover",os="focus",rs={AUTO:"auto",TOP:"top",RIGHT:p()?"left":"right",BOTTOM:"bottom",LEFT:p()?"right":"left"},as={allowList:Vn,animation:!0,boundary:"clippingParents",container:!1,customClass:"",delay:0,fallbackPlacements:["top","right","bottom","left"],html:!1,offset:[0,6],placement:"top",popperConfig:null,sanitize:!0,sanitizeFn:null,selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',title:"",trigger:"hover focus"},ls={allowList:"object",animation:"boolean",boundary:"(string|element)",container:"(string|element|boolean)",customClass:"(string|function)",delay:"(number|object)",fallbackPlacements:"array",html:"boolean",offset:"(array|string|function)",placement:"(string|function)",popperConfig:"(null|object|function)",sanitize:"boolean",sanitizeFn:"(null|function)",selector:"(string|boolean)",template:"string",title:"(string|element|function)",trigger:"string"};class cs extends W{constructor(t,e){if(void 0===vi)throw new TypeError("Bootstrap's tooltips require Popper (https://popper.js.org)");super(t,e),this._isEnabled=!0,this._timeout=0,this._isHovered=null,this._activeTrigger={},this._popper=null,this._templateFactory=null,this._newContent=null,this.tip=null,this._setListeners(),this._config.selector||this._fixTitle()}static get Default(){return as}static get DefaultType(){return ls}static get NAME(){return"tooltip"}enable(){this._isEnabled=!0}disable(){this._isEnabled=!1}toggleEnabled(){this._isEnabled=!this._isEnabled}toggle(){this._isEnabled&&(this._activeTrigger.click=!this._activeTrigger.click,this._isShown()?this._leave():this._enter())}dispose(){clearTimeout(this._timeout),N.off(this._element.closest(is),ns,this._hideModalHandler),this._element.getAttribute("data-bs-original-title")&&this._element.setAttribute("title",this._element.getAttribute("data-bs-original-title")),this._disposePopper(),super.dispose()}show(){if("none"===this._element.style.display)throw new Error("Please use show on visible elements");if(!this._isWithContent()||!this._isEnabled)return;const t=N.trigger(this._element,this.constructor.eventName("show")),e=(c(this._element)||this._element.ownerDocument.documentElement).contains(this._element);if(t.defaultPrevented||!e)return;this._disposePopper();const i=this._getTipElement();this._element.setAttribute("aria-describedby",i.getAttribute("id"));const{container:n}=this._config;if(this._element.ownerDocument.documentElement.contains(this.tip)||(n.append(i),N.trigger(this._element,this.constructor.eventName("inserted"))),this._popper=this._createPopper(i),i.classList.add(es),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))N.on(t,"mouseover",h);this._queueCallback((()=>{N.trigger(this._element,this.constructor.eventName("shown")),!1===this._isHovered&&this._leave(),this._isHovered=!1}),this.tip,this._isAnimated())}hide(){if(this._isShown()&&!N.trigger(this._element,this.constructor.eventName("hide")).defaultPrevented){if(this._getTipElement().classList.remove(es),"ontouchstart"in document.documentElement)for(const t of[].concat(...document.body.children))N.off(t,"mouseover",h);this._activeTrigger.click=!1,this._activeTrigger[os]=!1,this._activeTrigger[ss]=!1,this._isHovered=null,this._queueCallback((()=>{this._isWithActiveTrigger()||(this._isHovered||this._disposePopper(),this._element.removeAttribute("aria-describedby"),N.trigger(this._element,this.constructor.eventName("hidden")))}),this.tip,this._isAnimated())}}update(){this._popper&&this._popper.update()}_isWithContent(){return Boolean(this._getTitle())}_getTipElement(){return this.tip||(this.tip=this._createTipElement(this._newContent||this._getContentForTemplate())),this.tip}_createTipElement(t){const e=this._getTemplateFactory(t).toHtml();if(!e)return null;e.classList.remove(ts,es),e.classList.add(`bs-${this.constructor.NAME}-auto`);const i=(t=>{do{t+=Math.floor(1e6*Math.random())}while(document.getElementById(t));return t})(this.constructor.NAME).toString();return e.setAttribute("id",i),this._isAnimated()&&e.classList.add(ts),e}setContent(t){this._newContent=t,this._isShown()&&(this._disposePopper(),this.show())}_getTemplateFactory(t){return this._templateFactory?this._templateFactory.changeContent(t):this._templateFactory=new Jn({...this._config,content:t,extraClass:this._resolvePossibleFunction(this._config.customClass)}),this._templateFactory}_getContentForTemplate(){return{".tooltip-inner":this._getTitle()}}_getTitle(){return this._resolvePossibleFunction(this._config.title)||this._element.getAttribute("data-bs-original-title")}_initializeOnDelegatedTarget(t){return this.constructor.getOrCreateInstance(t.delegateTarget,this._getDelegateConfig())}_isAnimated(){return this._config.animation||this.tip&&this.tip.classList.contains(ts)}_isShown(){return this.tip&&this.tip.classList.contains(es)}_createPopper(t){const e=g(this._config.placement,[this,t,this._element]),i=rs[e.toUpperCase()];return bi(this._element,t,this._getPopperConfig(i))}_getOffset(){const{offset:t}=this._config;return"string"==typeof t?t.split(",").map((t=>Number.parseInt(t,10))):"function"==typeof t?e=>t(e,this._element):t}_resolvePossibleFunction(t){return g(t,[this._element])}_getPopperConfig(t){const e={placement:t,modifiers:[{name:"flip",options:{fallbackPlacements:this._config.fallbackPlacements}},{name:"offset",options:{offset:this._getOffset()}},{name:"preventOverflow",options:{boundary:this._config.boundary}},{name:"arrow",options:{element:`.${this.constructor.NAME}-arrow`}},{name:"preSetPlacement",enabled:!0,phase:"beforeMain",fn:t=>{this._getTipElement().setAttribute("data-popper-placement",t.state.placement)}}]};return{...e,...g(this._config.popperConfig,[e])}}_setListeners(){const t=this._config.trigger.split(" ");for(const e of t)if("click"===e)N.on(this._element,this.constructor.eventName("click"),this._config.selector,(t=>{this._initializeOnDelegatedTarget(t).toggle()}));else if("manual"!==e){const t=e===ss?this.constructor.eventName("mouseenter"):this.constructor.eventName("focusin"),i=e===ss?this.constructor.eventName("mouseleave"):this.constructor.eventName("focusout");N.on(this._element,t,this._config.selector,(t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusin"===t.type?os:ss]=!0,e._enter()})),N.on(this._element,i,this._config.selector,(t=>{const e=this._initializeOnDelegatedTarget(t);e._activeTrigger["focusout"===t.type?os:ss]=e._element.contains(t.relatedTarget),e._leave()}))}this._hideModalHandler=()=>{this._element&&this.hide()},N.on(this._element.closest(is),ns,this._hideModalHandler)}_fixTitle(){const t=this._element.getAttribute("title");t&&(this._element.getAttribute("aria-label")||this._element.textContent.trim()||this._element.setAttribute("aria-label",t),this._element.setAttribute("data-bs-original-title",t),this._element.removeAttribute("title"))}_enter(){this._isShown()||this._isHovered?this._isHovered=!0:(this._isHovered=!0,this._setTimeout((()=>{this._isHovered&&this.show()}),this._config.delay.show))}_leave(){this._isWithActiveTrigger()||(this._isHovered=!1,this._setTimeout((()=>{this._isHovered||this.hide()}),this._config.delay.hide))}_setTimeout(t,e){clearTimeout(this._timeout),this._timeout=setTimeout(t,e)}_isWithActiveTrigger(){return Object.values(this._activeTrigger).includes(!0)}_getConfig(t){const e=F.getDataAttributes(this._element);for(const t of Object.keys(e))Zn.has(t)&&delete e[t];return t={...e,..."object"==typeof t&&t?t:{}},t=this._mergeConfigObj(t),t=this._configAfterMerge(t),this._typeCheckConfig(t),t}_configAfterMerge(t){return t.container=!1===t.container?document.body:r(t.container),"number"==typeof t.delay&&(t.delay={show:t.delay,hide:t.delay}),"number"==typeof t.title&&(t.title=t.title.toString()),"number"==typeof t.content&&(t.content=t.content.toString()),t}_getDelegateConfig(){const t={};for(const[e,i]of Object.entries(this._config))this.constructor.Default[e]!==i&&(t[e]=i);return t.selector=!1,t.trigger="manual",t}_disposePopper(){this._popper&&(this._popper.destroy(),this._popper=null),this.tip&&(this.tip.remove(),this.tip=null)}static jQueryInterface(t){return this.each((function(){const e=cs.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}}m(cs);const hs={...cs.Default,content:"",offset:[0,8],placement:"right",template:'<div class="popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',trigger:"click"},ds={...cs.DefaultType,content:"(null|string|element|function)"};class us extends cs{static get Default(){return hs}static get DefaultType(){return ds}static get NAME(){return"popover"}_isWithContent(){return this._getTitle()||this._getContent()}_getContentForTemplate(){return{".popover-header":this._getTitle(),".popover-body":this._getContent()}}_getContent(){return this._resolvePossibleFunction(this._config.content)}static jQueryInterface(t){return this.each((function(){const e=us.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}}m(us);const fs=".bs.scrollspy",ps=`activate${fs}`,ms=`click${fs}`,gs=`load${fs}.data-api`,_s="active",bs="[href]",vs=".nav-link",ys=`${vs}, .nav-item > ${vs}, .list-group-item`,ws={offset:null,rootMargin:"0px 0px -25%",smoothScroll:!1,target:null,threshold:[.1,.5,1]},As={offset:"(number|null)",rootMargin:"string",smoothScroll:"boolean",target:"element",threshold:"array"};class Es extends W{constructor(t,e){super(t,e),this._targetLinks=new Map,this._observableSections=new Map,this._rootElement="visible"===getComputedStyle(this._element).overflowY?null:this._element,this._activeTarget=null,this._observer=null,this._previousScrollData={visibleEntryTop:0,parentScrollTop:0},this.refresh()}static get Default(){return ws}static get DefaultType(){return As}static get NAME(){return"scrollspy"}refresh(){this._initializeTargetsAndObservables(),this._maybeEnableSmoothScroll(),this._observer?this._observer.disconnect():this._observer=this._getNewObserver();for(const t of this._observableSections.values())this._observer.observe(t)}dispose(){this._observer.disconnect(),super.dispose()}_configAfterMerge(t){return t.target=r(t.target)||document.body,t.rootMargin=t.offset?`${t.offset}px 0px -30%`:t.rootMargin,"string"==typeof t.threshold&&(t.threshold=t.threshold.split(",").map((t=>Number.parseFloat(t)))),t}_maybeEnableSmoothScroll(){this._config.smoothScroll&&(N.off(this._config.target,ms),N.on(this._config.target,ms,bs,(t=>{const e=this._observableSections.get(t.target.hash);if(e){t.preventDefault();const i=this._rootElement||window,n=e.offsetTop-this._element.offsetTop;if(i.scrollTo)return void i.scrollTo({top:n,behavior:"smooth"});i.scrollTop=n}})))}_getNewObserver(){const t={root:this._rootElement,threshold:this._config.threshold,rootMargin:this._config.rootMargin};return new IntersectionObserver((t=>this._observerCallback(t)),t)}_observerCallback(t){const e=t=>this._targetLinks.get(`#${t.target.id}`),i=t=>{this._previousScrollData.visibleEntryTop=t.target.offsetTop,this._process(e(t))},n=(this._rootElement||document.documentElement).scrollTop,s=n>=this._previousScrollData.parentScrollTop;this._previousScrollData.parentScrollTop=n;for(const o of t){if(!o.isIntersecting){this._activeTarget=null,this._clearActiveClass(e(o));continue}const t=o.target.offsetTop>=this._previousScrollData.visibleEntryTop;if(s&&t){if(i(o),!n)return}else s||t||i(o)}}_initializeTargetsAndObservables(){this._targetLinks=new Map,this._observableSections=new Map;const t=z.find(bs,this._config.target);for(const e of t){if(!e.hash||l(e))continue;const t=z.findOne(decodeURI(e.hash),this._element);a(t)&&(this._targetLinks.set(decodeURI(e.hash),e),this._observableSections.set(e.hash,t))}}_process(t){this._activeTarget!==t&&(this._clearActiveClass(this._config.target),this._activeTarget=t,t.classList.add(_s),this._activateParents(t),N.trigger(this._element,ps,{relatedTarget:t}))}_activateParents(t){if(t.classList.contains("dropdown-item"))z.findOne(".dropdown-toggle",t.closest(".dropdown")).classList.add(_s);else for(const e of z.parents(t,".nav, .list-group"))for(const t of z.prev(e,ys))t.classList.add(_s)}_clearActiveClass(t){t.classList.remove(_s);const e=z.find(`${bs}.${_s}`,t);for(const t of e)t.classList.remove(_s)}static jQueryInterface(t){return this.each((function(){const e=Es.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}))}}N.on(window,gs,(()=>{for(const t of z.find('[data-bs-spy="scroll"]'))Es.getOrCreateInstance(t)})),m(Es);const Ts=".bs.tab",Cs=`hide${Ts}`,Os=`hidden${Ts}`,xs=`show${Ts}`,ks=`shown${Ts}`,Ls=`click${Ts}`,Ss=`keydown${Ts}`,Ds=`load${Ts}`,$s="ArrowLeft",Is="ArrowRight",Ns="ArrowUp",Ps="ArrowDown",js="Home",Ms="End",Fs="active",Hs="fade",Ws="show",Bs=".dropdown-toggle",zs=`:not(${Bs})`,Rs='[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]',qs=`.nav-link${zs}, .list-group-item${zs}, [role="tab"]${zs}, ${Rs}`,Vs=`.${Fs}[data-bs-toggle="tab"], .${Fs}[data-bs-toggle="pill"], .${Fs}[data-bs-toggle="list"]`;class Ks extends W{constructor(t){super(t),this._parent=this._element.closest('.list-group, .nav, [role="tablist"]'),this._parent&&(this._setInitialAttributes(this._parent,this._getChildren()),N.on(this._element,Ss,(t=>this._keydown(t))))}static get NAME(){return"tab"}show(){const t=this._element;if(this._elemIsActive(t))return;const e=this._getActiveElem(),i=e?N.trigger(e,Cs,{relatedTarget:t}):null;N.trigger(t,xs,{relatedTarget:e}).defaultPrevented||i&&i.defaultPrevented||(this._deactivate(e,t),this._activate(t,e))}_activate(t,e){t&&(t.classList.add(Fs),this._activate(z.getElementFromSelector(t)),this._queueCallback((()=>{"tab"===t.getAttribute("role")?(t.removeAttribute("tabindex"),t.setAttribute("aria-selected",!0),this._toggleDropDown(t,!0),N.trigger(t,ks,{relatedTarget:e})):t.classList.add(Ws)}),t,t.classList.contains(Hs)))}_deactivate(t,e){t&&(t.classList.remove(Fs),t.blur(),this._deactivate(z.getElementFromSelector(t)),this._queueCallback((()=>{"tab"===t.getAttribute("role")?(t.setAttribute("aria-selected",!1),t.setAttribute("tabindex","-1"),this._toggleDropDown(t,!1),N.trigger(t,Os,{relatedTarget:e})):t.classList.remove(Ws)}),t,t.classList.contains(Hs)))}_keydown(t){if(![$s,Is,Ns,Ps,js,Ms].includes(t.key))return;t.stopPropagation(),t.preventDefault();const e=this._getChildren().filter((t=>!l(t)));let i;if([js,Ms].includes(t.key))i=e[t.key===js?0:e.length-1];else{const n=[Is,Ps].includes(t.key);i=b(e,t.target,n,!0)}i&&(i.focus({preventScroll:!0}),Ks.getOrCreateInstance(i).show())}_getChildren(){return z.find(qs,this._parent)}_getActiveElem(){return this._getChildren().find((t=>this._elemIsActive(t)))||null}_setInitialAttributes(t,e){this._setAttributeIfNotExists(t,"role","tablist");for(const t of e)this._setInitialAttributesOnChild(t)}_setInitialAttributesOnChild(t){t=this._getInnerElement(t);const e=this._elemIsActive(t),i=this._getOuterElement(t);t.setAttribute("aria-selected",e),i!==t&&this._setAttributeIfNotExists(i,"role","presentation"),e||t.setAttribute("tabindex","-1"),this._setAttributeIfNotExists(t,"role","tab"),this._setInitialAttributesOnTargetPanel(t)}_setInitialAttributesOnTargetPanel(t){const e=z.getElementFromSelector(t);e&&(this._setAttributeIfNotExists(e,"role","tabpanel"),t.id&&this._setAttributeIfNotExists(e,"aria-labelledby",`${t.id}`))}_toggleDropDown(t,e){const i=this._getOuterElement(t);if(!i.classList.contains("dropdown"))return;const n=(t,n)=>{const s=z.findOne(t,i);s&&s.classList.toggle(n,e)};n(Bs,Fs),n(".dropdown-menu",Ws),i.setAttribute("aria-expanded",e)}_setAttributeIfNotExists(t,e,i){t.hasAttribute(e)||t.setAttribute(e,i)}_elemIsActive(t){return t.classList.contains(Fs)}_getInnerElement(t){return t.matches(qs)?t:z.findOne(qs,t)}_getOuterElement(t){return t.closest(".nav-item, .list-group-item")||t}static jQueryInterface(t){return this.each((function(){const e=Ks.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t]||t.startsWith("_")||"constructor"===t)throw new TypeError(`No method named "${t}"`);e[t]()}}))}}N.on(document,Ls,Rs,(function(t){["A","AREA"].includes(this.tagName)&&t.preventDefault(),l(this)||Ks.getOrCreateInstance(this).show()})),N.on(window,Ds,(()=>{for(const t of z.find(Vs))Ks.getOrCreateInstance(t)})),m(Ks);const Qs=".bs.toast",Xs=`mouseover${Qs}`,Ys=`mouseout${Qs}`,Us=`focusin${Qs}`,Gs=`focusout${Qs}`,Js=`hide${Qs}`,Zs=`hidden${Qs}`,to=`show${Qs}`,eo=`shown${Qs}`,io="hide",no="show",so="showing",oo={animation:"boolean",autohide:"boolean",delay:"number"},ro={animation:!0,autohide:!0,delay:5e3};class ao extends W{constructor(t,e){super(t,e),this._timeout=null,this._hasMouseInteraction=!1,this._hasKeyboardInteraction=!1,this._setListeners()}static get Default(){return ro}static get DefaultType(){return oo}static get NAME(){return"toast"}show(){N.trigger(this._element,to).defaultPrevented||(this._clearTimeout(),this._config.animation&&this._element.classList.add("fade"),this._element.classList.remove(io),d(this._element),this._element.classList.add(no,so),this._queueCallback((()=>{this._element.classList.remove(so),N.trigger(this._element,eo),this._maybeScheduleHide()}),this._element,this._config.animation))}hide(){this.isShown()&&(N.trigger(this._element,Js).defaultPrevented||(this._element.classList.add(so),this._queueCallback((()=>{this._element.classList.add(io),this._element.classList.remove(so,no),N.trigger(this._element,Zs)}),this._element,this._config.animation)))}dispose(){this._clearTimeout(),this.isShown()&&this._element.classList.remove(no),super.dispose()}isShown(){return this._element.classList.contains(no)}_maybeScheduleHide(){this._config.autohide&&(this._hasMouseInteraction||this._hasKeyboardInteraction||(this._timeout=setTimeout((()=>{this.hide()}),this._config.delay)))}_onInteraction(t,e){switch(t.type){case"mouseover":case"mouseout":this._hasMouseInteraction=e;break;case"focusin":case"focusout":this._hasKeyboardInteraction=e}if(e)return void this._clearTimeout();const i=t.relatedTarget;this._element===i||this._element.contains(i)||this._maybeScheduleHide()}_setListeners(){N.on(this._element,Xs,(t=>this._onInteraction(t,!0))),N.on(this._element,Ys,(t=>this._onInteraction(t,!1))),N.on(this._element,Us,(t=>this._onInteraction(t,!0))),N.on(this._element,Gs,(t=>this._onInteraction(t,!1)))}_clearTimeout(){clearTimeout(this._timeout),this._timeout=null}static jQueryInterface(t){return this.each((function(){const e=ao.getOrCreateInstance(this,t);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t](this)}}))}}return R(ao),m(ao),{Alert:Q,Button:Y,Carousel:xt,Collapse:Bt,Dropdown:qi,Modal:On,Offcanvas:qn,Popover:us,ScrollSpy:Es,Tab:Ks,Toast:ao,Tooltip:cs}}));;
+
+/* ===== PHẦN CHUNG (core) ===== */
+/* core.js: phần code dùng chung cho mọi trang của Âm Sắc Việt. */
 
 
-/* ======================================================================
-   PHẦN 1: BẢN DỊCH VI/EN VÀ HÀM ĐỔI NGÔN NGỮ (I18n)
-   ====================================================================== */
-
-/* i18n.js: Bản dịch VI/EN và hàm đổi ngôn ngữ
-   - Chữ trong HTML gắn data-i18n="key" → thay textContent.
-   - Thuộc tính: data-i18n-alt, data-i18n-aria-label,
-     data-i18n-title, data-i18n-placeholder, data-i18n-content.
-   - Lựa chọn lưu trong localStorage (khóa "asv-lang"). */
+/* PHẦN 1: BẢN DỊCH VI/EN VÀ HÀM ĐỔI NGÔN NGỮ (I18n) */
 
 var ASV_TRANSLATIONS = {
   vi: {
@@ -654,7 +652,6 @@ var I18n = (function () {
   var current = detect();
 
   // Bản tiếng Anh không dùng dấu tiếng Việt: "đàn bầu" → "dan bau", "sông Hương" → "Huong".
-  // Tên site cũng bỏ dấu ("Am Sac Viet"); chỉ tên nút "Tiếng Việt" giữ dấu cho người Việt dễ nhận ra.
   var KEEP_MARKS = { "lang.vi": true };
   function plain(text) {
     if (typeof text !== "string") return text;
@@ -730,31 +727,13 @@ var I18n = (function () {
 })();
 
 
-/* ======================================================================
-   PHẦN 2: DỮ LIỆU: NHẠC CỤ, LOẠI HÌNH, LỊCH SỬ, THUẬT NGỮ (ASV_DATA)
-   ====================================================================== */
-
-/* data.js: Dữ liệu dùng chung cho cả site (biến toàn cục)
-   - Không dùng fetch(): dữ liệu nằm sẵn trong file này để
-     site chạy được khi mở trực tiếp bằng file://.
-   - Chữ hiển thị viết dạng { vi: "...", en: "..." }.
-   - Tên riêng (đàn bầu, ca trù…) giữ nguyên dấu ở cả hai ngôn ngữ.
-   - "[CẦN KIỂM CHỨNG]" = chi tiết cần tra lại trước khi nộp.
-   - image: nhạc cụ dùng hình vẽ SVG trong images/nhac-cu/ (scripts/draw-instruments.cjs).
-   - image của loại hình: cảnh vẽ SVG trong images/loai-hinh/ (scripts/draw-genres.cjs).
-   - audio: đường dẫn để sẵn. Chưa có file → site tự hiện
-     ô giữ chỗ và phát âm tổng hợp (preset trong "synth").
-   - Không tách âm thanh từ video YouTube (bản quyền của UNESCO và đơn vị quay);
-     muốn có bản thu thật thì dùng file có giấy phép, thả vào audio/. */
+/* PHẦN 2: DỮ LIỆU: NHẠC CỤ, LOẠI HÌNH, LỊCH SỬ, THUẬT NGỮ (ASV_DATA) */
 
 var ASV_DATA = {
   /* true = tô vàng các chỗ [CẦN KIỂM CHỨNG] trên trang; đổi thành false khi đã tra xong */
   showVerifyMarks: true,
 
-  /* 12 nhạc cụ
-     family: "string" (dây) | "wind" (hơi) | "percussion" (gõ)
-     branch: nhánh nhỏ theo cách phát ra tiếng; people: dân tộc gắn bó nhiều nhất
-     genres: id loại hình liên quan (xem mục genres bên dưới) */
+  /* 12 nhạc cụ */
   instruments: [
     {
       id: "dan-bau",
@@ -763,7 +742,7 @@ var ASV_DATA = {
       family: "string",
       branch: { vi: "Dây gảy", en: "Plucked string" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/dan-bau.svg",
+      image: "assets/nhac-cu-dan-bau.svg",
       audio: "audio/dan-bau.mp3",
       synth: ["dan-bau"],
       genres: ["tai-tu"],
@@ -787,7 +766,7 @@ var ASV_DATA = {
       family: "string",
       branch: { vi: "Dây gảy", en: "Plucked string" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/dan-tranh.svg",
+      image: "assets/nhac-cu-dan-tranh.svg",
       audio: "audio/dan-tranh.mp3",
       synth: ["dan-tranh"],
       genres: ["tai-tu"],
@@ -811,7 +790,7 @@ var ASV_DATA = {
       family: "string",
       branch: { vi: "Dây gảy", en: "Plucked string" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/dan-nguyet.svg",
+      image: "assets/nhac-cu-dan-nguyet.svg",
       audio: "audio/dan-nguyet.mp3",
       synth: ["dan-nguyet"],
       genres: ["tai-tu"],
@@ -835,7 +814,7 @@ var ASV_DATA = {
       family: "string",
       branch: { vi: "Dây kéo bằng cung", en: "Bowed string" },
       people: { vi: "Người Kinh và nhiều dân tộc khác", en: "The Kinh and many other peoples" },
-      image: "images/nhac-cu/dan-nhi.svg",
+      image: "assets/nhac-cu-dan-nhi.svg",
       audio: "audio/dan-nhi.mp3",
       synth: ["dan-nhi"],
       genres: ["tai-tu", "nha-nhac"],
@@ -859,7 +838,7 @@ var ASV_DATA = {
       family: "string",
       branch: { vi: "Dây gảy", en: "Plucked string" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/ty-ba.svg",
+      image: "assets/nhac-cu-ty-ba.svg",
       audio: "audio/ty-ba.mp3",
       synth: ["ty-ba"],
       genres: ["nha-nhac", "tai-tu"],
@@ -883,7 +862,7 @@ var ASV_DATA = {
       family: "wind",
       branch: { vi: "Hơi, thổi qua lỗ", en: "Wind, blown across a hole" },
       people: { vi: "Người Kinh và nhiều dân tộc khác", en: "The Kinh and many other peoples" },
-      image: "images/nhac-cu/sao-truc.svg",
+      image: "assets/nhac-cu-sao-truc.svg",
       audio: "audio/sao-truc.mp3",
       synth: ["sao-truc"],
       genres: ["tai-tu"],
@@ -907,7 +886,7 @@ var ASV_DATA = {
       family: "wind",
       branch: { vi: "Hơi, lưỡi gà tự do", en: "Wind, free reed" },
       people: { vi: "Người H'Mông; người Thái, Mường có khèn bè", en: "H'Mông people; the Thái and Mường play the khèn bè" },
-      image: "images/nhac-cu/khen.svg",
+      image: "assets/nhac-cu-khen.svg",
       audio: "audio/khen.mp3",
       synth: ["khen"],
       genres: [],
@@ -931,7 +910,7 @@ var ASV_DATA = {
       family: "wind",
       branch: { vi: "Hơi, dăm kép", en: "Wind, double reed" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/ken-bau.svg",
+      image: "assets/nhac-cu-ken-bau.svg",
       audio: "audio/ken-bau.mp3",
       synth: ["ken-bau"],
       genres: ["nha-nhac"],
@@ -955,7 +934,7 @@ var ASV_DATA = {
       family: "percussion",
       branch: { vi: "Gõ, màng rung (mặt da)", en: "Percussion, vibrating skin" },
       people: { vi: "Người Kinh và nhiều dân tộc khác", en: "The Kinh and many other peoples" },
-      image: "images/nhac-cu/trong.svg",
+      image: "assets/nhac-cu-trong.svg",
       audio: "audio/trong.mp3",
       synth: ["trong"],
       genres: ["ca-tru", "hat-xoan", "bai-choi", "nha-nhac"],
@@ -979,7 +958,7 @@ var ASV_DATA = {
       family: "percussion",
       branch: { vi: "Gõ, tự thân vang", en: "Percussion, sounding body" },
       people: { vi: "Người Kinh (Việt)", en: "Kinh (Viet) people" },
-      image: "images/nhac-cu/phach.svg",
+      image: "assets/nhac-cu-phach.svg",
       audio: "audio/phach.mp3",
       synth: ["phach"],
       genres: ["ca-tru", "hat-xoan", "tai-tu"],
@@ -1003,7 +982,7 @@ var ASV_DATA = {
       family: "percussion",
       branch: { vi: "Gõ, tự thân vang", en: "Percussion, sounding body" },
       people: { vi: "Người Ba Na, Gia Rai (Tây Nguyên)", en: "Ba Na and Gia Rai peoples (Central Highlands)" },
-      image: "images/nhac-cu/dan-trung.svg",
+      image: "assets/nhac-cu-dan-trung.svg",
       audio: "audio/dan-trung.mp3",
       synth: ["dan-trung"],
       genres: ["cong-chieng"],
@@ -1027,7 +1006,7 @@ var ASV_DATA = {
       family: "percussion",
       branch: { vi: "Gõ, tự thân vang", en: "Percussion, sounding body" },
       people: { vi: "Các dân tộc Tây Nguyên; người Mường cũng có cồng chiêng", en: "Peoples of the Central Highlands; the Mường also play gongs" },
-      image: "images/nhac-cu/cong-chieng.svg",
+      image: "assets/nhac-cu-cong-chieng.svg",
       audio: "audio/cong-chieng.mp3",
       synth: ["cong-chieng"],
       genres: ["cong-chieng"],
@@ -1046,11 +1025,7 @@ var ASV_DATA = {
     }
   ],
 
-  /* 16 loại hình (10 được UNESCO ghi danh, 6 loại hình khác)
-     region: "north" | "central" | "highlands" | "south"
-     lat/lon: tọa độ gần đúng để đặt điểm trên bản đồ SVG
-     video: video chính thức trên kênh YouTube của UNESCO (mã video, trang di sản, ghi công).
-     Loại hình KHÔNG có âm tổng hợp: máy không giả được giọng hát, nên chỉ dùng bản ghi thật (video UNESCO). */
+  /* 16 loại hình (10 được UNESCO ghi danh, 6 loại hình khác) */
   genres: [
     {
       id: "quan-ho",
@@ -1063,7 +1038,7 @@ var ASV_DATA = {
         year: 2009,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/anh/quan-ho.jpg",
+      image: "assets/loai-hinh-quan-ho.jpg",
       photo: {
         author: "Nguyễn Đông Sơn", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
         page: "https://commons.wikimedia.org/wiki/File:Quan_h%E1%BB%8D_giao_duy%C3%AAn_-_h%E1%BB%99i_Lim,_B%E1%BA%AFc_Ninh.JPG",
@@ -1087,7 +1062,7 @@ var ASV_DATA = {
         year: 2009,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể cần bảo vệ khẩn cấp", en: "List of Intangible Cultural Heritage in Need of Urgent Safeguarding" }
       },
-      image: "images/loai-hinh/anh/ca-tru.jpg",
+      image: "assets/loai-hinh-ca-tru.jpg",
       photo: {
         author: "Michael Coghlan", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0",
         page: "https://commons.wikimedia.org/wiki/File:Ca_tr%C3%B9_performance.jpg",
@@ -1111,7 +1086,7 @@ var ASV_DATA = {
         year: 2011,
         note: { vi: "Danh sách cần bảo vệ khẩn cấp; năm 2017 được chuyển sang Danh sách đại diện", en: "Urgent Safeguarding List; moved to the Representative List in 2017" }
       },
-      image: "images/loai-hinh/anh/hat-xoan.jpg",
+      image: "assets/loai-hinh-hat-xoan.jpg",
       photo: {
         author: "Sở Văn hóa, Thể thao và Du lịch Phú Thọ", source: "hồ sơ UNESCO",
         license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
@@ -1136,7 +1111,7 @@ var ASV_DATA = {
         year: 2003,
         note: { vi: "Công nhận là Kiệt tác năm 2003; ghi danh vào Danh sách đại diện năm 2008", en: "Proclaimed a Masterpiece in 2003; inscribed on the Representative List in 2008" }
       },
-      image: "images/loai-hinh/anh/nha-nhac.jpg",
+      image: "assets/loai-hinh-nha-nhac.jpg",
       photo: {
         author: "Lưu Ly", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:Nh%C3%A3_nh%E1%BA%A1c_cung_%C4%91%C3%ACnh_Hu%E1%BA%BF.JPG",
@@ -1160,7 +1135,7 @@ var ASV_DATA = {
         year: 2014,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/anh/vi-giam.jpg",
+      image: "assets/loai-hinh-vi-giam.jpg",
       photo: {
         author: "Lan Anh", source: "Báo Điện tử Chính phủ",
         license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
@@ -1185,7 +1160,7 @@ var ASV_DATA = {
         year: 2017,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/anh/bai-choi.jpg",
+      image: "assets/loai-hinh-bai-choi.jpg",
       photo: {
         author: "Lê Tấn Lộc", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
         page: "https://commons.wikimedia.org/wiki/File:B%C3%A0i_ch%C3%B2i_H%E1%BB%99i_An.JPG",
@@ -1212,7 +1187,7 @@ var ASV_DATA = {
         year: 2005,
         note: { vi: "Công nhận là Kiệt tác năm 2005; ghi danh vào Danh sách đại diện năm 2008", en: "Proclaimed a Masterpiece in 2005; inscribed on the Representative List in 2008" }
       },
-      image: "images/loai-hinh/anh/cong-chieng.jpg",
+      image: "assets/loai-hinh-cong-chieng.jpg",
       photo: {
         author: "DA", source: "Báo Điện tử Chính phủ",
         license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
@@ -1237,7 +1212,7 @@ var ASV_DATA = {
         year: 2013,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/anh/tai-tu.jpg",
+      image: "assets/loai-hinh-tai-tu.jpg",
       photo: {
         author: "", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:Ban_nh%E1%BA%A1c_%C4%91%E1%BB%9Dn_ca_t%C3%A0i_t%E1%BB%AD_S%C3%A0i_G%C3%B2n_(1911).jpeg",
@@ -1265,7 +1240,7 @@ var ASV_DATA = {
         note: { vi: "Danh sách đại diện, là một phần của di sản Thực hành tín ngưỡng thờ Mẫu Tam phủ của người Việt",
                 en: "Representative List, as part of the Practices related to the Việt beliefs in the Mother Goddesses of Three Realms" }
       },
-      image: "images/loai-hinh/anh/hat-van.jpg",
+      image: "assets/loai-hinh-hat-van.jpg",
       photo: {
         author: "Casablanca1911", license: "CC BY 3.0", licenseUrl: "https://creativecommons.org/licenses/by/3.0",
         page: "https://commons.wikimedia.org/wiki/File:L%C3%AAn_%C4%91%E1%BB%93ng.jpg",
@@ -1290,7 +1265,7 @@ var ASV_DATA = {
         year: 2019,
         note: { vi: "Danh sách Di sản văn hóa phi vật thể đại diện của nhân loại", en: "Representative List of the Intangible Cultural Heritage of Humanity" }
       },
-      image: "images/loai-hinh/anh/then.jpg",
+      image: "assets/loai-hinh-then.jpg",
       photo: {
         author: "DTH-BD-NVT", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
         page: "https://commons.wikimedia.org/wiki/File:Dan_Tinh_lute_from_Vietnam.jpg",
@@ -1319,7 +1294,7 @@ var ASV_DATA = {
         note: { vi: "Chèo Bắc Ninh được công nhận là di sản văn hóa phi vật thể quốc gia năm 2025",
                 en: "Chèo of Bắc Ninh was recognised as national intangible cultural heritage in 2025" }
       },
-      image: "images/loai-hinh/anh/cheo.jpg",
+      image: "assets/loai-hinh-cheo.jpg",
       photo: {
         author: "USIS", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:VoCheoQuanamThiKinh.jpg",
@@ -1340,7 +1315,7 @@ var ASV_DATA = {
       place: { vi: "Trung Bộ, mạnh nhất ở Bình Định cũ (nay thuộc Gia Lai), Quảng Nam cũ (nay thuộc Đà Nẵng) và Huế; cũng có ở Bắc Bộ, Nam Bộ",
                en: "Central Vietnam, strongest in former Bình Định (now Gia Lai), former Quảng Nam (now Đà Nẵng) and Huế; also found in the north and south" },
       lat: 15.57, lon: 108.47,
-      image: "images/loai-hinh/anh/tuong.jpg",
+      image: "assets/loai-hinh-tuong.jpg",
       photo: {
         author: "Bùi Thụy Đào Nguyên", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
         page: "https://commons.wikimedia.org/wiki/File:H%C3%A1t_tu%E1%BB%93ng_2014.jpg",
@@ -1365,7 +1340,7 @@ var ASV_DATA = {
         note: { vi: "Di sản văn hóa phi vật thể quốc gia (Quyết định 1877/QĐ-BVHTTDL, ngày 8/6/2015)",
                 en: "National intangible cultural heritage (Decision 1877/QĐ-BVHTTDL, 8 June 2015)" }
       },
-      image: "images/loai-hinh/anh/ca-hue.jpg",
+      image: "assets/loai-hinh-ca-hue.jpg",
       photo: {
         author: "Liftold", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
         page: "https://commons.wikimedia.org/wiki/File:D%C3%A0n_nh%E1%BA%A1c_ca_Hu%E1%BA%BF_tr%C3%AAn_s%C3%B4ng_Hu%E1%BA%BF.JPG",
@@ -1390,7 +1365,7 @@ var ASV_DATA = {
         badge: { vi: "Hò khoan Lệ Thủy: di sản quốc gia", en: "Hò khoan Lệ Thủy: national heritage" },
         note: { vi: "Hò khoan Lệ Thủy là di sản văn hóa phi vật thể quốc gia", en: "Hò khoan Lệ Thủy is national intangible cultural heritage" }
       },
-      image: "images/loai-hinh/anh/ho.jpg",
+      image: "assets/loai-hinh-ho.jpg",
       photo: {
         author: "Báo Nhân Dân", source: "nhandan.vn",
         license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
@@ -1412,7 +1387,7 @@ var ASV_DATA = {
       place: { vi: "Nam Bộ; buổi diễn thường được coi là đầu tiên ở Mỹ Tho (nay thuộc Đồng Tháp)",
                en: "Southern Vietnam; the performance usually counted as the first was in Mỹ Tho (now in Đồng Tháp)" },
       lat: 10.36, lon: 106.36,
-      image: "images/loai-hinh/anh/cai-luong.jpg",
+      image: "assets/loai-hinh-cai-luong.jpg",
       photo: {
         author: "", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:T%C3%A2y-Thi_-_Saigon,_August_1927_-_B%C3%B9i_Quang_Tu%E1%BA%A5n_(3_June_2020).jpg",
@@ -1438,7 +1413,7 @@ var ASV_DATA = {
         note: { vi: "Nghệ thuật trình diễn dân gian nhạc ngũ âm của người Khmer là di sản văn hóa phi vật thể quốc gia (2021)",
                 en: "The Khmer folk performing art of ngũ âm music is national intangible cultural heritage (2021)" }
       },
-      image: "images/loai-hinh/anh/ngu-am.jpg",
+      image: "assets/loai-hinh-ngu-am.jpg",
       photo: {
         author: "Lê Sơn", source: "Báo Điện tử Chính phủ",
         license: { vi: "đăng lại có ghi nguồn theo điều khoản của báo", en: "republished with credit under the newspaper's terms" },
@@ -1455,11 +1430,7 @@ var ASV_DATA = {
   ],
 
 
-  /* 8 mốc lịch sử
-     Mỗi mốc: period (khoảng thời gian), title, summary (40–70 từ),
-     facts: các sự kiện có năm cụ thể (chỉ ghi điều đã đối chiếu được nguồn),
-     debate: điều còn tranh luận (nói rõ, không giấu), sources: nguồn tra cứu,
-     genres / instruments: mục liên quan để nghe, xem; image + alt: cảnh minh họa (hình vẽ mới, không phải tư liệu). */
+  /* 8 mốc lịch sử */
   history: [
     {
       id: "dong-son",
@@ -1489,9 +1460,9 @@ var ASV_DATA = {
         { vi: "G. Condominas, bài về đàn đá Ndut Liêng Krak, Bulletin de l'École française d'Extrême-Orient", en: "G. Condominas, article on the Ndut Liêng Krak lithophone, Bulletin de l'École française d'Extrême-Orient" }
       ],
       genres: [], instruments: [],
-      image: "images/lich-su/dong-son.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-dong-son.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/dong-son.jpg",
+        src: "assets/lich-su-dong-son.jpg",
         author: "VuThiAnh", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:Ngoc_Lu.jpg",
         caption: { vi: "Trống đồng Ngọc Lũ trưng bày tại Bảo tàng Lịch sử Quốc gia, Hà Nội",
@@ -1528,9 +1499,9 @@ var ASV_DATA = {
           url: "https://nhahatmuaroivietnam.vn/node/998" }
       ],
       genres: [], instruments: [],
-      image: "images/lich-su/ly-tran.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-ly-tran.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/ly-tran.jpg",
+        src: "assets/lich-su-ly-tran.jpg",
         author: "TravellerMya", license: "CC0", licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
         page: "https://commons.wikimedia.org/wiki/File:Water_Puppet_Show_in_Vietnam_with_Two_Birds.jpg",
         caption: { vi: "Một buổi diễn múa rối nước ngày nay",
@@ -1568,9 +1539,9 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/VSS/en/article/view/88612" }
       ],
       genres: ["ca-tru"], instruments: ["phach"],
-      image: "images/lich-su/le.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-le.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/le.jpg",
+        src: "assets/lich-su-le.jpg",
         author: "Phương Huy", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
         page: "https://commons.wikimedia.org/wiki/File:Tu_vi%E1%BB%87n_V%C4%A9nh_Nghi%C3%AAm,_c%E1%BB%95ng_tam_quan_(chi%E1%BA%BFc_kh%C3%A1nh_b%E1%BA%B1ng_%C4%91%C3%A1)_(4).jpg",
         caption: { vi: "Một chiếc khánh đá ngày nay treo ở cổng tam quan tu viện Vĩnh Nghiêm. Khánh là nhạc cụ quen thuộc trong lễ nhạc cung đình và chùa chiền.",
@@ -1610,9 +1581,9 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/ncpt-hue/article/view/4570" }
       ],
       genres: ["nha-nhac"], instruments: ["ken-bau", "trong"],
-      image: "images/lich-su/nguyen.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-nguyen.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/nguyen.jpg",
+        src: "assets/lich-su-nguyen.jpg",
         author: "Liftold", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
         page: "https://commons.wikimedia.org/wiki/File:S%C3%A2n_kh%E1%BA%A5u_ch%C3%ADnh_c%E1%BB%A7a_Duy%E1%BB%87t_Th%E1%BB%8B_%C4%90%C6%B0%E1%BB%9Dng.JPG",
         caption: { vi: "Sân khấu chính của nhà hát Duyệt Thị Đường trong Đại Nội Huế",
@@ -1650,9 +1621,9 @@ var ASV_DATA = {
           url: "https://vjol.info.vn/ncpt-hue/article/view/38427" }
       ],
       genres: ["tai-tu"], instruments: ["dan-nguyet", "dan-tranh"],
-      image: "images/lich-su/tai-tu-cai-luong.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-tai-tu-cai-luong.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/loai-hinh/anh/tai-tu.jpg",
+        src: "assets/loai-hinh-tai-tu.jpg",
         author: "", license: "Public domain",
         page: "https://commons.wikimedia.org/wiki/File:Ban_nh%E1%BA%A1c_%C4%91%E1%BB%9Dn_ca_t%C3%A0i_t%E1%BB%AD_S%C3%A0i_G%C3%B2n_(1911).jpeg",
         caption: { vi: "Một ban đờn ca tài tử ở Sài Gòn năm 1911, in trên một tờ quảng cáo",
@@ -1689,9 +1660,9 @@ var ASV_DATA = {
         { vi: "Trần Văn Khê, La musique vietnamienne traditionnelle, Paris, 1962", en: "Trần Văn Khê, La musique vietnamienne traditionnelle, Paris, 1962" }
       ],
       genres: [], instruments: ["dan-bau", "dan-tranh"],
-      image: "images/lich-su/hien-dai.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-hien-dai.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/hien-dai.jpg",
+        src: "assets/lich-su-hien-dai.jpg",
         author: "Adir Benyamini", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
         page: "https://commons.wikimedia.org/wiki/File:The_Vietnam_National_Academy_of_Music_SAM_0397.jpg",
         caption: { vi: "Tòa phòng hòa nhạc của Học viện Âm nhạc Quốc gia Việt Nam, Hà Nội",
@@ -1726,9 +1697,9 @@ var ASV_DATA = {
           url: "https://ich.unesco.org/en/state/viet-nam-VN" }
       ],
       genres: ["nha-nhac", "cong-chieng", "quan-ho", "ca-tru", "hat-xoan", "tai-tu", "vi-giam", "bai-choi"], instruments: [],
-      image: "images/lich-su/unesco.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-unesco.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/loai-hinh/anh/hat-xoan.jpg",
+        src: "assets/loai-hinh-hat-xoan.jpg",
         author: "Sở Văn hóa, Thể thao và Du lịch Phú Thọ", source: "hồ sơ UNESCO", license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
         page: "https://ich.unesco.org/en/RL/xoan-singing-of-phu-th-province-viet-nam-01260",
         caption: { vi: "Hát xoan tại miếu Lãi Lèn, Phú Thọ. Năm 2017 hát xoan được chuyển từ danh sách cần bảo vệ khẩn cấp sang danh sách đại diện.",
@@ -1757,9 +1728,9 @@ var ASV_DATA = {
         { vi: "Nghị định 62/2014/NĐ-CP về xét tặng danh hiệu Nghệ nhân nhân dân, Nghệ nhân ưu tú", en: "Decree 62/2014/NĐ-CP on the titles People's Artisan and Meritorious Artisan" }
       ],
       genres: [], instruments: ["dan-bau"],
-      image: "images/lich-su/hom-nay.svg", // tranh vẽ, dùng khi thiếu file ảnh
+      image: "assets/lich-su-hom-nay.svg", // tranh vẽ, dùng khi thiếu file ảnh
       photo: {
-        src: "images/lich-su/anh/hom-nay.jpg",
+        src: "assets/lich-su-hom-nay.jpg",
         author: "Cục Hợp tác quốc tế (Bộ VHTTDL)", source: "Báo Điện tử Chính phủ", license: { vi: "dùng cho bài tập môn học", en: "used for a course assignment" },
         page: "https://baochinhphu.vn/tinh-hoa-am-nhac-truyen-thong-viet-nam-toa-sang-tai-expo-2025-102250420143328483.htm",
         caption: { vi: "Khách tham quan chơi thử đàn t'rưng tại EXPO 2025 ở Osaka, Nhật Bản",
@@ -1770,14 +1741,7 @@ var ASV_DATA = {
     }
   ],
 
-  /* Thuật ngữ: bấm vào chữ có gạch chấm trong bài để xem giải thích (common.js, ASV.Glossary);
-     danh sách đầy đủ ở glossary.html (glossary.js), xếp theo nhóm, giữ thứ tự dưới đây (dễ trước, khó sau).
-     group: sound (cách chơi, âm thanh) | parts (nhạc cụ, bộ phận) | performance (biểu diễn, bài bản) | unesco
-     see: liên kết trên trang Thuật ngữ. listen = khóa ASV.playables (âm mô phỏng); try = nhạc cụ để chơi thử;
-          recording = loại hình có video thật; instruments/genres = link thêm; history = id mốc lịch sử;
-          scales = link phần "Năm âm và bảy âm"; unescoList = link danh sách loại hình UNESCO ghi danh.
-     match: các cách viết sẽ được nhận ra trong bài (không phân biệt hoa thường; bản EN tự bỏ dấu).
-     Chỉ ghi định nghĩa chắc chắn; thêm từ mới thì thêm cả vi và en. */
+  /* Thuật ngữ: bấm vào chữ có gạch chấm trong bài để xem giải thích (ASV.Glossary, phần 4) */
   glossary: [
     { id: "am-thuc", group: "sound", see: { listen: "term:am-thuc", try: "dan-bau" },
       term: { vi: "Âm thực", en: "Open string (âm thực)" },
@@ -1898,14 +1862,9 @@ var ASV_DATA = {
 };
 
 
-/* ======================================================================
-   PHẦN 3: ĐƯỜNG BIÊN VIỆT NAM CHO BẢN ĐỒ (ASV_MAP)
-   ====================================================================== */
+/* PHẦN 3: ĐƯỜNG BIÊN VIỆT NAM CHO BẢN ĐỒ (ASV_MAP) */
 
 /* <ban-do> (scripts/build-map.cjs ghi đè đoạn giữa hai mốc này) */
-/* map-data.js — Đường biên Việt Nam cho bản đồ trang Loại hình.
-   Sinh tự động bởi scripts/build-map.cjs từ dữ liệu Natural Earth (public domain).
-   Không sửa tay; muốn đổi thì sửa script rồi chạy lại. */
 var ASV_MAP = {
   width: 610,
   height: 664,
@@ -1918,26 +1877,11 @@ var ASV_MAP = {
 /* </ban-do> */
 
 
-/* ======================================================================
-   PHẦN 4: PHẦN DÙNG CHUNG: MENU, CHÂN TRANG, TRÌNH PHÁT ÂM THANH (ASV)
-   ====================================================================== */
-
-/* common.js: Phần dùng chung cho mọi trang
-   1. Danh sách trang + đánh dấu trang nào đã làm xong
-   2. Tiện ích nhỏ (escape, lưu trữ an toàn)
-   3. Biểu tượng SVG + biểu tượng đàn bầu (logo, dải phân cách, cây đàn ở hero)
-   4. Navbar, footer, khối "Xem tiếp"
-   5. Thông báo "Sẽ có trong bản hoàn chỉnh"
-   6. Âm thanh: thử file thật → thiếu file thì tổng hợp bằng Web Audio
-   7. Ảnh có ô giữ chỗ khi chưa có file
-   8. Thẻ video biểu diễn (YouTube của UNESCO)
-   Thứ tự nạp: i18n.js → data.js → common.js → <trang>.js */
+/* PHẦN 4: PHẦN DÙNG CHUNG: MENU, CHÂN TRANG, TRÌNH PHÁT ÂM THANH (ASV) */
 
 var ASV = window.ASV || {};
 
-/* Danh sách trang
-   ready: false → link tới trang đó hiện thông báo thay vì dẫn tới trang lỗi.
-   Làm xong trang nào thì đổi ready thành true. */
+/* Danh sách trang */
 ASV.PAGES = [
   { id: "home",        href: "HomePage.html",    icon: "home",     ready: true },
   { id: "genres",      href: "genres.html",      icon: "map",      ready: true },
@@ -1953,7 +1897,7 @@ ASV.escape = function (str) {
     .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 };
 
-// Hiện chữ từ data.js; tô vàng các chỗ [CẦN KIỂM CHỨNG] nếu bật showVerifyMarks
+// Hiện chữ từ dữ liệu (phần 2); tô vàng các chỗ [CẦN KIỂM CHỨNG] nếu bật showVerifyMarks
 ASV.renderText = function (value) {
   var html = ASV.escape(I18n.pick(value));
   var show = window.ASV_DATA && ASV_DATA.showVerifyMarks;
@@ -2007,10 +1951,7 @@ ASV.icon = function (name, extraClass) {
     (ASV.ICONS[name] || "") + "</svg>";
 };
 
-/* Biểu tượng đàn bầu
-   Biểu tượng của site là cây đàn bầu (đàn một dây, đặc trưng của Việt Nam)
-   đặt trong con dấu đỏ son, giống con dấu trên các bức tranh ở trang chủ.
-   Dùng cho: logo, dải phân cách, biểu tượng tải, cây đàn lớn ở hero. */
+/* Biểu tượng đàn bầu */
 ASV.Motif = (function () {
   var uid = 0;
 
@@ -2052,7 +1993,7 @@ ASV.Motif = (function () {
     for (var n = 2; n <= 8; n++) {
       var x = BAU.px - (BAU.px - BAU.sx) / n;
       var y = 121 - (10 * (x - 26)) / 950 + 3; // nằm trên mặt đàn
-      nodes += '<path class="bau-node" d="M' + x.toFixed(1) + " " + (y - 3.5).toFixed(1) + " l3.5 3.5 l-3.5 3.5 l-3.5 -3.5z\"/>";
+      nodes += '<path class="bau-node" data-n="' + n + '" d="M' + x.toFixed(1) + " " + (y - 3.5).toFixed(1) + " l3.5 3.5 l-3.5 3.5 l-3.5 -3.5z\"/>";
     }
     var line = "M" + BAU.sx + " " + BAU.sy + " L" + BAU.px + " " + BAU.py;
     return '<svg class="bau-svg" viewBox="0 0 1000 180" aria-hidden="true" focusable="false">' +
@@ -2250,9 +2191,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-/* Âm thanh tổng hợp (Web Audio)
-   Dùng khi chưa có file ghi âm. Mỗi preset là một câu nhạc ngắn gợi tả
-   âm sắc nhạc cụ; trả về độ dài (giây). Chỉ là minh họa, không phải bản thu. */
+/* Âm thanh tổng hợp (Web Audio) */
 ASV.Synth = (function () {
   var ctx = null, noiseBuf = null;
 
@@ -2449,7 +2388,7 @@ ASV.Synth = (function () {
   }
 
 
-  // Thư viện preset: tên trong data.js → hàm tạo âm
+  // Thư viện preset: tên trong dữ liệu → hàm tạo âm
   var PRESETS = {
     "dan-bau": function (out, t) {
       var seq = [["A4", 0], ["C5", 0.75], ["D5", 1.35], ["C5", 2.35], ["A4", 2.75]];
@@ -2544,8 +2483,6 @@ ASV.Synth = (function () {
       return 5.0;
     },
     // Bồi âm đàn bầu (dùng cho cây đàn ở hero): p.freq = tần số bồi âm.
-    // Dưới 200 Hz là âm thực (dây buông Đô 3): thêm bội âm 2–5 như dây thật, vì loa laptop và điện thoại
-    // gần như không phát được tần số thấp này; tai vẫn nghe ra đúng nốt.
     "bau-harmonic": function (out, t, p) {
       var f = (p && p.freq) || 261.63, open = f < 200;
       var parts = open ? [[1, 1], [2, 0.6], [3, 0.45], [4, 0.25], [5, 0.12]] : [[1, 1], [2, 0.08]];
@@ -2615,9 +2552,7 @@ ASV.Synth = (function () {
   return { getCtx: getCtx, play: play, presets: Object.keys(PRESETS) };
 })();
 
-/* Trình phát chung
-   item = { key, title ({vi,en} hoặc chuỗi) hoặc titleKey, src, synth: [...] hoặc hàm tự viết, params }
-   Luôn chỉ phát MỘT âm thanh; bấm âm mới thì âm cũ dừng. */
+/* Trình phát chung */
 ASV.Player = (function () {
   var token = 0;          // tăng mỗi lần phát → bỏ qua sự kiện của lần phát cũ
   var current = null;     // { item, status: 'loading'|'playing', source: 'file'|'synth', stop }
@@ -2719,8 +2654,7 @@ ASV.announce = function (msg) {
   ASV.announce.timer = setTimeout(function () { live.textContent = msg; }, 50);
 };
 
-/* Danh sách mọi thứ "nghe được": khóa → item cho trình phát.
-   Khóa: "instrument:<id>". Loại hình KHÔNG có âm tổng hợp: nghe bản ghi thật qua ASV.openRecording(id). */
+/* Danh sách mọi thứ "nghe được": khóa → item cho trình phát. */
 ASV.playables = {};
 ASV.buildPlayables = function () {
   ASV_DATA.instruments.forEach(function (it) {
@@ -2804,9 +2738,7 @@ ASV.updatePlayerBar = function () {
     (c.source === "synth" ? I18n.t("player.synth") : I18n.t("player.recording")) + " · " + I18n.t("player.escHint");
 };
 
-/* Ảnh có ô giữ chỗ
-   ASV.createMedia({ src, name, kind: "instrument"|"genre", className, alt, fallback, onFallback })
-   Ảnh lỗi/chưa có → thay bằng ô giữ chỗ có con dấu đàn bầu và tên. */
+/* Ảnh có ô giữ chỗ */
 ASV.createMedia = function (opts) {
   var wrap = document.createElement("div");
   wrap.className = "media-frame " + (opts.className || "");
@@ -2829,7 +2761,6 @@ ASV.createMedia = function (opts) {
   img.alt = opts.alt || I18n.t(altKey, { name: opts.name }); // opts.alt: mô tả riêng cho hình (nếu có)
   img.decoding = "async";
   // Ảnh lỗi: có ảnh dự phòng (opts.fallback, ví dụ tranh vẽ) thì đổi sang ảnh đó, không thì hiện ô giữ chỗ.
-  // Gắn trước khi đặt src để không lỡ sự kiện.
   img.addEventListener("error", function () {
     if (opts.fallback && img.getAttribute("src") !== opts.fallback) {
       if (/\.svg$/i.test(opts.fallback)) wrap.classList.add("is-art");
@@ -2844,16 +2775,10 @@ ASV.createMedia = function (opts) {
   return wrap;
 };
 
-/* Video biểu diễn (YouTube của UNESCO)
-   YouTube chặn phát nhúng khi trang mở bằng file:// (lỗi 153), nên:
-   - Mở bằng file://  → nút "Mở trên YouTube" (tab mới).
-   - Chạy trên web (http/https, ví dụ GitHub Pages) → có thêm "Xem tại đây":
-     chỉ khi bấm mới tải trình phát (không tự phát, không tải trước).
-   Video không bao giờ phát cùng lúc với âm thanh của site. */
+/* Video biểu diễn (YouTube của UNESCO) */
 ASV.canEmbedVideo = location.protocol === "http:" || location.protocol === "https:";
 
 // Thẻ video cho một loại hình trong ASV_DATA.genres
-// opts.compact = true: bỏ tiêu đề và dòng địa điểm (khi khung bên cạnh đã có sẵn)
 ASV.videoCard = function (g, opts) {
   opts = opts || {};
   var v = g.video;
@@ -2891,8 +2816,7 @@ ASV.videoCard = function (g, opts) {
     "</div></article>";
 };
 
-/* Chú thích dưới ảnh thật: nội dung ảnh + dòng nguồn (tác giả · nơi lấy ảnh · giấy phép), link tới trang gốc.
-   Ảnh Wikimedia Commons: giấy phép CC hoặc phạm vi công cộng. Dùng ở trang Loại hình và Lịch sử. */
+/* Chú thích dưới ảnh thật: nội dung ảnh + dòng nguồn (tác giả · nơi lấy ảnh · giấy phép), link tới trang gốc. */
 ASV.photoCaption = function (p) {
   var license = p.license === "Public domain" ? I18n.t("photo.pd") : I18n.pick(p.license);
   var credit = I18n.t("photo.credit", { author: I18n.pick(p.author) || I18n.t("photo.unknown"), license: license, source: I18n.pick(p.source || "Wikimedia Commons") });
@@ -2901,8 +2825,7 @@ ASV.photoCaption = function (p) {
     '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span></a></figcaption>";
 };
 
-/* Dòng nguồn của video: video UNESCO ghi "Video: UNESCO · <đơn vị giữ bản quyền>" (link tới trang UNESCO);
-   video của nhà hát hoặc báo chí nhà nước ghi rõ tên kênh (link tới kênh YouTube chính thức). */
+/* Dòng nguồn của video: video UNESCO ghi "Video: UNESCO · <đơn vị giữ bản quyền>" (link tới trang UNESCO) */
 ASV.videoCredit = function (v) {
   var tab = '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span>";
   if (v.unesco) {
@@ -2912,9 +2835,7 @@ ASV.videoCredit = function (v) {
   return '<a href="' + v.channelUrl + '" target="_blank" rel="noopener">' + ASV.escape(text) + tab + "</a>";
 };
 
-/* Nghe bản ghi thật của một loại hình (video UNESCO):
-   - chạy trên web → khung nổi (modal) phát video ngay trong trang;
-   - mở bằng file:// → YouTube chặn phát nhúng nên mở video ở tab mới. */
+/* Nghe bản ghi thật của một loại hình (video UNESCO) */
 ASV.openRecording = function (gid) {
   var g = ASV_DATA.genres.filter(function (x) { return x.id === gid; })[0];
   if (!g) return;
@@ -2983,12 +2904,7 @@ document.addEventListener("click", function (e) {
   if (btn) ASV.openVideo(btn.getAttribute("data-video-play"));
 });
 
-/* Thuật ngữ (ASV_DATA.glossary)
-   Tìm thuật ngữ trong chữ của trang và biến chúng thành nút nhỏ có gạch chấm; bấm vào thì hiện khung giải thích.
-   - Mỗi khối chữ (đoạn văn, mục danh sách…) chỉ đánh dấu lần xuất hiện ĐẦU TIÊN của mỗi từ cho đỡ rối mắt.
-   - Không đánh dấu trong tiêu đề, nút, link, menu, ô nhập, vùng thông báo, mô hình nhạc cụ.
-   - Chữ do JS vẽ lại (đổi ngôn ngữ, mở hộp chi tiết…) được đánh dấu lại nhờ MutationObserver.
-   - Khung giải thích đóng bằng nút Đóng, phím Esc, hoặc bấm ra ngoài; focus quay về chữ vừa bấm. */
+/* Thuật ngữ (ASV_DATA.glossary) */
 ASV.Glossary = (function () {
   var SKIP = "a, button, h1, h2, h3, h4, h5, h6, label, input, textarea, select, svg, script, style, " +
     "[aria-live], .visually-hidden, .site-header, .site-footer, .player-bar, .welcome, .hist-nav, " +
@@ -3150,8 +3066,7 @@ ASV.Glossary = (function () {
   return { start: start, scan: scan, close: close };
 })();
 
-/* Khởi động
-   ASV.ready(fn): trang riêng đăng ký hàm chạy sau khi phần chung đã sẵn sàng */
+/* Khởi động */
 (function () {
   var queue = [], done = false;
   ASV.ready = function (fn) { if (done) fn(); else queue.push(fn); };
@@ -3183,4 +3098,2488 @@ ASV.Glossary = (function () {
     var live = document.getElementById("asvLive");
     if (live) live.textContent = "";
   });
+})();
+
+/* ===== TRANG: home (home.js) ===== */
+if (document.body.getAttribute("data-page") === "home") (function () {
+/* home.js: Logic riêng của HomePage.html */
+
+(function () {
+  var WELCOME_KEY = "asv-welcomed";    // sessionStorage: đã qua màn hình chào trong phiên này
+  var current = null;                  // nhạc cụ đang hiện ở "Nghe thử một nhạc cụ"
+  var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Màn hình chào */
+  function setupWelcome() {
+    var welcome = document.getElementById("welcome");
+    if (!welcome) return;
+    var behind = [document.getElementById("site-header"), document.getElementById("main"), document.getElementById("site-footer")];
+
+    // Đã vào trong phiên này → bỏ hẳn màn hình chào
+    if (document.documentElement.classList.contains("skip-welcome")) {
+      welcome.remove();
+      return;
+    }
+
+    // Trong lúc màn hình chào hiện: khóa cuộn và tạm "tắt" phần trang phía sau (inert)
+    document.body.classList.add("welcome-open");
+    behind.forEach(function (el) { if (el) el.inert = true; });
+    var enterBtn = document.getElementById("welcomeEnter");
+    enterBtn.focus();
+
+    var leaving = false;
+    function enter() {
+      if (leaving) return;
+      leaving = true;
+      try { sessionStorage.setItem(WELCOME_KEY, "1"); } catch (e) { /* bỏ qua */ }
+      welcome.classList.add("is-leaving"); // CSS trượt màn hình chào lên trên
+      document.body.classList.remove("welcome-open");
+      behind.forEach(function (el) { if (el) el.inert = false; });
+      setTimeout(function () {
+        welcome.remove();
+        document.getElementById("main").focus({ preventScroll: true });
+      }, reduceMotion ? 50 : 850);
+      cleanup();
+    }
+
+    // Lăn chuột (bất kỳ chiều nào) → vào trang
+    function onWheel(e) { if (Math.abs(e.deltaY) > 4) { e.preventDefault(); enter(); } }
+    // Vuốt trên điện thoại: kéo đủ 40px theo chiều dọc
+    var startY = null;
+    function onTouchStart(e) { startY = e.touches[0].clientY; }
+    function onTouchMove(e) {
+      if (startY !== null && Math.abs(e.touches[0].clientY - startY) > 40) { e.preventDefault(); enter(); }
+    }
+    // Bàn phím: mũi tên xuống, Page Down, phím cách
+    function onKey(e) {
+      if (["ArrowDown", "PageDown", " "].indexOf(e.key) !== -1 && !e.target.closest(".lang-btn")) {
+        e.preventDefault();
+        enter();
+      }
+    }
+    function cleanup() {
+      welcome.removeEventListener("wheel", onWheel);
+      welcome.removeEventListener("touchstart", onTouchStart);
+      welcome.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("keydown", onKey);
+    }
+
+    enterBtn.addEventListener("click", enter);
+    welcome.addEventListener("wheel", onWheel, { passive: false });
+    welcome.addEventListener("touchstart", onTouchStart, { passive: true });
+    welcome.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener("keydown", onKey);
+  }
+
+  /* Cây đàn bầu ở hero */
+  var BASE_HZ = 130.81;
+  var KEY_SEQUENCE = [1, 2, 3, 4, 5, 6, 8]; // thứ tự khi gảy bằng bàn phím (1 = âm thực, dây buông)
+  var keyIndex = 0;
+  var raf = null;
+
+  function stringGeometry() {
+    var G = ASV.Motif.BAU;
+    var dx = G.px - G.sx, dy = G.py - G.sy, len = Math.hypot(dx, dy);
+    return { G: G, dx: dx, dy: dy, nx: -dy / len, ny: dx / len };
+  }
+
+  // Đổi tọa độ chuột trên màn hình → tọa độ trong hình SVG
+  function toSvgX(svg, clientX, clientY) {
+    var pt = svg.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse()).x;
+  }
+
+  // Vị trí bấm → bồi âm thứ n
+  function harmonicAt(svgX) {
+    var G = ASV.Motif.BAU;
+    var f = Math.min(1, Math.max(0, (G.px - svgX) / (G.px - G.sx)));
+    if (f > 0.72) return 1;
+    var best = 2;
+    for (var n = 2; n <= 8; n++) {
+      if (Math.abs(f - 1 / n) < Math.abs(f - 1 / best)) best = n;
+    }
+    return best;
+  }
+
+  // Dây rung theo sóng đứng có n bụng sóng, tắt dần trong khoảng 1 giây
+  function vibrate(svg, n) {
+    var s = stringGeometry();
+    var paths = svg.querySelectorAll(".bau-string, .bau-string-halo");
+    var straight = "M" + s.G.sx + " " + s.G.sy + " L" + s.G.px + " " + s.G.py;
+    cancelAnimationFrame(raf);
+    if (reduceMotion) return;
+    var t0 = performance.now();
+    function frame(now) {
+      var t = (now - t0) / 1000;
+      var amp = 7 * Math.exp(-t / 0.8);
+      if (amp < 0.25) { paths.forEach(function (p) { p.setAttribute("d", straight); }); return; }
+      var d = "";
+      for (var i = 0; i <= 64; i++) {
+        var u = i / 64;
+        var off = amp * Math.sin(n * Math.PI * u) * Math.sin(2 * Math.PI * 11 * t);
+        d += (i ? "L" : "M") + (s.G.sx + s.dx * u + s.nx * off).toFixed(1) + " " + (s.G.sy + s.dy * u + s.ny * off).toFixed(1);
+      }
+      paths.forEach(function (p) { p.setAttribute("d", d); });
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  // Hiện vòng tròn nhỏ ở điểm nút (chỗ cạnh bàn tay chạm dây)
+  function showTouch(svg, n) {
+    var G = ASV.Motif.BAU;
+    var u = 1 - 1 / n; // vị trí điểm nút tính từ đầu cần đàn
+    var mark = svg.querySelector(".bau-touch");
+    mark.setAttribute("cx", (G.sx + (G.px - G.sx) * u).toFixed(1));
+    mark.setAttribute("cy", (G.sy + (G.py - G.sy) * u).toFixed(1));
+    mark.classList.remove("is-on");
+    void mark.getBoundingClientRect(); // chạy lại hiệu ứng
+    mark.classList.add("is-on");
+  }
+
+  function pluck(n) {
+    var btn = document.getElementById("heroBau");
+    var svg = btn.querySelector("svg");
+    ASV.Player.play({
+      key: "hero-bau",
+      // Tiêu đề có sẵn cả hai ngôn ngữ để thanh phát đổi theo khi bấm VI/EN
+      title: n === 1
+        ? { vi: ASV_TRANSLATIONS.vi["home.bau.titleOpen"], en: ASV_TRANSLATIONS.en["home.bau.titleOpen"] }
+        : { vi: ASV_TRANSLATIONS.vi["home.bau.title"].replace("{n}", n), en: ASV_TRANSLATIONS.en["home.bau.title"].replace("{n}", n) },
+      synth: ["bau-harmonic"],
+      params: { freq: BASE_HZ * n }
+    });
+    vibrate(svg, n);
+    if (n > 1) showTouch(svg, n); // âm thực không chạm điểm nút nào
+    bgRipple();
+    document.getElementById("bauStatus").textContent = "· " + (n === 1 ? I18n.t("home.bau.open") : I18n.t("home.bau.harmonic", { n: n }));
+  }
+
+  function setupBau() {
+    var btn = document.getElementById("heroBau");
+    if (!btn) return;
+    btn.addEventListener("click", function (e) {
+      var n;
+      if (e.detail === 0) {
+        // Bấm bằng bàn phím (Enter/Space): gảy lần lượt các bồi âm
+        n = KEY_SEQUENCE[keyIndex++ % KEY_SEQUENCE.length];
+      } else {
+        n = harmonicAt(toSvgX(btn.querySelector("svg"), e.clientX, e.clientY));
+      }
+      pluck(n);
+    });
+  }
+
+  /* Hoa văn nền của hero */
+  function placeHoles() {
+    var bg = document.getElementById("heroBg");
+    if (!bg) return;
+    var box = bg.getBoundingClientRect();
+    function hole(el, prefix, kx, ky) {
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      // Bán kính elip = nửa kích thước khối, nới rộng thêm để vùng mờ dần nằm ngoài chữ
+      bg.style.setProperty("--" + prefix + "-x", (r.left + r.width / 2 - box.left).toFixed(0) + "px");
+      bg.style.setProperty("--" + prefix + "-y", (r.top + r.height / 2 - box.top).toFixed(0) + "px");
+      bg.style.setProperty("--" + prefix + "-w", (r.width * kx).toFixed(0) + "px");
+      bg.style.setProperty("--" + prefix + "-h", (r.height * ky).toFixed(0) + "px");
+    }
+    // Khối chữ: đo bề rộng thật của phần CHỮ trong tiêu đề (thẻ h1 trải hết bề ngang nên không dùng được)
+    var text = document.querySelector(".hero-text");
+    var title = document.getElementById("hero-title");
+    if (text && title) {
+      var tr = text.getBoundingClientRect();
+      var range = document.createRange();
+      range.selectNodeContents(title);
+      var w = Math.max(range.getBoundingClientRect().width, 320);
+      bg.style.setProperty("--t-x", (tr.left + tr.width / 2 - box.left).toFixed(0) + "px");
+      bg.style.setProperty("--t-y", (tr.top + tr.height / 2 - box.top).toFixed(0) + "px");
+      bg.style.setProperty("--t-w", (w * 0.64).toFixed(0) + "px");
+      bg.style.setProperty("--t-h", (tr.height * 0.66).toFixed(0) + "px");
+    }
+    hole(document.querySelector(".bau-stage"), "b", 0.64, 0.66);
+  }
+
+  function setupParallax() {
+    if (reduceMotion) return;
+    var far = document.getElementById("bgFar"), near = document.getElementById("bgNear");
+    if (!far || !near) return;
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        far.style.transform = "translate3d(0," + Math.min(30, y * 0.05).toFixed(1) + "px,0)";
+        near.style.transform = "translate3d(0," + Math.min(30, y * 0.1).toFixed(1) + "px,0)";
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  function bgRipple() {
+    if (reduceMotion) return;
+    var bg = document.getElementById("heroBg"), ring = document.getElementById("bgRipple");
+    var stage = document.querySelector(".bau-stage");
+    if (!bg || !ring || !stage) return;
+    var box = bg.getBoundingClientRect(), r = stage.getBoundingClientRect();
+    ring.style.left = (r.left + r.width / 2 - box.left).toFixed(0) + "px";
+    ring.style.top = (r.top + r.height * 0.4 - box.top).toFixed(0) + "px";
+    ring.classList.remove("is-on");
+    void ring.getBoundingClientRect(); // chạy lại hiệu ứng từ đầu
+    ring.classList.add("is-on");
+  }
+
+  function setupHeroBg() {
+    placeHoles();
+    setupParallax();
+    window.addEventListener("resize", placeHoles);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeHoles);
+    // Ảnh tranh tải xong có thể làm hero cao hơn → tính lại
+    document.querySelectorAll(".screen-panel img").forEach(function (img) { img.addEventListener("load", placeHoles); });
+  }
+
+  /* Ba bức tranh: nhãn cho trình đọc màn hình */
+  function labelPaintings() {
+    document.querySelectorAll(".screen-play[data-recording]").forEach(function (btn) {
+      var g = ASV_DATA.genres.filter(function (x) { return x.id === btn.getAttribute("data-recording"); })[0];
+      btn.setAttribute("aria-label", I18n.t(ASV.canEmbedVideo ? "home.screen.rec" : "home.screen.recExternal", { name: I18n.pick(g.name) }));
+      btn.querySelector(".rec-icon").innerHTML = ASV.icon(ASV.canEmbedVideo ? "play" : "external");
+    });
+  }
+
+  /* Thẻ video */
+  function renderVideos() {
+    var grid = document.getElementById("videoGrid");
+    if (!grid) return;
+    var ids = grid.getAttribute("data-genres").split(",");
+    grid.innerHTML = ids.map(function (id) {
+      var g = ASV_DATA.genres.filter(function (x) { return x.id === id; })[0];
+      return g ? '<div class="col-md-4">' + ASV.videoCard(g) + "</div>" : "";
+    }).join("");
+    ASV.syncPlayButtons();
+  }
+
+  /* Nghe thử một nhạc cụ */
+  function pickRandom() {
+    var list = ASV_DATA.instruments.filter(function (it) { return !current || it.id !== current.id; });
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  function renderToday() {
+    if (!current) return;
+    var it = current;
+
+    var mediaBox = document.getElementById("todayMedia");
+    mediaBox.innerHTML = "";
+    var name = I18n.pick(it.name); // bản EN: bỏ dấu ("Dan bau")
+    mediaBox.appendChild(ASV.createMedia({ src: it.image, name: name, kind: "instrument" }));
+
+    document.getElementById("todayName").textContent = name;
+    document.getElementById("todayGloss").textContent = I18n.pick(it.gloss);
+    document.getElementById("todayFamily").textContent = I18n.t("family." + it.family);
+    document.getElementById("todayDesc").innerHTML = ASV.renderText(it.desc);
+    document.getElementById("todayMaterial").innerHTML = ASV.renderText(it.material);
+    document.getElementById("todayPlay").innerHTML = ASV.renderText(it.play);
+    document.getElementById("todayListen").innerHTML = ASV.playButton("instrument:" + it.id);
+    // Link mở đúng nhạc cụ khi trang Nhạc cụ hoàn thành (instruments.html#dan-bau)
+    document.getElementById("todayMore").setAttribute("href", "instruments.html#" + it.id);
+    ASV.syncPlayButtons();
+  }
+
+  function setupToday() {
+    current = pickRandom();
+    renderToday();
+    document.getElementById("todayAnother").addEventListener("click", function () {
+      // Nếu đang phát nhạc cụ cũ thì dừng trước khi đổi
+      if (ASV.Player.isActive("instrument:" + current.id)) ASV.Player.stop(true);
+      current = pickRandom();
+      renderToday();
+    });
+  }
+
+  /* Khởi động */
+  ASV.ready(function () {
+    setupWelcome();
+    setupBau();
+    setupHeroBg();
+    renderVideos();
+    labelPaintings();
+    setupToday();
+  });
+
+  // Đổi ngôn ngữ → vẽ lại phần chữ lấy từ dữ liệu
+  document.addEventListener("asv:langchange", function () {
+    renderVideos();
+    labelPaintings();
+    renderToday();
+    document.getElementById("bauStatus").textContent = "";
+    placeHoles(); // chữ đổi độ dài → tính lại lỗ mặt nạ
+  });
+})();
+})();
+
+/* ===== TRANG: genres (genres.js) ===== */
+if (document.body.getAttribute("data-page") === "genres") (function () {
+/* genres.js: Logic riêng của genres.html (trang Loại hình) */
+
+(function () {
+  var current = null;     // loại hình đang chọn
+  var region = "all";     // vùng đang lọc
+  var group = "all";      // nhóm đang lọc: "all" | "unesco" | "other"
+
+  /* Nhiều loại hình nằm rất gần nhau trên bản đồ (Bắc Bộ, Huế, Nam Bộ). */
+  var LAYOUT = {
+    "then": { x: 196, y: 30, label: "right" },
+    "hat-xoan": { x: 128, y: 62, label: "left" },
+    "quan-ho": { x: 222, y: 80, label: "right" },
+    "ca-tru": { x: 120, y: 120, label: "left" },
+    "cheo": { x: 226, y: 132, label: "right" },
+    "hat-van": { x: 128, y: 176, label: "left" },
+    "vi-giam": { label: "left" },
+    "ho": { label: "left" },
+    "nha-nhac": { label: "right" },
+    "ca-hue": { x: 190, y: 318, label: "left" },
+    "tuong": { label: "right" },
+    "bai-choi": { label: "right" },
+    "cong-chieng": { label: "left" },
+    "cai-luong": { x: 228, y: 504, label: "right" },
+    "tai-tu": { x: 156, y: 554, label: "right" },
+    "ngu-am": { x: 196, y: 606, label: "right" }
+  };
+
+  function project(lat, lon) {
+    var p = ASV_MAP.proj;
+    return { x: (lon - p.lon0) * p.kx, y: (p.lat1 - lat) * p.ky };
+  }
+  function byId(id) {
+    return ASV_DATA.genres.filter(function (g) { return g.id === id; })[0];
+  }
+  // Nhóm của một loại hình: được UNESCO ghi danh hay loại hình khác
+  function groupOf(g) { return g.unesco ? "unesco" : "other"; }
+  function visibleGenres() {
+    return ASV_DATA.genres.filter(function (g) {
+      return (region === "all" || g.region === region) && (group === "all" || groupOf(g) === group);
+    });
+  }
+  // Nhãn danh hiệu: "UNESCO 2009", "Di sản quốc gia 2021", "Di sản quốc gia" hoặc "Loại hình truyền thống"
+  function badgeOf(g) {
+    if (g.unesco) return I18n.t("genres.panel.unesco", { year: g.unesco.year });
+    if (g.heritage && g.heritage.badge) return I18n.pick(g.heritage.badge); // danh hiệu chỉ thuộc một nơi / một làn điệu
+    if (g.heritage) return g.heritage.year ? I18n.t("genres.badge.national", { year: g.heritage.year }) : I18n.t("genres.badge.nationalNoYear");
+    return I18n.t("genres.badge.none");
+  }
+  // Ảnh thật kèm dòng nguồn (tác giả, giấy phép, nơi lấy ảnh, link trang gốc).
+  function figureHtml(g) {
+    if (!g.photo) return '<div class="genre-panel-media"></div>';
+    return '<figure class="genre-panel-media genre-photo">' + ASV.photoCaption(g.photo) + "</figure>";
+  }
+
+  /* Bản đồ */
+  function renderMap() {
+    var wrap = document.getElementById("mapWrap");
+    var W = ASV_MAP.width, H = ASV_MAP.height;
+    var islands = function (list) {
+      return list.map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.6"/>'; }).join("");
+    };
+    // Đường nối từ vị trí thật tới nút đã dời
+    var leaders = ASV_DATA.genres.map(function (g) {
+      var L = LAYOUT[g.id] || {};
+      if (L.x === undefined) return "";
+      var t = project(g.lat, g.lon);
+      return '<g class="map-link" data-genre="' + g.id + '"><path class="map-leader" d="M' + t.x.toFixed(1) + " " + t.y.toFixed(1) + " L" + L.x + " " + L.y + '"/>' +
+        '<circle class="map-true" cx="' + t.x.toFixed(1) + '" cy="' + t.y.toFixed(1) + '" r="3"/></g>';
+    }).join("");
+
+    var svg =
+      '<svg class="map-svg" viewBox="0 0 ' + W + " " + H + '" aria-hidden="true" focusable="false">' +
+        '<defs><pattern id="mapGan" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">' +
+        '<path d="M0 3.5 H7" stroke="#2E2118" stroke-width="0.7" opacity="0.16"/></pattern>' +
+        "</defs>" +
+        // Biển: vài nét sóng rải rác ngoài khơi
+        [[330, 170], [470, 150], [540, 230], [318, 360], [500, 360], [550, 470], [330, 560], [440, 630], [250, 640]]
+          .map(function (p) { return '<path class="map-wave" d="M' + p[0] + " " + p[1] + ' q7.5 -7 15 0 t15 0 t15 0"/>'; }).join("") +
+        '<path class="map-land" d="' + ASV_MAP.land + '"/>' +
+        '<path d="' + ASV_MAP.land + '" fill="url(#mapGan)"/>' +
+        '<g class="map-islands">' + islands(ASV_MAP.hoangSa) + islands(ASV_MAP.truongSa) + "</g>" +
+        '<text class="map-label map-sea-label" x="440" y="404" data-i18n="genres.map.sea">' + ASV.escape(I18n.t("genres.map.sea")) + "</text>" +
+        '<text class="map-label" x="372" y="252" data-i18n="genres.map.hoangSa">' + ASV.escape(I18n.t("genres.map.hoangSa")) + "</text>" +
+        '<text class="map-label" x="386" y="470" data-i18n="genres.map.truongSa">' + ASV.escape(I18n.t("genres.map.truongSa")) + "</text>" +
+        leaders +
+      "</svg>";
+
+    // Nút đánh dấu là <button> thật: bấm được bằng chuột, chạm và bàn phím
+    var markers = ASV_DATA.genres.map(function (g) {
+      var L = LAYOUT[g.id] || {};
+      var p = L.x !== undefined ? { x: L.x, y: L.y } : project(g.lat, g.lon);
+      return '<button type="button" class="map-marker label-' + (L.label || "right") + (g.unesco ? "" : " is-other") + '" data-genre="' + g.id + '" ' +
+        'style="left:' + (p.x / W * 100).toFixed(2) + "%;top:" + (p.y / H * 100).toFixed(2) + '%" aria-pressed="false" ' +
+        'aria-label="' + ASV.escape(I18n.t("genres.marker.aria", { name: I18n.pick(g.name), place: I18n.pick(g.place) })) + '">' +
+        '<span class="map-dot" aria-hidden="true"></span>' +
+        '<span class="map-name" aria-hidden="true">' + ASV.escape(I18n.pick(g.short)) + "</span></button>";
+    }).join("");
+
+    wrap.setAttribute("role", "group");
+    wrap.setAttribute("aria-label", I18n.t("genres.map.aria"));
+    wrap.innerHTML = '<div class="map-stage" id="mapStage">' + svg + markers + "</div>";
+  }
+
+  /* Khung chi tiết */
+  function renderPanel() {
+    var g = current;
+    var panel = document.getElementById("genrePanel");
+    var instruments = g.instruments.map(function (id) {
+      var it = ASV_DATA.instruments.filter(function (x) { return x.id === id; })[0];
+      return it ? '<li><a class="chip" href="instruments.html#' + it.id + '">' + ASV.escape(I18n.pick(it.name)) + "</a></li>" : "";
+    }).join("");
+
+    panel.innerHTML =
+      figureHtml(g) +
+        '<div class="genre-panel-body">' +
+          '<p class="genre-tags"><span class="badge-family">' + ASV.escape(I18n.t("region." + g.region)) + "</span>" +
+            '<span class="badge-unesco' + (g.unesco ? "" : " is-other") + '">' + ASV.escape(badgeOf(g)) + "</span></p>" +
+          '<h2 class="genre-name" id="genreName">' + ASV.escape(I18n.pick(g.name)) + "</h2>" +
+          '<p class="mb-3">' + ASV.renderText(g.desc) + "</p>" +
+          '<dl class="genre-facts">' +
+            "<dt>" + ASV.escape(I18n.t("genres.panel.place")) + "</dt><dd>" + ASV.renderText(g.place) + "</dd>" +
+            ((g.unesco || g.heritage) ? "<dt>" + ASV.escape(I18n.t("genres.panel.list")) + "</dt><dd>" + ASV.renderText((g.unesco || g.heritage).note) + "</dd>" : "") +
+            "<dt>" + ASV.escape(I18n.t("genres.panel.instruments")) + "</dt><dd>" +
+              (instruments ? '<ul class="chip-list">' + instruments + "</ul>" : ASV.escape(I18n.t("genres.panel.noInstruments"))) +
+            "</dd>" +
+          "</dl>" +
+          '<div class="genre-nav">' +
+            '<button type="button" class="btn btn-sm btn-outline-cham" data-step="-1">' + ASV.icon("arrow", "icon-flip") +
+              "<span>" + ASV.escape(I18n.t("genres.panel.prev")) + "</span></button>" +
+            '<button type="button" class="btn btn-sm btn-outline-cham" data-step="1"><span>' + ASV.escape(I18n.t("genres.panel.next")) +
+              "</span>" + ASV.icon("arrow") + "</button>" +
+          "</div>" +
+        "</div>";
+    var holder = panel.querySelector(".genre-panel-media");
+    // Ảnh riêng (photo.src) chỉ có trong bản nộp trên máy; bản online thiếu file thì tự quay về tranh vẽ (g.image)
+    var media = ASV.createMedia({
+      src: (g.photo && g.photo.src) || g.image, fallback: g.image, name: I18n.pick(g.name), kind: "genre",
+      alt: g.photo ? I18n.pick(g.photo.caption) : null,
+      onFallback: function () { var cap = holder.querySelector("figcaption"); if (cap) cap.remove(); }
+    });
+    holder.insertBefore(media, holder.firstChild);
+
+    // Video biểu diễn ngay dưới khung chi tiết (chưa có video được phép dùng thì nói rõ)
+    document.getElementById("genreMedia").innerHTML =
+      '<h3 class="genre-media-title">' + ASV.escape(I18n.t("genres.panel.media")) + "</h3>" +
+      (g.video ? ASV.videoCard(g, { compact: true }) : '<p class="genre-novideo">' + ASV.escape(I18n.t("genres.noVideo")) + "</p>");
+    ASV.syncPlayButtons();
+  }
+
+  /* Chọn một loại hình */
+  function select(id, opts) {
+    var g = byId(id);
+    if (!g) return;
+    opts = opts || {};
+    // Đổi sang loại hình khác thì dừng âm thanh/video của loại hình cũ
+    if (current && current.id !== g.id) { ASV.Player.stop(true); ASV.closeVideos(); }
+    current = g;
+    document.querySelectorAll(".map-marker").forEach(function (m) {
+      var on = m.getAttribute("data-genre") === id;
+      m.classList.toggle("is-active", on);
+      m.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    document.querySelectorAll(".genre-card").forEach(function (c) {
+      c.classList.toggle("is-active", c.getAttribute("data-genre") === id);
+    });
+    renderPanel();
+    saveState();
+    // Báo cho trình đọc màn hình biết khung chi tiết vừa đổi
+    document.getElementById("genreLive").textContent = I18n.t("genres.live", { name: I18n.pick(g.name) });
+    if (opts.focusPanel) {
+      var panel = document.getElementById("genrePanel");
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      panel.focus({ preventScroll: true });
+    }
+  }
+
+  // Nút "Loại hình trước / sau": đi vòng trong các loại hình đang hiện theo bộ lọc
+  function step(dir) {
+    var list = visibleGenres();
+    var i = list.indexOf(current);
+    var next = list[(i + dir + list.length) % list.length];
+    select(next.id);
+    var btn = document.querySelector('#genrePanel [data-step="' + dir + '"]');
+    if (btn) btn.focus();
+  }
+
+  /* Lọc theo vùng và theo nhóm */
+  function applyFilter(r, gr) {
+    region = r;
+    if (gr) group = gr;
+    document.querySelectorAll(".filter-btn[data-region]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-region") === region ? "true" : "false");
+    });
+    document.querySelectorAll(".filter-btn[data-group]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-group") === group ? "true" : "false");
+    });
+    var list = visibleGenres();
+    var inList = function (el) { return list.some(function (g) { return g.id === el.getAttribute("data-genre"); }); };
+    // hidden = không hiện, không bấm được, không nhận Tab → bộ lọc thật sự có tác dụng
+    document.querySelectorAll(".map-marker").forEach(function (m) { m.hidden = !inList(m); });
+    document.querySelectorAll(".map-link").forEach(function (l) { l.style.display = inList(l) ? "" : "none"; });
+    zoomTo(list);
+    saveState();
+    document.querySelectorAll(".genre-card").forEach(function (c) {
+      c.parentElement.hidden = !list.some(function (g) { return g.id === c.getAttribute("data-genre"); });
+    });
+    document.getElementById("filterCount").textContent = list.length ? I18n.t("genres.count", { n: list.length }) : I18n.t("genres.empty");
+    // Loại hình đang chọn không còn trong danh sách lọc → chọn loại hình đầu tiên còn lại
+    if (current && list.length && list.indexOf(current) === -1) select(list[0].id);
+  }
+
+  /* Phóng bản đồ tới khung bao quanh các điểm của vùng đang lọc ("Tất cả" = về như cũ) */
+  function zoomTo(list) {
+    var stage = document.getElementById("mapStage");
+    if (!stage) return;
+    var W = ASV_MAP.width, H = ASV_MAP.height;
+    if (region === "all" || !list.length) {
+      stage.style.transform = "";
+      stage.style.setProperty("--inv", 1);
+      return;
+    }
+    var xs = [], ys = [];
+    list.forEach(function (g) {
+      var L = LAYOUT[g.id] || {}, t = project(g.lat, g.lon);
+      xs.push(t.x); ys.push(t.y);
+      if (L.x !== undefined) { xs.push(L.x); ys.push(L.y); }
+    });
+    var pad = 90;
+    var minX = Math.min.apply(null, xs) - pad, maxX = Math.max.apply(null, xs) + pad;
+    var minY = Math.min.apply(null, ys) - pad, maxY = Math.max.apply(null, ys) + pad;
+    var s = Math.max(1, Math.min(W / (maxX - minX), H / (maxY - minY), 2.4));
+    // Đưa tâm vùng về giữa khung, nhưng không kéo lộ khoảng trống ngoài mép bản đồ
+    var cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+    var tx = Math.min(0, Math.max(W - W * s, W / 2 - cx * s));
+    var ty = Math.min(0, Math.max(H - H * s, H / 2 - cy * s));
+    stage.style.transform = "translate(" + (tx / W * 100).toFixed(2) + "%," + (ty / H * 100).toFixed(2) + "%) scale(" + s.toFixed(3) + ")";
+    stage.style.setProperty("--inv", (1 / s).toFixed(3)); // giữ nút đánh dấu và chữ đúng cỡ khi phóng
+  }
+
+  // Ghi vùng đang lọc và loại hình đang xem lên địa chỉ trang (chia sẻ link vẫn giữ nguyên)
+  function saveState() {
+    try {
+      var q = [];
+      if (region !== "all") q.push("vung=" + region);
+      if (group !== "all") q.push("nhom=" + group);
+      history.replaceState(null, "", (q.length ? "?" + q.join("&") : location.pathname) + (current ? "#" + current.id : ""));
+    } catch (e) { /* file:// có thể chặn, bỏ qua */ }
+  }
+
+  /* Danh sách thẻ */
+  function renderList() {
+    document.getElementById("genreList").innerHTML = ASV_DATA.genres.map(function (g) {
+      return '<div class="col-sm-6 col-lg-3"><button type="button" class="genre-card asv-card" data-genre="' + g.id + '">' +
+        '<span class="genre-card-media" data-src="' + g.image + '"></span>' +
+        '<span class="genre-card-body">' +
+          '<span class="genre-card-region">' + ASV.escape(I18n.t("region." + g.region)) + " · " + ASV.escape(badgeOf(g)) + "</span>" +
+          '<span class="genre-card-name">' + ASV.escape(I18n.pick(g.name)) + "</span>" +
+        "</span></button></div>";
+    }).join("");
+    document.querySelectorAll(".genre-card-media").forEach(function (box) {
+      var card = box.closest(".genre-card");
+      var g = byId(card.getAttribute("data-genre"));
+      var media = ASV.createMedia({ src: (g.photo && g.photo.src) || g.image, fallback: g.image, name: I18n.pick(g.name), kind: "genre" });
+      card.classList.toggle("is-other", !g.unesco);
+      // Hình trong thẻ chỉ để trang trí (tên đã có ngay bên dưới)
+      var img = media.querySelector("img");
+      if (img) img.alt = "";
+      box.appendChild(media);
+    });
+  }
+
+  /* Vẽ toàn bộ (lần đầu và khi đổi ngôn ngữ) */
+  function renderAll() {
+    renderMap();
+    renderList();
+    applyFilter(region, group);
+    if (current) select(current.id);
+  }
+
+  ASV.ready(function () {
+    // Đọc địa chỉ trang TRƯỚC khi vẽ (vẽ xong sẽ ghi lại địa chỉ)
+    var params = new URLSearchParams(location.search);
+    var vung = params.get("vung"), nhom = params.get("nhom");
+    if (["north", "central", "highlands", "south"].indexOf(vung) !== -1) region = vung;
+    if (["unesco", "other"].indexOf(nhom) !== -1) group = nhom;
+    var fromHash = location.hash.replace("#", "");
+    renderAll();
+    var shown = visibleGenres().length ? visibleGenres() : ASV_DATA.genres;
+    var startId = byId(fromHash) && shown.indexOf(byId(fromHash)) !== -1 ? fromHash : shown[0].id;
+    select(startId);
+
+    // Một bộ lắng nghe cho cả bản đồ, danh sách, nút lọc và nút trước/sau
+    document.addEventListener("click", function (e) {
+      var marker = e.target.closest(".map-marker");
+      if (marker) { select(marker.getAttribute("data-genre")); return; }
+      var card = e.target.closest(".genre-card");
+      if (card) { select(card.getAttribute("data-genre"), { focusPanel: true }); return; }
+      var filter = e.target.closest(".filter-btn");
+      if (filter && filter.hasAttribute("data-region")) { applyFilter(filter.getAttribute("data-region")); return; }
+      if (filter && filter.hasAttribute("data-group")) { applyFilter(region, filter.getAttribute("data-group")); return; }
+      var stepBtn = e.target.closest("#genrePanel [data-step]");
+      if (stepBtn) step(Number(stepBtn.getAttribute("data-step")));
+    });
+    // Mở từ link có #id khi trang đã mở sẵn
+    window.addEventListener("hashchange", function () {
+      var id = location.hash.replace("#", "");
+      if (byId(id) && (!current || current.id !== id)) select(id, { focusPanel: true });
+    });
+  });
+
+  document.addEventListener("asv:langchange", renderAll);
+})();
+})();
+
+/* ===== TRANG: history (history.js) ===== */
+if (document.body.getAttribute("data-page") === "history") (function () {
+/* history.js: Trang Lịch sử (history.html) */
+ASV.ready(function () {
+  var DATA = ASV_DATA.history;
+  var navList = document.getElementById("histNavList");
+  var list = document.getElementById("histList");
+  var live = document.getElementById("histLive");
+  var currentId = null;
+
+  function byId(arr, id) { return arr.filter(function (x) { return x.id === id; })[0]; }
+  function pick(o) { return I18n.pick(o); }
+
+  /* Thanh thời kỳ */
+  function renderNav() {
+    navList.innerHTML = DATA.map(function (h) {
+      return '<li><a class="hist-nav-link" href="#' + h.id + '" data-id="' + h.id + '">' +
+        '<span class="hist-nav-period">' + ASV.escape(pick(h.period)) + "</span>" +
+        '<span class="hist-nav-title">' + ASV.escape(pick(h.short)) + "</span></a></li>";
+    }).join("");
+  }
+
+  /* Một mốc */
+  // Sự kiện có năm: năm ở cột trái, nội dung bên phải
+  function factsHtml(h) {
+    if (!h.facts || !h.facts.length) return "";
+    return '<h3 class="hist-sub">' + I18n.t("hist.facts") + "</h3>" +
+      '<ol class="hist-facts">' + h.facts.map(function (fct) {
+        var year = I18n.lang === "en" && fct.yearEn ? fct.yearEn : fct.year;
+        return '<li><span class="hist-year">' + ASV.escape(I18n.pick({ vi: year, en: year })) + "</span>" +
+          '<span class="hist-fact">' + ASV.renderText(pick(fct)) + "</span></li>";
+      }).join("") + "</ol>";
+  }
+
+  // Điều còn tranh luận: nói rõ, tách riêng khỏi sự kiện đã chắc chắn
+  function debateHtml(h) {
+    if (!h.debate) return "";
+    return '<aside class="hist-debate"><h3 class="hist-sub">' + I18n.t("hist.debate") + "</h3>" +
+      "<p>" + ASV.renderText(pick(h.debate)) + "</p></aside>";
+  }
+
+  // Nghe bản ghi loại hình (video UNESCO thật), nghe âm mô phỏng nhạc cụ, link sang trang khác
+  function listenHtml(h) {
+    var items = [];
+    (h.genres || []).forEach(function (gid) {
+      var g = byId(ASV_DATA.genres, gid);
+      if (!g) return;
+      var name = pick(g.short || g.name);
+      // Mốc UNESCO có 8 loại hình: chỉ đưa link đọc, không xếp 16 nút
+      if (h.genres.length <= 2) {
+        items.push('<button type="button" class="btn btn-sm btn-son" data-recording="' + g.id + '">' +
+          ASV.icon(ASV.canEmbedVideo ? "play" : "external") + "<span>" + ASV.escape(I18n.t("hist.rec", { name: name })) + "</span></button>");
+      }
+      items.push('<a class="btn btn-sm btn-outline-cham" href="genres.html#' + g.id + '">' + ASV.escape(I18n.t("hist.read", { name: name })) + "</a>");
+    });
+    (h.instruments || []).forEach(function (iid) {
+      var it = byId(ASV_DATA.instruments, iid);
+      if (!it) return;
+      var name = pick(it.name);
+      // Nút nghe: nhãn "Nghe/Dừng" do core.js đổi theo trạng thái, tên nhạc cụ đứng riêng
+      items.push('<button type="button" class="btn btn-sm btn-outline-son btn-play" data-play="instrument:' + it.id + '">' +
+        '<span class="btn-play-icon">' + ASV.icon("play") + '</span><span class="btn-play-label">' + I18n.t("btn.listen") + "</span>" +
+        "<span>" + ASV.escape(name) + "</span></button>");
+      items.push('<a class="btn btn-sm btn-outline-cham" href="instruments.html?choi=' + it.id + '#choi-thu">' +
+        ASV.escape(I18n.t("hist.try", { name: name })) + "</a>");
+    });
+    if (!items.length) return "";
+    var firstSynth = DATA.filter(function (x) { return (x.instruments || []).length > 0; })[0];
+    var hasSynth = h === firstSynth;
+    return '<div class="hist-listen"><h3 class="hist-sub">' + I18n.t("hist.listen") + "</h3>" +
+      '<div class="hist-actions">' + items.join("") + "</div>" +
+      (hasSynth ? '<p class="hist-note">' + I18n.t("hist.synthNote") + "</p>" : "") + "</div>";
+  }
+
+  // Nguồn tra cứu: thu gọn trong <details> để không lấn nội dung chính
+  function sourcesHtml(h) {
+    if (!h.sources || !h.sources.length) return "";
+    return '<details class="hist-sources"><summary>' + I18n.t("hist.sources", { n: h.sources.length }) + "</summary><ul>" +
+      h.sources.map(function (s) {
+        var label = ASV.escape(pick(s));
+        return "<li>" + (s.url
+          ? '<a href="' + s.url + '" target="_blank" rel="noopener">' + label + ASV.icon("external") +
+            '<span class="visually-hidden"> ' + I18n.t("video.newTab") + "</span></a>"
+          : label) + "</li>";
+      }).join("") + "</ul></details>";
+  }
+
+  function itemHtml(h, i) {
+    return '<li class="hist-item" id="' + h.id + '">' +
+      '<article class="hist-card asv-card" aria-labelledby="t-' + h.id + '">' +
+        '<div class="row g-4">' +
+          '<div class="col-md-5">' +
+            '<figure class="hist-figure" data-media="' + i + '"></figure>' +
+          "</div>" +
+          '<div class="col-md-7">' +
+            '<p class="hist-period">' + ASV.escape(pick(h.period)) + "</p>" +
+            '<h2 class="hist-title" id="t-' + h.id + '">' + ASV.escape(pick(h.title)) + "</h2>" +
+            '<p class="hist-summary">' + ASV.renderText(pick(h.summary)) + "</p>" +
+            factsHtml(h) + debateHtml(h) + listenHtml(h) + sourcesHtml(h) +
+          "</div>" +
+        "</div>" +
+      "</article></li>";
+  }
+
+  function renderList() {
+    list.innerHTML = DATA.map(itemHtml).join("");
+    // Ảnh thật kèm chú thích và nguồn.
+    DATA.forEach(function (h, i) {
+      var fig = list.querySelector('[data-media="' + i + '"]');
+      if (h.photo) fig.innerHTML = ASV.photoCaption(h.photo);
+      fig.insertBefore(ASV.createMedia({
+        src: h.photo ? h.photo.src : h.image, fallback: h.image, name: pick(h.title), kind: "history", alt: pick(h.alt),
+        onFallback: function () { var cap = fig.querySelector("figcaption"); if (cap) cap.remove(); }
+      }), fig.firstChild);
+    });
+    ASV.syncPlayButtons();
+  }
+
+  /* Mốc đang xem */
+  function setCurrent(id, announce) {
+    if (!id || id === currentId) return;
+    currentId = id;
+    navList.querySelectorAll(".hist-nav-link").forEach(function (a) {
+      var on = a.getAttribute("data-id") === id;
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+      // Trên màn hẹp thanh thời kỳ cuộn ngang: đưa mục đang xem vào giữa
+      if (on) {
+        var bar = navList;
+        var left = a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2;
+        bar.scrollTo({ left: Math.max(0, left), behavior: "instant" });
+      }
+    });
+    if (announce) live.textContent = I18n.t("hist.live", { title: pick(byId(DATA, id).title) });
+  }
+
+  // Theo dõi mốc nào đang nằm ở dải giữa màn hình
+  var observer = null;
+  function observe() {
+    if (observer) observer.disconnect();
+    if (!("IntersectionObserver" in window)) return;
+    observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) setCurrent(en.target.id, false); });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    list.querySelectorAll(".hist-item").forEach(function (el) { observer.observe(el); });
+  }
+
+  // Bấm một thời kỳ: cuộn tới, chuyển focus vào tiêu đề mốc (người dùng bàn phím đọc tiếp được ngay)
+  navList.addEventListener("click", function (e) {
+    var a = e.target.closest(".hist-nav-link");
+    if (!a) return;
+    e.preventDefault();
+    goTo(a.getAttribute("data-id"), true);
+  });
+
+  function goTo(id, focus) {
+    var item = document.getElementById(id);
+    if (!item) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    item.scrollIntoView({ behavior: reduce || !focus ? "instant" : "smooth", block: "start" });
+    history.replaceState(null, "", "#" + id);
+    setCurrent(id, true);
+    if (focus) {
+      var title = item.querySelector(".hist-title");
+      title.setAttribute("tabindex", "-1");
+      title.focus({ preventScroll: true });
+    }
+  }
+
+  function renderAll() {
+    live.textContent = ""; // thông báo cũ viết bằng ngôn ngữ trước, xóa đi
+    renderNav();
+    renderList();
+    var keep = currentId;
+    currentId = null;
+    setCurrent(keep || DATA[0].id, false);
+    observe();
+  }
+
+  // Thanh thời kỳ dính ngay dưới menu; nhảy tới một mốc thì chừa chỗ cho cả hai thanh
+  function fitSticky() {
+    var hdr = document.getElementById("site-header").offsetHeight;
+    var nav = document.getElementById("histNav").offsetHeight;
+    document.documentElement.style.setProperty("--hdr", hdr + "px");
+    document.documentElement.style.scrollPaddingTop = (hdr + nav + 12) + "px";
+  }
+  window.addEventListener("resize", fitSticky);
+
+  renderAll();
+  fitSticky();
+
+  // Mở thẳng một mốc: history.html#nguyen (đọc hash sau khi đã vẽ)
+  var hash = decodeURIComponent(location.hash.slice(1));
+  if (hash && byId(DATA, hash)) goTo(hash, false);
+
+  window.addEventListener("hashchange", function () {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (byId(DATA, id)) goTo(id, true);
+  });
+
+  document.addEventListener("asv:langchange", function () { renderAll(); fitSticky(); });
+});
+})();
+
+/* ===== TRANG: glossary (glossary.js) ===== */
+if (document.body.getAttribute("data-page") === "glossary") (function () {
+/* glossary.js: Logic riêng của glossary.html (trang Thuật ngữ) */
+
+ASV.ready(function () {
+  var DATA = ASV_DATA.glossary;
+  var GROUPS = ["sound", "parts", "performance", "unesco"];
+  var BAU_HZ = 130.81; // âm thực (dây buông) của cây đàn bầu, giống trang chủ: Đô 3
+  var group = "all";   // nhóm đang lọc
+  var query = "";      // từ đang tìm
+  var pick = I18n.pick;
+
+  function find(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
+  function inst(id) { return find(ASV_DATA.instruments, id); }
+  function genre(id) { return find(ASV_DATA.genres, id); }
+
+  // Hai âm của đàn bầu để so sánh (âm MÔ PHỎNG, phát qua trình phát chung nên có nút Dừng và phím Esc)
+  ASV.playables["term:am-thuc"] = { key: "term:am-thuc", titleKey: "glossary.sound.am-thuc.title", synth: ["bau-harmonic"], params: { freq: BAU_HZ } };
+  ASV.playables["term:am-boi"] = { key: "term:am-boi", titleKey: "glossary.sound.am-boi.title", synth: ["bau-series"], params: { freq: BAU_HZ } };
+
+  /* Lọc + tìm */
+  // Bỏ dấu và viết thường để "am boi", "Âm bồi", "âm bồi" đều giống nhau
+  function norm(text) { return I18n.plain(String(text || "")).toLowerCase().trim(); }
+
+  // Chỉ tìm trong tên từ (cả hai ngôn ngữ), không tìm trong định nghĩa cho khỏi ra kết quả lạ
+  function haystack(g) {
+    return norm([g.term.vi, g.term.en, g.match.vi.join(" "), g.match.en.join(" ")].join(" "));
+  }
+
+  function visible() {
+    var q = norm(query);
+    return DATA.filter(function (g) {
+      return (group === "all" || g.group === group) && (!q || haystack(g).indexOf(q) !== -1);
+    });
+  }
+
+  /* Một mục từ */
+  function entryHtml(g) {
+    var see = g.see || {};
+    var acts = [], chips = [];
+
+    // Nghe: âm mô phỏng (âm thực / âm bồi đàn bầu, hoặc tiếng cả nhạc cụ)
+    if (see.listen) {
+      var what = see.listen.indexOf("term:") === 0
+        ? I18n.t("glossary.sound." + see.listen.slice(5))
+        : pick(inst(see.listen.replace("instrument:", "")).name);
+      acts.push('<button type="button" class="btn btn-sm btn-son btn-play" data-play="' + see.listen + '">' +
+        '<span class="btn-play-icon">' + ASV.icon("play") + '</span><span class="btn-play-label">' + I18n.t("btn.listen") + "</span>" +
+        "<span>" + ASV.escape(what) + "</span></button>");
+    }
+    // Xem biểu diễn: video thật của loại hình (không bao giờ tổng hợp âm cho loại hình)
+    if (see.recording) {
+      var rg = genre(see.recording);
+      acts.push('<button type="button" class="btn btn-sm btn-outline-son" data-recording="' + rg.id + '">' +
+        ASV.icon("play") + "<span>" + ASV.escape(I18n.t("glossary.watch", { name: pick(rg.name) })) + "</span></button>");
+      chips.push({ href: "genres.html#" + rg.id, text: pick(rg.name) });
+    }
+    // Chơi thử trên nhạc cụ ảo của trang Nhạc cụ
+    if (see.try) {
+      var href = see.try === "dan-bau" ? "instruments.html#dan-bau-ao" : "instruments.html?choi=" + see.try + "#choi-thu";
+      acts.push('<a class="btn btn-sm btn-outline-cham" href="' + href + '">' +
+        ASV.escape(I18n.t("hist.try", { name: pick(inst(see.try).name) })) + "</a>");
+    }
+    if (see.scales) {
+      acts.push('<a class="btn btn-sm btn-outline-cham" href="instruments.html#thang-am">' + ASV.escape(I18n.t("glossary.scales")) + "</a>");
+    }
+
+    // Link liên quan (dạng chip nhỏ)
+    (see.instruments || []).forEach(function (id) { chips.push({ href: "instruments.html#" + id, text: pick(inst(id).name) }); });
+    (see.genres || []).forEach(function (id) { chips.push({ href: "genres.html#" + id, text: pick(genre(id).name) }); });
+    if (see.unescoList) chips.push({ href: "genres.html?nhom=unesco", text: I18n.t("glossary.unescoList") });
+    if (see.history) {
+      var h = find(ASV_DATA.history, see.history);
+      chips.push({ href: "history.html#" + h.id, text: I18n.t("glossary.history", { name: pick(h.short) }) });
+    }
+
+    var related = chips.length
+      ? '<div class="gloss-entry-related"><span class="gloss-entry-label" id="rel-' + g.id + '">' + I18n.t("glossary.related") + "</span>" +
+        '<ul class="chip-list" aria-labelledby="rel-' + g.id + '">' + chips.map(function (c) {
+          return '<li><a class="chip" href="' + c.href + '">' + ASV.escape(c.text) + "</a></li>";
+        }).join("") + "</ul></div>"
+      : "";
+
+    return '<div class="col-md-6" data-col="' + g.id + '">' +
+      '<article class="asv-card gloss-entry" id="' + g.id + '" data-gloss-own="' + g.id + '" tabindex="-1" aria-labelledby="t-' + g.id + '">' +
+        '<h3 class="gloss-entry-term" id="t-' + g.id + '">' + ASV.escape(pick(g.term)) + "</h3>" +
+        '<p class="gloss-entry-def">' + ASV.renderText(g.def) + "</p>" +
+        '<div class="gloss-entry-foot">' + related +
+          (acts.length ? '<div class="gloss-entry-actions">' + acts.join("") + "</div>" : "") +
+        "</div>" +
+      "</article></div>";
+  }
+
+  /* Vẽ cả trang: mỗi nhóm một tiêu đề + lưới hai cột */
+  function render() {
+    document.getElementById("glossGroups").innerHTML = GROUPS.map(function (gr) {
+      var items = DATA.filter(function (g) { return g.group === gr; });
+      return '<section class="gloss-group" data-group-sec="' + gr + '" aria-labelledby="g-' + gr + '">' +
+        '<h2 class="gloss-group-title" id="g-' + gr + '">' + ASV.escape(I18n.t("glossary.group." + gr)) + "</h2>" +
+        '<div class="row g-3">' + items.map(entryHtml).join("") + "</div></section>";
+    }).join("");
+    applyFilter();
+    ASV.syncPlayButtons();
+  }
+
+  // Mục không khớp thì ẩn hẳn (không bấm, không Tab tới được), không chỉ làm mờ
+  function applyFilter() {
+    var list = visible();
+    document.querySelectorAll("#glossGroups [data-col]").forEach(function (col) {
+      col.hidden = !list.some(function (g) { return g.id === col.getAttribute("data-col"); });
+    });
+    document.querySelectorAll("[data-group-sec]").forEach(function (sec) {
+      sec.hidden = !sec.querySelector("[data-col]:not([hidden])");
+    });
+    document.querySelectorAll(".filter-btn[data-group]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-group") === group ? "true" : "false");
+    });
+    document.getElementById("glossCount").textContent = I18n.t(list.length === 1 ? "glossary.count1" : "glossary.count", { n: list.length });
+    var empty = document.getElementById("glossEmpty");
+    empty.hidden = list.length > 0;
+    if (!list.length) document.getElementById("glossEmptyText").textContent = I18n.t("glossary.empty.text", { q: query });
+    saveState();
+  }
+
+  // Ghi nhóm đang lọc và từ đang tìm lên địa chỉ trang (giữ nguyên #mục nếu có)
+  function saveState() {
+    var p = [];
+    if (group !== "all") p.push("nhom=" + group);
+    if (query) p.push("q=" + encodeURIComponent(query));
+    try {
+      history.replaceState(null, "", (p.length ? "?" + p.join("&") : location.pathname) + location.hash);
+    } catch (e) { /* file:// có thể chặn, bỏ qua */ }
+  }
+
+  /* Đi tới một mục: glossary.html#am-boi hoặc bấm "Đến mục từ này" trong khung giải thích */
+  function goTo(id) {
+    var el = document.getElementById(id);
+    if (!el || !el.classList.contains("gloss-entry")) return;
+    // Mục đang bị bộ lọc ẩn → bỏ lọc để thấy được
+    if (el.closest("[hidden]")) {
+      group = "all"; query = "";
+      document.getElementById("glossSearch").value = "";
+      applyFilter();
+    }
+    document.querySelectorAll(".gloss-entry.is-target").forEach(function (x) { x.classList.remove("is-target"); });
+    el.classList.add("is-target");
+    el.scrollIntoView({ behavior: "instant", block: "start" });
+    el.focus({ preventScroll: true });
+  }
+
+  /* Sự kiện */
+  document.querySelectorAll(".filter-btn[data-group]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      group = b.getAttribute("data-group");
+      applyFilter();
+    });
+  });
+  var input = document.getElementById("glossSearch");
+  input.addEventListener("input", function () { query = input.value; applyFilter(); });
+  document.getElementById("glossReset").addEventListener("click", function () {
+    group = "all"; query = ""; input.value = "";
+    applyFilter();
+    input.focus();
+  });
+  window.addEventListener("hashchange", function () { goTo(location.hash.slice(1)); });
+  document.addEventListener("asv:langchange", render);
+
+  // Đọc bộ lọc từ địa chỉ: ?nhom=sound&q=ve
+  var params = new URLSearchParams(location.search);
+  if (GROUPS.indexOf(params.get("nhom")) !== -1) group = params.get("nhom");
+  if (params.get("q")) { query = params.get("q"); input.value = query; }
+
+  render();
+  if (location.hash.length > 1) setTimeout(function () { goTo(location.hash.slice(1)); }, 0);
+});
+})();
+
+/* ===== TRANG: instruments (instruments.js) ===== */
+if (document.body.getAttribute("data-page") === "instruments") (function () {
+/* instruments.js: toàn bộ code riêng của trang Nhạc cụ (instruments.html). */
+
+/* PHẦN 1: MÔ HÌNH NHẠC CỤ ĐỂ BẤM TRỰC TIẾP (ASV.PlayModels) */
+
+var ASV = window.ASV || {};
+
+ASV.PlayModels = (function () {
+  var f = function (n) { return Number(n.toFixed(1)); };
+  var esc = function (s) { return ASV.escape(s); };
+
+  // Một vùng bấm được: dùng được bằng chuột, chạm và bàn phím (Tab rồi Enter/Space)
+  function hit(i, k, inner) {
+    var label = (k.sub ? k.sub + " · " : "") + k.label;
+    return '<g class="pm-hit" data-key="' + i + '" tabindex="0" role="button" aria-label="' + esc(label) + '">' + inner + "</g>";
+  }
+  function text(x, y, s, cls) { return '<text class="pm-label ' + (cls || "") + '" x="' + f(x) + '" y="' + f(y) + '">' + esc(s) + "</text>"; }
+  function svg(vb, body, label) {
+    return '<svg class="pm-svg" viewBox="' + vb + '" role="group" aria-label="' + esc(label) + '">' + body + "</svg>";
+  }
+
+  var M = {};
+
+  /* Đàn tranh: dây căng dọc thân đàn, con nhạn xếp chéo; vuốt lên/xuống qua các dây để gảy liên tiếp */
+  M["dan-tranh"] = function (keys, name, opts) {
+    var n = keys.length, o = [], labels = [];
+    // Màn hình hẹp: vẽ đàn ngắn lại (co theo chiều ngang) để các dây cách nhau đủ rộng cho ngón tay
+    var narrow = opts && opts.narrow, sx = narrow ? 0.36 : 1, sy = narrow ? 1.35 : 1;
+    o.push('<path class="pm-wood" d="M30 60 L840 22 Q856 22 856 38 L856 282 Q856 298 840 298 L30 262 Q16 260 16 246 L16 76 Q16 60 30 60 Z"/>');
+    o.push('<path class="pm-face" d="M46 70 L826 34 L826 286 L46 252 Z"/>');
+    o.push('<rect class="pm-horn" x="70" y="68" width="10" height="186" rx="3"/><rect class="pm-horn" x="790" y="38" width="10" height="246" rx="3"/>');
+    for (var i = 0; i < n; i++) {
+      // Dây trầm (i = 0) ở gần người chơi (phía dưới), dây cao ở xa
+      var yl = 244 - i * (168 / (n - 1)), yr = 274 - i * (228 / (n - 1));
+      var bx = 290 + i * 40, by = yl + (yr - yl) * ((bx - 75) / 720);
+      o.push(hit(i, keys[i],
+        '<line class="pm-hitline" x1="75" y1="' + f(yl) + '" x2="795" y2="' + f(yr) + '"/>' +
+        '<line class="pm-string" style="stroke-width:' + f(2.8 - i * 0.16) + '" x1="75" y1="' + f(yl) + '" x2="795" y2="' + f(yr) + '"/>' +
+        '<path class="pm-horn" d="M' + f(bx - 7) + " " + f(by + 6) + " L" + f(bx) + " " + f(by - 6) + " L" + f(bx + 7) + " " + f(by + 6) + 'Z"/>'));
+      labels.push(text(866 * sx + (narrow ? 4 : 0), yr * sy + 4, keys[i].label, "pm-small"));
+    }
+    return svg(narrow ? "0 0 360 " + Math.round(310 * sy) : "0 0 930 310",
+      '<g transform="scale(' + sx + " " + sy + ')">' + o.join("") + "</g>" + labels.join(""), name);
+  };
+
+  /* Đàn nguyệt: bầu tròn, cần dài với các phím cao; bấm vào từng phím */
+  M["dan-nguyet"] = function (keys, name) {
+    var o = [];
+    o.push('<circle class="pm-wood" cx="150" cy="150" r="118"/><circle class="pm-line" cx="150" cy="150" r="100"/>');
+    o.push('<rect class="pm-dark" x="248" y="132" width="600" height="36" rx="6"/>');
+    o.push('<path class="pm-dark" d="M846 132 Q880 124 892 100 L880 96 Q868 118 846 118 Z M846 168 L846 132"/>');
+    o.push('<rect class="pm-horn" x="110" y="128" width="12" height="44" rx="3"/>');
+    o.push('<line class="pm-string" x1="116" y1="143" x2="860" y2="143"/><line class="pm-string" x1="116" y1="157" x2="860" y2="157"/>');
+    keys.forEach(function (k, i) {
+      var x = 300 + i * 78;
+      o.push(hit(i, k,
+        '<rect class="pm-hitarea" x="' + (x - 36) + '" y="96" width="72" height="104" rx="6"/>' +
+        '<rect class="pm-fret" x="' + (x - 5) + '" y="120" width="10" height="60" rx="2"/>' +
+        text(x, 90, k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Đàn nhị: cần dài, 2 trục, bát đàn bịt da, cung vĩ; bấm và giữ ở các vị trí ngón tay trên cần */
+  M["dan-nhi"] = function (keys, name) {
+    var o = [];
+    o.push('<rect class="pm-dark" x="110" y="143" width="700" height="14" rx="4"/>');
+    o.push('<path class="pm-dark" d="M110 143 Q90 150 110 157 Z"/>');
+    o.push('<rect class="pm-horn" x="140" y="108" width="10" height="38" rx="3"/><rect class="pm-horn" x="180" y="154" width="10" height="38" rx="3"/>');
+    o.push('<rect class="pm-wood" x="800" y="118" width="70" height="64" rx="8"/><ellipse class="pm-skin" cx="870" cy="150" rx="12" ry="32"/>');
+    o.push('<line class="pm-string" x1="150" y1="146" x2="864" y2="146"/><line class="pm-string" x1="190" y1="154" x2="864" y2="154"/>');
+    o.push('<path class="pm-bow" d="M420 232 Q640 200 890 214"/><line class="pm-line" x1="424" y1="226" x2="888" y2="208"/>');
+    keys.forEach(function (k, i) {
+      var x = 260 + i * 88;
+      o.push(hit(i, k,
+        '<rect class="pm-hitarea" x="' + (x - 40) + '" y="104" width="80" height="92" rx="6"/>' +
+        '<circle class="pm-dot" cx="' + x + '" cy="150" r="7"/>' +
+        text(x, 96, k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Tỳ bà: thân hình quả lê, cần ngắn có phím; bấm nhanh để gảy, giữ để vê */
+  M["ty-ba"] = function (keys, name) {
+    var o = [];
+    o.push('<path class="pm-wood" d="M40 150 C40 50 200 40 340 92 C430 120 520 136 560 142 L560 158 C520 164 430 180 340 208 C200 260 40 250 40 150 Z"/>');
+    o.push('<rect class="pm-dark" x="556" y="136" width="280" height="28" rx="5"/>');
+    o.push('<path class="pm-dark" d="M832 136 Q868 120 880 96 L892 102 Q878 134 836 164 Z"/>');
+    o.push('<rect class="pm-horn" x="92" y="118" width="12" height="64" rx="3"/>');
+    [142, 147, 153, 158].forEach(function (y) { o.push('<line class="pm-string" x1="98" y1="' + y + '" x2="850" y2="' + y + '"/>'); });
+    // Phím gần đầu đàn cho nốt trầm, phím xuống thân đàn cho nốt cao
+    keys.forEach(function (k, i) {
+      var x = 790 - i * 82;
+      o.push(hit(i, k,
+        '<rect class="pm-hitarea" x="' + (x - 38) + '" y="100" width="76" height="100" rx="6"/>' +
+        '<rect class="pm-fret" x="' + (x - 4) + '" y="' + (i < 4 ? 130 : 120) + '" width="8" height="' + (i < 4 ? 40 : 60) + '" rx="2"/>' +
+        text(x, 94, k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Sáo trúc: ống trúc, lỗ thổi bên trái, các lỗ bấm; giữ một lỗ để thổi */
+  M["sao-truc"] = function (keys, name) {
+    var o = [];
+    o.push('<rect class="pm-bamboo" x="30" y="130" width="840" height="40" rx="20"/>');
+    o.push('<line class="pm-node" x1="90" y1="130" x2="90" y2="170"/><line class="pm-node" x1="810" y1="130" x2="810" y2="170"/>');
+    o.push('<ellipse class="pm-hole" cx="170" cy="150" rx="11" ry="8"/>'); // lỗ thổi
+    keys.forEach(function (k, i) {
+      var x = 400 + i * 70;
+      o.push(hit(i, k,
+        '<circle class="pm-hitarea" cx="' + x + '" cy="150" r="30"/>' +
+        '<circle class="pm-hole" cx="' + x + '" cy="150" r="9"/>' +
+        text(x, 112, k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Kèn bầu: dăm kèn, thân côn có lỗ bấm, loa kèn loe; giữ một lỗ để thổi */
+  M["ken-bau"] = function (keys, name) {
+    var o = [];
+    o.push('<rect class="pm-horn" x="30" y="143" width="44" height="14" rx="3"/><ellipse class="pm-gold" cx="80" cy="150" rx="6" ry="24"/>');
+    o.push('<path class="pm-dark" d="M84 140 L640 128 L640 172 L84 160 Z"/>');
+    o.push('<path class="pm-gold" d="M636 126 Q720 120 880 46 L880 254 Q720 180 636 174 Z"/>');
+    keys.forEach(function (k, i) {
+      var x = 200 + i * 72;
+      o.push(hit(i, k,
+        '<circle class="pm-hitarea" cx="' + x + '" cy="150" r="30"/>' +
+        '<circle class="pm-hole pm-hole-light" cx="' + x + '" cy="150" r="7"/>' +
+        text(x, 108, k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Khèn: bầu hơi bằng gỗ, các ống trúc; mỗi ống một nốt, vang cùng ống trì âm (giữ để thổi) */
+  M["khen"] = function (keys, name) {
+    var o = [];
+    // Ống trì âm (luôn vang cùng), không bấm
+    o.push('<rect class="pm-bamboo pm-drone" x="270" y="30" width="22" height="250" rx="10"/>');
+    keys.forEach(function (k, i) {
+      var x = 340 + i * 74, top = 40 + i * 18;
+      o.push(hit(i, k,
+        '<rect class="pm-hitarea" x="' + (x - 30) + '" y="' + (top - 6) + '" width="60" height="' + (232 - top) + '" rx="8"/>' +
+        '<rect class="pm-bamboo" x="' + (x - 11) + '" y="' + top + '" width="22" height="' + (280 - top) + '" rx="10"/>' +
+        '<circle class="pm-hole" cx="' + x + '" cy="' + (top + 40) + '" r="6"/>' +
+        text(x, top - 10, k.label, "pm-small pm-mid")));
+    });
+    o.push('<path class="pm-wood" d="M60 222 Q60 206 80 206 L230 204 Q300 186 450 188 Q650 192 700 222 Q650 254 450 256 Q300 258 230 240 L80 238 Q60 238 60 222 Z"/>');
+    o.push('<line class="pm-node" x1="250" y1="160" x2="720" y2="140"/>');
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Trống (nhìn từ trên): giữa mặt trống = "Tùng", gần mép da = "Tùng nhỏ", tang trống (vành gỗ) = "Cắc" */
+  M["trong"] = function (keys, name) {
+    // keys theo thứ tự trong PLAY: 0 = tung, 1 = cac, 2 = tungNho
+    var o = [];
+    o.push(hit(1, keys[1], '<circle class="pm-rim" cx="450" cy="150" r="140"/>' + text(450, 28, keys[1].label, "pm-mid pm-on-rim")));
+    o.push(hit(2, keys[2], '<circle class="pm-skin" cx="450" cy="150" r="112"/>' + text(450, 238, keys[2].label, "pm-small pm-mid")));
+    o.push(hit(0, keys[0], '<circle class="pm-skin-center" cx="450" cy="150" r="56"/>' + text(450, 156, keys[0].label, "pm-mid")));
+    for (var a = 0; a < 24; a++) {
+      var r = a * Math.PI / 12;
+      o.push('<circle class="pm-tack" cx="' + f(450 + Math.cos(r) * 126) + '" cy="' + f(150 + Math.sin(r) * 126) + '" r="3"/>');
+    }
+    o.push('<line class="pm-stick" x1="690" y1="40" x2="800" y2="250"/><line class="pm-stick" x1="760" y1="34" x2="840" y2="250"/>');
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Phách: bàn phách tre và hai dùi; gõ bên trái tiếng chắc, bên phải tiếng nhẹ */
+  M["phach"] = function (keys, name) {
+    var o = [];
+    o.push('<line class="pm-stick" x1="260" y1="40" x2="420" y2="120"/><line class="pm-stick" x1="640" y1="40" x2="500" y2="120"/>');
+    keys.forEach(function (k, i) {
+      var x = i === 0 ? 180 : 450;
+      o.push(hit(i, k,
+        '<rect class="pm-bamboo pm-board" x="' + x + '" y="130" width="270" height="74" rx="' + (i === 0 ? "18 0" : "0 18") + '"/>' +
+        text(x + 135, 240, k.label, "pm-mid")));
+    });
+    o.push('<line class="pm-node" x1="450" y1="130" x2="450" y2="204"/>');
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  /* Đàn t'rưng: ống tre xâu trên hai sợi dây, ống dài tiếng trầm; bấm hoặc vuốt qua các ống */
+  M["dan-trung"] = function (keys, name, opts) {
+    var n = keys.length, o = [], labels = [];
+    var narrow = opts && opts.narrow, sx = narrow ? 0.42 : 1, tx = narrow ? 40 : 0;
+    o.push('<line class="pm-cord" x1="300" y1="20" x2="270" y2="290"/><line class="pm-cord" x1="600" y1="20" x2="630" y2="290"/>');
+    for (var i = 0; i < n; i++) {
+      var y = 258 - i * (220 / (n - 1)), len = 700 - i * 52, x = 450 - len / 2;
+      o.push(hit(i, keys[i],
+        '<rect class="pm-hitarea" x="' + f(x - 6) + '" y="' + f(y - 15) + '" width="' + f(len + 12) + '" height="30" rx="14"/>' +
+        '<rect class="pm-bamboo" x="' + f(x) + '" y="' + f(y - 10) + '" width="' + f(len) + '" height="20" rx="10"/>' +
+        '<line class="pm-node" x1="' + f(x + 30) + '" y1="' + f(y - 10) + '" x2="' + f(x + 30) + '" y2="' + f(y + 10) + '"/>'));
+      labels.push(text(tx + (x - 14) * sx, y + 5, keys[i].label, "pm-small pm-end"));
+    }
+    return svg(narrow ? "0 0 400 300" : "0 0 900 300",
+      '<g transform="translate(' + tx + ' 0) scale(' + sx + ' 1)">' + o.join("") + "</g>" + labels.join(""), name);
+  };
+
+  /* Cồng chiêng: treo trên xà gỗ, chiếc lớn tiếng trầm; cồng (chiếc đầu) có núm */
+  M["cong-chieng"] = function (keys, name) {
+    var o = ['<rect class="pm-dark" x="30" y="26" width="840" height="18" rx="6"/>'];
+    keys.forEach(function (k, i) {
+      var cx = 120 + i * 168, r = 78 - i * 8, cy = 70 + r + 14;
+      o.push('<line class="pm-cord" x1="' + (cx - r * 0.4) + '" y1="44" x2="' + (cx - r * 0.25) + '" y2="' + (cy - r + 6) + '"/>' +
+             '<line class="pm-cord" x1="' + (cx + r * 0.4) + '" y1="44" x2="' + (cx + r * 0.25) + '" y2="' + (cy - r + 6) + '"/>');
+      o.push(hit(i, k,
+        '<circle class="pm-bronze" cx="' + cx + '" cy="' + f(cy) + '" r="' + r + '"/>' +
+        '<circle class="pm-gold" cx="' + cx + '" cy="' + f(cy) + '" r="' + f(r * 0.8) + '"/>' +
+        (i === 0 ? '<circle class="pm-bronze" cx="' + cx + '" cy="' + f(cy) + '" r="' + f(r * 0.24) + '"/>' : "") +
+        text(cx, cy + r + 24, (k.sub ? k.sub + " · " : "") + k.label, "pm-small pm-mid")));
+    });
+    return svg("0 0 900 300", o.join(""), name);
+  };
+
+  return M;
+})();
+
+/* PHẦN 2: LOGIC TRANG NHẠC CỤ */
+
+// Danh sách thuật ngữ đã chuyển sang trang riêng: link cũ instruments.html#thuat-ngu vẫn tới đúng chỗ
+if (location.hash === "#thuat-ngu") location.replace("glossary.html");
+
+(function () {
+  var family = "all";   // họ đang lọc
+  var query = "";       // từ đang tìm
+  var openId = null;    // nhạc cụ đang mở trong hộp chi tiết
+  var modal = null;     // đối tượng bootstrap.Modal
+  var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function byId(id) { return ASV_DATA.instruments.filter(function (x) { return x.id === id; })[0]; }
+
+  /* Lọc + tìm */
+  // Bỏ dấu và viết thường để "dan bau", "Đàn Bầu", "đàn bầu" đều giống nhau
+  function norm(text) { return I18n.plain(String(text || "")).toLowerCase().trim(); }
+
+  function haystack(it) {
+    return norm([it.name, it.id.replace(/-/g, " "), it.gloss.vi, it.gloss.en, it.branch.vi, it.branch.en, it.people.vi, it.people.en].join(" "));
+  }
+
+  function visible() {
+    var q = norm(query);
+    return ASV_DATA.instruments.filter(function (it) {
+      return (family === "all" || it.family === family) && (!q || haystack(it).indexOf(q) !== -1);
+    });
+  }
+
+  function renderGrid() {
+    document.getElementById("instGrid").innerHTML = ASV_DATA.instruments.map(function (it) {
+      var name = I18n.pick(it.name);
+      return '<div class="col-6 col-md-4 col-lg-3" data-col="' + it.id + '">' +
+        '<button type="button" class="inst-card asv-card" data-inst="' + it.id + '" aria-haspopup="dialog">' +
+          '<span class="inst-card-media"></span>' +
+          '<span class="inst-card-body">' +
+            '<span class="inst-card-tags"><span class="badge-family">' + ASV.escape(I18n.t("family." + it.family)) + "</span></span>" +
+            '<span class="inst-card-name">' + ASV.escape(name) + "</span>" +
+            '<span class="inst-card-gloss">' + ASV.escape(I18n.pick(it.gloss)) + "</span>" +
+          "</span></button></div>";
+    }).join("");
+    document.querySelectorAll(".inst-card").forEach(function (card) {
+      var it = byId(card.getAttribute("data-inst"));
+      var media = ASV.createMedia({ src: it.image, name: I18n.pick(it.name), kind: "instrument" });
+      var img = media.querySelector("img");
+      if (img) img.alt = ""; // tên đã có ngay dưới hình
+      card.querySelector(".inst-card-media").appendChild(media);
+    });
+  }
+
+  function applyFilter() {
+    var list = visible();
+    document.querySelectorAll("[data-col]").forEach(function (col) {
+      col.hidden = !list.some(function (it) { return it.id === col.getAttribute("data-col"); });
+    });
+    document.querySelectorAll(".inst-tools .filter-btn").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-family") === family ? "true" : "false");
+    });
+    document.getElementById("familyHint").textContent = I18n.t("inst.hint." + family);
+    document.getElementById("instCount").textContent = I18n.t("inst.count", { n: list.length });
+    // 2. Không tìm thấy
+    var empty = document.getElementById("instEmpty");
+    empty.hidden = list.length > 0;
+    if (!list.length) document.getElementById("instEmptyText").textContent = I18n.t("inst.empty.text", { q: query });
+    saveState();
+  }
+
+  // Ghi bộ lọc, từ tìm, nhạc cụ đang chơi thử và nhạc cụ đang mở lên địa chỉ trang
+  function saveState() {
+    var p = [];
+    if (family !== "all") p.push("ho=" + family);
+    if (query) p.push("q=" + encodeURIComponent(query));
+    if (playId && playId !== "dan-bau") p.push("choi=" + playId);
+    try {
+      var section = ["#choi-thu", "#thang-am"].indexOf(location.hash) !== -1 ? location.hash : "";
+      history.replaceState(null, "", (p.length ? "?" + p.join("&") : location.pathname) + (openId ? "#" + openId : section));
+    } catch (e) { /* file:// có thể chặn, bỏ qua */ }
+  }
+
+  /* Hộp chi tiết */
+  function renderModal() {
+    var it = byId(openId);
+    var name = I18n.pick(it.name);
+    document.getElementById("instModalTitle").textContent = name;
+    var genres = it.genres.map(function (gid) {
+      var g = ASV_DATA.genres.filter(function (x) { return x.id === gid; })[0];
+      return g ? '<li><a class="chip" href="genres.html#' + g.id + '">' + ASV.escape(I18n.pick(g.name)) + "</a></li>" : "";
+    }).join("");
+    var body = document.getElementById("instModalBody");
+    body.innerHTML =
+      '<div class="row g-4">' +
+        '<div class="col-md-5 inst-modal-media"></div>' +
+        '<div class="col-md-7">' +
+          '<p class="genre-tags"><span class="badge-family">' + ASV.escape(I18n.t("family." + it.family)) + "</span>" +
+            '<span class="badge-unesco">' + ASV.escape(I18n.pick(it.branch)) + "</span></p>" +
+          '<p class="inst-modal-gloss">' + ASV.escape(I18n.pick(it.gloss)) + "</p>" +
+          "<p>" + ASV.renderText(it.desc) + "</p>" +
+          '<dl class="genre-facts">' +
+            "<dt>" + ASV.escape(I18n.t("inst.modal.people")) + "</dt><dd>" + ASV.renderText(it.people) + "</dd>" +
+            "<dt>" + ASV.escape(I18n.t("inst.modal.material")) + "</dt><dd>" + ASV.renderText(it.material) + "</dd>" +
+            "<dt>" + ASV.escape(I18n.t("inst.modal.play")) + "</dt><dd>" + ASV.renderText(it.play) + "</dd>" +
+            "<dt>" + ASV.escape(I18n.t("inst.modal.genres")) + "</dt><dd>" +
+              (genres ? '<ul class="chip-list">' + genres + "</ul>" : ASV.escape(I18n.t("inst.modal.noGenres"))) + "</dd>" +
+          "</dl>" +
+          '<div class="d-flex flex-wrap gap-2">' + ASV.playButton("instrument:" + it.id) +
+            '<a class="btn btn-outline-son" href="#choi-thu" data-try="' + it.id + '">' +
+              ASV.escape(I18n.t("inst.modal.try", { name: name })) + "</a>" +
+          "</div>" +
+        "</div>" +
+      "</div>";
+    body.querySelector(".inst-modal-media").appendChild(ASV.createMedia({ src: it.image, name: name, kind: "instrument" }));
+    ASV.syncPlayButtons();
+  }
+
+  function openModal(id) {
+    if (!byId(id)) return;
+    // Đổi sang nhạc cụ khác thì dừng tiếng của nhạc cụ cũ
+    if (openId && openId !== id && ASV.Player.isActive("instrument:" + openId)) ASV.Player.stop(true);
+    openId = id;
+    renderModal();
+    saveState();
+    if (modal) modal.show();
+  }
+
+  // Nhạc cụ trước / sau: đi vòng trong các nhạc cụ đang hiện theo bộ lọc
+  function step(dir) {
+    var list = visible();
+    if (!list.length) list = ASV_DATA.instruments;
+    var i = list.map(function (x) { return x.id; }).indexOf(openId);
+    openModal(list[(i + dir + list.length) % list.length].id);
+  }
+
+  /* Chơi thử nhạc cụ ảo */
+
+  // Tên nốt → tần số (A4 = 440 Hz)
+  function hz(name) {
+    var m = /^([A-G])(#|b)?(-?\d)$/.exec(name);
+    var base = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]];
+    var midi = (Number(m[3]) + 1) * 12 + base + (m[2] === "#" ? 1 : m[2] === "b" ? -1 : 0);
+    return 440 * Math.pow(2, (midi - 69) / 12);
+  }
+  var NOTES = {
+    vi: ["Đô", "Đô thăng", "Rê", "Rê thăng", "Mi", "Fa", "Fa thăng", "Sol", "Sol thăng", "La", "La thăng", "Si"],
+    en: ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
+  };
+  function noteName(f, withHz) {
+    var midi = Math.round(69 + 12 * Math.log(f / 440) / Math.LN2);
+    var names = NOTES[I18n.lang] || NOTES.vi;
+    return names[((midi % 12) + 12) % 12] + " " + (Math.floor(midi / 12) - 1) + (withHz ? " · " + Math.round(f) + " Hz" : "");
+  }
+
+  /* Cách chơi của từng nhạc cụ (dùng thang ngũ cung cho các nhạc cụ có cao độ) */
+  var PLAY = {
+    "dan-tranh": { mode: "strings", sound: "tranh", notes: ["D4", "F4", "G4", "A4", "C5", "D5", "F5", "G5", "A5", "C6"] },
+    "dan-nguyet": { mode: "tap", sound: "nguyet", notes: ["G3", "C4", "D4", "F4", "G4", "A4", "C5"] },
+    "dan-nhi": { mode: "hold", sound: "nhi", notes: ["D4", "F4", "G4", "A4", "C5", "D5"] },
+    "ty-ba": { mode: "tremolo", sound: "tyba", notes: ["D4", "G4", "A4", "C5", "D5", "G5"] },
+    "sao-truc": { mode: "hold", sound: "sao", notes: ["D5", "F5", "G5", "A5", "C6", "D6"] },
+    "khen": { mode: "chord", sound: "khen", chords: [["D4", "G4"], ["D4", "A4"], ["D4", "C5"], ["D4", "D5"], ["D4", "F5"]] }, // [ống trì âm, nốt của ống]
+    "ken-bau": { mode: "hold", sound: "ken", notes: ["G4", "A4", "C5", "D5", "F5", "G5"] },
+    "trong": { mode: "pads", sound: "trong", pads: ["tung", "cac", "tungNho"] },
+    "phach": { mode: "pads", sound: "phach", pads: ["phachChac", "phachNhe"] },
+    "dan-trung": { mode: "strings", sound: "trung", notes: ["D5", "F5", "G5", "A5", "C6", "D6", "F6", "G6"] },
+    "cong-chieng": { mode: "tap", sound: "gong", notes: ["G3", "A3", "C4", "D4", "F4"] }
+  };
+  var playId = "dan-tranh"; // nhạc cụ đang chơi thử
+  // Màn hình hẹp: một số mô hình vẽ lại cho chỗ bấm đủ lớn (vẽ lại khi xoay máy / đổi cỡ cửa sổ)
+  var NARROW = window.matchMedia("(max-width: 575.98px)");
+
+  /* Phiên âm thanh: một "đường tiếng" chung đăng ký với ASV.Player */
+  var sess = null;           // { ctx, out, key }
+  var held = {};             // các tiếng đang giữ (hold/chord/tremolo), theo chỉ số phím
+  var noiseBuf = null;
+
+  function session() {
+    var key = "play:" + playId;
+    if (sess && ASV.Player.isActive(key)) return sess;
+    var it = byId(playId);
+    ASV.Player.play({
+      key: key,
+      title: {
+        vi: ASV_TRANSLATIONS.vi["inst.play.playerTitle"].replace("{name}", it.name),
+        en: ASV_TRANSLATIONS.en["inst.play.playerTitle"].replace("{name}", it.name)
+      },
+      // Hàm âm tự viết: chỉ mở đường tiếng, các nốt được thêm vào khi người dùng bấm
+      synth: function (ctx, out) { sess = { ctx: ctx, out: out, key: key }; return 600; }
+    });
+    return sess && ASV.Player.isActive(key) ? sess : null;
+  }
+
+  function noise(ctx) {
+    if (!noiseBuf) {
+      var len = ctx.sampleRate * 2;
+      noiseBuf = ctx.createBuffer(1, len, ctx.sampleRate);
+      var d = noiseBuf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    }
+    var src = ctx.createBufferSource();
+    src.buffer = noiseBuf;
+    src.loop = true;
+    return src;
+  }
+
+  // Tiếng gảy / gõ có cao độ, tắt dần
+  function pluck(s, f, o) {
+    var ctx = s.ctx, t = ctx.currentTime + 0.005, d = o.decay || 1;
+    var osc = ctx.createOscillator(), lp = ctx.createBiquadFilter(), g = ctx.createGain();
+    osc.type = o.type || "triangle";
+    osc.frequency.setValueAtTime(f, t);
+    lp.type = "lowpass";
+    lp.frequency.setValueAtTime(o.cutoff || 3000, t);
+    lp.frequency.exponentialRampToValueAtTime(Math.max(250, (o.cutoff || 3000) * 0.25), t + d);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(o.gain || 0.3, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+    osc.connect(lp); lp.connect(g); g.connect(s.out);
+    osc.start(t); osc.stop(t + d + 0.05);
+    if (o.overtone) {
+      var o2 = ctx.createOscillator(), g2 = ctx.createGain();
+      o2.type = "sine"; o2.frequency.value = f * o.overtone[0];
+      g2.gain.setValueAtTime(0.0001, t);
+      g2.gain.exponentialRampToValueAtTime(o.overtone[1], t + 0.006);
+      g2.gain.exponentialRampToValueAtTime(0.0001, t + d * o.overtone[2]);
+      o2.connect(g2); g2.connect(s.out);
+      o2.start(t); o2.stop(t + d + 0.05);
+    }
+  }
+
+  // Tiếng kim loại ngân dài (cồng chiêng)
+  function gong(s, f) {
+    var ctx = s.ctx, t = ctx.currentTime + 0.005;
+    [[1, 0.24, 2.6], [1.48, 0.1, 1.6], [2.02, 0.07, 1.3], [2.74, 0.04, 0.9], [1.003, 0.12, 2.6]].forEach(function (p) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sine"; o.frequency.value = f * p[0];
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(p[1], t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + p[2]);
+      o.connect(g); g.connect(s.out);
+      o.start(t); o.stop(t + p[2] + 0.05);
+    });
+  }
+
+  // Tiếng đánh không rõ cao độ (trống, phách)
+  function hit(s, o) {
+    var ctx = s.ctx, t = ctx.currentTime + 0.005;
+    if (o.f0) {
+      var osc = ctx.createOscillator(), g = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(o.f0, t);
+      osc.frequency.exponentialRampToValueAtTime(o.f1, t + (o.drop || 0.1));
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(o.gain, t + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + o.decay);
+      osc.connect(g); g.connect(s.out);
+      osc.start(t); osc.stop(t + o.decay + 0.05);
+    }
+    if (o.noise) {
+      var n = noise(ctx), fl = ctx.createBiquadFilter(), ng = ctx.createGain();
+      fl.type = o.noise[0]; fl.frequency.value = o.noise[1]; fl.Q.value = o.noise[4] || 0.8;
+      ng.gain.setValueAtTime(o.noise[2], t);
+      ng.gain.exponentialRampToValueAtTime(0.0001, t + o.noise[3]);
+      n.connect(fl); fl.connect(ng); ng.connect(s.out);
+      n.start(t); n.stop(t + o.noise[3] + 0.05);
+    }
+  }
+
+  // Tiếng ngân khi giữ (kéo cung, thổi): trả về { setFreq, stop } để luyến và dừng
+  function holdVoice(s, freqs, o) {
+    var ctx = s.ctx, t = ctx.currentTime + 0.005;
+    var g = ctx.createGain(), mix = ctx.createGain(), nodes = [], oscs = [];
+    var lfo = ctx.createOscillator(), lg = ctx.createGain();
+    lfo.frequency.value = o.vib ? o.vib[0] : 5;
+    lg.gain.setValueAtTime(0, t);
+    lg.gain.linearRampToValueAtTime(o.vib ? freqs[0] * o.vib[1] : 0, t + 0.5);
+    lfo.connect(lg);
+    nodes.push(lfo);
+    freqs.forEach(function (f) {
+      var osc = ctx.createOscillator();
+      osc.type = o.type || "sawtooth";
+      osc.frequency.setValueAtTime(f, t);
+      lg.connect(osc.frequency);
+      osc.connect(mix);
+      oscs.push(osc); nodes.push(osc);
+    });
+    var last = mix;
+    (o.filters || []).forEach(function (fd) {
+      var fl = ctx.createBiquadFilter();
+      fl.type = fd[0]; fl.frequency.value = fd[1]; fl.Q.value = fd[2] || 0.7;
+      if (fd[3] !== undefined) fl.gain.value = fd[3];
+      last.connect(fl); last = fl;
+    });
+    last.connect(g);
+    if (o.breath) { // tiếng hơi thở (sáo)
+      var n = noise(ctx), bp = ctx.createBiquadFilter(), ng = ctx.createGain();
+      bp.type = "bandpass"; bp.frequency.value = 3000; ng.gain.value = o.breath;
+      n.connect(bp); bp.connect(ng); ng.connect(g);
+      nodes.push(n);
+    }
+    g.gain.setValueAtTime(0, t);
+    g.gain.setTargetAtTime(o.level || 0.2, t, (o.attack || 0.06) / 3);
+    g.connect(s.out);
+    nodes.forEach(function (nd) { nd.start(t); });
+    return {
+      setFreq: function (list) {
+        var now = ctx.currentTime;
+        list.forEach(function (f, i) { if (oscs[i]) oscs[i].frequency.setTargetAtTime(f, now, 0.04); });
+      },
+      stop: function () {
+        var now = ctx.currentTime;
+        g.gain.cancelScheduledValues(now);
+        g.gain.setTargetAtTime(0, now, 0.06);
+        nodes.forEach(function (nd) { try { nd.stop(now + 0.4); } catch (e) { /* đã dừng */ } });
+      }
+    };
+  }
+
+  // Âm sắc từng nhạc cụ
+  var SOUND = {
+    tranh: function (s, f) { pluck(s, f, { type: "triangle", decay: 1.6, gain: 0.26, cutoff: 4200, overtone: [2, 0.05, 0.5] }); },
+    nguyet: function (s, f) { pluck(s, f, { type: "sawtooth", decay: 0.9, gain: 0.2, cutoff: 1900 }); },
+    tyba: function (s, f, soft) { pluck(s, f, { type: "sawtooth", decay: soft ? 0.3 : 0.9, gain: soft ? 0.14 : 0.24, cutoff: 2600 }); },
+    trung: function (s, f) { pluck(s, f, { type: "sine", decay: 0.5, gain: 0.32, cutoff: 6000, overtone: [3, 0.05, 0.25] }); },
+    gong: function (s, f) { gong(s, f); },
+    nhi: function (s, fs) { return holdVoice(s, fs, { type: "sawtooth", level: 0.2, attack: 0.15, vib: [5.6, 0.013], filters: [["lowpass", 2400], ["peaking", 1200, 1, 6]] }); },
+    sao: function (s, fs) { return holdVoice(s, fs, { type: "sine", level: 0.3, attack: 0.06, vib: [5, 0.01], breath: 0.04 }); },
+    ken: function (s, fs) { return holdVoice(s, fs, { type: "sawtooth", level: 0.18, attack: 0.04, vib: [6, 0.014], filters: [["highpass", 500], ["peaking", 1400, 1, 8], ["lowpass", 4500]] }); },
+    khen: function (s, fs) { return holdVoice(s, fs, { type: "square", level: 0.07, attack: 0.18, vib: [4, 0.003], filters: [["lowpass", 1300]] }); },
+    trong: function (s, pad) {
+      // Mỗi tiếng "tùng" có hai lớp: phần trầm (ngực nghe thấy, tai nghe) và tiếng mặt da ~300 Hz
+      if (pad === "tung") {
+        hit(s, { f0: 150, f1: 70, drop: 0.12, decay: 0.8, gain: 0.9, noise: ["lowpass", 400, 0.2, 0.05] });
+        hit(s, { f0: 340, f1: 190, drop: 0.09, decay: 0.32, gain: 0.32, noise: ["bandpass", 900, 0.35, 0.05, 1.2] });
+      }
+      if (pad === "tungNho") {
+        hit(s, { f0: 140, f1: 72, drop: 0.1, decay: 0.45, gain: 0.45, noise: ["lowpass", 400, 0.1, 0.04] });
+        hit(s, { f0: 380, f1: 230, drop: 0.07, decay: 0.2, gain: 0.2, noise: ["bandpass", 1100, 0.2, 0.04, 1.2] });
+      }
+      if (pad === "cac") hit(s, { f0: 800, f1: 650, drop: 0.03, decay: 0.06, gain: 0.1, noise: ["highpass", 2000, 0.4, 0.05] });
+    },
+    phach: function (s, pad) {
+      if (pad === "phachChac") hit(s, { f0: 1700, f1: 1400, drop: 0.02, decay: 0.08, gain: 0.45, noise: ["bandpass", 2400, 1.2, 0.07, 2] });
+      if (pad === "phachNhe") hit(s, { f0: 2100, f1: 1900, drop: 0.02, decay: 0.06, gain: 0.22, noise: ["bandpass", 3200, 0.6, 0.05, 2] });
+    }
+  };
+
+  // Danh sách phím của nhạc cụ đang chọn: { label, freqs, pad }
+  function keysOf(cfg) {
+    if (cfg.mode === "chord") {
+      // Tên phím là nốt của ống được bấm (nốt cuối); ống trì âm luôn vang cùng
+      return cfg.chords.map(function (c) { return { label: noteName(hz(c[c.length - 1])), freqs: c.map(hz) }; });
+    }
+    if (cfg.mode === "pads") {
+      return cfg.pads.map(function (p) { return { label: I18n.t("inst.pad." + p), pad: p }; });
+    }
+    return cfg.notes.map(function (n, i) {
+      var label = noteName(hz(n));
+      // Cồng chiêng: dòng trên là tên chiếc (cồng có núm / chiêng), dòng dưới là nốt
+      var sub = playId === "cong-chieng" ? (i === 0 ? I18n.t("inst.pad.cong") : I18n.t("inst.pad.gong", { n: i + 1 })) : "";
+      return { label: label, sub: sub, freqs: [hz(n)] };
+    });
+  }
+
+  function flash(i) {
+    var el = document.querySelector('#playPads [data-key="' + i + '"]');
+    if (!el) return;
+    el.classList.add("is-on");
+    clearTimeout(el._t);
+    el._t = setTimeout(function () { if (!held[i]) el.classList.remove("is-on"); }, 180);
+  }
+
+  function showNote(k) {
+    document.getElementById("playNote").textContent = I18n.t("inst.play.now", { name: I18n.pick(byId(playId).name), note: (k.sub ? k.sub + " · " : "") + k.label });
+  }
+
+  // Bấm xuống một phím
+  function press(i) {
+    var cfg = PLAY[playId], k = keysOf(cfg)[i];
+    if (!k) return;
+    var s = session();
+    if (!s) return;
+    recNote("d", i);
+    var snd = SOUND[cfg.sound];
+    showNote(k);
+    if (cfg.mode === "hold" || cfg.mode === "chord") {
+      // Đang giữ một phím khác (luyến): đổi cao độ của tiếng đang ngân thay vì tạo tiếng mới
+      var ids = Object.keys(held);
+      if (cfg.mode === "hold" && ids.length) {
+        var v = held[ids[0]];
+        delete held[ids[0]];
+        clearOn(ids[0]);
+        v.setFreq(k.freqs);
+        held[i] = v;
+      } else if (!held[i]) {
+        held[i] = snd(s, k.freqs);
+      }
+      setOn(i);
+      return;
+    }
+    if (cfg.mode === "tremolo") {
+      snd(s, k.freqs[0]);
+      // Giữ quá 0.25 giây thì bắt đầu vê: gảy liên tục rất nhanh
+      held[i] = { timer: setTimeout(function () {
+        held[i].loop = setInterval(function () { if (sess) snd(sess, k.freqs[0], true); }, 70);
+      }, 250) };
+      setOn(i);
+      return;
+    }
+    if (cfg.mode === "pads") snd(s, k.pad); else snd(s, k.freqs[0]);
+    flash(i);
+  }
+
+  // Nhả phím
+  function release(i) {
+    var v = held[i];
+    if (!v) return;
+    recNote("u", i);
+    if (v.stop) v.stop();
+    if (v.timer) { clearTimeout(v.timer); clearInterval(v.loop); }
+    delete held[i];
+    clearOn(i);
+  }
+  function releaseAll() { Object.keys(held).forEach(release); }
+  function setOn(i) { var el = document.querySelector('#playPads [data-key="' + i + '"]'); if (el) el.classList.add("is-on"); }
+  function clearOn(i) { var el = document.querySelector('#playPads [data-key="' + i + '"]'); if (el) el.classList.remove("is-on"); }
+
+  // Vẽ các phím của nhạc cụ đang chọn
+  function renderPads() {
+    var cfg = PLAY[playId];
+    var keys = keysOf(cfg);
+    var pads = document.getElementById("playPads");
+    pads.className = "play-pads mode-" + cfg.mode + " inst-" + playId;
+    // Mô hình nhạc cụ (phần 1): bấm thẳng vào dây, phím, lỗ, ống, mặt trống…
+    if (ASV.PlayModels && ASV.PlayModels[playId]) {
+      pads.classList.add("has-model");
+      pads.innerHTML = ASV.PlayModels[playId](keys, I18n.pick(byId(playId).name), { narrow: NARROW.matches });
+      return;
+    }
+    pads.innerHTML = keys.map(function (k, i) {
+      // Ống t'rưng / dây đàn tranh: dài ngắn theo cao độ để nhìn ra trầm bổng
+      var style = "";
+      if (playId === "dan-trung") style = ' style="--len:' + (100 - i * 8) + '"';
+      if (playId === "dan-tranh") style = ' style="--w:' + (3.2 - i * 0.18).toFixed(2) + 'px"';
+      if (playId === "cong-chieng") style = ' style="--size:' + (132 - i * 10) + 'px"';
+      return '<button type="button" class="play-key" data-key="' + i + '"' + style + ">" +
+        '<span class="play-key-num" aria-hidden="true">' + (i + 1) + "</span>" +
+        (k.sub ? '<span class="play-key-sub">' + ASV.escape(k.sub) + "</span>" : "") +
+        '<span class="play-key-label">' + ASV.escape(k.label) + "</span></button>";
+    }).join("");
+  }
+
+  function selectPlay(id, opts) {
+    if (!byId(id)) return;
+    opts = opts || {};
+    if (id !== playId) { stopReplay(); if (rec.on) recStop(); }
+    releaseAll();
+    if (sess && ASV.Player.current && ASV.Player.current.item.key.indexOf("play:") === 0) ASV.Player.stop(true);
+    if (ASV.Player.isActive("vbau")) ASV.Player.stop(true);
+    sess = null;
+    playId = id;
+    document.querySelectorAll("#playPicker .filter-btn").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-play-pick") === id ? "true" : "false");
+    });
+    var isBau = id === "dan-bau";
+    document.getElementById("playGeneric").hidden = isBau;
+    document.getElementById("vbauPanel").hidden = !isBau;
+    if (!isBau) {
+      var it = byId(id);
+      document.getElementById("playName").textContent = I18n.pick(it.name);
+      document.getElementById("playHow").textContent = I18n.t("inst.how." + id);
+      renderPads();
+      document.getElementById("playNote").textContent = "";
+    }
+    saveState();
+    if (opts.scroll) document.getElementById("choi-thu").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
+  function renderPicker() {
+    document.getElementById("playPicker").innerHTML = ASV_DATA.instruments.map(function (it) {
+      return '<button type="button" class="filter-btn" data-play-pick="' + it.id + '" aria-pressed="' + (it.id === playId) + '">' +
+        ASV.escape(I18n.pick(it.name)) + "</button>";
+    }).join("");
+  }
+
+  function setupPlay() {
+    var pads = document.getElementById("playPads");
+    var down = false, lastKey = null;
+    var cfgMode = function () { return PLAY[playId] ? PLAY[playId].mode : ""; };
+    var keyAt = function (x, y) {
+      var el = document.elementFromPoint(x, y);
+      el = el && el.closest("#playPads [data-key]");
+      return el ? Number(el.getAttribute("data-key")) : null;
+    };
+    // Chuột / ngón tay: bấm, giữ, vuốt
+    pads.addEventListener("pointerdown", function (e) {
+      var k = keyAt(e.clientX, e.clientY);
+      if (k === null) return;
+      e.preventDefault();
+      down = true; lastKey = k;
+      try { pads.setPointerCapture(e.pointerId); } catch (err) { /* bỏ qua */ }
+      press(k);
+    });
+    pads.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      var k = keyAt(e.clientX, e.clientY);
+      if (k === null || k === lastKey) return;
+      var mode = cfgMode();
+      // Vuốt qua dây/ống: gảy từng cái đi qua.
+      if (mode === "strings" || mode === "hold") {
+        if (mode === "strings") press(k);
+        else press(k);
+        lastKey = k;
+      }
+    });
+    var up = function () {
+      if (!down) return;
+      down = false;
+      releaseAll();
+      lastKey = null;
+    };
+    pads.addEventListener("pointerup", up);
+    pads.addEventListener("pointercancel", up);
+    pads.addEventListener("lostpointercapture", up);
+
+    // Bàn phím: Enter/Space trên phím đang focus, hoặc phím số 1–9 khi đang ở phần chơi thử
+    pads.addEventListener("keydown", function (e) {
+      var el = e.target.closest("[data-key]");
+      if (!el || (e.key !== "Enter" && e.key !== " ") || e.repeat) return;
+      e.preventDefault();
+      press(Number(el.getAttribute("data-key")));
+    });
+    pads.addEventListener("keyup", function (e) {
+      var el = e.target.closest("[data-key]");
+      if (el && (e.key === "Enter" || e.key === " ")) release(Number(el.getAttribute("data-key")));
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.repeat || !/^[1-9]$/.test(e.key) || playId === "dan-bau") return;
+      if (!e.target.closest || !e.target.closest("#choi-thu") || e.target.matches("input, textarea")) return;
+      var i = Number(e.key) - 1;
+      if (i < keysOf(PLAY[playId]).length) { e.preventDefault(); press(i); }
+    });
+    document.addEventListener("keyup", function (e) {
+      if (/^[1-9]$/.test(e.key)) release(Number(e.key) - 1);
+    });
+    var onNarrow = function () { if (playId !== "dan-bau") { releaseAll(); renderPads(); } };
+    if (NARROW.addEventListener) NARROW.addEventListener("change", onNarrow); else NARROW.addListener(onNarrow);
+    document.getElementById("playPicker").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-play-pick]");
+      if (b) selectPlay(b.getAttribute("data-play-pick"));
+    });
+    // Người dùng bấm Dừng / Esc → nhả hết các tiếng đang giữ
+    ASV.Player.onChange(function (c) {
+      if (!c || c.item.key.indexOf("play:") !== 0) { releaseAll(); if (!c || c.item.key !== "play:" + playId) sess = null; }
+    });
+  }
+
+  /* Đàn bầu ảo */
+  var BASE = 130.81;
+  var harmonic = 2;
+  var rod = 0;          // −100 … 100
+  var live = null;      // các bộ dao động đang kêu, để đổi cao độ khi kéo cần đàn
+  var raf = null;
+
+  function semitones() { return rod >= 0 ? (rod / 100) * 5 : (rod / 100) * 3; }
+  function freq() { return BASE * harmonic * Math.pow(2, semitones() / 12); }
+
+  /* Các thành phần của tiếng đàn: [bội số tần số, độ to]. */
+  var PARTS_HARM = [[1, 1], [2, 0.08]];
+  var PARTS_OPEN = [[1, 1], [2, 0.6], [3, 0.45], [4, 0.25], [5, 0.12]];
+
+  // Âm đàn bầu "sống": giữ lại dao động trong biến live để đổi cao độ khi kéo cần đàn
+  function voice(ctx, out, t) {
+    var f = freq(), open = harmonic === 1;
+    var parts = open ? PARTS_OPEN : PARTS_HARM;
+    var g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+    var oscs = [];
+    lfo.frequency.value = 5.2;
+    lg.gain.setValueAtTime(0, t);
+    lg.gain.linearRampToValueAtTime(f * 0.004, t + 0.8);
+    lfo.connect(lg);
+    parts.forEach(function (p) {
+      var osc = ctx.createOscillator(), pg = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(f * p[0], t);
+      lg.connect(osc.frequency);
+      pg.gain.value = p[1];
+      osc.connect(pg); pg.connect(g);
+      oscs.push([osc, p[0]]);
+    });
+    // Gảy: vang mạnh rồi tắt dần chậm (đàn bầu ngân dài).
+    var peak = open ? 0.3 : 0.5;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(peak * 0.28, t + 1.2);
+    g.gain.setTargetAtTime(0.0001, t + 1.2, 1.3);
+    g.connect(out);
+    lfo.start(t); lfo.stop(t + 6.2);
+    oscs.forEach(function (o) { o[0].start(t); o[0].stop(t + 6.2); });
+    live = { ctx: ctx, oscs: oscs };
+    return 6;
+  }
+
+  function bendLive() {
+    if (!live || !ASV.Player.isActive("vbau")) return;
+    var f = freq(), now = live.ctx.currentTime;
+    live.oscs.forEach(function (o) { o[0].frequency.setTargetAtTime(f * o[1], now, 0.03); });
+  }
+
+  // Hình: cần đàn nghiêng theo thanh trượt, dây nối từ đầu cần đàn tới trục
+  var PIVOT = { x: 80, y: 122 };
+  function rodTip() {
+    var G = ASV.Motif.BAU, a = (rod / 100) * 9 * Math.PI / 180;
+    var dx = G.sx - PIVOT.x, dy = G.sy - PIVOT.y;
+    return { x: PIVOT.x + dx * Math.cos(a) - dy * Math.sin(a), y: PIVOT.y + dx * Math.sin(a) + dy * Math.cos(a) };
+  }
+  function drawRod(offsetFn) {
+    var svg = document.querySelector("#vbauArt svg");
+    if (!svg) return;
+    var deg = ((rod / 100) * 9).toFixed(2);
+    svg.querySelectorAll(".bau-rod-out, .bau-rod, .bau-knob, .bau-gourd").forEach(function (el) {
+      el.setAttribute("transform", "rotate(" + deg + " " + PIVOT.x + " " + PIVOT.y + ")");
+    });
+    var S = rodTip(), P = ASV.Motif.BAU, d = "";
+    var dx = P.px - S.x, dy = P.py - S.y, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len;
+    for (var i = 0; i <= 64; i++) {
+      var u = i / 64, off = offsetFn ? offsetFn(u) : 0;
+      d += (i ? "L" : "M") + (S.x + dx * u + nx * off).toFixed(1) + " " + (S.y + dy * u + ny * off).toFixed(1);
+    }
+    svg.querySelectorAll(".bau-string, .bau-string-halo").forEach(function (p) { p.setAttribute("d", d); });
+  }
+  // Dây rung theo sóng đứng có "harmonic" bụng sóng, tắt dần
+  function vibrate() {
+    cancelAnimationFrame(raf);
+    if (reduceMotion) { drawRod(); return; }
+    var t0 = performance.now();
+    (function frame(now) {
+      var t = (now - t0) / 1000, amp = 6 * Math.exp(-t / 1.1);
+      if (amp < 0.25) { drawRod(); return; }
+      drawRod(function (u) { return amp * Math.sin(harmonic * Math.PI * u) * Math.sin(2 * Math.PI * 11 * t); });
+      raf = requestAnimationFrame(frame);
+    })(t0);
+  }
+
+  function updateNote(playing) {
+    document.getElementById("vbauNote").textContent = playing ? I18n.t("inst.bau.note", { note: noteName(freq(), true) }) : I18n.t("inst.bau.ready");
+  }
+
+  /* Bấm trên hình đàn: vị trí bấm → bồi âm (giống đàn bầu ở trang chủ) */
+  var MAX_HARM = 6;
+  function artSvg() { return document.querySelector("#vbauArt svg"); }
+
+  // Tọa độ chuột trên màn hình → tọa độ x trong hình SVG
+  function svgXAt(svg, clientX, clientY) {
+    var pt = svg.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse()).x;
+  }
+
+  // Điểm nút bồi âm n nằm ở 1/n chiều dài dây tính từ trục lên dây.
+  // Bấm gần cần đàn (xa mọi điểm nút) → âm thực (n = 1).
+  function harmonicAt(svgX) {
+    var G = ASV.Motif.BAU;
+    var f = Math.min(1, Math.max(0, (G.px - svgX) / (G.px - G.sx)));
+    if (f > 0.72) return 1;
+    var best = 2;
+    for (var n = 3; n <= MAX_HARM; n++) {
+      if (Math.abs(f - 1 / n) < Math.abs(f - 1 / best)) best = n;
+    }
+    return best;
+  }
+
+  // Đánh dấu trên hình: điểm nút đang chọn, hoặc cả dây khi chọn âm thực
+  function markHarmonic() {
+    var svg = artSvg();
+    if (!svg) return;
+    svg.querySelectorAll(".bau-node").forEach(function (el) {
+      el.classList.toggle("is-selected", Number(el.getAttribute("data-n")) === harmonic);
+    });
+    document.getElementById("vbauArt").classList.toggle("is-open", harmonic === 1);
+  }
+
+  function markHover(n) {
+    var svg = artSvg();
+    if (!svg) return;
+    svg.querySelectorAll(".bau-node").forEach(function (el) {
+      el.classList.toggle("is-hover", Number(el.getAttribute("data-n")) === n);
+    });
+    document.getElementById("vbauArt").classList.toggle("is-hover-open", n === 1);
+  }
+
+  // Vòng tròn nhỏ ở chỗ cạnh bàn tay chạm dây (trên dây thật, theo độ nghiêng cần đàn)
+  function showTouch() {
+    var svg = artSvg();
+    if (!svg || harmonic === 1) return; // âm thực không chạm điểm nút nào
+    var S = rodTip(), P = ASV.Motif.BAU, u = 1 - 1 / harmonic;
+    var mark = svg.querySelector(".bau-touch");
+    mark.setAttribute("cx", (S.x + (P.px - S.x) * u).toFixed(1));
+    mark.setAttribute("cy", (S.y + (P.py - S.y) * u).toFixed(1));
+    mark.classList.remove("is-on");
+    void mark.getBoundingClientRect(); // chạy lại hiệu ứng
+    mark.classList.add("is-on");
+  }
+
+  function pluckBau() {
+    recNote("p", harmonic);
+    ASV.Player.play({
+      key: "vbau",
+      title: { vi: ASV_TRANSLATIONS.vi["inst.bau.playerTitle"], en: ASV_TRANSLATIONS.en["inst.bau.playerTitle"] },
+      synth: voice
+    });
+    vibrate();
+    showTouch();
+    updateNote(true);
+  }
+
+  function renderHarmonics() {
+    markHarmonic();
+    // 1 = âm thực (dây buông); 2…6 = âm bồi
+    document.getElementById("vbauHarm").innerHTML = [1, 2, 3, 4, 5, 6].map(function (n) {
+      var label = n === 1 ? I18n.t("inst.bau.open") : I18n.t("inst.bau.harmonic", { n: n });
+      return '<button type="button" class="filter-btn" data-harm="' + n + '" aria-pressed="' + (n === harmonic) + '">' +
+        ASV.escape(label) + "</button>";
+    }).join("");
+  }
+
+  function setupBau() {
+    var art = document.getElementById("vbauArt");
+    // Trang này chỉ có tới bồi âm 6: bỏ các điểm nút 7, 8 trên hình
+    if (artSvg()) artSvg().querySelectorAll(".bau-node").forEach(function (el) {
+      if (Number(el.getAttribute("data-n")) > MAX_HARM) el.remove();
+    });
+    renderHarmonics();
+    drawRod();
+    updateNote(false);
+    document.getElementById("vbauPluck").addEventListener("click", pluckBau);
+    // Bấm vào hình: chọn âm theo chỗ bấm, nút bên dưới đổi theo, rồi gảy
+    art.addEventListener("click", function (e) {
+      var svg = artSvg();
+      if (!svg) return;
+      harmonic = harmonicAt(svgXAt(svg, e.clientX, e.clientY));
+      renderHarmonics();
+      pluckBau();
+    });
+    // Rê chuột: sáng nhẹ điểm nút sẽ được chọn
+    art.addEventListener("pointermove", function (e) {
+      var svg = artSvg();
+      if (svg && e.pointerType === "mouse") markHover(harmonicAt(svgXAt(svg, e.clientX, e.clientY)));
+    });
+    art.addEventListener("pointerleave", function () { markHover(0); });
+    var slider = document.getElementById("vbauRod");
+    slider.addEventListener("input", function () {
+      rod = Number(slider.value);
+      recNote("r", rod);
+      bendLive();
+      if (ASV.Player.isActive("vbau")) updateNote(true);
+      drawRod(); // vẽ cần đàn nghiêng ngay
+    });
+    // Nhấn đúp để đưa cần đàn về giữa
+    slider.addEventListener("dblclick", function () { slider.value = 0; slider.dispatchEvent(new Event("input")); });
+    document.getElementById("vbauHarm").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-harm]");
+      if (!b) return;
+      harmonic = Number(b.getAttribute("data-harm"));
+      renderHarmonics();
+      document.querySelector('#vbauHarm [data-harm="' + harmonic + '"]').focus();
+      pluckBau(); // đổi âm thì gảy luôn cho nghe
+    });
+  }
+
+  /* Ghi lại phần chơi thử */
+  var REC_MAX_MS = 60000, REC_MAX_EV = 600, REC_KEEP = 5;
+  var rec = { on: false, inst: null, t0: 0, ev: [], timer: null };
+  var take = null;                                   // bản ghi đang có: { inst, ev }
+  var replay = { on: false, timers: [], internal: false };
+  var recMsg = "";                                   // dòng trạng thái (tính lại khi đổi ngôn ngữ)
+  var recMsgArgs = null;
+
+  function recNote(type, val) {
+    if (!rec.on || replay.on) return;
+    var t = Math.round(performance.now() - rec.t0);
+    if (t > REC_MAX_MS) { recStop("rec.full"); return; }
+    var last = rec.ev[rec.ev.length - 1];
+    // Kéo cần đàn bắn ra rất nhiều sự kiện: gộp các lần kéo sát nhau (dưới 40 ms)
+    if (type === "r" && last && last[1] === "r" && t - last[0] < 40) { last[2] = val; return; }
+    rec.ev.push([t, type, val]);
+    if (rec.ev.length >= REC_MAX_EV) recStop("rec.full");
+  }
+
+  function notesIn(tk) { return tk.ev.filter(function (e) { return e[1] === "d" || e[1] === "p"; }).length; }
+  function lengthOf(tk) { return tk.ev.length ? tk.ev[tk.ev.length - 1][0] : 0; }
+  function clock(ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
+  function describe(tk) {
+    return { name: I18n.pick(byId(tk.inst).name), n: notesIn(tk), time: clock(lengthOf(tk)) };
+  }
+  function setMsg(key, args) { recMsg = key; recMsgArgs = args || null; renderRecStatus(); }
+
+  function recStart() {
+    stopReplay();
+    rec = { on: true, inst: playId, t0: performance.now(), ev: [], timer: null };
+    rec.timer = setInterval(function () {
+      var t = performance.now() - rec.t0;
+      if (t > REC_MAX_MS) recStop("rec.full"); else setMsg("rec.recording", { time: clock(t) });
+    }, 250);
+    setMsg("rec.recording", { time: "0:00" });
+    updateRecUI();
+  }
+
+  function recStop(reason) {
+    if (!rec.on) return;
+    var t = Math.round(performance.now() - rec.t0);
+    // Phím còn đang giữ lúc dừng ghi: thêm lần nhả ở cuối
+    Object.keys(held).forEach(function (k) { rec.ev.push([Math.min(t, REC_MAX_MS), "u", Number(k)]); });
+    rec.on = false;
+    clearInterval(rec.timer);
+    if (notesIn(rec) === 0) {
+      setMsg("rec.empty");
+    } else {
+      take = { inst: rec.inst, ev: rec.ev };
+      setMsg(reason === "rec.full" ? "rec.full" : "rec.ready", describe(take));
+    }
+    document.getElementById("recShareBox").hidden = true;
+    updateRecUI();
+  }
+
+  /* Nghe lại */
+  function playTake(tk) {
+    stopReplay();
+    if (rec.on) recStop();
+    if (tk.inst !== playId) selectPlay(tk.inst);
+    replay.on = true;
+    tk.ev.forEach(function (e) {
+      replay.timers.push(setTimeout(function () { replayEvent(tk.inst, e); }, e[0] + 60));
+    });
+    replay.timers.push(setTimeout(finishReplay, lengthOf(tk) + (tk.inst === "dan-bau" ? 2500 : 1200)));
+    setMsg("rec.playing");
+    updateRecUI();
+  }
+
+  function replayEvent(inst, e) {
+    replay.internal = true; // các thay đổi của trình phát lúc này là do nghe lại
+    try {
+      if (inst === "dan-bau") {
+        if (e[1] === "p") { harmonic = e[2]; renderHarmonics(); pluckBau(); }
+        if (e[1] === "r") {
+          rod = e[2];
+          document.getElementById("vbauRod").value = rod;
+          bendLive();
+          if (ASV.Player.isActive("vbau")) updateNote(true);
+        }
+      } else if (e[1] === "d") press(e[2]);
+      else if (e[1] === "u") release(e[2]);
+    } finally { replay.internal = false; }
+  }
+
+  function finishReplay() {
+    replay.timers.forEach(clearTimeout);
+    replay.timers = [];
+    replay.on = false;
+    releaseAll();
+    if (take) setMsg("rec.ready", describe(take));
+    updateRecUI();
+  }
+  function stopReplay() { if (replay.on) finishReplay(); }
+
+  /* Mã chia sẻ: mỗi sự kiện viết thành <loại><giá trị>.<khoảng cách tính bằng 10 ms, hệ 36>, nối bằng "_" */
+  function encodeTake(tk) {
+    var prev = 0;
+    return tk.ev.map(function (e) {
+      var d = Math.max(0, Math.round((e[0] - prev) / 10));
+      prev += d * 10;
+      return e[1] + e[2] + "." + d.toString(36);
+    }).join("_");
+  }
+  // Đọc mã từ link hoặc từ bộ nhớ; mã sai hay không hợp với nhạc cụ thì bỏ qua
+  function decodeTake(inst, code) {
+    if (!byId(inst) || typeof code !== "string" || code.length > 8000) return null;
+    var bau = inst === "dan-bau", nKeys = bau ? 0 : keysOf(PLAY[inst]).length;
+    var t = 0, ev = [];
+    var ok = code.split("_").every(function (part) {
+      var m = /^([dupr])(-?\d{1,3})\.([0-9a-z]{1,4})$/.exec(part);
+      if (!m) return false;
+      t += parseInt(m[3], 36) * 10;
+      var v = Number(m[2]), type = m[1];
+      if (t > REC_MAX_MS + 2000) return false;
+      if (bau ? !((type === "p" && v >= 1 && v <= 6) || (type === "r" && v >= -100 && v <= 100))
+              : !((type === "d" || type === "u") && v >= 0 && v < nKeys)) return false;
+      ev.push([t, type, v]);
+      return true;
+    });
+    return ok && ev.length && ev.length <= REC_MAX_EV + 20 ? { inst: inst, ev: ev } : null;
+  }
+
+  /* Lưu trong trình duyệt */
+  function savedList() {
+    var list = ASV.storage.get("asv-recordings", []);
+    if (!Array.isArray(list)) return [];
+    return list.filter(function (x) { return x && decodeTake(x.inst, x.code); }).slice(0, REC_KEEP);
+  }
+  function saveTake() {
+    if (!take) return;
+    var list = savedList();
+    list.unshift({ inst: take.inst, code: encodeTake(take), at: Date.now() });
+    ASV.storage.set("asv-recordings", list.slice(0, REC_KEEP));
+    setMsg("rec.saved");
+    renderSaved();
+  }
+  function stamp(ms) {
+    var d = new Date(ms), p = function (n) { return ("0" + n).slice(-2); };
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function renderSaved() {
+    var list = savedList();
+    var box = document.getElementById("recSaved");
+    box.innerHTML = list.length
+      ? list.map(function (x, i) {
+          var tk = decodeTake(x.inst, x.code), d = describe(tk);
+          return '<li><span class="rec-item-text">' + ASV.escape(I18n.t("rec.item", { name: d.name, n: d.n, time: d.time, date: stamp(x.at) })) + "</span>" +
+            '<span class="rec-item-actions"><button type="button" class="btn btn-sm btn-outline-son" data-rec-load="' + i + '">' + I18n.t("rec.listen") + "</button>" +
+            '<button type="button" class="btn btn-sm btn-outline-cham" data-rec-del="' + i + '" aria-label="' +
+              ASV.escape(I18n.t("rec.delAria", { name: d.name, date: stamp(x.at) })) + '">' + I18n.t("rec.del") + "</button></span></li>";
+        }).join("")
+      : '<li class="rec-none">' + I18n.t("rec.none") + "</li>";
+  }
+
+  /* Link chia sẻ */
+  function shareTake() {
+    if (!take) return;
+    var url = location.href.split(/[?#]/)[0] + "?choi=" + take.inst + "&ban=" + encodeTake(take) + "#choi-thu";
+    var box = document.getElementById("recShareBox"), input = document.getElementById("recLink");
+    input.value = url;
+    box.hidden = false;
+    document.getElementById("recLinkNote").hidden = ASV.canEmbedVideo; // chỉ giải thích khi mở bằng file://
+    input.focus();
+    input.select();
+    var done = function () { setMsg("rec.copied"); };
+    var fail = function () { setMsg("rec.copyFail"); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fail);
+      else fail();
+    } catch (e) { fail(); }
+  }
+
+  function renderRecStatus() {
+    var el = document.getElementById("recStatus");
+    if (el) el.textContent = recMsg ? I18n.t(recMsg, recMsgArgs || {}) : "";
+  }
+  function updateRecUI() {
+    var tg = document.getElementById("recToggle");
+    tg.classList.toggle("is-recording", rec.on);
+    tg.setAttribute("aria-pressed", rec.on ? "true" : "false");
+    tg.querySelector(".rec-label").textContent = I18n.t(rec.on ? "rec.stop" : "rec.start");
+    var pl = document.getElementById("recPlay");
+    pl.disabled = !take || rec.on;
+    pl.querySelector(".rec-label").textContent = I18n.t(replay.on ? "rec.playStop" : "rec.play");
+    pl.querySelector(".btn-play-icon").innerHTML = ASV.icon(replay.on ? "stop" : "play");
+    document.getElementById("recSave").disabled = !take || rec.on;
+    document.getElementById("recShare").disabled = !take || rec.on;
+  }
+
+  function setupRec() {
+    document.getElementById("recToggle").addEventListener("click", function () { if (rec.on) recStop(); else recStart(); });
+    document.getElementById("recPlay").addEventListener("click", function () { if (replay.on) stopReplay(); else if (take) playTake(take); });
+    document.getElementById("recSave").addEventListener("click", saveTake);
+    document.getElementById("recShare").addEventListener("click", shareTake);
+    document.getElementById("recSaved").addEventListener("click", function (e) {
+      var l = e.target.closest("[data-rec-load]"), d = e.target.closest("[data-rec-del]");
+      var list = savedList();
+      if (l) {
+        var x = list[Number(l.getAttribute("data-rec-load"))];
+        take = decodeTake(x.inst, x.code);
+        playTake(take);
+      }
+      if (d) {
+        list.splice(Number(d.getAttribute("data-rec-del")), 1);
+        ASV.storage.set("asv-recordings", list);
+        renderSaved();
+        setMsg("rec.deleted");
+        document.getElementById("recToggle").focus(); // nút vừa bấm đã mất, đưa focus về chỗ hợp lý
+      }
+    });
+    // Người dùng bấm Dừng / Esc, hoặc phát âm thanh khác của trang → ngừng nghe lại
+    ASV.Player.onChange(function (c) {
+      if (!replay.on || replay.internal) return;
+      if (!c || (c.item.key !== "vbau" && c.item.key.indexOf("play:") !== 0)) stopReplay();
+    });
+    renderSaved();
+    updateRecUI();
+  }
+
+  /* Khởi động */
+  ASV.ready(function () {
+    // Đọc địa chỉ trang trước khi vẽ (vẽ xong sẽ ghi lại địa chỉ)
+    var params = new URLSearchParams(location.search);
+    if (["string", "wind", "percussion"].indexOf(params.get("ho")) !== -1) family = params.get("ho");
+    query = params.get("q") || "";
+    var hash = location.hash.replace("#", "");
+    if (byId(params.get("choi"))) playId = params.get("choi");
+    if (hash === "dan-bau-ao") playId = "dan-bau"; // link cũ "Chơi thử đàn bầu"
+
+    document.getElementById("instSearch").value = query;
+    renderGrid();
+    applyFilter();
+    setupBau();
+    renderPicker();
+    setupPlay();
+    selectPlay(playId);
+    setupRec();
+    // Mở từ link chia sẻ: nạp bản ghi nhưng KHÔNG tự phát (âm thanh chỉ phát khi người dùng bấm)
+    if (params.get("ban")) {
+      var shared = decodeTake(playId, params.get("ban"));
+      if (shared) { take = shared; setMsg("rec.shared", describe(take)); updateRecUI(); }
+      else setMsg("rec.badLink");
+    }
+    // Nội dung phía trên do JS vẽ nên làm lệch chỗ nhảy tới: cuộn lại đúng phần được nhắc trong địa chỉ
+    if (["choi-thu", "thang-am"].indexOf(hash) !== -1) {
+      setTimeout(function () { document.getElementById(hash).scrollIntoView({ behavior: "instant" }); }, 0);
+    }
+
+    var el = document.getElementById("instModal");
+    if (window.bootstrap) {
+      modal = new bootstrap.Modal(el);
+      el.addEventListener("hidden.bs.modal", function () {
+        if (openId && ASV.Player.isActive("instrument:" + openId)) ASV.Player.stop(true);
+        var card = document.querySelector('.inst-card[data-inst="' + openId + '"]');
+        openId = null;
+        saveState();
+        if (card && !el._toPlay) card.focus(); // trả focus về thẻ vừa mở
+        el._toPlay = false;
+      });
+    }
+    if (byId(hash)) openModal(hash);
+    // Esc luôn đóng hộp chi tiết, kể cả khi hộp còn đang mở dở
+    var closeWhenShown = false;
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !modal || !openId) return;
+      closeWhenShown = true;
+      modal.hide();
+    });
+    el.addEventListener("shown.bs.modal", function () { if (closeWhenShown) modal.hide(); });
+    el.addEventListener("hidden.bs.modal", function () { closeWhenShown = false; });
+    el.addEventListener("show.bs.modal", function () { closeWhenShown = false; });
+
+    document.addEventListener("click", function (e) {
+      var card = e.target.closest(".inst-card");
+      if (card) { openModal(card.getAttribute("data-inst")); return; }
+      var f = e.target.closest(".inst-tools .filter-btn");
+      if (f) { family = f.getAttribute("data-family"); applyFilter(); return; }
+      var s = e.target.closest("#instModal [data-step]");
+      if (s) { step(Number(s.getAttribute("data-step"))); return; }
+      // "Chơi thử …" trong hộp chi tiết: đóng hộp, chọn nhạc cụ đó ở phần chơi thử rồi cuộn tới
+      var tryBtn = e.target.closest("[data-try]");
+      if (tryBtn) {
+        e.preventDefault();
+        el._toPlay = true;
+        if (modal) modal.hide();
+        selectPlay(tryBtn.getAttribute("data-try"), { scroll: true });
+      }
+    });
+    document.getElementById("instSearch").addEventListener("input", function (e) { query = e.target.value; applyFilter(); });
+    document.getElementById("instReset").addEventListener("click", function () {
+      family = "all"; query = "";
+      document.getElementById("instSearch").value = "";
+      applyFilter();
+      document.getElementById("instSearch").focus();
+    });
+    // Link tới instruments.html#dan-tranh khi trang đã mở sẵn
+    window.addEventListener("hashchange", function () {
+      var id = location.hash.replace("#", "");
+      if (id === "dan-bau-ao") selectPlay("dan-bau", { scroll: true });
+      else if (byId(id) && id !== openId) openModal(id);
+    });
+  });
+
+  document.addEventListener("asv:langchange", function () {
+    renderGrid();
+    applyFilter();
+    renderHarmonics();
+    renderPicker();
+    selectPlay(playId);
+    updateNote(ASV.Player.isActive("vbau"));
+    if (openId) renderModal();
+    renderRecStatus();
+    renderSaved();
+    updateRecUI();
+  });
+})();
+
+/* PHẦN 3: NĂM ÂM VÀ BẢY ÂM */
+
+ASV.ready(function () {
+  var host = document.getElementById("scaleTool");
+  if (!host) return;
+
+  var COLS = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
+  var PENTA = ["C4", "D4", "F4", "G4", "A4", "C5"];
+  var NAMES = {
+    vi: { C4: "Đô", D4: "Rê", E4: "Mi", F4: "Fa", G4: "Sol", A4: "La", B4: "Si", C5: "Đô" },
+    en: { C4: "C", D4: "D", E4: "E", F4: "F", G4: "G", A4: "A", B4: "B", C5: "C" }
+  };
+  var timbre = "tranh";   // âm sắc đang chọn: "tranh" (gảy) hoặc "sao" (thổi)
+  var timers = [];        // các hẹn giờ tô sáng phím khi đang phát cả thang
+
+  function hz(n) {
+    var semis = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[n[0]] + (Number(n[1]) - 4) * 12;
+    return 261.63 * Math.pow(2, semis / 12);
+  }
+  function notesOf(which) { return which === "penta" ? PENTA : COLS; }
+
+  /* Hai âm sắc, viết gọn: đàn tranh (gảy, tắt dần) và sáo (thổi, có rung và tiếng hơi) */
+  function note(ctx, out, t, f) {
+    var g = ctx.createGain(), osc = ctx.createOscillator();
+    if (timbre === "tranh") {
+      var lp = ctx.createBiquadFilter();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(f, t);
+      lp.type = "lowpass";
+      lp.frequency.setValueAtTime(4000, t);
+      lp.frequency.exponentialRampToValueAtTime(900, t + 1.2);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.3, t + 0.006);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.3);
+      osc.connect(lp); lp.connect(g);
+      osc.start(t); osc.stop(t + 1.35);
+    } else {
+      var lfo = ctx.createOscillator(), lg = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(f * 2, t); // sáo nghe cao hơn một quãng tám
+      lfo.frequency.value = 5; lg.gain.value = f * 0.02;
+      lfo.connect(lg); lg.connect(osc.frequency);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.25, t + 0.05);
+      g.gain.setValueAtTime(0.25, t + 0.3);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+      osc.connect(g);
+      [osc, lfo].forEach(function (o) { o.start(t); o.stop(t + 0.5); });
+    }
+    g.connect(out);
+  }
+
+  function timbreName(lang) {
+    return ASV_TRANSLATIONS[lang]["scale.timbre." + timbre];
+  }
+
+  /* Phát cả thang: đi lên rồi đi xuống, tô sáng từng phím đang kêu */
+  function run(which) {
+    var key = "scale:" + which;
+    if (ASV.Player.isActive(key)) { ASV.Player.stop(); return; }
+    var seq = notesOf(which).slice();
+    seq = seq.concat(seq.slice(0, -1).reverse());
+    var gap = 0.42;
+    ASV.Player.play({
+      key: key,
+      title: {
+        vi: ASV_TRANSLATIONS.vi["scale." + which] + " · " + timbreName("vi"),
+        en: ASV_TRANSLATIONS.en["scale." + which] + " · " + timbreName("en")
+      },
+      synth: function (ctx, out, t) {
+        seq.forEach(function (n, i) { note(ctx, out, t + i * gap, hz(n)); });
+        return seq.length * gap + 1;
+      }
+    });
+    clearMarks();
+    seq.forEach(function (n, i) {
+      timers.push(setTimeout(function () { mark(which, n); }, i * gap * 1000));
+    });
+    timers.push(setTimeout(clearMarks, seq.length * gap * 1000 + 300));
+  }
+
+  // Bấm một phím: phát đúng một nốt
+  function one(which, n) {
+    ASV.Player.play({
+      key: "scale-note",
+      title: { vi: NAMES.vi[n] + " · " + timbreName("vi"), en: NAMES.en[n] + " · " + timbreName("en") },
+      synth: function (ctx, out, t) { note(ctx, out, t, hz(n)); return 1.3; }
+    });
+    clearMarks();
+    mark(which, n);
+    timers.push(setTimeout(clearMarks, 450));
+  }
+
+  function mark(which, n) {
+    host.querySelectorAll(".scale-key.is-on").forEach(function (k) { k.classList.remove("is-on"); });
+    var k = host.querySelector('[data-scale="' + which + '"] [data-note="' + n + '"]');
+    if (k) k.classList.add("is-on");
+  }
+  function clearMarks() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    host.querySelectorAll(".scale-key.is-on").forEach(function (k) { k.classList.remove("is-on"); });
+  }
+
+  function rowHtml(which) {
+    var names = NAMES[I18n.lang] || NAMES.vi;
+    var inScale = notesOf(which);
+    var cells = COLS.map(function (n) {
+      if (inScale.indexOf(n) === -1) {
+        // Nốt thang năm âm không dùng: để ô trống có viền gạch
+        return '<span class="scale-gap" title="' + ASV.escape(I18n.t("scale.missing", { note: names[n] })) + '">' +
+          '<span class="visually-hidden">' + ASV.escape(I18n.t("scale.missing", { note: names[n] })) + "</span></span>";
+      }
+      var half = which === "hepta" && (n === "E4" || n === "B4") ? " is-half" : "";
+      return '<button type="button" class="scale-key' + half + '" data-note="' + n + '">' + ASV.escape(names[n]) + "</button>";
+    }).join("");
+    return '<div class="scale-row" data-scale="' + which + '" role="group" aria-labelledby="scale-' + which + '-title">' +
+      '<div class="scale-head">' +
+        '<h3 class="scale-title" id="scale-' + which + '-title">' + I18n.t("scale." + which) + "</h3>" +
+        '<button type="button" class="btn btn-sm btn-son btn-play" data-scale-run="' + which + '">' +
+          '<span class="btn-play-icon">' + ASV.icon("play") + "</span><span>" + I18n.t("scale.run") + "</span></button>" +
+      "</div>" +
+      '<div class="scale-keys">' + cells + "</div>" +
+      '<p class="scale-steps">' + I18n.t("scale.steps." + which) + "</p>" +
+    "</div>";
+  }
+
+  function render() {
+    host.innerHTML =
+      '<div class="filter-bar scale-timbre" role="group" aria-label="' + ASV.escape(I18n.t("scale.timbre")) + '">' +
+        ["tranh", "sao"].map(function (t) {
+          return '<button type="button" class="filter-btn" data-timbre="' + t + '" aria-pressed="' + (t === timbre) + '">' +
+            ASV.escape(I18n.t("scale.timbre." + t)) + "</button>";
+        }).join("") +
+      "</div>" + rowHtml("penta") + rowHtml("hepta");
+    syncRun();
+  }
+
+  // Nút "Nghe cả thang" đổi thành "Dừng" khi đang phát
+  function syncRun() {
+    host.querySelectorAll("[data-scale-run]").forEach(function (b) {
+      var on = ASV.Player.isActive("scale:" + b.getAttribute("data-scale-run"));
+      b.classList.toggle("is-playing", on);
+      b.querySelector(".btn-play-icon").innerHTML = ASV.icon(on ? "stop" : "play");
+      b.lastChild.textContent = I18n.t(on ? "btn.stop" : "scale.run");
+    });
+  }
+
+  host.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-timbre]");
+    if (t) { timbre = t.getAttribute("data-timbre"); render(); host.querySelector('[data-timbre="' + timbre + '"]').focus(); return; }
+    var r = e.target.closest("[data-scale-run]");
+    if (r) { run(r.getAttribute("data-scale-run")); return; }
+    var k = e.target.closest(".scale-key");
+    if (k) one(k.closest("[data-scale]").getAttribute("data-scale"), k.getAttribute("data-note"));
+  });
+  ASV.Player.onChange(function (c) {
+    if (!c || c.item.key.indexOf("scale") !== 0) clearMarks();
+    syncRun();
+  });
+  document.addEventListener("asv:langchange", render);
+  render();
+});
 })();

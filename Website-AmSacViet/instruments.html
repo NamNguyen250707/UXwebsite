@@ -6,15 +6,12 @@
   <title data-i18n="inst.meta.title">Nhạc cụ | Âm Sắc Việt</title>
   <meta name="description" data-i18n-content="inst.meta.desc"
         content="12 nhạc cụ truyền thống Việt Nam chia theo dây, hơi, gõ, có hình, mô tả, âm thanh và một cây đàn bầu ảo để tự chơi.">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <script>document.documentElement.className += " js";</script>
 
-  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script defer src="js/core.js"></script>
-  <script defer src="js/instruments.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body data-page="instruments" id="top">
 
@@ -25,7 +22,7 @@
     <!-- Đầu trang: tiêu đề, lọc theo họ, tìm kiếm -->
     <section class="page-head has-deco" aria-labelledby="inst-title">
       <div class="sec-deco" aria-hidden="true">
-        <img class="deco-drum deco-drum-head" src="images/motifs/vong-trong-dong.svg" alt="">
+        <img class="deco-drum deco-drum-head" src="assets/motif-vong-trong-dong.svg" alt="">
       </div>
       <div class="container">
         <h1 id="inst-title" class="page-title" data-i18n="inst.title">Nhạc cụ truyền thống</h1>
@@ -65,9 +62,9 @@
     <!-- Chơi thử nhạc cụ ảo (cả 12 nhạc cụ) -->
     <section class="section pt-0 has-deco" id="choi-thu" aria-labelledby="play-title">
       <div class="sec-deco" aria-hidden="true">
-        <img class="deco-hac deco-l1" src="images/motifs/hac.svg" alt="">
-        <img class="deco-hac deco-l2" src="images/motifs/hac.svg" alt="">
-        <img class="deco-hac deco-l3" src="images/motifs/hac.svg" alt="">
+        <img class="deco-hac deco-l1" src="assets/motif-hac.svg" alt="">
+        <img class="deco-hac deco-l2" src="assets/motif-hac.svg" alt="">
+        <img class="deco-hac deco-l3" src="assets/motif-hac.svg" alt="">
       </div>
       <div class="container">
         <span id="dan-bau-ao" class="anchor-alias" aria-hidden="true"></span><!-- link cũ #dan-bau-ao vẫn tới đây -->
@@ -143,7 +140,7 @@
       </div>
     </section>
 
-    <!-- Năm âm và bảy âm (scales.js vẽ hai hàng phím vào #scaleTool) -->
+    <!-- Năm âm và bảy âm (instruments.js vẽ hai hàng phím vào #scaleTool) -->
     <section class="section pt-0" id="thang-am" aria-labelledby="scale-title">
       <div class="container">
         <h2 id="scale-title" class="section-title" data-i18n="scale.title">Năm âm và bảy âm</h2>

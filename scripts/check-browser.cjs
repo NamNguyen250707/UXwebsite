@@ -36,7 +36,7 @@ const shots = path.resolve('docs/screenshots');
   };
   try {
     {
-      const core = require('node:fs').readFileSync(path.resolve('Website-AmSacViet/js/core.js'), 'utf8');
+      const core = require('node:fs').readFileSync(path.resolve('Website-AmSacViet/app.js'), 'utf8');
       const src = core.slice(core.indexOf('PHẦN 1:'), core.indexOf('PHẦN 2:')); // chỉ phần bản dịch
       const part = (a, b2) => src.slice(src.indexOf(a), b2 ? src.indexOf(b2) : undefined);
       const dup = [part('vi: {', '  en: {'), part('  en: {', '\n};')].map((t) => { const k = [...t.matchAll(/^\s+"([^"]+)":/gm)].map((m) => m[1]); return k.filter((x, i) => k.indexOf(x) !== i); });
@@ -100,7 +100,7 @@ const shots = path.resolve('docs/screenshots');
     /* --- Hoa văn nền trang chủ --- */
     ok('Nền: có vòng trống đồng, 6 hạc, dải sen, đủ hai lớp xa/gần; không còn chữ "hò xự xang xê cống"', await js('!!document.querySelector("#bgFar .bg-drum") && document.querySelectorAll(".hero-bg .bg-hac").length===6 && !!document.querySelector("#bgNear .bg-sen") && !document.body.innerText.includes("xang xê")'));
     ok('Nền trải xuống cả phần dưới: hoa văn ở 3 phần bên dưới và dải sen trước footer', await js('document.querySelectorAll(".has-deco .sec-deco img").length===7 && getComputedStyle(document.querySelector(".explore-next")).backgroundImage.includes("dai-sen")'));
-    ok('Hoa văn rỗng trong (file SVG không còn hình tô đặc)', ['vong-trong-dong', 'hac', 'dai-sen'].every((n) => !require('node:fs').readFileSync(path.resolve('Website-AmSacViet/images/motifs/' + n + '.svg'), 'utf8').includes('fill="currentColor"')));
+    ok('Hoa văn rỗng trong (file SVG không còn hình tô đặc)', ['vong-trong-dong', 'hac', 'dai-sen'].every((n) => !require('node:fs').readFileSync(path.resolve('Website-AmSacViet/assets/motif-' + n + '.svg'), 'utf8').includes('fill="currentColor"')));
     ok('Nền: không còn hoa văn lặp đều, không còn ký hiệu ♪', await js('!document.body.classList.contains("page-motif") && !document.body.innerText.includes("♪")'));
     ok('Nền: hình nền đều tải được', await js('[...document.querySelectorAll(".hero-bg img")].every(i=>i.complete&&i.naturalWidth>0)'));
     ok('Nền: mặt nạ khoét lỗ đúng chỗ khối chữ (tâm lỗ trùng tâm tiêu đề, sai lệch < 40px)', await js('(()=>{const bg=document.getElementById("heroBg"),b=bg.getBoundingClientRect(),t=document.querySelector(".hero-text").getBoundingClientRect();const x=parseFloat(getComputedStyle(bg).getPropertyValue("--t-x"));return getComputedStyle(bg).maskImage.includes("radial-gradient")&&Math.abs(x-(t.left+t.width/2-b.left))<40})()'));
@@ -207,7 +207,7 @@ const shots = path.resolve('docs/screenshots');
     ok('Loại hình: bản đồ có 16 nút đánh dấu (10 UNESCO chấm đặc, 6 loại hình khác chấm rỗng), có Hoàng Sa và Trường Sa', await js('document.querySelectorAll(".map-marker").length===16 && document.querySelector(".map-svg").textContent.includes("Hoàng Sa") && document.querySelector(".map-svg").textContent.includes("Trường Sa") && document.querySelectorAll(".map-marker.is-other").length===6'));
     ok('Loại hình: mở trang → chọn sẵn quan họ, nút đang chọn được tô sáng', await js('document.getElementById("genreName").textContent.includes("quan họ") && document.querySelector(".map-marker.is-active").dataset.genre==="quan-ho" && document.querySelector(".map-marker.is-active").getAttribute("aria-pressed")==="true"'));
     await b.click('.map-marker[data-genre="nha-nhac"]');
-    ok('Loại hình: bấm điểm Nhã nhạc → khung đổi tên, ảnh thật, năm UNESCO 2003', await js('document.getElementById("genreName").textContent.includes("Nhã nhạc") && document.querySelector("#genrePanel .badge-unesco").textContent.includes("2003") && document.querySelector("#genrePanel img").src.includes("anh/nha-nhac")'));
+    ok('Loại hình: bấm điểm Nhã nhạc → khung đổi tên, ảnh thật, năm UNESCO 2003', await js('document.getElementById("genreName").textContent.includes("Nhã nhạc") && document.querySelector("#genrePanel .badge-unesco").textContent.includes("2003") && document.querySelector("#genrePanel img").src.includes("nha-nhac.jpg")'));
     ok('Loại hình: ảnh thật có chú thích và dòng nguồn (tác giả, giấy phép, link Wikimedia Commons)', await js('(()=>{const c=document.querySelector("#genrePanel figcaption");return !!c && c.textContent.includes("Phạm vi công cộng") && c.querySelector("a.photo-credit").href.startsWith("https://commons.wikimedia.org/") && document.querySelector("#genrePanel img").alt.includes("Festival Huế")})()'));
     ok('Loại hình: phần "Nghe và xem" chỉ có bản ghi thật (link YouTube đúng video UNESCO), không có âm giả', await js('!document.querySelector("#genreMedia [data-play]") && !!document.querySelector("#genreMedia a[href*=\\"G5X7KUtbEkk\\"]")'));
     await js('document.querySelector(".filter-btn[data-region=central]").scrollIntoView({behavior:"instant",block:"center"})');
@@ -241,9 +241,9 @@ const shots = path.resolve('docs/screenshots');
     await b.wait('!!document.getElementById("genreName")');
     ok('Loại hình: địa chỉ genres.html?vung=south mở sẵn bộ lọc Nam Bộ', await js('document.querySelector(".filter-btn[aria-pressed=true]").dataset.region==="south" && document.querySelector(".map-marker.is-active").dataset.genre==="tai-tu"'));
     // Ảnh thiếu file → tự quay về ảnh dự phòng (tranh vẽ), không hiện ô giữ chỗ
-    await js('window._fb=ASV.createMedia({src:"images/loai-hinh/anh/khong-co-file.jpg",fallback:"images/loai-hinh/ho.svg",name:"Hò",kind:"genre",onFallback:function(){window._fbDone=true}});document.body.appendChild(window._fb)');
+    await js('window._fb=ASV.createMedia({src:"images/loai-hinh/anh/khong-co-file.jpg",fallback:"assets/motif-hac.svg",name:"Hò",kind:"genre",onFallback:function(){window._fbDone=true}});document.body.appendChild(window._fb)');
     await b.delay(400);
-    ok('Ảnh thiếu file → tự hiện ảnh dự phòng (tranh vẽ)', await js('window._fbDone===true && window._fb.querySelector("img").getAttribute("src").endsWith("ho.svg") && !window._fb.classList.contains("is-placeholder") && window._fb.classList.contains("is-art")'));
+    ok('Ảnh thiếu file → tự hiện ảnh dự phòng (tranh vẽ)', await js('window._fbDone===true && window._fb.querySelector("img").getAttribute("src").endsWith("motif-hac.svg") && !window._fb.classList.contains("is-placeholder") && window._fb.classList.contains("is-art")'));
     await js('window._fb.remove()');
     // Lọc theo nhóm
     await b.goto(url);

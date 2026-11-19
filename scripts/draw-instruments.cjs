@@ -3,7 +3,7 @@
    Chỉ dùng khi muốn vẽ lại; website chỉ đọc các file SVG đã sinh ra. */
 const fs = require('fs');
 const path = require('path');
-const OUT = path.resolve(__dirname, '../Website-AmSacViet/images/nhac-cu');
+const OUT = path.resolve(__dirname, '../Website-AmSacViet/assets');
 fs.mkdirSync(OUT, { recursive: true });
 
 // Bảng màu (khớp với css/style.css và 3 bức tranh)
@@ -256,6 +256,6 @@ S['phach'] = ['Phách', `  <g transform="rotate(-8 200 240)">
 
 for (const id of Object.keys(S)) {
   const [title, body, shadow] = S[id];
-  fs.writeFileSync(path.join(OUT, id + '.svg'), wrap(id, title, body, shadow));
+  fs.writeFileSync(path.join(OUT, 'nhac-cu-' + id + '.svg'), wrap(id, title, body, shadow));
 }
 console.log('Đã vẽ ' + Object.keys(S).length + ' nhạc cụ vào ' + OUT);

@@ -6,31 +6,26 @@
   <title data-i18n="home.meta.title">Âm Sắc Việt | Âm nhạc truyền thống Việt Nam</title>
   <meta name="description" data-i18n-content="home.meta.desc"
         content="Âm nhạc truyền thống Việt Nam: 16 loại hình có video biểu diễn, 12 nhạc cụ chơi thử được, 8 mốc lịch sử có nguồn.">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-  <!-- Bootstrap tải sẵn trong vendor/ (không dùng CDN), CSS riêng nạp sau để ghi đè -->
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <!-- style.css = Bootstrap (tải sẵn, không dùng CDN) + CSS riêng; app.js = toàn bộ JavaScript -->
+  <link rel="stylesheet" href="style.css">
 
-  <!-- Chạy ngay khi tải: đánh dấu có JavaScript; nếu đã qua màn hình chào trong phiên này thì bỏ qua nó
-       (đặt ở đây để màn hình chào không "nháy" lên rồi mới ẩn) -->
+  <!-- Chạy ngay khi tải: đánh dấu có JavaScript -->
   <script>
     document.documentElement.className += " js";
     try { if (sessionStorage.getItem("asv-welcomed")) document.documentElement.className += " skip-welcome"; } catch (e) {}
   </script>
 
   <!-- defer: tải song song, chạy theo đúng thứ tự sau khi HTML đã đọc xong -->
-  <script defer src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script defer src="js/core.js"></script>
-  <script defer src="js/home.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body data-page="home" id="top">
 
-  <!-- Màn hình chào (chỉ hiện lần đầu vào trang trong mỗi phiên) =====
-       Vào trang chủ bằng: nút "Vào thăm ngay", lăn chuột, vuốt, hoặc phím mũi tên xuống / Enter. -->
+  <!-- Màn hình chào (chỉ hiện lần đầu vào trang trong mỗi phiên) -->
   <section class="welcome" id="welcome" aria-labelledby="welcome-title"
 >
-    <img class="welcome-drum bg-drum-spin" src="images/motifs/vong-trong-dong.svg" alt="" aria-hidden="true">
+    <img class="welcome-drum bg-drum-spin" src="assets/motif-vong-trong-dong.svg" alt="" aria-hidden="true">
     <div class="welcome-inner">
       <span class="welcome-logo" data-motif="logo"></span>
       <h2 class="welcome-title" id="welcome-title" data-i18n="site.name">Âm Sắc Việt</h2>
@@ -50,30 +45,26 @@
     </svg>
   </section>
 
-  <!-- Navbar do common.js vẽ để giống hệt nhau ở mọi trang -->
+  <!-- Navbar do core.js vẽ để giống hệt nhau ở mọi trang -->
   <div id="site-header"></div>
 
   <main id="main" tabindex="-1">
 
     <!-- Hero: bình phong 3 bức tranh (Bắc – Trung – Nam) + cây đàn bầu -->
     <section class="hero" aria-labelledby="hero-title">
-      <!-- Hoa văn nền chạm nổi (chỉ trang trí, trình đọc màn hình bỏ qua) =====
-           Lớp xa: vòng trống đồng + 2 hạc lớn, mờ. Lớp gần: 4 hạc nhỏ, dải sen.
-           home.js: cuộn trang → hai lớp trôi chậm khác nhau (tối đa 30px);
-                    khoét "lỗ" (mask) sau tiêu đề, đoạn mô tả, nút bấm và cây đàn để hoa văn không nằm sau chúng;
-                    chạm dây đàn → một gợn sóng nhạt lan qua nền. -->
+      <!-- Hoa văn nền chạm nổi (chỉ trang trí, trình đọc màn hình bỏ qua) -->
       <div class="hero-bg" id="heroBg" aria-hidden="true">
         <div class="bg-layer bg-far" id="bgFar">
-          <img class="bg-drum bg-drum-spin" src="images/motifs/vong-trong-dong.svg" alt="">
-          <img class="bg-hac bg-hac-1" src="images/motifs/hac.svg" alt="">
-          <img class="bg-hac bg-hac-2" src="images/motifs/hac.svg" alt="">
+          <img class="bg-drum bg-drum-spin" src="assets/motif-vong-trong-dong.svg" alt="">
+          <img class="bg-hac bg-hac-1" src="assets/motif-hac.svg" alt="">
+          <img class="bg-hac bg-hac-2" src="assets/motif-hac.svg" alt="">
         </div>
         <div class="bg-layer bg-near" id="bgNear">
-          <img class="bg-hac bg-hac-3" src="images/motifs/hac.svg" alt="">
-          <img class="bg-hac bg-hac-4" src="images/motifs/hac.svg" alt="">
-          <img class="bg-hac bg-hac-5" src="images/motifs/hac.svg" alt="">
-          <img class="bg-hac bg-hac-6" src="images/motifs/hac.svg" alt="">
-          <img class="bg-sen" src="images/motifs/dai-sen.svg" alt="">
+          <img class="bg-hac bg-hac-3" src="assets/motif-hac.svg" alt="">
+          <img class="bg-hac bg-hac-4" src="assets/motif-hac.svg" alt="">
+          <img class="bg-hac bg-hac-5" src="assets/motif-hac.svg" alt="">
+          <img class="bg-hac bg-hac-6" src="assets/motif-hac.svg" alt="">
+          <img class="bg-sen" src="assets/motif-dai-sen.svg" alt="">
         </div>
         <svg class="bg-ripple" id="bgRipple" viewBox="-50 -50 100 100"><circle r="40"/></svg>
       </div>
@@ -92,8 +83,7 @@
           </div>
         </div>
 
-        <!-- Ba tấm tranh vẽ mới theo phong cách tranh khắc gỗ dân gian.
-             Bấm vào tranh: nghe bản ghi thật (video UNESCO) của loại hình miền đó. Bấm bảng tên: sang trang Loại hình. -->
+        <!-- Ba tấm tranh vẽ mới theo phong cách tranh khắc gỗ dân gian. -->
         <div class="hero-screen">
           <figure class="screen-panel" data-genre="quan-ho">
             <!-- Bảng tên: sang thẳng trang Loại hình của loại nhạc này -->
@@ -106,7 +96,7 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="quan-ho"
                     aria-label="Nghe quan họ Bắc Ninh" >
-              <img src="images/loai-hinh/anh/quan-ho.jpg" alt="Liền anh, liền chị hát quan họ giao duyên dưới rạp hội Lim, Bắc Ninh, người xem đứng quanh." data-i18n-alt="home.screen.northAlt">
+              <img src="assets/loai-hinh-quan-ho.jpg" alt="Liền anh, liền chị hát quan họ giao duyên dưới rạp hội Lim, Bắc Ninh, người xem đứng quanh." data-i18n-alt="home.screen.northAlt">
               <span class="screen-play-badge" aria-hidden="true">
                 <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
@@ -123,7 +113,7 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="nha-nhac"
                     aria-label="Nghe nhã nhạc cung đình Huế" >
-              <img src="images/loai-hinh/anh/nha-nhac.jpg" alt="Nhạc công nhã nhạc mặc áo đỏ viền vàng đánh trống, thổi kèn trong một buổi diễn ở Festival Huế 2008." data-i18n-alt="home.screen.centralAlt">
+              <img src="assets/loai-hinh-nha-nhac.jpg" alt="Nhạc công nhã nhạc mặc áo đỏ viền vàng đánh trống, thổi kèn trong một buổi diễn ở Festival Huế 2008." data-i18n-alt="home.screen.centralAlt">
               <span class="screen-play-badge" aria-hidden="true">
                 <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
@@ -140,7 +130,7 @@
             <!-- Bức tranh: bấm để nghe bản ghi thật của UNESCO (home.js đặt nhãn cho trình đọc màn hình) -->
             <button type="button" class="screen-play" data-recording="tai-tu"
                     aria-label="Nghe đờn ca tài tử" >
-              <img src="images/loai-hinh/anh/tai-tu.jpg" alt="Ảnh năm 1911: một ban đờn ca tài tử ở Sài Gòn ngồi cùng đàn tranh, đàn kìm, đàn cò, đàn tỳ bà." data-i18n-alt="home.screen.southAlt">
+              <img src="assets/loai-hinh-tai-tu.jpg" alt="Ảnh năm 1911: một ban đờn ca tài tử ở Sài Gòn ngồi cùng đàn tranh, đàn kìm, đàn cò, đàn tỳ bà." data-i18n-alt="home.screen.southAlt">
               <span class="screen-play-badge" aria-hidden="true">
                 <span class="rec-icon" data-icon="play"></span><span data-i18n="home.screen.badge">Xem biểu diễn</span>
               </span>
@@ -148,8 +138,7 @@
           </figure>
         </div>
 
-        <!-- Cây đàn bầu nằm ngang dưới bình phong: một dây đàn nối ba miền.
-             Bấm vào dây ở chỗ nào thì nghe âm ở chỗ đó (home.js). -->
+        <!-- Cây đàn bầu nằm ngang dưới bình phong: một dây đàn nối ba miền. -->
         <div class="bau-stage">
           <button type="button" class="bau-btn" id="heroBau"
                   aria-label="Cây đàn bầu. Bấm vào dây đàn ở các vị trí khác nhau để nghe; với bàn phím, nhấn Enter để gảy lần lượt."
@@ -169,7 +158,7 @@
     <!-- Ba lối vào -->
     <section class="section pt-2 has-deco" aria-labelledby="paths-title">
       <!-- Hoa văn: 3 hạc bay ở khoảng trống bên trái tiêu đề -->
-      <div class="sec-deco" aria-hidden="true"><img class="deco-hac deco-p1" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-p2" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-p3" src="images/motifs/hac.svg" alt=""></div>
+      <div class="sec-deco" aria-hidden="true"><img class="deco-hac deco-p1" src="assets/motif-hac.svg" alt=""><img class="deco-hac deco-p2" src="assets/motif-hac.svg" alt=""><img class="deco-hac deco-p3" src="assets/motif-hac.svg" alt=""></div>
       <div class="container">
         <h2 id="paths-title" class="section-title text-center" data-i18n="home.paths.title">Bắt đầu từ đâu?</h2>
         <p class="section-lead text-center mx-auto mb-4" data-i18n="home.paths.lead">Bạn có thể đi theo vùng đất, theo từng cây đàn, hoặc theo dòng lịch sử.</p>
@@ -200,7 +189,7 @@
     <!-- Xem biểu diễn thật (3 video UNESCO, ứng với 3 bức tranh) -->
     <section class="section pt-0 has-deco" aria-labelledby="video-title">
       <!-- Hoa văn: vòng trống đồng lấp ló ở mép phải, cạnh khoảng trống bên phải tiêu đề -->
-      <div class="sec-deco" aria-hidden="true"><img class="deco-drum" src="images/motifs/vong-trong-dong.svg" alt=""></div>
+      <div class="sec-deco" aria-hidden="true"><img class="deco-drum" src="assets/motif-vong-trong-dong.svg" alt=""></div>
       <div class="container">
         <h2 id="video-title" class="section-title" data-i18n="home.video.title">Xem nghệ nhân biểu diễn</h2>
         <!-- home.js vẽ thẻ video cho các loại hình trong data-genres -->
@@ -217,7 +206,7 @@
     <!-- Nghe thử một nhạc cụ (home.js chọn ngẫu nhiên một nhạc cụ) -->
     <section class="section pt-0 has-deco" aria-labelledby="today-title">
       <!-- Hoa văn: đàn hạc nhỏ ở khoảng trống bên phải tiêu đề -->
-      <div class="sec-deco" aria-hidden="true"><img class="deco-hac deco-t1" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-t2" src="images/motifs/hac.svg" alt=""><img class="deco-hac deco-t3" src="images/motifs/hac.svg" alt=""></div>
+      <div class="sec-deco" aria-hidden="true"><img class="deco-hac deco-t1" src="assets/motif-hac.svg" alt=""><img class="deco-hac deco-t2" src="assets/motif-hac.svg" alt=""><img class="deco-hac deco-t3" src="assets/motif-hac.svg" alt=""></div>
       <div class="container">
         <h2 id="today-title" class="section-title" data-i18n="home.today.title">Nghe thử một nhạc cụ</h2>
 
@@ -257,7 +246,7 @@
     <div class="explore-next explore-next--plain" aria-hidden="true"></div>
   </main>
 
-  <!-- Footer do common.js vẽ -->
+  <!-- Footer do core.js vẽ -->
   <div id="site-footer"></div>
 
   <noscript>

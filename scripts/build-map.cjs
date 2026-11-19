@@ -50,12 +50,12 @@ var ASV_MAP = {
   truongSa: ${JSON.stringify(dots(truongSa))}
 };
 `;
-// Đoạn bản đồ nằm trong core.js, giữa hai mốc <ban-do> … </ban-do>
-const dest = path.resolve(__dirname, '../Website-AmSacViet/js/core.js');
+// Đoạn bản đồ nằm trong app.js, giữa hai mốc <ban-do> … </ban-do>
+const dest = path.resolve(__dirname, '../Website-AmSacViet/app.js');
 const core = fs.readFileSync(dest, 'utf8');
 const A = '/* <ban-do>', B = '/* </ban-do> */';
 const i = core.indexOf(A), j = core.indexOf(B);
-if (i < 0 || j < 0) throw Error('Không thấy mốc <ban-do> trong core.js');
+if (i < 0 || j < 0) throw Error('Không thấy mốc <ban-do> trong app.js');
 const head = core.slice(i, core.indexOf('\n', i) + 1);
 fs.writeFileSync(dest, core.slice(0, i) + head + out + core.slice(j));
 console.log('Đã ghi ' + dest + ' (' + (out.length / 1024).toFixed(1) + ' KB)');

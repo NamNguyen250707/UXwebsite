@@ -4,7 +4,7 @@
    Đây là hình gợi tả, không phải tư liệu lịch sử hay bản vẽ trang phục chính xác. */
 const fs = require('fs');
 const path = require('path');
-const OUT = path.resolve(__dirname, '../Website-AmSacViet/images/loai-hinh');
+const OUT = path.resolve(__dirname, '../Website-AmSacViet/assets');
 fs.mkdirSync(OUT, { recursive: true });
 
 const C = {
@@ -334,6 +334,6 @@ S['ho'] = ['Hò', [
 module.exports = { C, f, wrap, hills, water, ground, sun, cloud, birds, roof, hat, stand, sit, fan, drumOnStand, stick };
 if (require.main === module) for (const id of Object.keys(S)) {
   const [title, body] = S[id];
-  fs.writeFileSync(path.join(OUT, id + '.svg'), wrap(title, body));
+  fs.writeFileSync(path.join(OUT, 'loai-hinh-' + id + '.svg'), wrap(title, body));
 }
 if (require.main === module) console.log('Đã vẽ ' + Object.keys(S).length + ' cảnh vào ' + OUT);

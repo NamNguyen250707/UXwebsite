@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const G = require('./draw-genres.cjs');
 const { C, f, wrap, hills, water, ground, sun, cloud, birds, roof, stand, sit, fan, drumOnStand, stick } = G;
-const OUT = path.resolve(__dirname, '../Website-AmSacViet/images/lich-su');
+const OUT = path.resolve(__dirname, '../Website-AmSacViet/assets');
 fs.mkdirSync(OUT, { recursive: true });
 
 const BRONZE = '#B98B3E', BRONZE_D = '#8A6A2E', STONE = '#9C978A', STONE_D = '#7C776B';
@@ -239,6 +239,6 @@ S['hom-nay'] = ['Âm nhạc truyền thống hôm nay', [
 
 for (const id of Object.keys(S)) {
   const [title, body] = S[id];
-  fs.writeFileSync(path.join(OUT, id + '.svg'), wrap(title, body, 'draw-history.cjs'));
+  fs.writeFileSync(path.join(OUT, 'lich-su-' + id + '.svg'), wrap(title, body, 'draw-history.cjs'));
 }
 console.log('Đã vẽ ' + Object.keys(S).length + ' cảnh vào ' + OUT);
