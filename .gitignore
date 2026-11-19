@@ -5,3 +5,11 @@ Desktop.ini
 *.log
 # Ảnh chụp do scripts/check-browser.cjs tạo lại mỗi lần chạy
 docs/screenshots/
+
+# Ghi chú làm việc riêng, chỉ để trên máy
+CLAUDE.md
+.claude/
+# Báo cáo và hình cho báo cáo (không công khai)
+docs/*.docx
+docs/*.pdf
+docs/report-figures/
